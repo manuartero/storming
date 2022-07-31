@@ -1,0 +1,32 @@
+.hexagon {
+  position: relative;
+
+  path {
+    fill: none;
+    stroke: #403f3f;
+    stroke-width: 4px;
+  }
+
+  &--selected {
+    path {
+      fill: red;
+    }
+  }
+
+  /* inner area */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 3%;
+    left: 3%;
+    width: 93%;
+    height: 93%;
+
+    cursor: pointer;
+
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+
+    // background-color: rgba(255, 0, 0, 0.292);
+  }
+
+}
