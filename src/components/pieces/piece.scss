@@ -1,0 +1,36 @@
+.piece {
+  position: relative;
+  width: 80px;
+  height: 80px;
+
+  border: 6px solid #aaa;
+  border-radius: 50%;
+
+  background-position: center;
+  background-color: #ddd;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  &::before {
+    content: "";
+    width: 99%;
+    height: 99%;
+    position: absolute;
+    border: 3px solid #ffea00;
+    border-radius: 50%;
+    top: -4%;
+    left: -4%;
+  }
+
+  &--soldier {
+    background-image: url('./soldier.png')
+  }
+
+  &--knight {
+    background-image: url('./knight.png')
+  }
+
+  &--ballista {
+    background-image: url('./ballista.png')
+  }
+}
