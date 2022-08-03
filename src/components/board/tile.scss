@@ -1,13 +1,34 @@
+$available-tile: rgba(195, 214, 191, 0.5);
+$forbidden-tile: rgba(190, 88, 88, 0.5);
+$tile-border: white;
+
 .tile {
+  display: flex;
   position: relative;
   width: 120px;
   height: 120px;
   margin: 0;
-
+  justify-content: center;
+  align-items: center;
   &__terrain {
     position: absolute;
-    stroke: #403f3f;
+    stroke: #5f5858;
+    stroke-width: 3px;
 
+    &--forest {
+      top: 15%;
+      left: 15%;
+
+      width: 80px;
+      height: 80px
+    }
+
+    &--lake {
+      top: 5%;
+      left: 5%;
+      width: 110px;
+      height: 110px
+    }
   }
 
   &__hexagon {
@@ -15,13 +36,25 @@
 
     path {
       fill: none;
-      stroke: #403f3f;
-      stroke-width: 4px;
+      stroke: $tile-border;
+      stroke-width: 6px;
     }
 
     &--selected {
       path {
         fill: rgba(255, 248, 174, 0.179);
+      }
+    }
+
+    &--available {
+      path {
+        fill: $available-tile;
+      }
+    }
+
+    &--forbidden {
+      path {
+        fill: $forbidden-tile;
       }
     }
   }
@@ -35,14 +68,23 @@
       position: absolute;
       top: 3%;
       left: 3%;
-      width: 93%;
-      height: 93%;
+      width: 94%;
+      height: 94%;
 
       cursor: pointer;
 
       clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 
+      // debug
       // background-color: rgba(255, 0, 0, 0.292);
     }
+  }
+
+  // center
+  &__content {
+
+
+    display: flex;
+
   }
 }

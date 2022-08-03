@@ -33,4 +33,8 @@
   &--ballista {
     background-image: url('./ballista.png')
   }
+
+  &--enemy {
+    transform: rotateY(180deg); 
+  }
 }

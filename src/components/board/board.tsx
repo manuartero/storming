@@ -1,11 +1,10 @@
+import Piece from "../pieces/piece";
 import "./board.scss";
 import Tile from "./tile";
 
 interface Props {
   foo?: string;
 }
-
-
 
 /**
  * 5+6+7+8+7+6+5
@@ -14,9 +13,9 @@ function Board({ foo }: Props): JSX.Element {
   return (
     <div className="board">
       <div className="board__row board__row--3-to-equator">
-        <Tile key='-1 -3' />
-        <Tile key='0, -3' terrain="mountain" />
-        <Tile key='1, 3' terrain="forest" />
+        <Tile key="-1 -3" />
+        <Tile key="0, -3" terrain="mountain" />
+        <Tile key="1, 3" terrain="forest" />
         <Tile />
         <Tile />
       </div>
@@ -29,9 +28,9 @@ function Board({ foo }: Props): JSX.Element {
         <Tile />
       </div>
       <div className="board__row board__row--1-to-equator">
-        <Tile />
-        <Tile />
-        <Tile />
+        <Tile status="available" />
+        <Tile status="forbidden" />
+        <Tile terrain="lake" />
         <Tile />
         <Tile />
         <Tile />
@@ -50,8 +49,12 @@ function Board({ foo }: Props): JSX.Element {
       <div className="board__row board__row--1-to-equator">
         <Tile />
         <Tile />
-        <Tile />
-        <Tile />
+        <Tile>
+          <Piece type="soldier" />
+        </Tile>
+        <Tile>
+          <Piece owner="enemy" />
+        </Tile>
         <Tile />
         <Tile />
         <Tile />
