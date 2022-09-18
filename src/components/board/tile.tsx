@@ -1,20 +1,24 @@
 import c from "classnames";
 import { useState } from "react";
-import { ReactComponent as ForestSvg } from "./forest.svg";
-import { ReactComponent as HexagonSvg } from "./hexagon.svg";
-import { ReactComponent as MountainSvg } from "./mountain.svg";
-import { ReactComponent as LakeSvg } from "./lake.svg";
+import { ReactComponent as ForestSvg } from "./assets/forest.svg";
+import { ReactComponent as HexagonSvg } from "./assets/hexagon.svg";
+import { ReactComponent as LakeSvg } from "./assets/lake.svg";
+import { ReactComponent as MountainSvg } from "./assets/mountain.svg";
+import tileId from "./tile-id";
 
 import "./tile.scss";
 
 interface Props {
+  id: TileIdStr;
   terrain?: "field" | "mountain" | "lake" | "forest";
-  status?: "available" | "forbidden";
+  status?: "idle" | "available" | "forbidden" | "selected";
+  onClick?: (tileID: TileID) => void;
   children?: React.ReactNode;
 }
 
-function Cell({ terrain, status, children }: Props): JSX.Element {
-  const [isSelected, setIsSelected] = useState(false);
+function Tile({ id, terrain, status, children, onClick }: Props): JSX.Element {
+  // console.debug(`render <Tile id="${id}" />`)
+  const tileID = tileId(id);
 
   return (
     <div className="tile">
@@ -33,14 +37,14 @@ function Cell({ terrain, status, children }: Props): JSX.Element {
           "tile__hexagon",
           status === "available" && "tile__hexagon--available",
           status === "forbidden" && "tile__hexagon--forbidden",
-          isSelected && "tile__hexagon--selected"
+          status === "selected" && "tile__hexagon--selected"
         )}
       />
 
       <div
         className="pointer-area"
         onClick={() => {
-          setIsSelected(!isSelected);
+          onClick && onClick(tileID);
         }}
       />
       {children && <div className="tile__content">{children}</div>}
@@ -48,4 +52,4 @@ function Cell({ terrain, status, children }: Props): JSX.Element {
   );
 }
 
-export default Cell;
+export default Tile;
