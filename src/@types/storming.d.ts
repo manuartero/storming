@@ -69,8 +69,9 @@ interface TileState {
 type BoardState = Record<TileIdStr, TileState>;
 
 interface BoardStateAction {
-  type: "move-piece" | "mark-tile-as-available" | "select-piece";
+  type: "move-piece" | "select-piece";
   from?: TileIdStr;
   to?: TileIdStr;
   tile?: TileIdStr;
+  tiles?: TileIdStr[];
 }

@@ -1,7 +1,7 @@
 import { useReducer } from "react";
 import Board from "./board";
 import { boardStateReducer, initialBoardState } from "./state";
-import BoardModel from "./state/board-model";
+import boardModel from "./utils/board-model";
 
 function BoardController(): JSX.Element {
   const [boardState, dispatchBoardAction] = useReducer(
@@ -9,9 +9,10 @@ function BoardController(): JSX.Element {
     initialBoardState
   );
 
-  const board = BoardModel(boardState);
+  const board = boardModel(boardState);
 
   const onTileClick = (tileID: TileID) => {
+    console.debug("onTileClick()");
     if (board.hasASelectedPiece() && !boardState[tileID.str].piece) {
       const selectedTileId = board.getSelectedTileID();
       return dispatchBoardAction({

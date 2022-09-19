@@ -1,10 +1,9 @@
 import c from "classnames";
-import { useState } from "react";
 import { ReactComponent as ForestSvg } from "./assets/forest.svg";
 import { ReactComponent as HexagonSvg } from "./assets/hexagon.svg";
 import { ReactComponent as LakeSvg } from "./assets/lake.svg";
 import { ReactComponent as MountainSvg } from "./assets/mountain.svg";
-import tileId from "./tile-id";
+import { asTileID } from "./utils/tile-model";
 
 import "./tile.scss";
 
@@ -18,10 +17,11 @@ interface Props {
 
 function Tile({ id, terrain, status, children, onClick }: Props): JSX.Element {
   // console.debug(`render <Tile id="${id}" />`)
-  const tileID = tileId(id);
+  const tileID = asTileID(id);
 
   return (
     <div className="tile">
+      {/* <span className="tile__id">{id}</span> */}
       {terrain === "mountain" && (
         <MountainSvg className={c("tile__terrain", "tile__terrain-mountain")} />
       )}

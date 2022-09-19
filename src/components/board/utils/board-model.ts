@@ -1,4 +1,5 @@
-function BoardModel(b: BoardState) {
+
+function boardModel(b: BoardState) {
   return {
     hasASelectedPiece() {
       return Object.values(b).some(
@@ -20,4 +21,4 @@ function BoardModel(b: BoardState) {
   };
 }
 
-export default BoardModel;
+export default boardModel;

@@ -10,6 +10,12 @@ $tile-border: black;
   margin: 0;
   justify-content: center;
   align-items: center;
+
+  &__id {
+    margin: auto;
+
+  }
+
   &__terrain {
     position: absolute;
     stroke: #5f5858;

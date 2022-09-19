@@ -1,28 +1,24 @@
+import { getAvailableMovements } from "../utils/movements";
+
 function boardStateReducer(
   state: BoardState,
   action: BoardStateAction
 ): BoardState {
-  console.debug(action);
+  console.debug(`boardStateReducer(${action.type})`);
   switch (action.type) {
-    case "mark-tile-as-available": {
-      if (!action.tile) {
-        throw Error(
-          'Inconsistent state: "mark-tile-as-available" action requires "tile"'
-        );
-      }
-      state[action.tile].status = "available";
-      return {
-        ...state,
-      };
-    }
-
     case "select-piece": {
       if (!action.tile) {
         throw Error(
           'Inconsistent state: "select-piece" action requires "tile"'
         );
       }
-      state[action.tile].status = "selected";
+      const t = state[action.tile];
+      t.status = "selected";
+      if (t.piece && t.piece?.type === "soldier") {
+        getAvailableMovements(action.tile).forEach((availableTile) => {
+          state[availableTile].status = "available";
+        });
+      }
       return {
         ...state,
       };
@@ -44,7 +40,7 @@ function boardStateReducer(
         return { ...state };
       }
       state[action.from].piece = undefined;
-      state[action.from].status = "idle";
+      state[action.from].status = "idle"; // TODO cleanup every tile.status
       state[action.to].piece = piece;
       return {
         ...state,

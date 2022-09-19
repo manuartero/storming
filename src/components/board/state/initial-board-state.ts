@@ -30,7 +30,7 @@ const initialBoardState: BoardState = {
     piece: undefined,
   },
   "-2,-2": {
-    status: "available", // XXX
+    status: "idle",
     terrain: "field",
     piece: undefined,
   },
@@ -77,27 +77,27 @@ const initialBoardState: BoardState = {
   "1,-1": {
     status: "idle",
     terrain: "field",
-    piece: undefined,
+    piece: { owner: "player", type: "soldier" },
   },
   "2,-1": {
     status: "idle",
     terrain: "field",
-    piece: undefined,
+    piece: { owner: "player", type: "soldier" },
   },
   "3,-1": {
     status: "idle",
     terrain: "field",
-    piece: undefined,
+    piece: { owner: "player", type: "soldier" },
   },
   "-4,0": {
     status: "idle",
     terrain: "field",
-    piece: undefined,
+    piece: { owner: "player", type: "soldier" },
   },
   "-3,0": {
     status: "idle",
     terrain: "field",
-    piece: undefined,
+    piece: { owner: "player", type: "soldier" },
   },
   "-2,0": {
     status: "idle",
