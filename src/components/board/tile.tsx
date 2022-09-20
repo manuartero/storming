@@ -3,21 +3,21 @@ import { ReactComponent as ForestSvg } from "./assets/forest.svg";
 import { ReactComponent as HexagonSvg } from "./assets/hexagon.svg";
 import { ReactComponent as LakeSvg } from "./assets/lake.svg";
 import { ReactComponent as MountainSvg } from "./assets/mountain.svg";
-import { asTileID } from "./utils/tile-model";
+import { coordinates } from "models/tiles";
 
 import "./tile.scss";
 
 interface Props {
-  id: TileIdStr;
+  id: TileID;
   terrain?: "field" | "mountain" | "lake" | "forest";
   status?: "idle" | "available" | "forbidden" | "selected";
-  onClick?: (tileID: TileID) => void;
+  onClick?: (tileID: Coordinates) => void;
   children?: React.ReactNode;
 }
 
 function Tile({ id, terrain, status, children, onClick }: Props): JSX.Element {
   // console.debug(`render <Tile id="${id}" />`)
-  const tileID = asTileID(id);
+  const tileID = coordinates(id);
 
   return (
     <div className="tile">

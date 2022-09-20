@@ -1,4 +1,4 @@
-import { getAvailableMovements } from "../utils/movements";
+import { getAvailableMovements } from "models/movements";
 
 function boardStateReducer(
   state: BoardState,
@@ -47,7 +47,6 @@ function boardStateReducer(
       };
     }
   }
-  throw Error("Unknown action: " + action.type);
 }
 
 export default boardStateReducer;

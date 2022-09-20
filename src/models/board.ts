@@ -1,4 +1,3 @@
-
 function boardModel(b: BoardState) {
   return {
     hasASelectedPiece() {
@@ -13,10 +12,10 @@ function boardModel(b: BoardState) {
       )?.[0];
       if (!selectedTileID) {
         throw new Error(
-          'Inconsistent state: "getSelectedTileID" was unable to find selected tile'
+          'Inconsistent state: "getSelectedTileID" was unable to find any selected tile'
         );
       }
-      return selectedTileID as TileIdStr;
+      return selectedTileID as TileID;
     },
   };
 }

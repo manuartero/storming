@@ -1,8 +1,8 @@
-import { asTileID, asTileIdStr } from "../utils/tile-model";
+import { asTileID, coordinates } from "models/tiles";
 
-export function getAvailableMovements(t: TileIdStr, range = 1) {
+export function getAvailableMovements(t: TileID, range = 1) {
   console.debug(`getAvailableMovements(${t})`);
-  const tileID = asTileID(t);
+  const tileID = coordinates(t);
 
   // TODO use range param instead of fixed array
   // TODO avoid fixed arrays?
@@ -26,7 +26,7 @@ export function getAvailableMovements(t: TileIdStr, range = 1) {
         ];
 
   return range1Movements.flatMap((variance) => {
-    const tileIdStr = asTileIdStr({
+    const tileIdStr = asTileID({
       x: tileID.x + variance[0],
       y: tileID.y + variance[1],
     });
