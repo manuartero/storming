@@ -34,7 +34,7 @@ function Board({ state, onTileClick }: Props): JSX.Element {
       <div className="board__row">{renderRow(0)}</div>
       <div className="board__row board__row--1-to-equator">{renderRow(1)}</div>
       <div className="board__row board__row--2-to-equator">{renderRow(2)}</div>
-      <div className="board__row board__row--3-to-equator">{renderRow(-3)}</div>
+      <div className="board__row board__row--3-to-equator">{renderRow(3)}</div>
     </div>
   );
 }
