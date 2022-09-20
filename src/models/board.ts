@@ -1,3 +1,5 @@
+import { rangeTiles as tilesInRange } from "./tiles";
+
 function boardModel(b: BoardState) {
   return {
     hasAnySelectedTile() {
@@ -11,15 +13,24 @@ function boardModel(b: BoardState) {
     },
 
     getSelectedTile() {
-      const selectedTile = Object.entries(b).find(
+      const selectedTileID = Object.entries(b).find(
         ([, tile]) => tile.status === "selected"
       )?.[0];
-      if (!selectedTile) {
+      if (!selectedTileID) {
         throw new Error(
           'Inconsistent state: "getSelectedTileID" was unable to find any selected tile'
         );
       }
-      return selectedTile as TileID;
+      return selectedTileID as TileID;
+    },
+
+    getAvailableMovements(tile: TileID) {
+      return tilesInRange(tile).filter(
+        (candidateTile) =>
+          /* valid options: */
+          !b[candidateTile].piece ||
+          b[candidateTile].piece?.owner !== b[tile].piece?.owner
+      );
     },
   };
 }

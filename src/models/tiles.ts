@@ -74,3 +74,35 @@ export function asTileID({ x, y }: { x: number; y: number }): TileID | null {
 export function row(n: -3 | -2 | -1 | 0 | 1 | 2 | 3): TileID[] {
   return tiles.filter((id) => coordinates(id).y === n);
 }
+
+export function rangeTiles(tile: TileID, range = 1): TileID[] {
+  const { x, y } = coordinates(tile);
+
+  // TODO use range param instead of fixed array?
+  const range1Movements =
+    y % 2 === 0
+      ? [
+          [0, -1],
+          [+1, -1],
+          [-1, 0],
+          [+1, 0],
+          [0, +1],
+          [+1, +1],
+        ]
+      : [
+          [-1, -1],
+          [0, -1],
+          [-1, 0],
+          [+1, 0],
+          [-1, +1],
+          [0, +1],
+        ];
+
+  return range1Movements.flatMap((variance) => {
+    const tileIdStr = asTileID({
+      x: x + variance[0],
+      y: y + variance[1],
+    });
+    return tileIdStr ? [tileIdStr] : [];
+  });
+}

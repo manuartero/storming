@@ -1,26 +1,25 @@
 import boardModel from "models/board";
-import { getAvailableMovements } from "models/movements";
 
 function boardStateReducer(
   state: BoardState,
   action: BoardStateAction
 ): BoardState {
   console.debug(`boardStateReducer(${action.type})`);
-  // const board = boardModel(state);
 
+  const board = boardModel(state);
   switch (action.type) {
     case "select-tile": {
       if (!action.tile) {
         throw Error('Inconsistent state: "select-tile" action requires "tile"');
       }
-      // if (board.hasAnySelectedTile()) {
-      //   state[board.getSelectedTile()].status = "idle";
-      // }
+      if (board.hasAnySelectedTile()) {
+        state[board.getSelectedTile()].status = "idle";
+      }
       const tile = state[action.tile];
       tile.status = "selected";
 
       if (tile.piece && tile.piece?.type === "soldier") {
-        getAvailableMovements(action.tile).forEach((availableTile) => {
+        board.getAvailableMovements(action.tile).forEach((availableTile) => {
           state[availableTile].status = "available";
         });
       }
