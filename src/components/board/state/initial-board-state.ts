@@ -87,7 +87,7 @@ const initialBoardState: BoardState = {
   "3,-1": {
     status: "idle",
     terrain: "field",
-    piece: { owner: "player", type: "soldier" },
+    piece: { owner: "enemy", type: "soldier" },
   },
   "-4,0": {
     status: "idle",
@@ -97,7 +97,7 @@ const initialBoardState: BoardState = {
   "-3,0": {
     status: "idle",
     terrain: "field",
-    piece: { owner: "player", type: "soldier" },
+    piece: { owner: "enemy", type: "soldier" },
   },
   "-2,0": {
     status: "idle",
