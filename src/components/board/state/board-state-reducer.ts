@@ -44,9 +44,21 @@ function boardStateReducer(
         );
         return { ...state };
       }
+
+      if (state[action.to].status !== "available") {
+        state[action.from].status = "idle";
+        board.getAvailableTiles().forEach((availableTile) => {
+          state[availableTile].status = "idle";
+        });
+        return { ...state };
+      }
+
       state[action.from].piece = undefined;
-      state[action.from].status = "idle"; // TODO cleanup every tile.status
+      state[action.from].status = "idle";
       state[action.to].piece = piece;
+      board.getAvailableTiles().forEach((availableTile) => {
+        state[availableTile].status = "idle";
+      });
       return {
         ...state,
       };

@@ -32,6 +32,12 @@ function boardModel(b: BoardState) {
           b[candidateTile].piece?.owner !== b[tile].piece?.owner
       );
     },
+
+    getAvailableTiles(): TileID[] {
+      return Object.entries(b)
+        .filter(([, tile]) => tile.status === "available")
+        .map(([tileID]) => tileID as TileID);
+    }
   };
 }
 
