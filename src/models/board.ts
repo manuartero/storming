@@ -1,21 +1,25 @@
 function boardModel(b: BoardState) {
   return {
-    hasASelectedPiece() {
+    hasAnySelectedTile() {
+      return Object.values(b).some((tile) => tile.status === "selected");
+    },
+
+    hasAnySelectedPiece() {
       return Object.values(b).some(
         (tile) => tile.status === "selected" && tile.piece
       );
     },
 
-    getSelectedTileID() {
-      const selectedTileID = Object.entries(b).find(
+    getSelectedTile() {
+      const selectedTile = Object.entries(b).find(
         ([, tile]) => tile.status === "selected"
       )?.[0];
-      if (!selectedTileID) {
+      if (!selectedTile) {
         throw new Error(
           'Inconsistent state: "getSelectedTileID" was unable to find any selected tile'
         );
       }
-      return selectedTileID as TileID;
+      return selectedTile as TileID;
     },
   };
 }

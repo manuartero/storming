@@ -1,3 +1,4 @@
+import boardModel from "models/board";
 import { getAvailableMovements } from "models/movements";
 
 function boardStateReducer(
@@ -5,20 +6,25 @@ function boardStateReducer(
   action: BoardStateAction
 ): BoardState {
   console.debug(`boardStateReducer(${action.type})`);
+  // const board = boardModel(state);
+
   switch (action.type) {
-    case "select-piece": {
+    case "select-tile": {
       if (!action.tile) {
-        throw Error(
-          'Inconsistent state: "select-piece" action requires "tile"'
-        );
+        throw Error('Inconsistent state: "select-tile" action requires "tile"');
       }
-      const t = state[action.tile];
-      t.status = "selected";
-      if (t.piece && t.piece?.type === "soldier") {
+      // if (board.hasAnySelectedTile()) {
+      //   state[board.getSelectedTile()].status = "idle";
+      // }
+      const tile = state[action.tile];
+      tile.status = "selected";
+
+      if (tile.piece && tile.piece?.type === "soldier") {
         getAvailableMovements(action.tile).forEach((availableTile) => {
           state[availableTile].status = "available";
         });
       }
+
       return {
         ...state,
       };
@@ -31,8 +37,8 @@ function boardStateReducer(
         );
         return { ...state };
       }
-      const piece = state[action.from].piece;
 
+      const piece = state[action.from].piece;
       if (!piece) {
         console.warn(
           'Inconsistent state: "move-piece" action requires a piece at "action.from"'

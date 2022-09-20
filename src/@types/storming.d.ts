@@ -23,9 +23,9 @@ interface MovePieceAction {
   to: TileID;
 }
 
-interface SelectPieceAction {
-  type: "select-piece";
+interface SelectTileAction {
+  type: "select-tile";
   tile: TileID;
 }
 
-type BoardStateAction = MovePieceAction | SelectPieceAction;
+type BoardStateAction = MovePieceAction | SelectTileAction;
