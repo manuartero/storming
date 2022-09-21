@@ -24,20 +24,28 @@ function boardModel(b: BoardState) {
       return selectedTileID as TileID;
     },
 
-    getAvailableMovements(tile: TileID) {
-      return tilesInRange(tile).filter(
-        (candidateTile) =>
-          /* valid options: */
-          !b[candidateTile].piece ||
-          b[candidateTile].piece?.owner !== b[tile].piece?.owner
-      );
+    getInRangeMovements(tile: TileID): AvailableMovements {
+      const tiles = tilesInRange(tile);
+      return {
+        available: tiles.filter(
+          (candidateTile) =>
+            /* valid options: */
+            !b[candidateTile].piece ||
+            b[candidateTile].piece?.owner !== b[tile].piece?.owner
+        ),
+        forbidden: tiles.filter(
+          (candidateTile) =>
+            /* valid options: */
+            b[candidateTile].terrain === "lake"
+        ),
+      };
     },
 
     getAvailableTiles(): TileID[] {
       return Object.entries(b)
         .filter(([, tile]) => tile.status === "available")
         .map(([tileID]) => tileID as TileID);
-    }
+    },
   };
 }
 

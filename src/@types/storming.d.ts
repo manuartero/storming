@@ -29,3 +29,8 @@ interface SelectTileAction {
 }
 
 type BoardStateAction = MovePieceAction | SelectTileAction;
+
+interface AvailableMovements {
+  available: TileID[];
+  forbidden: TileID[];
+}

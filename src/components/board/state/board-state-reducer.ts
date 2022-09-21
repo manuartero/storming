@@ -19,8 +19,14 @@ function boardStateReducer(
       tile.status = "selected";
 
       if (tile.piece && tile.piece?.type === "soldier") {
-        board.getAvailableMovements(action.tile).forEach((availableTile) => {
+        const { available, forbidden } = board.getInRangeMovements(
+          action.tile
+        );
+        available.forEach((availableTile) => {
           state[availableTile].status = "available";
+        });
+        forbidden.forEach((forbiddenTile) => {
+          state[forbiddenTile].status = "forbidden";
         });
       }
 
