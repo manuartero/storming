@@ -1,15 +1,6 @@
-import "./card.scss";
-import BuildIcn from "./assets/build_1.png";
-import DiploIcn from "./assets/diplo_1.png";
-import MoveIcn from "./assets/move_1.png";
-import RecruitIcn from "./assets/recruit_1.png";
+import c from "classnames";
 
-const headingIcn = {
-  build: BuildIcn,
-  diplo: DiploIcn,
-  move: MoveIcn,
-  recruit: RecruitIcn,
-};
+import "./card.scss";
 
 interface Props {
   action: CardAction;
@@ -17,13 +8,16 @@ interface Props {
 
 function Card({ action }: Props): JSX.Element {
   return (
-    <div className="card">
-      <div className="card__heading">
-        <img
-          src={headingIcn[action]}
-          alt={`heading icon for ${action} action card`}
-        />
-        <h1 >{action}</h1>
+    <div className={c("card", `card--${action}`)}>
+      <div className="card__background">
+        <div className="card__background__corner" />
+        <div className="card__background__corner" />
+        <div className="card__background__corner" />
+        <div className="card__background__corner" />
+      </div>
+      <div className="card__heading" />
+      <div className="card__text-box">
+        <div className="card__text-box__title">{action}</div>
       </div>
     </div>
   );
