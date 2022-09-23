@@ -1,5 +1,5 @@
-$card-background-color: #fff;
-$card-outline-color: #ddd;
+$card-background-color: rgb(250, 250, 250);
+$card-outline-color: #ccc;
 
 
 @mixin bg-image($name) {
@@ -50,6 +50,7 @@ $card-outline-color: #ddd;
     overflow: hidden; // hidden &__corners
 
     $corner-overflow-position: -26px;
+
     &__corner {
       position: absolute;
 
@@ -110,7 +111,8 @@ $card-outline-color: #ddd;
     &__title {
       text-transform: uppercase;
       margin: auto;
-
     }
+
+    &__text {}
   }
 }

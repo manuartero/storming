@@ -1,0 +1,6 @@
+{
+  "build": "2x:\n Found a Settlement\n Improve a City\nBuild Walls",
+  "move": "Move up to two different Units",
+  "recruit": "Recruit units at up to two different Settlements",
+  "diplo": "Take the Initial Player token"
+}
