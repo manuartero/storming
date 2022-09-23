@@ -4,7 +4,7 @@ import cardText from "./card-text.json";
 import "./card.scss";
 
 interface Props {
-  action: CardAction;
+  action: ActionCardType;
 }
 
 function Card({ action }: Props): JSX.Element {

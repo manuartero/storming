@@ -1,3 +1,7 @@
+// --------------
+// TILES
+// --------------
+
 declare type TileID = import("models/tiles")._TileID;
 
 interface Coordinates {
@@ -14,6 +18,10 @@ interface TileState {
     owner: "player" | "enemy";
   };
 }
+
+// --------------
+// BOARD
+// --------------
 
 type BoardState = Record<TileID, TileState>;
 
@@ -35,4 +43,42 @@ interface AvailableMovements {
   forbidden: TileID[];
 }
 
-type CardAction = "build" | "diplo" | "move" | "recruit";
+// --------------
+// CARDS
+// --------------
+
+type ActionCardType = "build" | "diplo" | "move" | "recruit";
+
+type Card = ActionCard | EventCard;
+
+interface ActionCard {
+  cardType: "actionCard";
+  owner: "player" | "enemy";
+  card: ActionCardType;
+}
+
+interface EventCard {
+  cardType: "event";
+  // TODO
+}
+
+// --------------
+// TIMELINE
+// --------------
+
+interface TimelineState {
+  current: Card | undefined;
+  next: Card[];
+  future: Card[];
+}
+
+interface PlanCardAction {
+  type: "prepare";
+  card: Card;
+}
+
+interface NextAction {
+  type: "next";
+}
+
+type TimelineAction = PrepareAction | NextAction;

@@ -1,11 +1,12 @@
-import { Board, Hand } from "./components";
+import { Board, Hand, TimeLine } from "./components";
 
 function App() {
   return (
     <div className="root">
       <main className="game">
-        <Hand />
+        <TimeLine />
         <Board />
+        <Hand />
       </main>
     </div>
   );
