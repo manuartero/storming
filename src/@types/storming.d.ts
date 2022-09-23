@@ -34,3 +34,5 @@ interface AvailableMovements {
   available: TileID[];
   forbidden: TileID[];
 }
+
+type CardAction = "build" | "diplo" | "move" | "recruit";

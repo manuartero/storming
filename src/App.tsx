@@ -1,9 +1,12 @@
-import { Board } from "./components";
+import { Board, Hand } from "./components";
 
 function App() {
   return (
-    <div className="App">
-      <Board />
+    <div className="root">
+      <main className="game">
+        <Hand />
+        <Board />
+      </main>
     </div>
   );
 }
