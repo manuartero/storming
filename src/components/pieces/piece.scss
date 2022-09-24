@@ -1,3 +1,6 @@
+$player-highlight-color: #ffea00;
+$enemy-highlight-color: #ff0000;
+
 .piece {
   position: relative;
   width: 80px;
@@ -16,7 +19,7 @@
     width: 99%;
     height: 99%;
     position: absolute;
-    border: 3px solid #ffea00;
+    border: 3px solid $player-highlight-color;
     border-radius: 50%;
     top: -4%;
     left: -4%;
@@ -36,10 +39,11 @@
 
   &--enemy {
     transform: rotateY(180deg);
+
     &::before {
 
-      border: 3px solid #ff0000;
-      
+      border: 3px solid $enemy-highlight-color;
+
     }
   }
 }
