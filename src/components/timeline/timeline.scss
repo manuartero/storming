@@ -1,8 +1,10 @@
+// import colors
+@use 'styles/colors.scss';
+
+
 $timeline-color: rgb(220, 220, 220);
 $line-item-color: rgb(88, 88, 88);
 
-$player-highlight-color: #ffea00;
-$enemy-highlight-color: #ff0000;
 
 .timeline {
   width: 100%;
@@ -55,11 +57,19 @@ $enemy-highlight-color: #ff0000;
         cursor: pointer;
 
         &--player {
-          outline: 2px solid $player-highlight-color;
+          outline: 2px solid colors.$player-highlight-color;
         }
 
-        &--enemy {
-          outline: 2px solid $enemy-highlight-color;
+        &--enemy1 {
+          outline: 2px solid colors.$enemy1-highlight-color;
+        }
+
+        &--enemy2 {
+          outline: 2px solid colors.$enemy2-highlight-color;
+        }
+
+        &--enemy3 {
+          outline: 2px solid colors.$enemy3-highlight-color;
         }
 
         &__detail {

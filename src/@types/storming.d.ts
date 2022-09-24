@@ -1,4 +1,10 @@
 // --------------
+// PLAYERS
+// --------------
+
+type Owner = "player" | "enemy1" | "enemy2" | "enemy3";
+
+// --------------
 // TILES
 // --------------
 
@@ -15,7 +21,7 @@ interface TileState {
   terrain: "field" | "mountain" | "lake" | "forest";
   piece?: {
     type: "soldier";
-    owner: "player" | "enemy";
+    owner: Owner;
   };
 }
 
@@ -53,7 +59,7 @@ type Card = ActionCard | EventCard;
 
 interface ActionCard {
   cardType: "actionCard";
-  owner: "player" | "enemy";
+  owner: Owner;
   card: ActionCardType;
 }
 

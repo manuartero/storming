@@ -1,5 +1,5 @@
-$player-highlight-color: #ffea00;
-$enemy-highlight-color: #ff0000;
+// import colors
+@use 'styles/colors.scss';
 
 .piece {
   position: relative;
@@ -19,7 +19,7 @@ $enemy-highlight-color: #ff0000;
     width: 99%;
     height: 99%;
     position: absolute;
-    border: 3px solid $player-highlight-color;
+    border: 3px solid colors.$player-highlight-color;
     border-radius: 50%;
     top: -4%;
     left: -4%;
@@ -39,11 +39,21 @@ $enemy-highlight-color: #ff0000;
 
   &--enemy {
     transform: rotateY(180deg);
+  }
 
+  &--enemy1 {
     &::before {
-
-      border: 3px solid $enemy-highlight-color;
-
+      border: 3px solid colors.$enemy1-highlight-color;
+    }
+  }
+  &--enemy2 {
+    &::before {
+      border: 3px solid colors.$enemy2-highlight-color;
+    }
+  }
+  &--enemy3 {
+    &::before {
+      border: 3px solid colors.$enemy3-highlight-color;
     }
   }
 }

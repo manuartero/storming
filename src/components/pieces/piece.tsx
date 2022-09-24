@@ -3,7 +3,7 @@ import c from "classnames";
 
 interface Props {
   type?: "soldier" | "knight" | "ballista";
-  owner?: "player" | "enemy";
+  owner?: Owner;
 }
 
 function Piece(props: Props): JSX.Element {
@@ -14,7 +14,8 @@ function Piece(props: Props): JSX.Element {
       className={c(
         "piece",
         `piece--${type}`,
-        owner === "enemy" && "piece--enemy"
+        owner !== "player" && "piece--enemy",
+        `piece--${owner}`
       )}
     ></div>
   );
