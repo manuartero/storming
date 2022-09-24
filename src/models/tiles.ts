@@ -1,4 +1,4 @@
-const tiles = [
+export const tiles = [
   // 1st row
   "-2,-3",
   "-1,-3",

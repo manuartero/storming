@@ -1,4 +1,11 @@
-import { tilesInRange } from "./tiles";
+import { tiles, tilesInRange } from "./tiles";
+
+function* makeBoardIterable(b: BoardState) {
+  // b is iterable in tile order
+  for (const tileID of tiles) {
+    yield b[tileID];
+  }
+}
 
 function boardModel(b: BoardState) {
   return {
