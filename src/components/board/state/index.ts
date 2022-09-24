@@ -1,2 +1,2 @@
-export { default as boardStateReducer } from "./board-state-reducer";
-export { default as initialBoardState } from "./initial-board-state";
+export { default as boardReducer } from "./board-reducer";
+export { default as initialBoard } from "./initial-board";

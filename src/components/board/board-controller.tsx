@@ -1,12 +1,12 @@
 import { useReducer } from "react";
 import Board from "./board";
-import { boardStateReducer, initialBoardState } from "./state";
+import { boardReducer, initialBoard } from "./state";
 import boardModel from "models/board";
 
 function BoardController(): JSX.Element {
   const [boardState, dispatchBoardAction] = useReducer(
-    boardStateReducer,
-    initialBoardState
+    boardReducer,
+    initialBoard
   );
 
   const board = boardModel(boardState);

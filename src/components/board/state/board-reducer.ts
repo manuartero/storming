@@ -1,6 +1,6 @@
 import boardModel from "models/board";
 
-function boardStateReducer(
+function boardReducer(
   state: BoardState,
   action: BoardStateAction
 ): BoardState {
@@ -72,4 +72,4 @@ function boardStateReducer(
   }
 }
 
-export default boardStateReducer;
+export default boardReducer;

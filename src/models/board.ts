@@ -1,4 +1,4 @@
-import { rangeTiles as tilesInRange } from "./tiles";
+import { tilesInRange } from "./tiles";
 
 function boardModel(b: BoardState) {
   return {

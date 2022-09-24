@@ -1,4 +1,4 @@
-const initialBoardState: BoardState = {
+const initialBoard: BoardState = {
   "-2,-3": {
     status: "idle",
     terrain: "field",
@@ -221,4 +221,4 @@ const initialBoardState: BoardState = {
   },
 };
 
-export default initialBoardState;
+export default initialBoard;
