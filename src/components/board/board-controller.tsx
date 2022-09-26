@@ -1,27 +1,32 @@
-import { useReducer } from "react";
-import Board from "./board";
-import { boardReducer, initialBoard } from "./state";
+import { useGameLog } from "contexts";
 import boardModel from "models/board";
+import Board from "./board";
+import { useBoard } from "./hooks";
 
 function BoardController(): JSX.Element {
-  const [boardState, dispatchBoardAction] = useReducer(
-    boardReducer,
-    initialBoard
-  );
-
+  const { boardState, dispatchBoardAction } = useBoard();
+  const { log } = useGameLog();
   const board = boardModel(boardState);
 
-  const onTileClick = ({ str }: Coordinates) => {
+  const onTileClick = ({ str: tile }: Coordinates) => {
     console.debug("onTileClick()");
     if (board.hasAnySelectedPiece()) {
       const selectedTileId = board.getSelectedTile();
-      return dispatchBoardAction({
-        type: "move-piece",
-        from: selectedTileId,
-        to: str,
-      });
+      if (selectedTileId !== tile) {
+        const piece = boardState[selectedTileId].piece;
+        dispatchBoardAction({
+          type: "move-piece",
+          from: selectedTileId,
+          to: tile,
+        });
+        log({
+          player: piece?.owner,
+          msg: `Move ${piece?.type} from ${selectedTileId} to ${tile}`,
+        });
+      }
     }
-    return dispatchBoardAction({ type: "select-tile", tile: str });
+
+    return dispatchBoardAction({ type: "select-tile", tile });
   };
 
   return <Board state={boardState} onTileClick={onTileClick} />;

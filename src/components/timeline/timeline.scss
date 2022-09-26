@@ -3,7 +3,6 @@
 
 
 $timeline-color: rgb(220, 220, 220);
-$line-item-color: rgb(88, 88, 88);
 
 
 .timeline {
@@ -50,26 +49,26 @@ $line-item-color: rgb(88, 88, 88);
         width: 16px;
         height: 16px;
         border-radius: 50%;
-        background-color: $line-item-color;
+        background-color: colors.$dark-grey;
         z-index: 1; // FIXME
         outline-offset: 3px;
 
         cursor: pointer;
 
         &--player {
-          outline: 2px solid colors.$player-highlight-color;
+          outline: 2px solid colors.$player-highlight;
         }
 
         &--enemy1 {
-          outline: 2px solid colors.$enemy1-highlight-color;
+          outline: 2px solid colors.$enemy1-highlight;
         }
 
         &--enemy2 {
-          outline: 2px solid colors.$enemy2-highlight-color;
+          outline: 2px solid colors.$enemy2-highlight;
         }
 
         &--enemy3 {
-          outline: 2px solid colors.$enemy3-highlight-color;
+          outline: 2px solid colors.$enemy3-highlight;
         }
 
         &__detail {

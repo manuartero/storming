@@ -31,22 +31,22 @@ $size: 65px;
   }
 
   &--player {
-    border: 3px solid colors.$player-highlight-color;
-    background-color: rgb(colors.$player-highlight-color, 0.1);
+    border: 3px solid colors.$player-highlight;
+    background-color: rgb(colors.$player-highlight, 0.1);
   }
 
   &--enemy1 {
-    border: 3px solid colors.$enemy1-highlight-color;
-    background-color: rgb(colors.$enemy1-highlight-color, 0.1);
+    border: 3px solid colors.$enemy1-highlight;
+    background-color: rgb(colors.$enemy1-highlight, 0.1);
   }
 
   &--enemy2 {
-    border: 3px solid colors.$enemy2-highlight-color;
-    background-color: rgb(colors.$enemy2-highlight-color, 0.1);
+    border: 3px solid colors.$enemy2-highlight;
+    background-color: rgb(colors.$enemy2-highlight, 0.1);
   }
 
   &--enemy3 {
-    border: 3px solid colors.$enemy3-highlight-color;
-    background-color: rgb(colors.$enemy3-highlight-color, 0.1);
+    border: 3px solid colors.$enemy3-highlight;
+    background-color: rgb(colors.$enemy3-highlight, 0.1);
   }
 }

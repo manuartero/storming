@@ -7,7 +7,7 @@ interface Props {
 }
 
 function Hand({ foo }: Props): JSX.Element {
-  return <div className='hand'>
+  return <div className='player-hand'>
     <Card action='build' />
     <Card action='diplo' />
     <Card action='move' />

@@ -1,0 +1,27 @@
+@use '../../styles/colors.scss';
+
+
+.log-panel {
+  display: flex;
+  flex-direction: column-reverse;
+
+  &__entry {
+
+    &--player {
+      outline: 2px solid colors.$player-highlight;
+    }
+
+    &--enemy1 {
+      outline: 2px solid colors.$enemy1-highlight;
+    }
+
+    &--enemy2 {
+      outline: 2px solid colors.$enemy2-highlight;
+    }
+
+    &--enemy3 {
+      outline: 2px solid colors.$enemy3-highlight;
+    }
+  }
+
+}

@@ -1,11 +1,20 @@
-import { Board, Hand, TimeLine } from "./components";
+import { GameLogProvider } from "contexts";
+import { Board, Hand, LogPanel, RoundSummary, TimeLine } from "components";
+import Marketplace from "components/marketplace/marketplace";
+
+import "./app.scss";
 
 function App() {
   return (
     <main className="game">
-      <TimeLine />
-      <Board />
-      <Hand />
+      <GameLogProvider>
+        <TimeLine />
+        <RoundSummary />
+        <Board />
+        <Marketplace />
+        <Hand />
+        <LogPanel />
+      </GameLogProvider>
     </main>
   );
 }

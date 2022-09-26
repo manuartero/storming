@@ -95,3 +95,17 @@ interface NextAction {
 }
 
 type TimelineAction = PrepareAction | NextAction;
+
+// --------------
+// Contexts
+// --------------
+
+interface ActionLog {
+  player?: Owner; // TODO mandatory player
+  msg: string;
+}
+
+interface GameLogContext {
+  actions: ActionLog[];
+  log(action: ActionLog): void;
+}
