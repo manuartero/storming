@@ -1,5 +1,6 @@
 $available-tile: rgba(195, 214, 191, 0.5);
 $forbidden-tile: rgba(190, 88, 88, 0.5);
+$selected-tile: rgba(255, 248, 174, 0.179);
 $tile-border: black;
 
 .tile {
@@ -49,7 +50,7 @@ $tile-border: black;
 
     &--selected {
       path {
-        fill: rgba(255, 248, 174, 0.179);
+        fill: $selected-tile;
       }
     }
 
@@ -89,8 +90,6 @@ $tile-border: black;
 
   // center
   &__content {
-
-
     display: flex;
 
   }

@@ -9,8 +9,8 @@ import "./tile.scss";
 
 interface Props {
   id: TileID;
-  terrain?: "field" | "mountain" | "lake" | "forest";
-  status?: "idle" | "available" | "forbidden" | "selected";
+  status?: TileStatus;
+  terrain?: Terrain;
   onClick?: (tileID: Coordinates) => void;
   children?: React.ReactNode;
 }

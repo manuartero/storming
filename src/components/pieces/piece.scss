@@ -1,30 +1,18 @@
 @use '../../styles/colors.scss';
 // @use 'styles/colors.scss';
 
+$size: 65px;
 
 .piece {
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: $size;
+  height: $size;
 
-  border: 6px solid #aaa;
   border-radius: 50%;
-
   background-position: center;
-  background-color: #ddd;
   background-repeat: no-repeat;
   background-size: contain;
-
-  &::before {
-    content: "";
-    width: 99%;
-    height: 99%;
-    position: absolute;
-    border: 3px solid colors.$player-highlight-color;
-    border-radius: 50%;
-    top: -4%;
-    left: -4%;
-  }
+  outline: 3px solid #555;
 
   &--soldier {
     background-image: url('./soldier.png')
@@ -42,21 +30,23 @@
     transform: rotateY(180deg);
   }
 
+  &--player {
+    border: 3px solid colors.$player-highlight-color;
+    background-color: rgb(colors.$player-highlight-color, 0.1);
+  }
+
   &--enemy1 {
-    &::before {
-      border: 3px solid colors.$enemy1-highlight-color;
-    }
+    border: 3px solid colors.$enemy1-highlight-color;
+    background-color: rgb(colors.$enemy1-highlight-color, 0.1);
   }
 
   &--enemy2 {
-    &::before {
-      border: 3px solid colors.$enemy2-highlight-color;
-    }
+    border: 3px solid colors.$enemy2-highlight-color;
+    background-color: rgb(colors.$enemy2-highlight-color, 0.1);
   }
 
   &--enemy3 {
-    &::before {
-      border: 3px solid colors.$enemy3-highlight-color;
-    }
+    border: 3px solid colors.$enemy3-highlight-color;
+    background-color: rgb(colors.$enemy3-highlight-color, 0.1);
   }
 }

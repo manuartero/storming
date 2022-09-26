@@ -16,11 +16,18 @@ interface Coordinates {
   str: TileID;
 }
 
+type TileStatus = "idle" | "available" | "forbidden" | "selected";
+type Terrain = "field" | "mountain" | "lake" | "forest";
+
 interface TileState {
-  status: "idle" | "available" | "forbidden" | "selected";
-  terrain: "field" | "mountain" | "lake" | "forest";
+  status: TileStatus;
+  terrain: Terrain;
   piece?: {
     type: "soldier";
+    owner: Owner;
+  };
+  building?: {
+    type: "village" | "town" | "city";
     owner: Owner;
   };
 }
