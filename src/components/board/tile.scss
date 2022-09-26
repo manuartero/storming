@@ -37,10 +37,14 @@ $tile-border: black;
     }
   }
 
+
   &__hexagon {
     position: absolute;
+    width: 120px; // needed when changed from CRA to Vite
+    height: 120px; // needed when changed from CRA to Vite
 
     path {
+
       fill: none;
       stroke: $tile-border;
       stroke-width: 6px;

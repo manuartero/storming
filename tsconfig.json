@@ -9,7 +9,7 @@
     "strict": true,
     "noFallthroughCasesInSwitch": true,
     /* language */
-    "target": "ES6",
+    "target": "ESNext",
     "jsx": "react-jsx",
     "allowJs": true,
     "lib": [

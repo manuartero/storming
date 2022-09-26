@@ -1,5 +1,6 @@
-// import colors
-@use 'styles/colors.scss';
+@use '../../styles/colors.scss';
+// @use 'styles/colors.scss';
+
 
 .piece {
   position: relative;
@@ -46,11 +47,13 @@
       border: 3px solid colors.$enemy1-highlight-color;
     }
   }
+
   &--enemy2 {
     &::before {
       border: 3px solid colors.$enemy2-highlight-color;
     }
   }
+
   &--enemy3 {
     &::before {
       border: 3px solid colors.$enemy3-highlight-color;
