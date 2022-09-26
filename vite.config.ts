@@ -15,11 +15,6 @@ export default defineConfig({
       include: "**/*.tsx",
     }),
     tsconfigPaths(),
-    svgr({
-      svgrOptions: {
-        icon: true,
-        // ...svgr options (https://react-svgr.com/docs/options/)
-      },
-    }),
+    svgr(),
   ],
 });
