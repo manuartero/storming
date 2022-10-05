@@ -53,6 +53,15 @@ function boardModel(b: BoardState) {
         .filter(([, tile]) => tile.status === "available")
         .map(([tileID]) => tileID as TileID);
     },
+
+    getAvailableTilesForActionCard(card: ActionCard): TileID[] {
+      if (card.action === "move") {
+        return Object.entries(b)
+          .filter(([, tile]) => tile.piece && tile.piece.owner === card.owner)
+          .map(([tileID]) => tileID as TileID);
+      }
+      return [];
+    },
   };
 }
 

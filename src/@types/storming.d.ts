@@ -16,18 +16,20 @@ interface Coordinates {
   str: TileID;
 }
 
-type TileStatus = "idle" | "available" | "forbidden" | "selected";
+type TileStatus = "idle" | "selected" | "available" | "forbidden";
 type Terrain = "field" | "mountain" | "lake" | "forest";
+type Building = "village" | "town" | "city";
+type Piece = "soldier" | "knight";
 
 interface TileState {
   status: TileStatus;
   terrain: Terrain;
   piece?: {
-    type: "soldier";
+    type: Piece;
     owner: Owner;
   };
   building?: {
-    type: "village" | "town" | "city";
+    type: Building;
     owner: Owner;
   };
 }
@@ -70,8 +72,12 @@ interface ActionCard {
   owner: Owner;
 }
 
+type EventCardType = "even1" | "event2" | "event3";
+
 interface EventCard {
-  cardType: "event";
+  cardType: "eventCard";
+  event: EventCardType;
+  playedBy: Owner;
   // TODO
 }
 
@@ -90,11 +96,11 @@ interface PlanCardAction {
   card: Card;
 }
 
-interface NextAction {
-  type: "next";
+interface ResolveAction {
+  type: "resolve";
 }
 
-type TimelineAction = PrepareAction | NextAction;
+type TimelineAction = PrepareAction | ResolveAction;
 
 // --------------
 // Contexts
@@ -108,4 +114,9 @@ interface ActionLog {
 interface GameLogContext {
   actions: ActionLog[];
   log(action: ActionLog): void;
+}
+
+interface CurrentCardContext {
+  currentCard: Card | undefined;
+  setCurrentCard(card: Card): void;
 }
