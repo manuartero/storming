@@ -66,8 +66,8 @@ type Card = ActionCard | EventCard;
 
 interface ActionCard {
   cardType: "actionCard";
+  action: ActionCardType;
   owner: Owner;
-  card: ActionCardType;
 }
 
 interface EventCard {

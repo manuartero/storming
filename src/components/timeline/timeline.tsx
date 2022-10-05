@@ -1,4 +1,5 @@
 import c from "classnames";
+import IconCard from "components/cards/icon-card";
 
 import "./timeline.scss";
 
@@ -9,7 +10,9 @@ interface Props {
 function Timeline({ state }: Props): JSX.Element {
   return (
     <div className="timeline">
-      <div className="timeline__current"></div>
+      <div className="timeline__current">
+        <IconCard card={state.current} />
+      </div>
       <div className="timeline__next timeline__section">
         <span className="timeline__section__name">NEXT</span>
         <div className="timeline__section__line">

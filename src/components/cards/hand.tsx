@@ -11,6 +11,7 @@ function Hand({ foo }: Props): JSX.Element {
     <Card action='build' />
     <Card action='diplo' />
     <Card action='move' />
+    <Card action='move' />
     <Card action='recruit' />
   </div>;
 }
