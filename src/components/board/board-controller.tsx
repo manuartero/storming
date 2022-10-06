@@ -22,7 +22,14 @@ function BoardController(): JSX.Element {
       const tiles = board.getAvailableTilesForActionCard(
         gameContext.activeCard
       );
-      dispatchBoardAction({ type: "highlight-tiles", tiles });
+      if (tiles.length > 0) {
+        dispatchBoardAction({ type: "highlight-tiles", tiles });
+      } else {
+        // TODO: show a modal
+        // no options to play this action
+        console.warn(`activeCard (${card}) has no available tiles`);
+        gameContext.setActiveCard(undefined); // next()
+      }
       return;
     }
   }, [gameContext.activeCard]);
@@ -38,7 +45,25 @@ function BoardController(): JSX.Element {
         dispatchBoardAction({ type: "build-in-tile", tile });
         gameContext.setActiveCard(undefined); // next()
         break;
+      case "move":
+        if (board.hasAnySelectedPiece()) {
+          const selectedTileId = board.getSelectedTile();
+          if (selectedTileId !== tile) {
+            dispatchBoardAction({
+              type: "move-piece",
+              from: selectedTileId,
+              to: tile,
+            });
+            gameContext.setActiveCard(undefined); // next()
 
+            // const piece = boardState[selectedTileId].piece;
+            // log({
+            //   player: piece?.owner,
+            //   msg: `Move ${piece?.type} from ${selectedTileId} to ${tile}`,
+            // });
+          }
+        }
+        break;
       default:
         break;
     }
@@ -49,29 +74,13 @@ function BoardController(): JSX.Element {
 
     if (gameContext.activeCard?.cardType === "actionCard") {
       const selectionableTiles = board.getSelectionableTiles();
-      console.debug({ selectionableTiles, tile });
+
       if (selectionableTiles.includes(tile)) {
         dispatchBoardActionOnSelectionableTile(tile);
       } else {
         dispatchBoardAction({ type: "select-tile", tile });
       }
     }
-
-    // if (board.hasAnySelectedPiece()) {
-    //   const selectedTileId = board.getSelectedTile();
-    //   if (selectedTileId !== tile) {
-    //     const piece = boardState[selectedTileId].piece;
-    //     dispatchBoardAction({
-    //       type: "move-piece",
-    //       from: selectedTileId,
-    //       to: tile,
-    //     });
-    //     log({
-    //       player: piece?.owner,
-    //       msg: `Move ${piece?.type} from ${selectedTileId} to ${tile}`,
-    //     });
-    //   }
-    // }
   };
 
   return <Board state={boardState} onTileClick={onTileClick} />;
