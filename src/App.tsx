@@ -1,29 +1,30 @@
-import { CurrentCardProvider, GameLogProvider } from "contexts";
 import {
   Board,
   Hand,
   LogPanel,
+  Marketplace,
   RoundSummary,
   TimeLine,
-  Marketplace,
 } from "components";
+import { GameContextProvider, GameLogProvider } from "contexts";
+import { StrictMode } from "react";
 
 import "./app.scss";
 
 function App() {
   return (
-    <main className="game">
-      <GameLogProvider>
-        <CurrentCardProvider>
+    <StrictMode>
+      <main className="game">
+        <GameContextProvider>
           <TimeLine />
           <RoundSummary />
           <Board />
           <Marketplace />
           <Hand />
           <LogPanel />
-        </CurrentCardProvider>
-      </GameLogProvider>
-    </main>
+        </GameContextProvider>
+      </main>
+    </StrictMode>
   );
 }
 

@@ -51,7 +51,22 @@ interface SelectTileAction {
   tile: TileID;
 }
 
-type BoardStateAction = MovePieceAction | SelectTileAction;
+/* available */
+interface HighlightTilesAction {
+  type: "highlight-tiles";
+  tiles: TileID[];
+}
+
+interface BuildInTileAction {
+  type: "build-in-tile";
+  tile: TileID;
+}
+
+type BoardStateAction =
+  | BuildInTileAction
+  | HighlightTilesAction
+  | MovePieceAction
+  | SelectTileAction;
 
 interface AvailableMovements {
   available: TileID[];
@@ -78,36 +93,37 @@ interface EventCard {
   cardType: "eventCard";
   event: EventCardType;
   playedBy: Owner;
-  // TODO
+  // TODO Consider EventCards (!MVP)
 }
 
 // --------------
 // TIMELINE
 // --------------
 
-interface TimelineState {
+type TimelineState = {
   current: Card | undefined;
   next: Card[];
   future: Card[];
-}
+};
 
-interface PlanCardAction {
-  type: "prepare";
+interface PlanificationAction {
+  type: "planification";
   card: Card;
 }
 
 interface ResolveAction {
   type: "resolve";
+  card: Card;
 }
 
-type TimelineAction = PrepareAction | ResolveAction;
+type TimelineAction = PlanificationAction | ResolveAction;
 
 // --------------
 // Contexts
 // --------------
 
 interface ActionLog {
-  player?: Owner; // TODO mandatory player
+  player?: Owner; // TODO? make 'player' mandatory field
   msg: string;
 }
 
@@ -116,7 +132,18 @@ interface GameLogContext {
   log(action: ActionLog): void;
 }
 
-interface CurrentCardContext {
-  currentCard: Card | undefined;
-  setCurrentCard(card: Card): void;
+// --------------
+// GameContext
+// --------------
+
+type Phase = "setup" | "planification" | "action";
+
+interface GameContext {
+  phase: Phase;
+  activeCard: Card | undefined;
+  activePlayer: Owner | undefined;
+
+  changePhase(): void;
+  setActiveCard(card: Card | undefined): void;
+  setActivePlayer(player: Owner | undefined): void;
 }

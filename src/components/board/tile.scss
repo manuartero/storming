@@ -4,17 +4,18 @@ $selected-tile: rgba(255, 248, 174, 0.179);
 $tile-border: black;
 
 .tile {
-  display: flex;
   position: relative;
   width: 120px;
   height: 120px;
   margin: 0;
+
+  display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 
   &__id {
     margin: auto;
-
   }
 
   &__terrain {
@@ -38,6 +39,19 @@ $tile-border: black;
     }
   }
 
+  &__building {
+    width: 90px;
+    height: 90px;
+
+    position: absolute;
+    bottom: 5px; // building in the bottom
+
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('./assets/castle.png');
+
+  }
 
   &__hexagon {
     position: absolute;

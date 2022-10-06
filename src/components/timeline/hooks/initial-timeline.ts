@@ -1,9 +1,5 @@
 const initialTimeline: TimelineState = {
-  current: {
-    cardType: "actionCard",
-    action: "move",
-    owner: "player",
-  },
+  current: undefined,
   next: [
     // example
     { cardType: "actionCard", action: "build", owner: "enemy1" },

@@ -1,2 +1,2 @@
 export { GameLogProvider, useGameLog } from "./game-log";
-export { CurrentCardProvider, useCurrentCard } from "./current-card";
+export { GameContextProvider, useGameContext } from "./game-context";

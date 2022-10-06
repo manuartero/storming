@@ -11,11 +11,19 @@ interface Props {
   id: TileID;
   status?: TileStatus;
   terrain?: Terrain;
+  building?: Building;
   onClick?: (tileID: Coordinates) => void;
   children?: React.ReactNode;
 }
 
-function Tile({ id, terrain, status, children, onClick }: Props): JSX.Element {
+function Tile({
+  id,
+  terrain,
+  building,
+  status,
+  children,
+  onClick,
+}: Props): JSX.Element {
   // console.debug(`render <Tile id="${id}" />`)
   const tileID = coordinates(id);
 
@@ -30,6 +38,9 @@ function Tile({ id, terrain, status, children, onClick }: Props): JSX.Element {
       )}
       {terrain === "lake" && (
         <LakeSvg className={c("tile__terrain", "tile__terrain--lake")} />
+      )}
+      {building === "town" && (
+        <div className={c("tile__building", "tile__building--town")}></div>
       )}
 
       <HexagonSvg

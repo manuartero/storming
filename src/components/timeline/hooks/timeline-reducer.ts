@@ -5,18 +5,26 @@ function timelineReducer(
   console.debug(`timelineReducer(${action.type})`);
 
   switch (action.type) {
-    case "prepare": {
+    case "planification": {
+      // action.card
+
       return {
         ...state,
       };
     }
-    case "next": {
+
+    case "resolve": {
+      /* double validation (strict mode) */
+      if (action.card !== state.next[0]) {
+        return { ...state };
+      }
+      state.current = state.next[0];
+      state.next = state.next.slice(1);
       return {
         ...state,
       };
     }
   }
-  throw Error("Unknown action: " + action.type);
 }
 
 export default timelineReducer;
