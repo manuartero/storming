@@ -1,11 +1,4 @@
-import { tiles, tilesInRange } from "./tiles";
-
-function* makeBoardIterable(b: Board) {
-  // b is iterable in tile order
-  for (const tileID of tiles) {
-    yield b[tileID];
-  }
-}
+import {  tilesInRange } from "./tiles";
 
 type _FilterPredicate = (_: [string, Tile]) => boolean;
 
