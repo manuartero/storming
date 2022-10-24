@@ -2,17 +2,22 @@ import { tiles } from "models/tiles";
 import { useState } from "react";
 import initialBoard from "./initial-board";
 
+/**
+ * plain react state + named update methods
+ *
+ * **no game logic here**
+ */
 export function useBoard() {
   const [board, setBoard] = useState(initialBoard);
 
-  const buildInTile = ({ tile, building, owner }: BuidInTile) => {
+  const buildOnTile = ({ tile, building }: BuildAction) => {
     console.debug(
-      `GameContext.buildInTile({tile: ${tile}, building: ${building}, owner: ${owner}})`
+      `GameContext.buildOnTile({tile: ${tile}, building: ${building}})`
     );
     setBoard((currentBoard) => {
       const newTile: Tile = {
         ...currentBoard[tile],
-        building: { type: building, owner },
+        building,
       };
       return {
         ...currentBoard,
@@ -21,9 +26,9 @@ export function useBoard() {
     });
   };
 
-  const movePiece = ({ piece, from, to }: MovePiece) => {
+  const movePiece = ({ piece, from, to }: MoveAction) => {
     console.debug(
-      `GameContext.movePiece({ from:  ${from}, to:  ${to}, piece: ${piece.type},}`
+      `GameContext.movePiece({ from:  ${from}, to:  ${to}, piece: ${piece.type}}`
     );
     setBoard((currentBoard) => {
       const fromTile: Tile = {
@@ -42,7 +47,21 @@ export function useBoard() {
     });
   };
 
-  return { board, buildInTile, movePiece };
+  const recruitOnTile = ({ tile, piece }: RecruitAction) => {
+    console.debug(`GameContext.recruitOnTile({ tile:  ${tile}, piece: ${piece}}`);
+    setBoard((currentBoard) => {
+      const newTile: Tile = {
+        ...currentBoard[tile],
+        piece,
+      };
+      return {
+        ...currentBoard,
+        [tile]: newTile,
+      };
+    });
+  };
+
+  return { board, buildOnTile, movePiece, recruitOnTile };
 }
 
 /**
@@ -51,7 +70,6 @@ export function useBoard() {
  */
 export const emptyBoard: Board = tiles.reduce((acc, key) => {
   acc[key] = {
-    status: "idle",
     terrain: "field",
     piece: undefined,
   };

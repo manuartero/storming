@@ -93,19 +93,29 @@ interface GameLogContext {
 
 type Phase = "setup" | "planification" | "action";
 
-interface BuidInTile {
+interface BuildAction {
   tile: TileID;
-  building: Building;
-  owner: Owner;
+  building: {
+    type: Building;
+    owner: Owner;
+  };
 }
 
-interface MovePiece {
+interface MoveAction {
+  from: TileID;
+  to: TileID;
   piece: {
     type: Piece;
     owner: Owner;
   };
-  from: TileID;
-  to: TileID;
+}
+
+interface RecruitAction {
+  tile: TileID;
+  piece: {
+    type: Piece;
+    owner: Owner;
+  };
 }
 
 interface GameContext {
@@ -114,7 +124,8 @@ interface GameContext {
   timeline: Timeline;
   activeCard: Card | undefined;
   activePlayer: Owner | undefined;
-  buildInTile(_: BuidInTile): void;
-  movePiece(_: MovePiece): void;
+  build(_: BuildAction): void;
+  move(_: MoveAction): void;
+  recruit(_: RecruitAction): void;
   tmp(): void;
 }

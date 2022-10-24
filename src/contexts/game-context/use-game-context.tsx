@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
-import { useBoard, emptyBoard } from "./board/use-board";
-import { emptyTimeline, useTimeline } from "./timeline/use-timeline";
+import { useBoard, emptyBoard } from "./use-board";
+import { emptyTimeline, useTimeline } from "./use-timeline";
 
 const GameContext = createContext<GameContext>({
   phase: "setup",
@@ -8,8 +8,9 @@ const GameContext = createContext<GameContext>({
   timeline: emptyTimeline,
   activeCard: undefined,
   activePlayer: undefined,
-  buildInTile: () => {},
-  movePiece: () => {},
+  build: () => {},
+  move: () => {},
+  recruit: () => {},
   tmp: () => {},
 });
 
@@ -21,7 +22,7 @@ export function GameContextProvider({ children }: Props): JSX.Element {
   console.debug("<GameContextProvider />");
 
   const [phase, setPhase] = useState<Phase>("planification"); // will be setup
-  const { board, buildInTile, movePiece } = useBoard();
+  const { board, buildOnTile, movePiece, recruitOnTile } = useBoard();
   const { timeline, nextCard, planCard } = useTimeline();
 
   /* derived state */
@@ -69,12 +70,16 @@ export function GameContextProvider({ children }: Props): JSX.Element {
         timeline,
         activeCard,
         activePlayer,
-        buildInTile: (obj: BuidInTile) => {
-          buildInTile(obj);
+        build: (action: BuildAction) => {
+          buildOnTile(action);
           resolveActionCard();
         },
-        movePiece: (obj: MovePiece) => {
-          movePiece(obj);
+        move: (action: MoveAction) => {
+          movePiece(action);
+          resolveActionCard();
+        },
+        recruit: (action: RecruitAction) => {
+          recruitOnTile(action);
           resolveActionCard();
         },
         tmp: () => {

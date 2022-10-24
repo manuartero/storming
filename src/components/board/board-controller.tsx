@@ -52,6 +52,58 @@ function BoardController(): JSX.Element {
 
   const b = createVisualBoardFromGameContext(gameContext, selectedTile);
 
+  const buildOnTile = (tile: TileID) => {
+    const piece = b[tile].piece;
+    if (!piece || piece.type !== "soldier") {
+      console.warn(
+        `Inconsistent state: trying to build on ${tile} but no soldier found`,
+        { tile: b[tile] }
+      );
+      return;
+    }
+    const building = {
+      type: "town" as const,
+      owner: piece.owner,
+    };
+    setSelectedTile(undefined);
+    gameContext.build({ tile, building });
+  };
+
+  const moveFromTile = (tile: TileID) => {
+    if (selectedTile) {
+      const piece = b[selectedTile].piece;
+      if (!piece) {
+        return setSelectedTile(tile);
+      }
+      if (piece.owner === gameContext.activePlayer) {
+        setSelectedTile(undefined);
+        return gameContext.move({
+          piece,
+          from: selectedTile,
+          to: tile,
+        });
+      }
+    }
+    setSelectedTile(tile);
+  };
+
+  const recruitOnTile = (tile: TileID) => {
+    const building = b[tile].building;
+    if (!building) {
+      console.warn(
+        `Inconsistent state: trying to recruit on ${tile} but no building found`,
+        { tile: b[tile] }
+      );
+      return;
+    }
+    const piece = {
+      type: "soldier" as const,
+      owner: building.owner,
+    };
+    setSelectedTile(undefined);
+    return gameContext.recruit({ tile, piece });
+  };
+
   const resolveActionOnTile = (tile: TileID) => {
     if (gameContext.activeCard?.cardType !== "actionCard") {
       console.warn(
@@ -59,39 +111,13 @@ function BoardController(): JSX.Element {
       );
       return;
     }
-
     switch (gameContext.activeCard.action) {
       case "build":
-        const piece = b[tile].piece;
-        if (!piece || piece.type !== "soldier") {
-          console.warn(
-            `Inconsistent state: trying to build on ${tile} but no soldier found`,
-            { tile: b[tile] }
-          );
-          return;
-        }
-        const building = "town";
-        const owner = piece.owner;
-        setSelectedTile(undefined);
-        return gameContext.buildInTile({ tile, building, owner });
-
+        return buildOnTile(tile);
       case "move":
-        if (selectedTile) {
-          const piece = b[selectedTile].piece;
-          if (!piece) {
-            return setSelectedTile(tile);
-          }
-          if (piece.owner === gameContext.activePlayer) {
-            setSelectedTile(undefined);
-            return gameContext.movePiece({
-              piece,
-              from: selectedTile,
-              to: tile,
-            });
-          }
-        }
-        return setSelectedTile(tile);
-
+        return moveFromTile(tile);
+      case "recruit":
+        return recruitOnTile(tile);
       default:
         break;
     }
