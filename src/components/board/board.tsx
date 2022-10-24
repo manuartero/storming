@@ -5,11 +5,12 @@ import Tile from "./tile";
 import "./board.scss";
 
 interface Props {
-  state: BoardState;
+  state: VisualBoard;
   onTileClick: (titleID: Coordinates) => void;
 }
 
 function Board({ state, onTileClick }: Props): JSX.Element {
+
   const renderRow = (n: -3 | -2 | -1 | 0 | 1 | 2 | 3) =>
     row(n).map((tileId) => {
       const s = state[tileId];

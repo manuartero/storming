@@ -1,4 +1,4 @@
-const initialBoard: BoardState = {
+const initialBoard: Board = {
   "-2,-3": {
     status: "idle",
     terrain: "field",

@@ -1,12 +1,16 @@
 import { createContext, useContext, useState } from "react";
+import { useBoard, emptyBoard } from "./board/use-board";
+import { emptyTimeline, useTimeline } from "./timeline/use-timeline";
 
 const GameContext = createContext<GameContext>({
-  phase: "action",
-  activePlayer: undefined,
+  phase: "setup",
+  board: emptyBoard,
+  timeline: emptyTimeline,
   activeCard: undefined,
-  changePhase: () => {},
-  setActivePlayer: () => {},
-  setActiveCard: () => {},
+  activePlayer: undefined,
+  buildInTile: () => {},
+  movePiece: () => {},
+  tmp: () => {},
 });
 
 interface Props {
@@ -14,26 +18,46 @@ interface Props {
 }
 
 export function GameContextProvider({ children }: Props): JSX.Element {
-  console.debug("<GameContextProvider>");
+  console.debug("<GameContextProvider />");
 
-  const [phase, setPhase] = useState<Phase>("action"); // will be setup
-  const [activePlayer, setActivePlayer] = useState<Owner | undefined>(
-    undefined
-  );
-  const [activeCard, setActiveCard] = useState<Card | undefined>(undefined);
+  const [phase, setPhase] = useState<Phase>("planification"); // will be setup
+  const { board, buildInTile, movePiece } = useBoard();
+  const { timeline, nextCard, planCard } = useTimeline();
 
+  /* derived state */
+  const activeCard = timeline.current;
+  const activePlayer =
+    timeline.current?.cardType === "actionCard"
+      ? timeline.current.owner
+      : undefined;
+
+  /* API */
   const changePhase = () => {
-    console.debug(`GameContext.changePhase() (${phase} -> ...)`);
+    let nextPhase: Phase;
     switch (phase) {
       case "setup":
-        setPhase("planification");
+        nextPhase = "planification";
         break;
       case "planification":
-        setPhase("action");
+        nextPhase = "action";
+        nextCard(); // XXX
         break;
       case "action":
-        setPhase("planification");
+        nextPhase = "planification";
         break;
+    }
+    console.debug(`GameContext.changePhase() (${phase} -> ${nextPhase})`);
+    setPhase(nextPhase);
+  };
+
+  const resolveActionCard = () => {
+    if (timeline.next.length === 0) {
+      console.debug(
+        "GameContext.resolveActionCard(): no more cards to resolve this turn"
+      );
+      changePhase();
+    } else {
+      nextCard();
     }
   };
 
@@ -41,11 +65,21 @@ export function GameContextProvider({ children }: Props): JSX.Element {
     <GameContext.Provider
       value={{
         phase,
-        activePlayer,
+        board,
+        timeline,
         activeCard,
-        changePhase,
-        setActivePlayer,
-        setActiveCard,
+        activePlayer,
+        buildInTile: (obj: BuidInTile) => {
+          buildInTile(obj);
+          resolveActionCard();
+        },
+        movePiece: (obj: MovePiece) => {
+          movePiece(obj);
+          resolveActionCard();
+        },
+        tmp: () => {
+          changePhase();
+        },
       }}
     >
       {children}

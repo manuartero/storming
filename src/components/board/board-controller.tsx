@@ -1,89 +1,121 @@
 import { useGameContext } from "contexts";
-import boardModel from "models/board";
-import cardModel from "models/card";
-import { useEffect } from "react";
+import { getAvailableTilesForActionCard } from "models/board";
+import { useState } from "react";
+
 import Board from "./board";
-import { useBoard } from "./hooks";
 
-function BoardController(): JSX.Element {
-  const { boardState, dispatchBoardAction } = useBoard();
-  const gameContext = useGameContext();
+function createVisualBoardFromGameContext(
+  { board, activeCard, activePlayer }: GameContext,
+  selectedTile: TileID | undefined
+): VisualBoard {
+  const availableTiles =
+    activeCard?.cardType === "actionCard"
+      ? getAvailableTilesForActionCard({
+          board,
+          activeCard,
+          activePlayer,
+          selectedTile,
+        })
+      : [];
 
-  const board = boardModel(boardState);
-
-  useEffect(() => {
-    const card = cardModel(gameContext.activeCard);
-    console.debug(`Effect: <BoardController /> (activeCard: ${card})`);
-
-    if (
-      gameContext.activeCard &&
-      gameContext.activeCard.cardType === "actionCard"
-    ) {
-      const tiles = board.getAvailableTilesForActionCard(
-        gameContext.activeCard
-      );
-      if (tiles.length > 0) {
-        dispatchBoardAction({ type: "highlight-tiles", tiles });
-      } else {
-        // TODO: show a modal
-        // no options to play this action
-        console.warn(`activeCard (${card}) has no available tiles`);
-        gameContext.setActiveCard(undefined); // next()
-      }
-      return;
+  const tileStatus = (tile: TileID) => {
+    if (tile === selectedTile) {
+      return "selected";
     }
-  }, [gameContext.activeCard]);
+    return availableTiles.includes(tile as TileID) ? "available" : "idle";
+  };
 
-  const dispatchBoardActionOnSelectionableTile = (tile: TileID) => {
-    // ts check
+  return Object.entries(board).reduce(
+    (acc, [tile, tileState]) => ({
+      ...acc,
+      [tile]: {
+        ...tileState,
+        status: tileStatus(tile as TileID),
+      },
+    }),
+    {} as VisualBoard
+  );
+}
+
+/**
+ * Renders depends on:
+ *  - useGameContext()
+ *
+ * Defines visual board from GameContext: manages selected, available and forbidden tiles.
+ * Manges onTileClick(), validates before changing GameContext.
+ */
+function BoardController(): JSX.Element {
+  console.debug("<BoardController />");
+
+  const gameContext = useGameContext();
+  const [selectedTile, setSelectedTile] = useState<TileID | undefined>();
+
+  const b = createVisualBoardFromGameContext(gameContext, selectedTile);
+
+  const resolveActionOnTile = (tile: TileID) => {
     if (gameContext.activeCard?.cardType !== "actionCard") {
+      console.warn(
+        `Inconsistent state: trying to resolve an action on ${tile} while no action card`
+      );
       return;
     }
 
     switch (gameContext.activeCard.action) {
       case "build":
-        dispatchBoardAction({ type: "build-in-tile", tile });
-        gameContext.setActiveCard(undefined); // next()
-        break;
+        const piece = b[tile].piece;
+        if (!piece || piece.type !== "soldier") {
+          console.warn(
+            `Inconsistent state: trying to build on ${tile} but no soldier found`,
+            { tile: b[tile] }
+          );
+          return;
+        }
+        const building = "town";
+        const owner = piece.owner;
+        setSelectedTile(undefined);
+        return gameContext.buildInTile({ tile, building, owner });
+
       case "move":
-        if (board.hasAnySelectedPiece()) {
-          const selectedTileId = board.getSelectedTile();
-          if (selectedTileId !== tile) {
-            dispatchBoardAction({
-              type: "move-piece",
-              from: selectedTileId,
+        if (selectedTile) {
+          const piece = b[selectedTile].piece;
+          if (!piece) {
+            return setSelectedTile(tile);
+          }
+          if (piece.owner === gameContext.activePlayer) {
+            setSelectedTile(undefined);
+            return gameContext.movePiece({
+              piece,
+              from: selectedTile,
               to: tile,
             });
-            gameContext.setActiveCard(undefined); // next()
-
-            // const piece = boardState[selectedTileId].piece;
-            // log({
-            //   player: piece?.owner,
-            //   msg: `Move ${piece?.type} from ${selectedTileId} to ${tile}`,
-            // });
           }
         }
-        break;
+        return setSelectedTile(tile);
+
       default:
         break;
     }
   };
 
   const onTileClick = ({ str: tile }: Coordinates) => {
-    console.debug(`onTileClick(${tile}): `, boardState[tile]);
+    console.debug(`onTileClick(${tile}): %o`, b[tile]);
 
     if (gameContext.activeCard?.cardType === "actionCard") {
-      const selectionableTiles = board.getSelectionableTiles();
-
-      if (selectionableTiles.includes(tile)) {
-        dispatchBoardActionOnSelectionableTile(tile);
-      } else {
-        dispatchBoardAction({ type: "select-tile", tile });
+      const availableTiles = getAvailableTilesForActionCard({
+        board: b,
+        selectedTile,
+        activeCard: gameContext.activeCard,
+        activePlayer: gameContext.activePlayer,
+      });
+      if (availableTiles.includes(tile)) {
+        return resolveActionOnTile(tile);
       }
     }
+
+    setSelectedTile(tile);
   };
 
-  return <Board state={boardState} onTileClick={onTileClick} />;
+  return <Board state={b} onTileClick={onTileClick} />;
 }
 
 export default BoardController;

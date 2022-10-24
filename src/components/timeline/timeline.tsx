@@ -4,13 +4,15 @@ import IconCard from "components/cards/icon-card";
 import "./timeline.scss";
 
 interface Props {
-  state: TimelineState;
+  state: Timeline;
+  // tmp
+  onClick: () => void;
 }
 
-function Timeline({ state }: Props): JSX.Element {
+function Timeline({ state, onClick }: Props): JSX.Element {
   return (
     <div className="timeline">
-      <div className="timeline__current">
+      <div className="timeline__current" onClick={onClick}>
         <IconCard card={state.current} />
       </div>
       <div className="timeline__next timeline__section">

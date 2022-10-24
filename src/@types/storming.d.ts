@@ -5,7 +5,7 @@
 type Owner = "player" | "enemy1" | "enemy2" | "enemy3";
 
 // --------------
-// TILES
+// BOARD & TILES
 // --------------
 
 declare type TileID = import("models/tiles")._TileID;
@@ -16,13 +16,12 @@ interface Coordinates {
   str: TileID;
 }
 
-type TileStatus = "idle" | "selected" | "available" | "forbidden";
+type Board = Record<TileID, Tile>;
+
 type Terrain = "field" | "mountain" | "lake" | "forest";
 type Building = "village" | "town" | "city";
 type Piece = "soldier" | "knight";
-
-interface TileState {
-  status: TileStatus;
+interface Tile {
   terrain: Terrain;
   piece?: {
     type: Piece;
@@ -34,43 +33,11 @@ interface TileState {
   };
 }
 
-// --------------
-// BOARD
-// --------------
+type VisualBoard = Record<TileID, TileWithStatus>;
 
-type BoardState = Record<TileID, TileState>;
-
-interface MovePieceAction {
-  type: "move-piece";
-  from: TileID;
-  to: TileID;
-}
-
-interface SelectTileAction {
-  type: "select-tile";
-  tile: TileID;
-}
-
-/* available */
-interface HighlightTilesAction {
-  type: "highlight-tiles";
-  tiles: TileID[];
-}
-
-interface BuildInTileAction {
-  type: "build-in-tile";
-  tile: TileID;
-}
-
-type BoardStateAction =
-  | BuildInTileAction
-  | HighlightTilesAction
-  | MovePieceAction
-  | SelectTileAction;
-
-interface AvailableMovements {
-  available: TileID[];
-  forbidden: TileID[];
+type TileStatus = "idle" | "selected" | "available" | "forbidden";
+interface TileWithStatus extends Tile {
+  status: TileStatus;
 }
 
 // --------------
@@ -100,23 +67,11 @@ interface EventCard {
 // TIMELINE
 // --------------
 
-type TimelineState = {
+type Timeline = {
   current: Card | undefined;
   next: Card[];
   future: Card[];
 };
-
-interface PlanificationAction {
-  type: "planification";
-  card: Card;
-}
-
-interface ResolveAction {
-  type: "resolve";
-  card: Card;
-}
-
-type TimelineAction = PlanificationAction | ResolveAction;
 
 // --------------
 // Contexts
@@ -138,12 +93,28 @@ interface GameLogContext {
 
 type Phase = "setup" | "planification" | "action";
 
+interface BuidInTile {
+  tile: TileID;
+  building: Building;
+  owner: Owner;
+}
+
+interface MovePiece {
+  piece: {
+    type: Piece;
+    owner: Owner;
+  };
+  from: TileID;
+  to: TileID;
+}
+
 interface GameContext {
   phase: Phase;
+  board: Board;
+  timeline: Timeline;
   activeCard: Card | undefined;
   activePlayer: Owner | undefined;
-
-  changePhase(): void;
-  setActiveCard(card: Card | undefined): void;
-  setActivePlayer(player: Owner | undefined): void;
+  buildInTile(_: BuidInTile): void;
+  movePiece(_: MovePiece): void;
+  tmp(): void;
 }
