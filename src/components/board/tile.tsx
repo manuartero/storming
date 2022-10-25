@@ -12,6 +12,7 @@ interface Props {
   status?: TileStatus;
   terrain?: Terrain;
   building?: Building;
+  owner?: Owner;
   onClick?: (tileID: Coordinates) => void;
   children?: React.ReactNode;
 }
@@ -20,6 +21,7 @@ function Tile({
   id,
   terrain,
   building,
+  owner,
   status,
   children,
   onClick,
@@ -40,7 +42,13 @@ function Tile({
         <LakeSvg className={c("tile__terrain", "tile__terrain--lake")} />
       )}
       {building === "town" && (
-        <div className={c("tile__building", "tile__building--town")}></div>
+        <div
+          className={c(
+            "tile__building",
+            "tile__building--town",
+            `tile__building--${owner}`
+          )}
+        ></div>
       )}
 
       <HexagonSvg

@@ -20,6 +20,7 @@ function Board({ state, onTileClick }: Props): JSX.Element {
           id={tileId}
           terrain={s.terrain}
           building={s.building?.type}
+          owner={s.building?.owner}
           status={s.status}
           onClick={onTileClick}
         >

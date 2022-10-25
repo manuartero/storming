@@ -49,9 +49,22 @@ $tile-border: black;
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url('./assets/castle.png');
 
+    &--player {
+      background-image: url('./assets/castle--player.png');
+    }
+    &--enemy1 {
+      background-image: url('./assets/castle--enemy1.png');
+    }
+    &--enemy2 {
+      background-image: url('./assets/castle--enemy2.png');
+    }
+    &--enemy3 {
+      background-image: url('./assets/castle--enemy3.png');
+    }
   }
+
+
 
   &__hexagon {
     position: absolute;
