@@ -12,7 +12,7 @@ interface Props {
   status?: TileStatus;
   terrain?: Terrain;
   building?: Building;
-  owner?: Owner;
+  owner?: Player;
   onClick?: (tileID: Coordinates) => void;
   children?: React.ReactNode;
 }

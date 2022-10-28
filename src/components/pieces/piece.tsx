@@ -3,7 +3,7 @@ import c from "classnames";
 
 interface Props {
   type?: "soldier" | "knight" | "ballista";
-  owner?: Owner;
+  owner?: Player;
 }
 
 function Piece(props: Props): JSX.Element {

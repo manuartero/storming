@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { useBoard, emptyBoard } from "./use-board";
+import usePlayerOrder from "./use-player-order";
 import { emptyTimeline, useTimeline } from "./use-timeline";
 
 const GameContext = createContext<GameContext>({
@@ -8,9 +9,11 @@ const GameContext = createContext<GameContext>({
   timeline: emptyTimeline,
   activeCard: undefined,
   activePlayer: undefined,
+  playerOrder: [],
   build: () => {},
   move: () => {},
   recruit: () => {},
+  firstPlayer: () => {},
   tmp: () => {},
 });
 
@@ -24,6 +27,7 @@ export function GameContextProvider({ children }: Props): JSX.Element {
   const [phase, setPhase] = useState<Phase>("planification"); // will be setup
   const { board, buildOnTile, movePiece, recruitOnTile } = useBoard();
   const { timeline, nextCard, planCard } = useTimeline();
+  const { playerOrder, firstPlayer } = usePlayerOrder();
 
   /* derived state */
   const activeCard = timeline.current;
@@ -70,6 +74,7 @@ export function GameContextProvider({ children }: Props): JSX.Element {
         timeline,
         activeCard,
         activePlayer,
+        playerOrder,
         build: (action: BuildAction) => {
           buildOnTile(action);
           resolveActionCard();
@@ -80,6 +85,10 @@ export function GameContextProvider({ children }: Props): JSX.Element {
         },
         recruit: (action: RecruitAction) => {
           recruitOnTile(action);
+          resolveActionCard();
+        },
+        firstPlayer: (player: Player) => {
+          firstPlayer(player);
           resolveActionCard();
         },
         tmp: () => {

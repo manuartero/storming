@@ -1,4 +1,4 @@
-import {  tilesInRange } from "./tiles";
+import { tilesInRange } from "./tiles";
 
 type _FilterPredicate = (_: [string, Tile]) => boolean;
 
@@ -28,7 +28,7 @@ export function getAvailableTilesForActionCard({
   board: Board;
   activeCard: ActionCard;
   selectedTile: TileID | undefined;
-  activePlayer: Owner | undefined;
+  activePlayer: Player | undefined;
 }): TileID[] {
   if (activeCard.action === "move") {
     if (selectedTile && board[selectedTile].piece?.owner === activePlayer) {

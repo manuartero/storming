@@ -2,7 +2,7 @@
 // PLAYERS
 // --------------
 
-type Owner = "player" | "enemy1" | "enemy2" | "enemy3";
+type Player = "player" | "enemy1" /* red */ | "enemy2" /* blue */ | "enemy3";
 
 // --------------
 // BOARD & TILES
@@ -25,11 +25,11 @@ interface Tile {
   terrain: Terrain;
   piece?: {
     type: Piece;
-    owner: Owner;
+    owner: Player;
   };
   building?: {
     type: Building;
-    owner: Owner;
+    owner: Player;
   };
 }
 
@@ -51,7 +51,7 @@ type Card = ActionCard | EventCard;
 interface ActionCard {
   cardType: "actionCard";
   action: ActionCardType;
-  owner: Owner;
+  owner: Player;
 }
 
 type EventCardType = "even1" | "event2" | "event3";
@@ -59,7 +59,7 @@ type EventCardType = "even1" | "event2" | "event3";
 interface EventCard {
   cardType: "eventCard";
   event: EventCardType;
-  playedBy: Owner;
+  playedBy: Player;
   // TODO Consider EventCards (!MVP)
 }
 
@@ -78,7 +78,7 @@ type Timeline = {
 // --------------
 
 interface ActionLog {
-  player?: Owner; // TODO? make 'player' mandatory field
+  player?: Player; // TODO? make 'player' mandatory field
   msg: string;
 }
 
@@ -97,7 +97,7 @@ interface BuildAction {
   tile: TileID;
   building: {
     type: Building;
-    owner: Owner;
+    owner: Player;
   };
 }
 
@@ -106,7 +106,7 @@ interface MoveAction {
   to: TileID;
   piece: {
     type: Piece;
-    owner: Owner;
+    owner: Player;
   };
 }
 
@@ -114,7 +114,7 @@ interface RecruitAction {
   tile: TileID;
   piece: {
     type: Piece;
-    owner: Owner;
+    owner: Player;
   };
 }
 
@@ -123,9 +123,11 @@ interface GameContext {
   board: Board;
   timeline: Timeline;
   activeCard: Card | undefined;
-  activePlayer: Owner | undefined;
+  activePlayer: Player | undefined;
+  playerOrder: Player[];
   build(_: BuildAction): void;
   move(_: MoveAction): void;
   recruit(_: RecruitAction): void;
   tmp(): void;
+  firstPlayer(_: Player): void;
 }
