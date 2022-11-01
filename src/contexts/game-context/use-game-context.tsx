@@ -56,13 +56,12 @@ export function GameContextProvider({ children }: Props): JSX.Element {
   };
 
   const resolveActionCard = () => {
+    nextCard();
     if (timeline.next.length === 0) {
       console.debug(
         "GameContext.resolveActionCard(): no more cards to resolve this turn"
       );
       changePhase();
-    } else {
-      nextCard();
     }
   };
 

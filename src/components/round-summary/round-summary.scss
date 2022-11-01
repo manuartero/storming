@@ -20,7 +20,9 @@ $size: 80px;
   background-size: contain;
   border: 2px solid #555;
 
-
+  &--clickable {
+    cursor: pointer;
+  }
 
   &--player {
     background-image: url('./assets/player.png');
