@@ -4,9 +4,10 @@ import "./icon-card.scss";
 
 interface IconCardProps {
   card: Card | undefined;
+  available?: boolean;
 }
 
-function IconCard({ card }: IconCardProps): JSX.Element {
+function IconCard({ card, available }: IconCardProps): JSX.Element {
   if (card?.cardType === "actionCard") {
     return ActionIconCard({ card });
   }

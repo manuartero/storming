@@ -4,6 +4,13 @@
 
 type Player = "player" | "enemy1" /* red */ | "enemy2" /* blue */ | "enemy3";
 
+/**
+ * ```ts
+ * [ { "build": true }, { "diplo": true } ... ]
+ * ```
+ */
+type PlayerHand = { action: ActionCardType; available: boolean }[];
+
 // --------------
 // BOARD & TILES
 // --------------
