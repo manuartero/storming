@@ -1,8 +1,7 @@
 import { useState } from "react";
-import initialTimeline from "./initial-timeline";
 
 export function useTimeline() {
-  const [timeline, setTimeline] = useState(initialTimeline);
+  const [timeline, setTimeline] = useState(emptyTimeline);
 
   const nextCard = () => {
     console.info("GameContext.nextCard()");
@@ -17,20 +16,35 @@ export function useTimeline() {
     });
   };
 
-  const planNextCard = ({ card }: { card: ActionCard }) => {
-    console.info(`GameContext.planCard({ card: ${card.action}  })`);
+  const planification = ({ player, nextCard, futureCard }: PlanAction) => {
+    console.info(
+      `GameContext.planification({ player: ${player}, next: ${nextCard.action}, future: ${futureCard.action} })`
+    );
     const newTimeline = {
-      ...timeline,
-      next: timeline.next.concat(card),
+      current: undefined,
+      next: timeline.next.concat(nextCard),
+      future: timeline.future.concat(futureCard),
     };
     setTimeline(newTimeline);
-    return newTimeline
+    return newTimeline;
+  };
+
+  const newTurn = () => {
+    console.info(`GameContext.newTurn()`);
+    const newTimeline = {
+      current: undefined,
+      next: timeline.next.concat(timeline.future),
+      future: [],
+    };
+    setTimeline(newTimeline);
+    return newTimeline;
   };
 
   return {
     timeline,
     nextCard,
-    planNextCard,
+    planification,
+    newTurn,
   };
 }
 

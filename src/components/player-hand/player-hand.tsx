@@ -20,7 +20,7 @@ function PlayerHand({ isActive, player, cards, onClick }: Props): JSX.Element {
   return (
     <div className="player-hand">
       {player &&
-        cards.map(({ action, available }, i) => {
+        cards.map(({ action, status }, i) => {
           const card: ActionCard = {
             cardType: "actionCard",
             owner: player,
@@ -29,7 +29,7 @@ function PlayerHand({ isActive, player, cards, onClick }: Props): JSX.Element {
           return (
             <Card
               key={`card-${action}-${i}`}
-              available={available}
+              status={status}
               card={card}
               onClick={() => considerOnClickIfActive(card)}
             ></Card>

@@ -4,12 +4,14 @@
 
 type Player = "player" | "enemy1" /* red */ | "enemy2" /* blue */ | "enemy3";
 
+type PlayerHandCardStatus = "available" | "selected" | "played";
+
 /**
  * ```ts
- * [ { "build": true }, { "diplo": true } ... ]
+ * [ { action: "build", status: "available" }, ... ]
  * ```
  */
-type PlayerHand = { action: ActionCardType; available: boolean }[];
+type PlayerHand = { action: ActionCardType; status: PlayerHandCardStatus }[];
 
 // --------------
 // BOARD & TILES
@@ -125,6 +127,13 @@ interface RecruitAction {
   };
 }
 
+interface PlanAction {
+  player: Player;
+  nextCard: ActionCard;
+  futureCard: ActionCard;
+  eventCard?: EventCard; // TODO !MVP
+}
+
 interface GameContext {
   phase: Phase;
   board: Board;
@@ -132,10 +141,10 @@ interface GameContext {
   activeCard: Card | undefined;
   activePlayer: Player | undefined;
   playerOrder: Player[];
-  build(_: BuildAction): void;
-  move(_: MoveAction): void;
-  recruit(_: RecruitAction): void;
-  tmp(): void;
+  build(action: BuildAction): void;
+  move(action: MoveAction): void;
+  recruit(action: RecruitAction): void;
+  plan(action: PlanAction): void;
   firstPlayer(_: Player): void;
-  planNextCard(card: AcionCard): void;
+  tmp(): void;
 }

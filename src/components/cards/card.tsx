@@ -1,18 +1,23 @@
 import c from "classnames";
 import IconCard from "./icon-card";
 
-import './card.scss'
+import "./card.scss";
 
 interface Props {
-  available: boolean;
+  status: PlayerHandCardStatus;
   card: Card;
   onClick?: () => void;
 }
 
-function Card({ available, card, onClick }: Props): JSX.Element {
+function Card({ status, card, onClick }: Props): JSX.Element {
   return (
     <div
-      className={c("card", available && "card--available", onClick && "clickable")}
+      className={c(
+        "card",
+        status === "available" && "card--available",
+        status === "selected" && "card--selected",
+        onClick && "clickable"
+      )}
       onClick={onClick}
     >
       <IconCard card={card} />

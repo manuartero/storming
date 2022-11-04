@@ -14,8 +14,8 @@ const GameContext = createContext<GameContext>({
   build: () => {},
   move: () => {},
   recruit: () => {},
+  plan: () => {},
   firstPlayer: () => {},
-  planNextCard: () => {},
   tmp: () => {},
 });
 
@@ -47,7 +47,7 @@ export function GameContextProvider({ children }: Props): JSX.Element {
 
   const [phase, setPhase] = useState<Phase>("planification"); // will be setup
   const { board, buildOnTile, movePiece, recruitOnTile } = useBoard();
-  const { timeline, nextCard, planNextCard } = useTimeline();
+  const { timeline, nextCard, planification, newTurn } = useTimeline();
   const { playerOrder, firstPlayer } = usePlayerOrder();
 
   /* derived state */
@@ -70,6 +70,9 @@ export function GameContextProvider({ children }: Props): JSX.Element {
         break;
     }
     console.info(`GameContext.changePhase() (${phase} -> ${nextPhase})`);
+    if (nextPhase === "planification") {
+      newTurn();
+    }
     setPhase(nextPhase);
   };
 
@@ -108,8 +111,8 @@ export function GameContextProvider({ children }: Props): JSX.Element {
           firstPlayer(player);
           resolveActionCard();
         },
-        planNextCard: (card: ActionCard) => {
-          const { next } = planNextCard({ card });
+        plan: (action: PlanAction) => {
+          const { next } = planification(action);
           if (next.length % 4 === 0) {
             changePhase();
           }
