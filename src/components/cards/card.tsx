@@ -1,29 +1,21 @@
 import c from "classnames";
-import cardText from "./card-text.json";
+import IconCard from "./icon-card";
 
-import "./card.scss";
+import './card.scss'
 
 interface Props {
-  action: ActionCardType;
+  available: boolean;
+  card: Card;
+  onClick?: () => void;
 }
 
-function Card({ action }: Props): JSX.Element {
+function Card({ available, card, onClick }: Props): JSX.Element {
   return (
-    <div className={c("card", `card--${action}`)}>
-      <div className="card__text-box">
-        <div className="card__text-box__text">{cardText[action]}</div>
-      </div>
-
-      <div className="card__background">
-        <div className="card__background__corner" />
-        <div className="card__background__corner" />
-        <div className="card__background__corner" />
-        <div className="card__background__corner" />
-      </div>
-
-      <div className="card__text-box">
-        <div className="card__text-box__title">{action}</div>
-      </div>
+    <div
+      className={c("card", available && "card--available")}
+      onClick={onClick}
+    >
+      <IconCard card={card} />
     </div>
   );
 }

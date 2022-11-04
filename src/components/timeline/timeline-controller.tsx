@@ -6,8 +6,6 @@ import Timeline from "./timeline";
  *  - useGameContext()
  */
 function TimelineController(): JSX.Element {
-  console.log("<TimelineController />");
-
   const gameContext = useGameContext();
 
   const onClick = () => {

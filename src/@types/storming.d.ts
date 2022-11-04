@@ -137,4 +137,5 @@ interface GameContext {
   recruit(_: RecruitAction): void;
   tmp(): void;
   firstPlayer(_: Player): void;
+  planNextCard(card: AcionCard): void;
 }

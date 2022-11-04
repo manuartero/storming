@@ -5,7 +5,7 @@ export function useTimeline() {
   const [timeline, setTimeline] = useState(initialTimeline);
 
   const nextCard = () => {
-    console.debug("GameContext.nextCard()");
+    console.info("GameContext.nextCard()");
     setTimeline((currentTimeline) => {
       const current = currentTimeline.next[0];
       const next = currentTimeline.next.slice(1);
@@ -17,20 +17,20 @@ export function useTimeline() {
     });
   };
 
-  const planCard = ({
-    card,
-    section,
-  }: {
-    card: Card;
-    section: "next" | "future";
-  }) => {
-    // TODO
+  const planNextCard = ({ card }: { card: ActionCard }) => {
+    console.info(`GameContext.planCard({ card: ${card.action}  })`);
+    const newTimeline = {
+      ...timeline,
+      next: timeline.next.concat(card),
+    };
+    setTimeline(newTimeline);
+    return newTimeline
   };
 
   return {
     timeline,
     nextCard,
-    planCard,
+    planNextCard,
   };
 }
 

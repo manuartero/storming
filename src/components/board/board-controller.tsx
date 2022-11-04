@@ -45,8 +45,6 @@ function createVisualBoardFromGameContext(
  * Manges onTileClick(), validates before changing GameContext.
  */
 function BoardController(): JSX.Element {
-  console.debug("<BoardController />");
-
   const gameContext = useGameContext();
   const [selectedTile, setSelectedTile] = useState<TileID | undefined>();
 

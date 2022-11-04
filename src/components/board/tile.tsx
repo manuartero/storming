@@ -26,7 +26,6 @@ function Tile({
   children,
   onClick,
 }: Props): JSX.Element {
-  // console.debug(`render <Tile id="${id}" />`)
   const tileID = coordinates(id);
 
   return (

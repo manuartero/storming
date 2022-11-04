@@ -6,7 +6,7 @@ function usePlayerOrder() {
   const [playerOrder, setPlayerOrder] = useState(initialPlayerOrder);
 
   const firstPlayer = (player: Player) => {
-    console.debug(`GameContext.firstPlayer({player: ${player}})`);
+    console.info(`GameContext.firstPlayer({player: ${player}})`);
     const newPlayerOrder = [player, ...playerOrder.filter((p) => p !== player)];
     setPlayerOrder(newPlayerOrder);
   };

@@ -1,5 +1,6 @@
 import c from "classnames";
 import { useGameContext } from "contexts";
+import { logRender } from "utils/console";
 import "./round-summary.scss";
 
 function PlayerSummary({
@@ -31,7 +32,8 @@ function PlayerSummary({
  *  - useGameContext()
  */
 function RoundSummary(): JSX.Element {
-  console.debug("<RoundSummary />");
+  logRender("RoundSummary");
+
   const gameContext = useGameContext();
 
   const isResolvingDiploAction = (player: Player) => {

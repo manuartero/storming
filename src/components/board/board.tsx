@@ -1,5 +1,6 @@
+import Piece from "components/pieces/piece";
 import { row } from "models/tiles";
-import Piece from "../pieces/piece";
+import { logRender } from "utils/console";
 import Tile from "./tile";
 
 import "./board.scss";
@@ -10,6 +11,7 @@ interface Props {
 }
 
 function Board({ state, onTileClick }: Props): JSX.Element {
+  logRender("Board");
 
   const renderRow = (n: -3 | -2 | -1 | 0 | 1 | 2 | 3) =>
     row(n).map((tileId) => {

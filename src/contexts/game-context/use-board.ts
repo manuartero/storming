@@ -11,8 +11,8 @@ export function useBoard() {
   const [board, setBoard] = useState(initialBoard);
 
   const buildOnTile = ({ tile, building }: BuildAction) => {
-    console.debug(
-      `GameContext.buildOnTile({tile: ${tile}, building: ${building}})`
+    console.info(
+      `GameContext.buildOnTile({ tile: <${tile}>, building: ${building.type}(${building.owner}) })`
     );
     setBoard((currentBoard) => {
       const newTile: Tile = {
@@ -27,8 +27,8 @@ export function useBoard() {
   };
 
   const movePiece = ({ piece, from, to }: MoveAction) => {
-    console.debug(
-      `GameContext.movePiece({ from:  ${from}, to:  ${to}, piece: ${piece.type}}`
+    console.info(
+      `GameContext.movePiece({ from: <${from}>, to: <${to}>, piece: ${piece.type}(${piece.owner}) })`
     );
     setBoard((currentBoard) => {
       const fromTile: Tile = {
@@ -48,7 +48,9 @@ export function useBoard() {
   };
 
   const recruitOnTile = ({ tile, piece }: RecruitAction) => {
-    console.debug(`GameContext.recruitOnTile({ tile:  ${tile}, piece: ${piece}}`);
+    console.info(
+      `GameContext.recruitOnTile({ tile: <${tile}>, piece: ${piece.type}(${piece.owner}) })`
+    );
     setBoard((currentBoard) => {
       const newTile: Tile = {
         ...currentBoard[tile],

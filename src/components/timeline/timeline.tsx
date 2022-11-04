@@ -1,5 +1,6 @@
 import c from "classnames";
 import IconCard from "components/cards/icon-card";
+import { logRender } from "utils/console";
 
 import "./timeline.scss";
 
@@ -10,6 +11,7 @@ interface Props {
 }
 
 function Timeline({ state, onClick }: Props): JSX.Element {
+  logRender("Timeline");
   return (
     <div className="timeline">
       <div className="timeline__current" onClick={onClick}>

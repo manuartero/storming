@@ -1,12 +1,9 @@
 import {
-  Board,
-  Hand,
-  LogPanel,
-  Marketplace,
-  RoundSummary,
-  TimeLine,
+  Board, LogPanel,
+  Marketplace, PlayerHand, RoundSummary,
+  TimeLine
 } from "components";
-import { GameContextProvider, GameLogProvider } from "contexts";
+import { GameContextProvider } from "contexts";
 import { StrictMode } from "react";
 
 import "./app.scss";
@@ -20,7 +17,7 @@ function App() {
           <RoundSummary />
           <Board />
           <Marketplace />
-          <Hand />
+          <PlayerHand />
           <LogPanel />
         </GameContextProvider>
       </main>

@@ -1,5 +1,5 @@
 import { useGameContext } from "contexts";
-import Hand from "./hand";
+import PlayerHand from "./player-hand";
 
 const players: Player[] = ["player", "enemy1", "enemy2", "enemy3"];
 const actionCards: ActionCardType[] = [
@@ -51,14 +51,23 @@ function inferPlayerHandsFromGameContext(
   }, {} as Record<Player, PlayerHand>);
 }
 
-function HandController(): JSX.Element {
-  console.debug("<HandController />");
+function PlayerHandController(): JSX.Element {
   const gameContext = useGameContext();
   const playerHands = inferPlayerHandsFromGameContext(gameContext.timeline);
   const activePlayerHand = gameContext.activePlayer
     ? playerHands[gameContext.activePlayer]
     : [];
-  return <Hand player={gameContext.activePlayer} cards={activePlayerHand} />;
+  const onClick = (actionCard: ActionCard) => {
+    gameContext.planNextCard(actionCard);
+  };
+  return (
+    <PlayerHand
+      isActive={gameContext.phase === "planification"}
+      player={gameContext.activePlayer}
+      cards={activePlayerHand}
+      onClick={onClick}
+    />
+  );
 }
 
-export default HandController;
+export default PlayerHandController;
