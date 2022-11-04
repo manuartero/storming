@@ -5,14 +5,15 @@ import "./icon-card.scss";
 interface IconCardProps {
   card: Card | undefined;
   available?: boolean;
+  onClick?: () => void;
 }
 
-function IconCard({ card, available }: IconCardProps): JSX.Element {
+function IconCard({ card, available, onClick }: IconCardProps): JSX.Element {
   if (card?.cardType === "actionCard") {
     return ActionIconCard({ card });
   }
   return (
-    <div className="icon-card">
+    <div className={c("icon-card", onClick && "clickable")} onClick={onClick}>
       <div className={"icon-card__image"}></div>
       <div className="icon-card__text"></div>
     </div>

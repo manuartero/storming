@@ -12,7 +12,7 @@ interface Props {
 function Card({ available, card, onClick }: Props): JSX.Element {
   return (
     <div
-      className={c("card", available && "card--available")}
+      className={c("card", available && "card--available", onClick && "clickable")}
       onClick={onClick}
     >
       <IconCard card={card} />

@@ -18,10 +18,12 @@ $timeline-color: rgb(220, 220, 220);
   }
 
   &__current {
-    flex-grow: 1; // (1/9)
-
+    flex-grow: 1; // (1/18)
+    display: flex;
+    justify-content: space-around;
 
     // background-color: rgb(129, 203, 99);
+    &__phase {}
   }
 
   &__next {
@@ -33,7 +35,7 @@ $timeline-color: rgb(220, 220, 220);
   }
 
   &__section {
-    flex-grow: 4; // (4/9)
+    flex-grow: 8; // (4/9)
     display: flex;
     align-items: center;
 

@@ -11,7 +11,7 @@ function TimelineController(): JSX.Element {
   const onClick = () => {
     gameContext.tmp();
   };
-  return <Timeline state={gameContext.timeline} onClick={onClick} />;
+  return <Timeline phase={gameContext.phase} timeline={gameContext.timeline} onClick={onClick} />;
 }
 
 export default TimelineController;
