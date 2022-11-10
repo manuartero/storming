@@ -16,7 +16,7 @@ const GameContext = createContext<GameContext>({
   recruit: () => {},
   plan: () => {},
   firstPlayer: () => {},
-  tmp: () => {},
+  skip: () => {},
 });
 
 interface Props {
@@ -117,8 +117,8 @@ export function GameContextProvider({ children }: Props): JSX.Element {
             changePhase();
           }
         },
-        tmp: () => {
-          changePhase();
+        skip: () => {
+          resolveActionCard();
         },
       }}
     >

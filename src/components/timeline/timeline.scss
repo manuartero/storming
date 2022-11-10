@@ -24,6 +24,11 @@ $timeline-color: rgb(220, 220, 220);
 
     // background-color: rgb(129, 203, 99);
     &__phase {}
+
+    &__action{
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   &__next {

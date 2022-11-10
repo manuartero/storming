@@ -146,5 +146,5 @@ interface GameContext {
   recruit(action: RecruitAction): void;
   plan(action: PlanAction): void;
   firstPlayer(_: Player): void;
-  tmp(): void;
+  skip(): void;
 }

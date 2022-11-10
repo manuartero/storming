@@ -7,17 +7,20 @@ import "./timeline.scss";
 interface Props {
   phase: Phase;
   timeline: Timeline;
-  // tmp
-  onClick: () => void;
+  mustSkip: boolean;
+  onSkip: () => void;
 }
 
-function Timeline({ phase, timeline, onClick }: Props): JSX.Element {
+function Timeline({ phase, timeline, mustSkip, onSkip }: Props): JSX.Element {
   logRender("Timeline");
   return (
     <div className="timeline">
       <div className="timeline__current">
         <h2 className="timeline__current__phase">{phase}</h2>
-        <IconCard card={timeline.current} onClick={onClick} />
+        <div className="timeline__current__action">
+          <IconCard card={timeline.current} />
+          <button disabled={!mustSkip} onClick={onSkip}>SKIP</button>
+        </div>
       </div>
       <div className="timeline__next timeline__section">
         <span className="timeline__section__name">NEXT</span>

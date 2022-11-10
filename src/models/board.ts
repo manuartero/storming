@@ -22,13 +22,13 @@ function asTileID([t, _]: [string, Tile]): TileID {
 export function getAvailableTilesForActionCard({
   board,
   activeCard,
-  selectedTile,
   activePlayer,
+  selectedTile,
 }: {
   board: Board;
   activeCard: ActionCard;
-  selectedTile: TileID | undefined;
   activePlayer: Player | undefined;
+  selectedTile?: TileID | undefined;
 }): TileID[] {
   if (activeCard.action === "move") {
     if (selectedTile && board[selectedTile].piece?.owner === activePlayer) {
