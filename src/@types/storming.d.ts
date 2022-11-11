@@ -2,7 +2,11 @@
 // PLAYERS
 // --------------
 
-type Player = "player" | "enemy1" /* red */ | "enemy2" /* blue */ | "enemy3";
+type Player =
+  | "player"
+  | "enemy1" /* red */
+  | "enemy2" /* blue */
+  | "enemy3" /* green */;
 
 type PlayerHandCardStatus = "available" | "selected" | "played";
 
@@ -134,17 +138,24 @@ interface PlanAction {
   eventCard?: EventCard; // TODO !MVP
 }
 
+interface PlayerStatus {
+  player: Player;
+  points: number;
+  greatestEmpirePoint: boolean;
+}
+
 interface GameContext {
   phase: Phase;
   board: Board;
   timeline: Timeline;
   activeCard: Card | undefined;
   activePlayer: Player | undefined;
-  playerOrder: Player[];
+  players: PlayerStatus[];
+
   build(action: BuildAction): void;
   move(action: MoveAction): void;
   recruit(action: RecruitAction): void;
   plan(action: PlanAction): void;
-  firstPlayer(_: Player): void;
+  firstPlayer(player: Player): void;
   skip(): void;
 }

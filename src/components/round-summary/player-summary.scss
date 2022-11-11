@@ -1,0 +1,71 @@
+@use '../../styles/colors.scss';
+// @use 'styles/colors.scss';
+
+
+$size: 80px;
+
+.player-summary {
+  width: $size;
+  height: $size;
+
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 20px;
+  border-radius: 10%;
+  border: 2px solid #555;
+
+  &--clickable {
+    cursor: pointer;
+  }
+
+  &--active {
+    border: 2px solid rgb(222, 164, 255); // tmp
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column; // tmp will be row?
+    justify-content: space-around;
+
+    &__avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+
+      &--player {
+        background-image: url('./assets/player.png');
+      }
+
+      &--enemy1 {
+        background-image: url('./assets/enemy-1.png');
+      }
+
+      &--enemy2 {
+        background-image: url('./assets/enemy-2.png');
+      }
+
+      &--enemy3 {
+        background-image: url('./assets/enemy-3.png');
+      }
+    }
+
+    &__points {
+      font-size: large;
+      font-weight: bold;
+
+      img {
+        width: 20px;
+      }
+    }
+  }
+
+  &__extra {
+    &__greatest-empire {}
+  }
+
+}

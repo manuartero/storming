@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { logRender } from "utils/console";
 import { useBoard, emptyBoard } from "./use-board";
-import usePlayerOrder from "./use-player-order";
+import usePlayers from "./use-players";
 import { emptyTimeline, useTimeline } from "./use-timeline";
 
 const GameContext = createContext<GameContext>({
@@ -10,7 +10,7 @@ const GameContext = createContext<GameContext>({
   timeline: emptyTimeline,
   activeCard: undefined,
   activePlayer: undefined,
-  playerOrder: [],
+  players: [],
   build: () => {},
   move: () => {},
   recruit: () => {},
@@ -26,13 +26,13 @@ interface Props {
 function defineActivePlayer(
   phase: Phase,
   timeline: Timeline,
-  playerOrder: Player[]
+  players: PlayerStatus[]
 ) {
   if (phase === "planification") {
     // [ . . . . ]  playerOrder[0]    0, 4
     // [ . ]        playerOrder[1]    1, 5
-    // []           playerOrder[2]    2, 6
-    return playerOrder[timeline.next.length % 4];
+    // [ . . ]      playerOrder[2]    2, 6
+    return players[timeline.next.length % 4].player;
   }
   if (phase === "action") {
     return timeline.current?.cardType === "actionCard"
@@ -48,11 +48,11 @@ export function GameContextProvider({ children }: Props): JSX.Element {
   const [phase, setPhase] = useState<Phase>("planification"); // will be setup
   const { board, buildOnTile, movePiece, recruitOnTile } = useBoard();
   const { timeline, nextCard, planification, newTurn } = useTimeline();
-  const { playerOrder, firstPlayer } = usePlayerOrder();
+  const { players, firstPlayer } = usePlayers();
 
   /* derived state */
   const activeCard = timeline.current;
-  const activePlayer = defineActivePlayer(phase, timeline, playerOrder);
+  const activePlayer = defineActivePlayer(phase, timeline, players);
 
   /* API */
   const changePhase = () => {
@@ -94,7 +94,7 @@ export function GameContextProvider({ children }: Props): JSX.Element {
         timeline,
         activeCard,
         activePlayer,
-        playerOrder,
+        players,
         build: (action: BuildAction) => {
           buildOnTile(action);
           resolveActionCard();

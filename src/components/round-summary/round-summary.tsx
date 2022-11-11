@@ -1,31 +1,9 @@
-import c from "classnames";
 import { useGameContext } from "contexts";
 import { logRender } from "utils/console";
+import PlayerSummary from "./player-summary";
+
 import "./round-summary.scss";
 
-function PlayerSummary({
-  player,
-  active,
-  clickable,
-  onClick,
-}: {
-  player: Player;
-  active: boolean;
-  clickable: boolean;
-  onClick: (player: Player) => void;
-}): JSX.Element {
-  return (
-    <div
-      onClick={() => onClick(player)}
-      className={c(
-        "player-summary",
-        `player-summary--${player}`,
-        clickable && `player-summary--clickable`,
-        active && `player-summary--${player}--active`
-      )}
-    ></div>
-  );
-}
 
 /**
  * Renders depends on:
@@ -36,7 +14,7 @@ function RoundSummary(): JSX.Element {
 
   const gameContext = useGameContext();
 
-  const isResolvingDiploAction = (player: Player) => {
+  const isResolvingDiploAction = ({ player }: PlayerStatus) => {
     return (
       gameContext.activePlayer === player &&
       gameContext.activeCard?.cardType === "actionCard" &&
@@ -44,20 +22,20 @@ function RoundSummary(): JSX.Element {
     );
   };
 
-  const onPlayerSummaryClick = (player: Player) => {
-    if (isResolvingDiploAction(player)) {
-      gameContext.firstPlayer(player);
+  const onPlayerSummaryClick = (playerStatus: PlayerStatus) => {
+    if (isResolvingDiploAction(playerStatus)) {
+      gameContext.firstPlayer(playerStatus.player);
     }
   };
 
   return (
     <div className="round-summary">
-      {gameContext.playerOrder.map((player) => (
+      {gameContext.players.map((playerStatus) => (
         <PlayerSummary
-          key={`summary-${player}`}
-          player={player}
-          active={player === gameContext.activePlayer}
-          clickable={isResolvingDiploAction(player)}
+          key={`player-summary-${playerStatus.player}`}
+          player={playerStatus}
+          active={playerStatus.player === gameContext.activePlayer}
+          clickable={isResolvingDiploAction(playerStatus)}
           onClick={onPlayerSummaryClick}
         />
       ))}
