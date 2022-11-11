@@ -1,182 +1,229 @@
 const initialBoard: Board = {
+  // row 1
   "-2,-3": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "-1,-3": {
     terrain: "field",
-    piece: { owner: "player", type: "soldier" }, //XXX
+    building: undefined,
+    piece: undefined,
   },
   "0,-3": {
     terrain: "field",
+    building: { owner: "enemy1", type: "town" },
     piece: undefined,
   },
   "1,-3": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "2,-3": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
+  // row 2
   "-3,-2": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "-2,-2": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "-1,-2": {
     terrain: "field",
-    piece: { owner: "enemy1", type: "soldier" }, // XXX
+    building: undefined,
+    piece: { owner: "enemy1", type: "soldier" },
   },
   "0,-2": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "1,-2": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "2,-2": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
+  // row 3
   "-3,-1": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "-2,-1": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "-1,-1": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "0,-1": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "1,-1": {
     terrain: "field",
-    piece: { owner: "player", type: "soldier" },
+    building: undefined,
+    piece: undefined,
   },
   "2,-1": {
     terrain: "field",
-    piece: { owner: "player", type: "soldier" },
+    building: undefined,
+    piece: undefined,
   },
   "3,-1": {
     terrain: "field",
-    piece: { owner: "enemy2", type: "soldier" },
+    building: undefined,
+    piece: undefined,
   },
+  // row 4
   "-4,0": {
     terrain: "field",
-    piece: { owner: "player", type: "soldier" },
+    building: { owner: "player", type: "town" },
+    piece: undefined,
   },
   "-3,0": {
     terrain: "field",
-    piece: { owner: "enemy3", type: "soldier" },
+    building: undefined,
+    piece: { owner: "player", type: "soldier" },
   },
   "-2,0": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "-1,0": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "0,0": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "1,0": {
-    terrain: "mountain", // XXX
+    terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "2,0": {
-    terrain: "forest", // XXX
-    piece: undefined,
+    terrain: "field",
+    building: undefined,
+    piece: { owner: "enemy2", type: "soldier" },
   },
   "3,0": {
-    terrain: "lake", // XXX
+    terrain: "field",
+    building: { owner: "enemy2", type: "town" },
     piece: undefined,
   },
+  // row 5
   "-3,1": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "-2,1": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "-1,1": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "0,1": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "1,1": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
-    building: {
-      owner: "enemy3",
-      type: "town",
-    },
   },
   "2,1": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "3,1": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
+  // row 6
   "-3,2": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "-2,2": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "-1,2": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "0,2": {
     terrain: "field",
-    piece: undefined,
+    building: undefined,
+    piece: { owner: "enemy3", type: "soldier" },
   },
   "1,2": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "2,2": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
+  // row 7
   "-2,3": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "-1,3": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "0,3": {
     terrain: "field",
+    building: { owner: "enemy3", type: "town" },
     piece: undefined,
   },
   "1,3": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
   "2,3": {
     terrain: "field",
+    building: undefined,
     piece: undefined,
   },
 };
