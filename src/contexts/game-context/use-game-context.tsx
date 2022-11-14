@@ -46,9 +46,10 @@ export function GameContextProvider({ children }: Props): JSX.Element {
   logRender("GameContextProvider");
 
   const [phase, setPhase] = useState<Phase>("planification"); // will be setup
-  const { board, buildOnTile, movePiece, recruitOnTile } = useBoard();
+  const { board, isConquering, buildOnTile, movePiece, recruitOnTile } =
+    useBoard();
   const { timeline, nextCard, planification, newTurn } = useTimeline();
-  const { players, firstPlayer } = usePlayers();
+  const { players, firstPlayer, scorePoint } = usePlayers();
 
   /* derived state */
   const activeCard = timeline.current;
@@ -100,6 +101,9 @@ export function GameContextProvider({ children }: Props): JSX.Element {
           resolveActionCard();
         },
         move: (action: MoveAction) => {
+          if (isConquering(action)) {
+            scorePoint(action.piece.owner);
+          }
           movePiece(action);
           resolveActionCard();
         },

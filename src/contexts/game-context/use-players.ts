@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const initialPlayerStatus: PlayerStatus[] = [
   { player: "player", points: 0, greatestEmpirePoint: false },
-  { player: "enemy1", points: 3, greatestEmpirePoint: false },
+  { player: "enemy1", points: 0, greatestEmpirePoint: false },
   { player: "enemy2", points: 0, greatestEmpirePoint: false },
   { player: "enemy3", points: 0, greatestEmpirePoint: false },
 ];
@@ -22,7 +22,16 @@ function usePlayers() {
     setPlayers([newFirstPlayer, ...players.filter((p) => p.player !== player)]);
   };
 
-  return { players, firstPlayer };
+  const scorePoint = (player: Player) => {
+    console.info(`GameContext.point({ player: ${player} })`);
+    setPlayers((currentPlayers) =>
+      currentPlayers.map((p) =>
+        p.player === player ? { ...p, points: p.points + 1 } : p
+      )
+    );
+  };
+
+  return { players, firstPlayer, scorePoint };
 }
 
 export default usePlayers;

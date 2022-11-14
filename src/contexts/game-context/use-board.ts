@@ -26,23 +26,47 @@ export function useBoard() {
     });
   };
 
+  const isConquering = ({
+    piece,
+    to,
+  }: {
+    to: TileID;
+    piece: {
+      type: Piece;
+      owner: Player;
+    };
+  }) => {
+    if (board[to].building && board[to].building?.owner !== piece.owner) {
+      console.info(`GameContext.isConquering({ ... }): YES`);
+      return true;
+    }
+    return false;
+  };
+
   const movePiece = ({ piece, from, to }: MoveAction) => {
     console.info(
       `GameContext.movePiece({ from: <${from}>, to: <${to}>, piece: ${piece.type}(${piece.owner}) })`
     );
     setBoard((currentBoard) => {
-      const fromTile: Tile = {
+      const originTile: Tile = {
         ...currentBoard[from],
         piece: undefined,
       };
-      const toTile: Tile = {
+      const targetTile: Tile = {
         ...currentBoard[to],
         piece,
       };
+      // is it better to use isConquering() ?
+      if (targetTile.building) {
+        targetTile.building = {
+          ...targetTile.building,
+          owner: piece.owner,
+        };
+      }
       return {
         ...currentBoard,
-        [from]: fromTile,
-        [to]: toTile,
+        [from]: originTile,
+        [to]: targetTile,
       };
     });
   };
@@ -63,7 +87,7 @@ export function useBoard() {
     });
   };
 
-  return { board, buildOnTile, movePiece, recruitOnTile };
+  return { board, buildOnTile, movePiece, recruitOnTile, isConquering };
 }
 
 /**
