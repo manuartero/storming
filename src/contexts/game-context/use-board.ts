@@ -43,6 +43,7 @@ export function useBoard() {
     return false;
   };
 
+  /** direct update on the board; no validity check */
   const movePiece = ({ piece, from, to }: MoveAction) => {
     console.info(
       `GameContext.movePiece({ from: <${from}>, to: <${to}>, piece: ${piece.type}(${piece.owner}) })`
