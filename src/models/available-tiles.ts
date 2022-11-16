@@ -1,4 +1,4 @@
-import { tilesInRange } from "./tiles";
+import { tilesInRange } from "models/tiles";
 
 type _FilterPredicate = (_: [string, Tile]) => boolean;
 
@@ -22,16 +22,14 @@ function asTileID([t, _]: [string, Tile]): TileID {
 export function getAvailableTilesForActionCard({
   board,
   activeCard,
-  activePlayer,
   selectedTile,
 }: {
   board: Board;
   activeCard: ActionCard;
-  activePlayer: Player | undefined;
   selectedTile?: TileID | undefined;
 }): TileID[] {
   if (activeCard.action === "move") {
-    if (selectedTile && board[selectedTile].piece?.owner === activePlayer) {
+    if (selectedTile && board[selectedTile].piece?.owner === activeCard.owner) {
       return getInRangeMovements(board, selectedTile);
     }
     return Object.entries(board)

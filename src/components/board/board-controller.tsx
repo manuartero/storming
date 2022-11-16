@@ -1,11 +1,11 @@
 import { useGameContext } from "contexts";
-import { getAvailableTilesForActionCard } from "models/board";
+import { getAvailableTilesForActionCard } from "models/available-tiles";
 import { useState } from "react";
 
 import Board from "./board";
 
 function createVisualBoardFromGameContext(
-  { board, activeCard, activePlayer }: GameContext,
+  { board, activeCard }: GameContext,
   selectedTile: TileID | undefined
 ): VisualBoard {
   const availableTiles =
@@ -13,7 +13,6 @@ function createVisualBoardFromGameContext(
       ? getAvailableTilesForActionCard({
           board,
           activeCard,
-          activePlayer,
           selectedTile,
         })
       : [];
@@ -129,7 +128,6 @@ function BoardController(): JSX.Element {
         board: b,
         selectedTile,
         activeCard: gameContext.activeCard,
-        activePlayer: gameContext.activePlayer,
       });
       if (availableTiles.includes(tile)) {
         return resolveActionOnTile(tile);

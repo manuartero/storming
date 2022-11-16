@@ -1,5 +1,5 @@
 import { useGameContext } from "contexts";
-import { getAvailableTilesForActionCard } from "models/board";
+import { getAvailableTilesForActionCard } from "models/available-tiles";
 import Timeline from "./timeline";
 
 function mustSkip(gameContext: GameContext) {
@@ -9,7 +9,6 @@ function mustSkip(gameContext: GameContext) {
       getAvailableTilesForActionCard({
         board: gameContext.board,
         activeCard: gameContext.activeCard,
-        activePlayer: gameContext.activePlayer,
       }).length === 0
     );
   }
