@@ -40,11 +40,11 @@ function Tile({
       {terrain === "lake" && (
         <LakeSvg className={c("tile__terrain", "tile__terrain--lake")} />
       )}
-      {building === "town" && (
+      {building && (
         <div
           className={c(
             "tile__building",
-            "tile__building--town",
+            `tile__building--${building}`,
             `tile__building--${owner}`
           )}
         ></div>

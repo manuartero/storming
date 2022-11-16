@@ -51,19 +51,34 @@ function BoardController(): JSX.Element {
 
   const buildOnTile = (tile: TileID) => {
     const piece = b[tile].piece;
-    if (!piece || piece.type !== "soldier") {
+    const building = b[tile].building;
+
+    if (piece) {
+      gameContext.build({
+        tile,
+        building: {
+          type: "town" as const,
+          owner: piece.owner,
+        },
+      });
+    } else if (building) {
+      gameContext.build({
+        tile,
+        building: {
+          type:
+            building.type === "village" ? ("town" as const) : ("city" as const),
+          owner: building.owner,
+        },
+      });
+    } else {
       console.warn(
-        `Inconsistent state: trying to build on ${tile} but no soldier found`,
+        `Inconsistent state: trying to build on ${tile} but no soldier AND no building found`,
         { tile: b[tile] }
       );
       return;
     }
-    const building = {
-      type: "town" as const,
-      owner: piece.owner,
-    };
+
     setSelectedTile(undefined);
-    gameContext.build({ tile, building });
   };
 
   const moveFromTile = (tile: TileID) => {

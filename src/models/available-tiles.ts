@@ -10,9 +10,15 @@ function hasPieceFromSameOwner(card: ActionCard): _FilterPredicate {
   return ([_, tile]) => tile.piece?.owner === card.owner;
 }
 
-function hasSoldierFromSameOwner(card: ActionCard): _FilterPredicate {
-  return ([_, tile]) =>
-    tile.piece?.owner === card.owner && tile.piece?.type === "soldier";
+function hasBuilderOrBuildingFromSameOwner(
+  card: ActionCard,
+  board: Board
+): _FilterPredicate {
+  return ([tileId, tile]) =>
+    (tile.piece?.owner === card.owner &&
+      tile.piece?.type === "soldier" &&
+      isBuildingPlot({ tileId: tileId as TileID, board })) ||
+    tile.building?.owner === card.owner;
 }
 
 function asTileID([t, _]: [string, Tile]): TileID {
@@ -30,7 +36,7 @@ export function getAvailableTilesForActionCard({
 }): TileID[] {
   if (activeCard.action === "move") {
     if (selectedTile && board[selectedTile].piece?.owner === activeCard.owner) {
-      return getInRangeMovements(board, selectedTile);
+      return getInRangeMovements({ tileId: selectedTile, board });
     }
     return Object.entries(board)
       .filter(hasPieceFromSameOwner(activeCard))
@@ -39,7 +45,7 @@ export function getAvailableTilesForActionCard({
 
   if (activeCard.action === "build") {
     return Object.entries(board)
-      .filter(hasSoldierFromSameOwner(activeCard))
+      .filter(hasBuilderOrBuildingFromSameOwner(activeCard, board))
       .map(asTileID);
   }
 
@@ -51,12 +57,19 @@ export function getAvailableTilesForActionCard({
   return [];
 }
 
-export function getInRangeMovements(board: Board, tile: TileID): TileID[] {
-  const tiles = tilesInRange(tile);
+type _TileInBoard = { tileId: TileID; board: Board };
+
+export function getInRangeMovements({ tileId, board }: _TileInBoard): TileID[] {
+  const tiles = tilesInRange(tileId);
   return tiles.filter(
     (candidateTile) =>
       /* valid options: */
       !board[candidateTile].piece ||
-      board[candidateTile].piece?.owner !== board[tile].piece?.owner
+      board[candidateTile].piece?.owner !== board[tileId].piece?.owner
   );
+}
+
+export function isBuildingPlot({ tileId, board }: _TileInBoard) {
+  // TODO
+  return true;
 }
