@@ -24,7 +24,7 @@ interface Props {
 }
 
 function defineActivePlayer(
-  phase: Phase,
+  phase: PhaseType,
   timeline: Timeline,
   players: PlayerStatus[]
 ) {
@@ -45,7 +45,7 @@ function defineActivePlayer(
 export function GameContextProvider({ children }: Props): JSX.Element {
   logRender("GameContextProvider");
 
-  const [phase, setPhase] = useState<Phase>("planification"); // will be setup
+  const [phase, setPhase] = useState<PhaseType>("planification"); // will be setup
   const { board, isConquering, buildOnTile, movePiece, recruitOnTile } =
     useBoard();
   const { timeline, nextCard, planification, newTurn } = useTimeline();
@@ -57,7 +57,7 @@ export function GameContextProvider({ children }: Props): JSX.Element {
 
   /* API */
   const changePhase = () => {
-    let nextPhase: Phase;
+    let nextPhase: PhaseType;
     switch (phase) {
       case "setup":
         nextPhase = "planification";
@@ -96,32 +96,38 @@ export function GameContextProvider({ children }: Props): JSX.Element {
         activeCard,
         activePlayer,
         players,
-        build: (action: BuildAction) => {
+
+        build(action: BuildAction) {
           buildOnTile(action);
           resolveActionCard();
         },
-        move: (action: MoveAction) => {
+
+        move(action: MoveAction) {
           if (isConquering(action)) {
             scorePoint(action.piece.owner);
           }
           movePiece(action);
           resolveActionCard();
         },
-        recruit: (action: RecruitAction) => {
+
+        recruit(action: RecruitAction) {
           recruitOnTile(action);
           resolveActionCard();
         },
-        firstPlayer: (player: Player) => {
+
+        firstPlayer(player: Player) {
           firstPlayer(player);
           resolveActionCard();
         },
-        plan: (action: PlanAction) => {
+
+        plan(action: PlanAction) {
           const { next } = planification(action);
           if (next.length % 4 === 0) {
             changePhase();
           }
         },
-        skip: () => {
+
+        skip() {
           resolveActionCard();
         },
       }}

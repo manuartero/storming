@@ -26,16 +26,7 @@ export function useBoard() {
     });
   };
 
-  const isConquering = ({
-    piece,
-    to,
-  }: {
-    to: TileID;
-    piece: {
-      type: Piece;
-      owner: Player;
-    };
-  }) => {
+  const isConquering = ({ piece, to }: { to: TileID; piece: Piece }) => {
     if (board[to].building && board[to].building?.owner !== piece.owner) {
       console.info(`GameContext.isConquering({ ... }): YES`);
       return true;

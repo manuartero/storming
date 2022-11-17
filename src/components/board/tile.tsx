@@ -11,7 +11,7 @@ interface Props {
   id: TileID;
   status?: TileStatus;
   terrain?: Terrain;
-  building?: Building;
+  building?: BuildingType;
   owner?: Player;
   onClick?: (tileID: Coordinates) => void;
   children?: React.ReactNode;

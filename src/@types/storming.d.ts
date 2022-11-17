@@ -18,7 +18,7 @@ type PlayerHandCardStatus = "available" | "selected" | "played";
 type PlayerHand = { action: ActionCardType; status: PlayerHandCardStatus }[];
 
 // --------------
-// BOARD & TILES
+// BOARD, TILES & PIECES
 // --------------
 
 declare type TileID = import("models/tiles")._TileID;
@@ -31,19 +31,24 @@ interface Coordinates {
 
 type Board = Record<TileID, Tile>;
 
+type Building = {
+  type: BuildingType;
+  owner: Player;
+};
+
+type Piece = {
+  type: PieceType;
+  owner: Player;
+}
+
 type Terrain = "field" | "mountain" | "lake" | "forest";
-type Building = "village" | "town" | "city";
-type Piece = "soldier" | "knight";
+type BuildingType = "village" | "town" | "city";
+type PieceType = "soldier" | "knight";
+
 interface Tile {
   terrain: Terrain;
-  piece?: {
-    type: Piece;
-    owner: Player;
-  };
-  building?: {
-    type: Building;
-    owner: Player;
-  };
+  piece?: Piece;
+  building?: Building;
 }
 
 type VisualBoard = Record<TileID, TileWithStatus>;
@@ -104,31 +109,22 @@ interface GameLogContext {
 // GameContext
 // --------------
 
-type Phase = "setup" | "planification" | "action";
+type PhaseType = "setup" | "planification" | "action";
 
 interface BuildAction {
   tile: TileID;
-  building: {
-    type: Building;
-    owner: Player;
-  };
+  building: Building;
 }
 
 interface MoveAction {
   from: TileID;
   to: TileID;
-  piece: {
-    type: Piece;
-    owner: Player;
-  };
+  piece: Piece;
 }
 
 interface RecruitAction {
   tile: TileID;
-  piece: {
-    type: Piece;
-    owner: Player;
-  };
+  piece: Piece;
 }
 
 interface PlanAction {
@@ -145,7 +141,7 @@ interface PlayerStatus {
 }
 
 interface GameContext {
-  phase: Phase;
+  phase: PhaseType;
   board: Board;
   timeline: Timeline;
   activeCard: Card | undefined;

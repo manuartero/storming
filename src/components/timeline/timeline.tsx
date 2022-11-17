@@ -5,7 +5,7 @@ import { logRender } from "utils/console";
 import "./timeline.scss";
 
 interface Props {
-  phase: Phase;
+  phase: PhaseType;
   timeline: Timeline;
   mustSkip: boolean;
   onSkip: () => void;
