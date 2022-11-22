@@ -18,7 +18,7 @@ function hasBuilderOrBuildingFromSameOwner(
     (tile.piece?.owner === card.owner &&
       tile.piece?.type === "soldier" &&
       isBuildingPlot({ tileId: tileId as TileID, board })) ||
-    tile.building?.owner === card.owner;
+    (tile.building?.owner === card.owner && tile.building.type !== "city");
 }
 
 function asTileID([t, _]: [string, Tile]): TileID {

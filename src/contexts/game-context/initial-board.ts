@@ -12,7 +12,7 @@ const initialBoard: Board = {
   },
   "0,-3": {
     terrain: "field",
-    building: { owner: "enemy1", type: "town" },
+    building: { owner: "enemy1", type: "village" },
     piece: undefined,
   },
   "1,-3": {
@@ -95,7 +95,7 @@ const initialBoard: Board = {
   // row 4
   "-4,0": {
     terrain: "field",
-    building: { owner: "player", type: "town" },
+    building: { owner: "player", type: "village" },
     piece: undefined,
   },
   "-3,0": {
@@ -130,7 +130,7 @@ const initialBoard: Board = {
   },
   "3,0": {
     terrain: "field",
-    building: { owner: "enemy2", type: "town" },
+    building: { owner: "enemy2", type: "village" },
     piece: undefined,
   },
   // row 5
@@ -213,7 +213,7 @@ const initialBoard: Board = {
   },
   "0,3": {
     terrain: "field",
-    building: { owner: "enemy3", type: "town" },
+    building: { owner: "enemy3", type: "village" },
     piece: undefined,
   },
   "1,3": {
