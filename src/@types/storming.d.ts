@@ -34,6 +34,7 @@ type Board = Record<TileID, Tile>;
 type Building = {
   type: BuildingType;
   owner: Player;
+  hasWalls?: boolean;
 };
 
 type Piece = {

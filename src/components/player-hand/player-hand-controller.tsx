@@ -1,5 +1,6 @@
 import { useGameContext } from "contexts";
 import { useEffect, useState } from "react";
+import { logInconsistentState } from "utils/console";
 import PlayerHand from "./player-hand";
 
 const players: Player[] = ["player", "enemy1", "enemy2", "enemy3"];
@@ -91,10 +92,9 @@ function PlayerHandController(): JSX.Element {
 
   const onClick = (actionCard: ActionCard) => {
     if (!gameContext.activePlayer) {
-      console.warn(
-        `Inconsistent state: PlayerHandController trying to handle click on ${actionCard} while no activePlayer`
+      return logInconsistentState(
+        `trying to handle click on ${actionCard} while no activePlayer`
       );
-      return;
     }
     if (nextCard) {
       gameContext.plan({
