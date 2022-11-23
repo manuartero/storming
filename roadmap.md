@@ -51,12 +51,33 @@ _Simplified version of the game_:
 
 ***
 
+- Every player may MOVE once
+- Every player may RECRUIT once
+- Every player may BUILD once
+- Every player: discard a PERSONA or IMPROVEMENT
+- Every SOLDIER: promote to KNIGHT
+- Every KNIGHT: downgrade to SOLDIER
+- Every SOLDIER on Settlement: perish
+- Every player may recruit a KNIGHT
+- Every player discard a PERSONA or IMPROVEMENT
+- Every WALL is destroyed
+- Mixup FUTURE
+- first player: REVOLT
+- first player: place a LAKE
+- first player: MOVE or RECRUIT once
+- first player: remove a LAKE
+- first player: last position
+
+- Next RECRUIT card doesn't apply
+- Next MOVE card can't attack (just movement)
+- Until next DIPLO, can't hire PERSONA or IMPROVEMENT
+
 **Strategos**: Both Actions are plan to NEXT
 **Warlock**: One extra event tied to one action
 **Philosopher**: Play one (any) action when solving REVOLT
 **Alchemist**: Special Action card: INVENT
 **Henchman**: DIPLO action -> discard another PERSONA
-**Saboteur**: DIPLO action -> discard another BUILDING
+**Saboteur**: DIPLO action -> discard another IMPROVEMENT
 **Chancellor**: DIPLO action -> create REVOLT
 **Commander**: May move 2 times same SOLDIER
 
@@ -65,4 +86,4 @@ _Simplified version of the game_:
 **Barracks**: may RECRUIT on tiles next to a settlement
 **Cathedral**: 1 point.
 **Theatre**: create REVOLT
-**Library**: Copies another BUILDING
+**Library**: Copies another IMPROVEMENT
