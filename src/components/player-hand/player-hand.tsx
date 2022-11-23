@@ -7,31 +7,26 @@ interface Props {
   isActive: boolean;
   player: Player | undefined;
   cards: PlayerHand;
-  onClick: (actionCard: ActionCard) => void;
+  onClick: (cardId: string) => void;
 }
 
 function PlayerHand({ isActive, player, cards, onClick }: Props): JSX.Element {
   logRender("PlayerHand");
 
-  const considerOnClickIfActive = (card: ActionCard) => {
-    isActive && onClick(card);
+  const considerOnClickIfActive = (cardId: string) => {
+    isActive && onClick(cardId);
   };
 
   return (
     <div className="player-hand">
       {player &&
-        cards.map(({ action, status }, i) => {
-          const card: ActionCard = {
-            cardType: "actionCard",
-            owner: player,
-            action,
-          };
+        cards.map(({ card, status }, i) => {
           return (
             <Card
-              key={`card-${action}-${i}`}
+              key={card.cardId}
               status={status}
               card={card}
-              onClick={() => considerOnClickIfActive(card)}
+              onClick={() => considerOnClickIfActive(card.cardId)}
             ></Card>
           );
         })}

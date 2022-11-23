@@ -15,7 +15,7 @@ type PlayerHandCardStatus = "available" | "selected" | "played";
  * [ { action: "build", status: "available" }, ... ]
  * ```
  */
-type PlayerHand = { action: ActionCardType; status: PlayerHandCardStatus }[];
+type PlayerHand = { card: Card; status: PlayerHandCardStatus }[];
 
 // --------------
 // BOARD, TILES & PIECES
@@ -40,7 +40,7 @@ type Building = {
 type Piece = {
   type: PieceType;
   owner: Player;
-}
+};
 
 type Terrain = "field" | "mountain" | "lake" | "forest";
 type BuildingType = "village" | "town" | "city";
@@ -71,6 +71,7 @@ interface ActionCard {
   cardType: "actionCard";
   action: ActionCardType;
   owner: Player;
+  cardId: string;
 }
 
 type EventCardType = "even1" | "event2" | "event3";
@@ -79,7 +80,7 @@ interface EventCard {
   cardType: "eventCard";
   event: EventCardType;
   playedBy: Player;
-  // TODO Consider EventCards (!MVP)
+  cardId: string;
 }
 
 // --------------

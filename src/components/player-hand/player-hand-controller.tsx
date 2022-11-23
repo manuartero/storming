@@ -1,77 +1,16 @@
 import { useGameContext } from "contexts";
 import { useEffect, useState } from "react";
 import { logInconsistentState } from "utils/console";
+import { inferPlayerHandsFromGameContext } from "./infer-player-hands";
 import PlayerHand from "./player-hand";
 
-const players: Player[] = ["player", "enemy1", "enemy2", "enemy3"];
-const actionCards: ActionCardType[] = [
-  "build",
-  "diplo",
-  "move",
-  "move",
-  "recruit",
-];
-
-function getPlayedActionCards(timeline: Timeline): ActionCard[] {
-  const playedCards = [...timeline.next, ...timeline.future];
-  if (timeline.current) {
-    playedCards.unshift(timeline.current);
-  }
-  return playedCards.filter(
-    (playedCard) => playedCard.cardType === "actionCard"
-  ) as ActionCard[];
-}
-
-function defineCardStatus(
-  playedActionCards: ActionCard[],
-  player: Player,
-  action: ActionCardType,
-  selectedCard?: ActionCard
-): PlayerHandCardStatus {
-  if (selectedCard && selectedCard.action === action) {
-    return "selected";
-  }
-  const hasBeenPlayed = playedActionCards.some(
-    (playedCard) => playedCard.owner === player && playedCard.action === action
-  );
-  return hasBeenPlayed ? "played" : "available";
-}
-
 /**
- * {
- *   "player": [ { cardType: "build", status: "available" } ]
- *   "enemy1": [ ... ]
- *   "enemy2": [ ... ]
- *   "enemy3": [ ... ]
- * }
+ * Renders depends on:
+ *  - `useGameContext()`
+ *
+ * Defines visual player hand from GameContext
+ *
  */
-function inferPlayerHandsFromGameContext(
-  timeline: Timeline,
-  selectedCard?: ActionCard
-): Record<Player, PlayerHand> {
-  const playedActionCards = getPlayedActionCards(timeline);
-
-  return players.reduce((acc, player) => {
-    const playerHand = actionCards.map((action) => {
-      const status = defineCardStatus(
-        playedActionCards,
-        player,
-        action,
-        selectedCard
-      );
-      return {
-        action,
-        status,
-      };
-    });
-
-    return {
-      ...acc,
-      [player]: playerHand,
-    };
-  }, {} as Record<Player, PlayerHand>);
-}
-
 function PlayerHandController(): JSX.Element {
   const gameContext = useGameContext();
   const [nextCard, setNextCard] = useState<ActionCard | undefined>(undefined);
@@ -82,28 +21,40 @@ function PlayerHandController(): JSX.Element {
   }, [gameContext.activePlayer]);
 
   /* infered state */
-  const playerHands = inferPlayerHandsFromGameContext(
+  const playerCards = inferPlayerHandsFromGameContext(
     gameContext.timeline,
     nextCard
   );
   const activePlayerHand = gameContext.activePlayer
-    ? playerHands[gameContext.activePlayer]
+    ? playerCards[gameContext.activePlayer]
     : [];
 
-  const onClick = (actionCard: ActionCard) => {
+  const handlePlayerCardClick = (cardId: string) => {
     if (!gameContext.activePlayer) {
       return logInconsistentState(
-        `trying to handle click on ${actionCard} while no activePlayer`
+        `trying to handle click on ${cardId} while no activePlayer`
       );
     }
+    const playerCard = activePlayerHand.find((e) => e.card.cardId === cardId);
+    if (!playerCard) {
+      return logInconsistentState(
+        `trying to handle click on ${cardId}, can't find this card on player's hand`,
+        { activePlayerHand }
+      );
+    }
+
+    if (playerCard.status !== 'available') {
+      return
+    }
+
     if (nextCard) {
       gameContext.plan({
         nextCard,
-        futureCard: actionCard,
+        futureCard: playerCard.card as ActionCard, // casting? XXX
         player: gameContext.activePlayer,
       });
     } else {
-      setNextCard(actionCard);
+      setNextCard(playerCard.card as ActionCard); // casting? XXX
     }
   };
 
@@ -112,7 +63,7 @@ function PlayerHandController(): JSX.Element {
       isActive={gameContext.phase === "planification"}
       player={gameContext.activePlayer}
       cards={activePlayerHand}
-      onClick={onClick}
+      onClick={handlePlayerCardClick}
     />
   );
 }
