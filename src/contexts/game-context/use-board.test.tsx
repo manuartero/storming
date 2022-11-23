@@ -36,7 +36,7 @@ function TestingComponent() {
         data-testid="build-on-tile-12"
         onClick={() =>
           buildOnTile({
-            building: { owner: "enemy3", type: "town" },
+            building: { owner: "enemy3", type: "village" },
             tile: "1,2",
           })
         }
@@ -61,13 +61,13 @@ describe("game-context", () => {
     render(<TestingComponent />);
     expect(getTileInfo("tile-0,2")).toEqual("soldier (enemy3)");
     expect(getTileInfo("tile-1,2")).toEqual("");
-    expect(getTileInfo("tile-0,3")).toEqual("town (enemy3)");
+    expect(getTileInfo("tile-0,3")).toEqual("village (enemy3)");
   });
 
   test("useBoard() returns buildOnTile()", () => {
     render(<TestingComponent />);
     fireEvent.click(screen.getByTestId("build-on-tile-12"));
-    expect(getTileInfo("tile-1,2")).toEqual("town (enemy3)");
+    expect(getTileInfo("tile-1,2")).toEqual("village (enemy3)");
   });
 
   test("useBoard() returns movePiece()", () => {
@@ -80,7 +80,7 @@ describe("game-context", () => {
   test("useBoard() returns recruitOnTile()", () => {
     render(<TestingComponent />);
     fireEvent.click(screen.getByTestId("recruit-on-tile-03"));
-    expect(getTileInfo("tile-0,3")).toEqual("town (enemy3)soldier (enemy3)");
+    expect(getTileInfo("tile-0,3")).toEqual("village (enemy3)soldier (enemy3)");
   });
 
   test.todo("useBoard() returns isConquering()");
