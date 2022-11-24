@@ -1,4 +1,5 @@
 import { tilesInRange } from "models/tiles-in-range";
+import { logInconsistentState } from "utils/console";
 
 type _FilterPredicate = (_: [string, Tile]) => boolean;
 
@@ -57,10 +58,24 @@ export function getAvailableTilesForActionCard({
   return [];
 }
 
+const MOVEMENT_RANGE: Record<PieceType, number> = {
+  soldier: 1,
+  knight: 2,
+};
+
 type _TileInBoard = { tileId: TileID; board: Board };
 
 export function getInRangeMovements({ tileId, board }: _TileInBoard): TileID[] {
-  const tiles = tilesInRange(tileId);
+  const piece = board[tileId].piece;
+  if (!piece) {
+    logInconsistentState(
+      `getting range movement for piece at ${tileId}, but no piece found`,
+      { tile: board[tileId] }
+    );
+    return [];
+  }
+  const range = MOVEMENT_RANGE[piece.type];
+  const tiles = tilesInRange(tileId, { range });
   return tiles.filter(
     (candidateTile) =>
       /* valid options: */

@@ -146,10 +146,17 @@ function BoardController(): JSX.Element {
         { tile: b[tile] }
       );
     }
-    const piece = {
-      type: "soldier" as const,
-      owner: building.owner,
-    };
+
+    const piece: Piece =
+      building.type === "city" // TODO show dialog for unit selection
+        ? {
+            type: "soldier",
+            owner: building.owner,
+          }
+        : {
+            type: "knight",
+            owner: building.owner,
+          };
     setSelectedTile(undefined);
     return gameContext.recruit({ tile, piece });
   };
