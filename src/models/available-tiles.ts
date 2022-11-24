@@ -1,4 +1,4 @@
-import { tilesInRange } from "models/tiles";
+import { tilesInRange } from "models/tiles-in-range";
 
 type _FilterPredicate = (_: [string, Tile]) => boolean;
 

@@ -1,4 +1,5 @@
 import { asTileID, coordinates } from "./tiles";
+import { merge } from "utils/array";
 
 const NEIGHBOUR_TILES_MEM_CACHE = {} as Record<TileID, TileID[]>;
 
@@ -16,16 +17,12 @@ function tilesInRangeRec(
 ): TileID[] {
   const neighbourTiles = tilesInRange1Cached(tileId);
   if (range === 1) {
-    return addAll(acc, neighbourTiles);
+    return merge(acc, neighbourTiles);
   }
   const tiles = neighbourTiles.flatMap((tileId) =>
     tilesInRangeRec(tileId, range - 1, acc)
   );
-  return addAll(acc, tiles);
-}
-
-function addAll<T>(a: T[], b: T[]) {
-  return Array.from(new Set([...a, ...b]));
+  return merge(acc, tiles);
 }
 
 function tilesInRange1Cached(tileId: TileID) {
