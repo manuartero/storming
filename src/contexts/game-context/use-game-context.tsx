@@ -3,6 +3,8 @@ import { logRender } from "utils/console";
 import { useBoard, emptyBoard } from "./use-board";
 import usePlayers from "./use-players";
 import { emptyTimeline, useTimeline } from "./use-timeline";
+import { isConquering, isCreatingGreatesEmpire } from "models/score";
+import { empireSize } from "models/empire-size";
 
 const GameContext = createContext<GameContext>({
   phase: "setup",
@@ -46,10 +48,10 @@ export function GameContextProvider({ children }: Props): JSX.Element {
   logRender("GameContextProvider");
 
   const [phase, setPhase] = useState<PhaseType>("planification"); // will be setup
-  const { board, isConquering, buildOnTile, movePiece, recruitOnTile } =
-    useBoard();
+  const { board, buildOnTile, movePiece, recruitOnTile } = useBoard();
   const { timeline, nextCard, planification, newTurn } = useTimeline();
-  const { players, firstPlayer, scorePoint } = usePlayers();
+  const { players, firstPlayer, scorePoint, declareGreatestEmpire } =
+    usePlayers();
 
   /* derived state */
   const activeCard = timeline.current;
@@ -98,13 +100,19 @@ export function GameContextProvider({ children }: Props): JSX.Element {
         players,
 
         build(action: BuildAction) {
+          if (
+            isCreatingGreatesEmpire({ ...action, empires: empireSize(board) })
+          ) {
+            declareGreatestEmpire(action.building.owner);
+          }
           buildOnTile(action);
           resolveActionCard();
         },
 
         move(action: MoveAction) {
-          if (isConquering(action)) {
-            scorePoint(action.piece.owner);
+          const player = action.piece.owner;
+          if (isConquering({ player, targetTile: board[action.to] })) {
+            scorePoint(player);
           }
           movePiece(action);
           resolveActionCard();

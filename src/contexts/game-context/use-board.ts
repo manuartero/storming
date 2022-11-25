@@ -26,14 +26,6 @@ export function useBoard() {
     });
   };
 
-  const isConquering = ({ piece, to }: { to: TileID; piece: Piece }) => {
-    if (board[to].building && board[to].building?.owner !== piece.owner) {
-      console.info(`GameContext.isConquering({ ... }): YES`);
-      return true;
-    }
-    return false;
-  };
-
   /** direct update on the board; no validity check */
   const movePiece = ({ piece, from, to }: MoveAction) => {
     console.info(
@@ -48,7 +40,6 @@ export function useBoard() {
         ...currentBoard[to],
         piece,
       };
-      // is it better to use isConquering() ?
       if (targetTile.building) {
         targetTile.building = {
           ...targetTile.building,
@@ -79,7 +70,7 @@ export function useBoard() {
     });
   };
 
-  return { board, buildOnTile, movePiece, recruitOnTile, isConquering };
+  return { board, buildOnTile, movePiece, recruitOnTile };
 }
 
 /**
@@ -90,6 +81,7 @@ export const emptyBoard: Board = tiles.reduce((acc, key) => {
   acc[key] = {
     terrain: "field",
     piece: undefined,
+    building: undefined,
   };
   return acc;
-}, {} as any);
+}, {} as Record<TileID, Tile>);

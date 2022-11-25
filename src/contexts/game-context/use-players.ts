@@ -8,6 +8,11 @@ const initialPlayerStatus: PlayerStatus[] = [
   { player: "enemy3", points: 0, greatestEmpirePoint: false },
 ];
 
+/**
+ * plain react state + named update methods
+ *
+ * **no game logic here**
+ */
 function usePlayers() {
   const [players, setPlayers] = useState(initialPlayerStatus);
 
@@ -29,7 +34,18 @@ function usePlayers() {
     );
   };
 
-  return { players, firstPlayer, scorePoint };
+  const declareGreatestEmpire = (player: Player) => {
+    console.info(`GameContext.declareGreatestEmpire({ player: ${player} })`);
+    setPlayers((currentPlayers) =>
+      currentPlayers.map((p) =>
+        p.player === player
+          ? { ...p, greatestEmpirePoint: true }
+          : { ...p, greatestEmpirePoint: false }
+      )
+    );
+  };
+
+  return { players, firstPlayer, scorePoint, declareGreatestEmpire };
 }
 
 export default usePlayers;
