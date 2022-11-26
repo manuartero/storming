@@ -1,5 +1,5 @@
-import { asTileID, coordinates } from "./tiles";
 import { merge } from "utils/array";
+import { asTileID, coordinates } from "../models/tiles";
 
 const NEIGHBOUR_TILES_MEM_CACHE = {} as Record<TileID, TileID[]>;
 

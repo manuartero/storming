@@ -1,5 +1,5 @@
 import { useGameContext } from "contexts";
-import { getAvailableTilesForActionCard } from "models/available-tiles";
+import { getAvailableTilesForActionCard } from "game-logic/available-tiles";
 import { useState } from "react";
 import { logInconsistentState } from "utils/console";
 

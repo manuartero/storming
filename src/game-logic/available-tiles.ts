@@ -1,4 +1,4 @@
-import { tilesInRange } from "models/tiles-in-range";
+import { tilesInRange } from "game-logic/tiles-in-range";
 import { logInconsistentState } from "utils/console";
 
 type _FilterPredicate = (_: [string, Tile]) => boolean;
