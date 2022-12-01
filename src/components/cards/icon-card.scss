@@ -1,5 +1,4 @@
-@use '../../styles/colors.scss';
-// @use 'styles/colors.scss';
+@use '/src/styles/colors.scss';
 
 @mixin action-icn($action) {
   background-image: url('./assets/' + $action + '-icn.png');

@@ -14,7 +14,7 @@ export default defineConfig({
       // Only .tsx files
       include: "**/*.tsx",
     }),
-    tsconfigPaths(),
-    svgr(),
+    tsconfigPaths(), // resolve imports using TypeScript's path mapping.
+    svgr(), //  transform SVGs into React components
   ],
 });
