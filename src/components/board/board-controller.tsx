@@ -1,5 +1,4 @@
 import { useGameContext } from "contexts";
-import { getAvailableTilesForActionCard } from "game-logic/available-tiles";
 import { useState } from "react";
 import { logInconsistentState } from "utils/console";
 import Board from "./board";
@@ -160,19 +159,9 @@ function BoardController(): JSX.Element {
   };
 
   const onTileClick = ({ str: tile }: Coordinates) => {
-    console.debug(`onTileClick(${tile})`, board[tile]);
-
-    if (gameContext.activeCard?.cardType === "actionCard") {
-      const availableTiles = getAvailableTilesForActionCard({
-        board: board,
-        selectedTile,
-        activeCard: gameContext.activeCard,
-      });
-      if (availableTiles.includes(tile)) {
-        return resolveActionOnTile(tile);
-      }
+    if (board[tile].status === "available") {
+      return resolveActionOnTile(tile);
     }
-
     setSelectedTile(tile);
   };
 
