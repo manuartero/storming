@@ -2,41 +2,9 @@ import { useGameContext } from "contexts";
 import { getAvailableTilesForActionCard } from "game-logic/available-tiles";
 import { useState } from "react";
 import { logInconsistentState } from "utils/console";
-
 import Board from "./board";
 import BuildDialog from "./build-dialog";
-
-function createVisualBoardFromGameContext(
-  { board, activeCard }: GameContext,
-  selectedTile: TileID | undefined
-): VisualBoard {
-  const availableTiles =
-    activeCard?.cardType === "actionCard"
-      ? getAvailableTilesForActionCard({
-          board,
-          activeCard,
-          selectedTile,
-        })
-      : [];
-
-  const tileStatus = (tile: TileID) => {
-    if (tile === selectedTile) {
-      return "selected";
-    }
-    return availableTiles.includes(tile as TileID) ? "available" : "idle";
-  };
-
-  return Object.entries(board).reduce(
-    (acc, [tile, tileState]) => ({
-      ...acc,
-      [tile]: {
-        ...tileState,
-        status: tileStatus(tile as TileID),
-      },
-    }),
-    {} as VisualBoard
-  );
-}
+import { inferVisualBoardFromGameContext } from "./infer-visual-board";
 
 /**
  * Renders depends on:
@@ -54,14 +22,15 @@ function BoardController(): JSX.Element {
   const [selectedTile, setSelectedTile] = useState<TileID | undefined>();
   const [buildingTile, setBuildingTile] = useState<TileID | undefined>();
 
-  const b = createVisualBoardFromGameContext(gameContext, selectedTile);
+  /* derived state */
+  const board = inferVisualBoardFromGameContext(gameContext, selectedTile);
 
   const settleOnTile = (tile: TileID) => {
-    const piece = b[tile].piece;
+    const piece = board[tile].piece;
     if (!piece) {
       return logInconsistentState(
         `trying to settle on ${tile} but no soldier found`,
-        { tile: b[tile] }
+        { tile: board[tile] }
       );
     }
     setSelectedTile(undefined);
@@ -76,11 +45,11 @@ function BoardController(): JSX.Element {
   };
 
   const upgradeBuildingOnTile = (tile: TileID) => {
-    const building = b[tile].building;
+    const building = board[tile].building;
     if (!building) {
       return logInconsistentState(
         `trying to upgrade building on ${tile} but no building found`,
-        { tile: b[tile] }
+        { tile: board[tile] }
       );
     }
     setSelectedTile(undefined);
@@ -96,11 +65,11 @@ function BoardController(): JSX.Element {
   };
 
   const buildWallsOnTile = (tile: TileID) => {
-    const building = b[tile].building;
+    const building = board[tile].building;
     if (!building) {
       return logInconsistentState(
         `trying to build walls on ${tile} but no building found`,
-        { tile: b[tile] }
+        { tile: board[tile] }
       );
     }
     setSelectedTile(undefined);
@@ -116,7 +85,7 @@ function BoardController(): JSX.Element {
 
   const moveFromTile = (tile: TileID) => {
     if (selectedTile) {
-      const piece = b[selectedTile].piece;
+      const piece = board[selectedTile].piece;
       if (!piece) {
         return setSelectedTile(tile);
       }
@@ -133,17 +102,17 @@ function BoardController(): JSX.Element {
   };
 
   const recruitOnTile = (tile: TileID) => {
-    const building = b[tile].building;
+    const building = board[tile].building;
     if (!building) {
       return logInconsistentState(
         `trying to recruit on ${tile} but no building found`,
-        { tile: b[tile] }
+        { tile: board[tile] }
       );
     }
-    if (b[tile].piece) {
+    if (board[tile].piece) {
       return logInconsistentState(
         `trying to recruit on ${tile} but piece already found`,
-        { tile: b[tile] }
+        { tile: board[tile] }
       );
     }
 
@@ -162,10 +131,10 @@ function BoardController(): JSX.Element {
   };
 
   const resolveBuildOnTile = (tile: TileID) => {
-    if (!b[tile].building && b[tile].piece?.type === "soldier") {
+    if (!board[tile].building && board[tile].piece?.type === "soldier") {
       return settleOnTile(tile);
     }
-    if (b[tile].building?.hasWalls) {
+    if (board[tile].building?.hasWalls) {
       return upgradeBuildingOnTile(tile);
     }
     setBuildingTile(tile);
@@ -175,7 +144,7 @@ function BoardController(): JSX.Element {
     if (gameContext.activeCard?.cardType !== "actionCard") {
       return logInconsistentState(
         `trying to resolve an action on ${tile} while no action card`,
-        { tile: b[tile] }
+        { tile: board[tile] }
       );
     }
     switch (gameContext.activeCard.action) {
@@ -191,11 +160,11 @@ function BoardController(): JSX.Element {
   };
 
   const onTileClick = ({ str: tile }: Coordinates) => {
-    console.debug(`onTileClick(${tile})`, b[tile]);
+    console.debug(`onTileClick(${tile})`, board[tile]);
 
     if (gameContext.activeCard?.cardType === "actionCard") {
       const availableTiles = getAvailableTilesForActionCard({
-        board: b,
+        board: board,
         selectedTile,
         activeCard: gameContext.activeCard,
       });
@@ -209,7 +178,7 @@ function BoardController(): JSX.Element {
 
   return (
     <div>
-      <Board state={b} onTileClick={onTileClick} />
+      <Board state={board} onTileClick={onTileClick} />
       {buildingTile && (
         <BuildDialog
           onWallOption={() => {
