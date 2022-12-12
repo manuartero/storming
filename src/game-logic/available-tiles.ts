@@ -1,5 +1,6 @@
 import { tilesInRange } from "game-logic/tiles-in-range";
 import { logInconsistentState } from "utils/console";
+import { pieces } from "./pieces";
 
 type _FilterPredicate = (_: [string, Tile]) => boolean;
 
@@ -58,11 +59,6 @@ export function getAvailableTilesForActionCard({
   return [];
 }
 
-const MOVEMENT_RANGE: Record<PieceType, number> = {
-  soldier: 1,
-  knight: 2,
-};
-
 type _TileInBoard = { tileId: TileID; board: Board };
 
 export function getInRangeMovements({ tileId, board }: _TileInBoard): TileID[] {
@@ -74,13 +70,16 @@ export function getInRangeMovements({ tileId, board }: _TileInBoard): TileID[] {
     );
     return [];
   }
-  const range = MOVEMENT_RANGE[piece.type];
+
+  const { range, validTerrain } = pieces[piece.type];
+
   const tiles = tilesInRange(tileId, { range });
   return tiles.filter(
     (candidateTile) =>
-      /* valid options: */
-      !board[candidateTile].piece ||
-      board[candidateTile].piece?.owner !== board[tileId].piece?.owner
+      /* valid options: valid tile && (empty || enemy)  */
+      validTerrain.includes(board[candidateTile].terrain) &&
+      (!board[candidateTile].piece ||
+        board[candidateTile].piece?.owner !== board[tileId].piece?.owner)
   );
 }
 

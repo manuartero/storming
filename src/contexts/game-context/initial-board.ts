@@ -68,7 +68,7 @@ const initialBoard: Board = {
     piece: undefined,
   },
   "-1,-1": {
-    terrain: "field",
+    terrain: "lake",
     building: undefined,
     piece: undefined,
   },
@@ -155,7 +155,7 @@ const initialBoard: Board = {
     piece: undefined,
   },
   "1,1": {
-    terrain: "field",
+    terrain: "lake",
     building: undefined,
     piece: undefined,
   },
