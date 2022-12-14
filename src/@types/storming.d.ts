@@ -157,3 +157,11 @@ interface GameContext {
   firstPlayer(player: Player): void;
   skip(): void;
 }
+
+// ----
+
+type Savegame = {
+  date: string;
+  empireSize: number;
+  gameContext: GameContext;
+}

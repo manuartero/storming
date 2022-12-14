@@ -1,7 +1,11 @@
 import {
-  Board, LogPanel,
-  Marketplace, PlayerHand, RoundSummary,
-  TimeLine
+  Board,
+  LogPanel,
+  Marketplace,
+  Menu,
+  PlayerHand,
+  RoundSummary,
+  TimeLine,
 } from "components";
 import { GameContextProvider } from "contexts";
 import { StrictMode } from "react";
@@ -14,6 +18,7 @@ function App() {
       <main className="game">
         <GameContextProvider>
           <TimeLine />
+          <Menu />
           <RoundSummary />
           <Board />
           <Marketplace />
