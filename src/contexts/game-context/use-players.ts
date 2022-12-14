@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { logInconsistentState } from "utils/console";
+import { warnInconsistentState } from "utils/console";
 
 const initialPlayerStatus: PlayerStatus[] = [
   { player: "player", points: 0, greatestEmpirePoint: false },
@@ -20,7 +20,7 @@ function usePlayers() {
     console.info(`GameContext.firstPlayer({ player: ${player} })`);
     const newFirstPlayer = players.find((p) => p.player === player);
     if (!newFirstPlayer) {
-      return logInconsistentState(`trying to set first player to ${player}`);
+      return warnInconsistentState(`trying to set first player to ${player}`);
     }
     setPlayers([newFirstPlayer, ...players.filter((p) => p.player !== player)]);
   };

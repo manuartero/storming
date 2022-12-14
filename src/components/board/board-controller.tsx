@@ -1,6 +1,6 @@
 import { useGameContext } from "contexts";
 import { useState } from "react";
-import { logInconsistentState } from "utils/console";
+import { warnInconsistentState } from "utils/console";
 import Board from "./board";
 import BuildDialog from "./build-dialog";
 import { inferVisualBoardFromGameContext } from "./infer-visual-board";
@@ -27,7 +27,7 @@ function BoardController(): JSX.Element {
   const settleOnTile = (tile: TileID) => {
     const piece = board[tile].piece;
     if (!piece) {
-      return logInconsistentState(
+      return warnInconsistentState(
         `trying to settle on ${tile} but no soldier found`,
         { tile: board[tile] }
       );
@@ -46,7 +46,7 @@ function BoardController(): JSX.Element {
   const upgradeBuildingOnTile = (tile: TileID) => {
     const building = board[tile].building;
     if (!building) {
-      return logInconsistentState(
+      return warnInconsistentState(
         `trying to upgrade building on ${tile} but no building found`,
         { tile: board[tile] }
       );
@@ -66,7 +66,7 @@ function BoardController(): JSX.Element {
   const buildWallsOnTile = (tile: TileID) => {
     const building = board[tile].building;
     if (!building) {
-      return logInconsistentState(
+      return warnInconsistentState(
         `trying to build walls on ${tile} but no building found`,
         { tile: board[tile] }
       );
@@ -103,13 +103,13 @@ function BoardController(): JSX.Element {
   const recruitOnTile = (tile: TileID) => {
     const building = board[tile].building;
     if (!building) {
-      return logInconsistentState(
+      return warnInconsistentState(
         `trying to recruit on ${tile} but no building found`,
         { tile: board[tile] }
       );
     }
     if (board[tile].piece) {
-      return logInconsistentState(
+      return warnInconsistentState(
         `trying to recruit on ${tile} but piece already found`,
         { tile: board[tile] }
       );
@@ -141,7 +141,7 @@ function BoardController(): JSX.Element {
 
   const resolveActionOnTile = (tile: TileID) => {
     if (gameContext.activeCard?.cardType !== "actionCard") {
-      return logInconsistentState(
+      return warnInconsistentState(
         `trying to resolve an action on ${tile} while no action card`,
         { tile: board[tile] }
       );

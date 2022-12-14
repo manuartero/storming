@@ -7,6 +7,6 @@ export function logRender(componentName: string) {
 
 const WARN_TAG_STYLE = "color: red; font: bold; padding: 4px";
 
-export function logInconsistentState(...args: unknown[]) {
+export function warnInconsistentState(...args: unknown[]) {
   console.warn(`%cInconsistent State%c: `, WARN_TAG_STYLE, ...args);
 }

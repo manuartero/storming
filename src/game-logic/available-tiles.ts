@@ -1,5 +1,5 @@
 import { tilesInRange } from "game-logic/tiles-in-range";
-import { logInconsistentState } from "utils/console";
+import { warnInconsistentState } from "utils/console";
 import { pieces } from "./pieces";
 
 type _FilterPredicate = (_: [string, Tile]) => boolean;
@@ -64,7 +64,7 @@ type _TileInBoard = { tileId: TileID; board: Board };
 export function getInRangeMovements({ tileId, board }: _TileInBoard): TileID[] {
   const piece = board[tileId].piece;
   if (!piece) {
-    logInconsistentState(
+    warnInconsistentState(
       `getting range movement for piece at ${tileId}, but no piece found`,
       { tile: board[tileId] }
     );

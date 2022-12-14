@@ -1,6 +1,6 @@
 import { useGameContext } from "contexts";
 import { useEffect, useState } from "react";
-import { logInconsistentState } from "utils/console";
+import { warnInconsistentState } from "utils/console";
 import { inferPlayerHandsFromGameContext } from "./infer-player-hands";
 import PlayerHand from "./player-hand";
 
@@ -31,13 +31,13 @@ function PlayerHandController(): JSX.Element {
 
   const handlePlayerCardClick = (cardId: string) => {
     if (!gameContext.activePlayer) {
-      return logInconsistentState(
+      return warnInconsistentState(
         `trying to handle click on ${cardId} while no activePlayer`
       );
     }
     const playerCard = activePlayerHand.find((e) => e.card.cardId === cardId);
     if (!playerCard) {
-      return logInconsistentState(
+      return warnInconsistentState(
         `trying to handle click on ${cardId}, can't find this card on player's hand`,
         { activePlayerHand }
       );
