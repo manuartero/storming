@@ -45,7 +45,13 @@ function usePlayers() {
     );
   };
 
-  return { players, firstPlayer, scorePoint, declareGreatestEmpire };
+  return {
+    players,
+    firstPlayer,
+    scorePoint,
+    declareGreatestEmpire,
+    _overridePlayers: setPlayers,
+  };
 }
 
 export default usePlayers;

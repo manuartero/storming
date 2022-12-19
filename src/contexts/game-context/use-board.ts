@@ -70,7 +70,13 @@ export function useBoard() {
     });
   };
 
-  return { board, buildOnTile, movePiece, recruitOnTile };
+  return {
+    board,
+    buildOnTile,
+    movePiece,
+    recruitOnTile,
+    _overrideBoard: setBoard,
+  };
 }
 
 /**

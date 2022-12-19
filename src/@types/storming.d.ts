@@ -156,12 +156,14 @@ interface GameContext {
   plan(action: PlanAction): void;
   firstPlayer(player: Player): void;
   skip(): void;
+
+  loadSavegame(gameContext: GameContext): void
 }
 
 // ----
 
 type Savegame = {
-  date: string;
-  empireSize: number;
+  createdAt: string; // ms from Epoch
+  playerEmpireSize: number;
   gameContext: GameContext;
 }

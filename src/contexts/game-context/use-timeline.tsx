@@ -45,6 +45,7 @@ export function useTimeline() {
     nextCard,
     planification,
     newTurn,
+    _overrideTimeline: setTimeline,
   };
 }
 

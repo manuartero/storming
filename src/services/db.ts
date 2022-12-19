@@ -7,20 +7,20 @@ import { empireSize } from "game-logic/empire-size";
 import { warnInconsistentState } from "utils/console";
 
 export function savegame(gameContext: GameContext) {
-  const date = Date.now().toString();
+  const createdAt = Date.now().toString();
   const playerEmpireSize = empireSize(gameContext.board).player;
   const item: Savegame = {
-    date,
-    empireSize: playerEmpireSize,
+    createdAt,
+    playerEmpireSize,
     gameContext,
   };
   try {
-    window.localStorage.setItem(date, JSON.stringify(item));
+    window.localStorage.setItem(createdAt, JSON.stringify(item));
   } catch (e) {
     warnInconsistentState(`error while saving game context: ${e}`);
     return undefined;
   }
-  return date;
+  return createdAt;
 }
 
 export function listSavegames() {
@@ -31,9 +31,16 @@ export function loadSavegame(date: string): Savegame | undefined {
   const raw = window.localStorage.getItem(date);
   if (!raw) {
     warnInconsistentState(
-      `trying to load game context with key ${key} but no data found`
+      `trying to load game context with key ${date} but no data found`
     );
     return undefined;
   }
-  return JSON.parse(raw);
+  try {
+    const a = JSON.parse(raw);
+    console.debug("loadSavegame(): ", a);
+    return a
+  } catch (e) {
+    warnInconsistentState(`error while loading game context: ${e}`);
+    return undefined;
+  }
 }

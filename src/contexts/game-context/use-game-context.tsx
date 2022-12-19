@@ -19,6 +19,7 @@ const GameContext = createContext<GameContext>({
   plan: () => {},
   firstPlayer: () => {},
   skip: () => {},
+  loadSavegame: () => {},
 });
 
 interface Props {
@@ -48,16 +49,35 @@ export function GameContextProvider({ children }: Props): JSX.Element {
   logRender("GameContextProvider");
 
   const [phase, setPhase] = useState<PhaseType>("planification"); // will be setup
-  const { board, buildOnTile, movePiece, recruitOnTile } = useBoard();
-  const { timeline, nextCard, planification, newTurn } = useTimeline();
-  const { players, firstPlayer, scorePoint, declareGreatestEmpire } =
-    usePlayers();
+  const { board, buildOnTile, movePiece, recruitOnTile, _overrideBoard } =
+    useBoard();
+  const { timeline, nextCard, planification, newTurn, _overrideTimeline } =
+    useTimeline();
+  const {
+    players,
+    firstPlayer,
+    scorePoint,
+    declareGreatestEmpire,
+    _overridePlayers,
+  } = usePlayers();
 
   /* derived state */
   const activeCard = timeline.current;
   const activePlayer = defineActivePlayer(phase, timeline, players);
 
   /* API */
+  const overrideGameContext = ({
+    phase,
+    board,
+    timeline,
+    players,
+  }: GameContext) => {
+    setPhase(phase);
+    _overrideBoard(board);
+    _overrideTimeline(timeline);
+    _overridePlayers(players);
+  };
+
   const changePhase = () => {
     let nextPhase: PhaseType;
     switch (phase) {
@@ -137,6 +157,10 @@ export function GameContextProvider({ children }: Props): JSX.Element {
 
         skip() {
           resolveActionCard();
+        },
+
+        loadSavegame(gameContext: GameContext) {
+          overrideGameContext(gameContext);
         },
       }}
     >
