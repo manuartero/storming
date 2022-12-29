@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'FrederickatheGreat';
-  src: local('FrederickatheGreat'), url(./fonts/FrederickatheGreat/FrederickatheGreat-Regular.ttf) format('truetype');
+  font-family: 'Roboto';
+  src: local('Roboto'), url(./fonts/Roboto/Roboto-Regular.ttf) format('truetype');
 }
 
 * {
@@ -10,7 +10,7 @@
 }
 
 body {
-  font-family: FrederickatheGreat;
+  font-family: Roboto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
