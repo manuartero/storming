@@ -6,10 +6,10 @@ I can play the _most basic run_ from beginning to end.
 
 _most basic run_:
 
- - Hot-Seat mode.
- - No Events.
- - No Improvement Cards.
- - No Diplomacy
+- Hot-Seat mode.
+- No Events.
+- No Improvement Cards.
+- No Diplomacy
 
 --
 
@@ -18,14 +18,14 @@ _most basic run_:
 
 ## Alpha
 
- I can play a _basic run_ from beginning to end at www.domain.xxx
+I can play a _basic run_ from beginning to end at www.domain.xxx
 
 _basic run_:
 
- - Dumbest IA (random).
- - Small selection of Events.
- - Small selection of Improvement Cards.
- - No Diplomacy.
+- Dumbest IA (random).
+- Small selection of Events.
+- Small selection of Improvement Cards.
+- No Diplomacy.
 
 --
 
@@ -38,10 +38,10 @@ I can play a simplified version of the game at www.domain.xx
 
 _Simplified version of the game_:
 
- - Dumbest IA (random).
- - Selection of Events.
- - Selection of Improvement Cards.
- - Original Alliance
+- Dumbest IA (random).
+- Selection of Events.
+- Selection of Improvement Cards.
+- Original Alliance
 
 --
 
@@ -49,7 +49,7 @@ _Simplified version of the game_:
 - [] Design iteration #6
 - [] Sounds and BSO
 
-***
+---
 
 - Every player may MOVE once
 - Every player may RECRUIT once
@@ -87,3 +87,10 @@ _Simplified version of the game_:
 **Cathedral**: 1 point.
 **Theatre**: create REVOLT
 **Library**: Copies another IMPROVEMENT
+
+---
+
+### Design
+
+[] selected card background color
+[] changed some px at `cards.scss` (shadow, padding, etc.)

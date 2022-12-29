@@ -1,4 +1,4 @@
-import Card from "components/cards/card";
+import { Card } from "components";
 import { logRender } from "utils/console";
 
 import "./player-hand.scss";
