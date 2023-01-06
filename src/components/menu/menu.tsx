@@ -1,12 +1,13 @@
-import { logRender } from "utils/console";
-import { listSavegames, loadSavegame, savegame } from "services/db";
-import MenuIcon from "./menu-icon.svg";
+import { DialogContent, DialogOverlay } from "@reach/dialog";
+import { Button } from "components/common";
 import { useGameContext } from "contexts";
-import { Dialog, DialogOverlay, DialogContent } from "@reach/dialog";
 import { useState } from "react";
+import { listSavegames, loadSavegame, savegame } from "services/db";
+import { logRender } from "utils/console";
+import MenuIcon from "./menu-icon.svg";
 
-import "./menu.scss";
 import "@reach/dialog/styles.css";
+import "./menu.scss";
 
 function SavegameLoadItem({
   savegame,
@@ -20,14 +21,13 @@ function SavegameLoadItem({
   };
 
   return (
-    <button
+    <Button
       onClick={() => {
         onLoad(savegame.gameContext);
-        
       }}
     >
       {name()} ({savegame.playerEmpireSize})
-    </button>
+    </Button>
   );
 }
 
@@ -69,8 +69,8 @@ export function Menu(): JSX.Element {
         >
           {savegames.length === 0 ? (
             <>
-              <button onClick={saveHandler}>SAVE GAME</button>
-              <button onClick={loadHandler}>LOAD GAME</button>
+              <Button onClick={saveHandler}>SAVE GAME</Button>
+              <Button onClick={loadHandler}>LOAD GAME</Button>
             </>
           ) : (
             <>

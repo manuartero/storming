@@ -1,5 +1,6 @@
 import c from "classnames";
 import IconCard from "components/cards/icon-card";
+import { Button } from "components/common";
 import { logRender } from "utils/console";
 
 import "./timeline.scss";
@@ -19,7 +20,7 @@ function Timeline({ phase, timeline, mustSkip, onSkip }: Props): JSX.Element {
         <h2 className="timeline__current__phase">{phase}</h2>
         <div className="timeline__current__action">
           <IconCard card={timeline.current} />
-          <button disabled={!mustSkip} onClick={onSkip}>SKIP</button>
+          <Button disabled={!mustSkip} onClick={onSkip}>SKIP</Button>
         </div>
       </div>
       <div className="timeline__next timeline__section">

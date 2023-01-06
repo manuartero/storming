@@ -1,0 +1,19 @@
+.button {
+  width: 133px;
+  height: 34px;
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 0px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+
+  /* visual */
+  border: 2px solid #000000;
+  border-radius: 16px;
+  background: #FFFFFF;
+  box-shadow: inset 0px -4px 0px #FFCA3A;
+}
