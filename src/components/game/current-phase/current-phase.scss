@@ -8,8 +8,20 @@
 
   background-color: rgb(243, 220, 220);
 
-  &__heading {}
+  &__heading {
+    height: 100px;
+  }
 
-  &__action {}
+  &__planning {
+    height: 100%;
+
+    .card-silhouette {
+      margin: 10px; // FIXME
+    }
+  }
+
+  &__action {
+    height: 100%;
+  }
 
 }
