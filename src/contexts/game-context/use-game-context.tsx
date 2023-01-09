@@ -1,10 +1,11 @@
+import { empireSize } from "game-logic/empire-size";
+import { isConquering, isCreatingGreatesEmpire } from "game-logic/score-check";
 import { createContext, useContext, useState } from "react";
 import { logRender } from "utils/console";
-import { useBoard, emptyBoard } from "./use-board";
+import { emptyBoard } from "./empty-board";
+import { useBoard } from "./use-board";
 import usePlayers from "./use-players";
 import { emptyTimeline, useTimeline } from "./use-timeline";
-import { isConquering, isCreatingGreatesEmpire } from "game-logic/score-check";
-import { empireSize } from "game-logic/empire-size";
 
 const GameContext = createContext<GameContext>({
   phase: "setup",

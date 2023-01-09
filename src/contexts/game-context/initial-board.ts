@@ -1,4 +1,4 @@
-const initialBoard: Board = {
+export const initialBoard: Board = {
   // row 1
   "-2,-3": {
     terrain: "field",
@@ -227,5 +227,3 @@ const initialBoard: Board = {
     piece: undefined,
   },
 };
-
-export default initialBoard;

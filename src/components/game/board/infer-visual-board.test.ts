@@ -1,4 +1,4 @@
-import initialBoard from "contexts/game-context/initial-board";
+import { initialBoard } from "contexts/game-context/initial-board";
 import { inferVisualBoardFromGameContext } from "./infer-visual-board";
 
 test("board/inferVisualBoardFromGameContext()", () => {

@@ -1,6 +1,5 @@
-import { tiles } from "models/tiles";
 import { useState } from "react";
-import initialBoard from "./initial-board";
+import { initialBoard } from "./initial-board";
 
 /**
  * plain react state + named update methods
@@ -78,16 +77,3 @@ export function useBoard() {
     _overrideBoard: setBoard,
   };
 }
-
-/**
- * just a valid ts BoardState for new GameContext.
- * Will be overriden with initialBoard.
- */
-export const emptyBoard: Board = tiles.reduce((acc, key) => {
-  acc[key] = {
-    terrain: "field",
-    piece: undefined,
-    building: undefined,
-  };
-  return acc;
-}, {} as Record<TileID, Tile>);

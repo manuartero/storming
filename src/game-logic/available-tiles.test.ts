@@ -1,5 +1,5 @@
 import { getAvailableTilesForActionCard } from "./available-tiles";
-import board from "contexts/game-context/initial-board";
+import { initialBoard } from "contexts/game-context/initial-board";
 
 const recruitScenarios: { activeCard: ActionCard; expectedTiles: TileID[] }[] =
   [
@@ -43,11 +43,17 @@ const recruitScenarios: { activeCard: ActionCard; expectedTiles: TileID[] }[] =
 
 recruitScenarios.forEach(({ activeCard, expectedTiles }) => {
   test("getAvailableTilesForActionCard() returns empty villages for 'recruit' action", () => {
-    const got = getAvailableTilesForActionCard({ board, activeCard });
+    const got = getAvailableTilesForActionCard({
+      activeCard,
+      board: initialBoard,
+    });
     expect(got).toEqual(expectedTiles);
   });
 });
 
-test.todo("getAvailableTilesForActionCard() returns building spots for 'building' action")
-test.todo("getAvailableTilesForActionCard() returns tiles in range for 'move' action")
-
+test.todo(
+  "getAvailableTilesForActionCard() returns building spots for 'building' action"
+);
+test.todo(
+  "getAvailableTilesForActionCard() returns tiles in range for 'move' action"
+);
