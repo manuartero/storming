@@ -4,8 +4,8 @@ import { pieces } from "./pieces";
 
 type _FilterPredicate = (_: [string, Tile]) => boolean;
 
-function hasBuildingFromSameOwner(card: ActionCard): _FilterPredicate {
-  return ([_, tile]) => tile.building?.owner === card.owner;
+function hasEmptyBuildingFromSameOwner(card: ActionCard): _FilterPredicate {
+  return ([_, tile]) => tile.building?.owner === card.owner && !tile.piece;
 }
 
 function hasPieceFromSameOwner(card: ActionCard): _FilterPredicate {
@@ -53,7 +53,7 @@ export function getAvailableTilesForActionCard({
 
   if (activeCard.action === "recruit") {
     return Object.entries(board)
-      .filter(hasBuildingFromSameOwner(activeCard))
+      .filter(hasEmptyBuildingFromSameOwner(activeCard))
       .map(asTileID);
   }
   return [];
