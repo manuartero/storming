@@ -1,10 +1,9 @@
 import {
   Board,
-  LogPanel,
+  CurrentPhase,
   Marketplace,
   Menu,
   PlayerHand,
-  RoundSummary,
   TimeLine,
 } from "components";
 import { GameContextProvider } from "contexts";
@@ -17,13 +16,12 @@ function App() {
     <StrictMode>
       <main className="game">
         <GameContextProvider>
+          <CurrentPhase />
           <TimeLine />
           <Menu />
-          <RoundSummary />
           <Board />
           <Marketplace />
           <PlayerHand />
-          <LogPanel />
         </GameContextProvider>
       </main>
     </StrictMode>

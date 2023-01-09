@@ -1,4 +1,4 @@
-import Piece from "components/pieces/piece";
+import Piece from "components/game/pieces/piece";
 import { row } from "models/tiles";
 import { logRender } from "utils/console";
 import Tile from "./tile";

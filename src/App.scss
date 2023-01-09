@@ -4,37 +4,35 @@
   .game {
     display: grid;
     grid-template-columns: 0.5fr 2fr 0.5fr;
+    grid-template-rows: 0.2fr 2fr 0.8fr;
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
-      "timeline timeline timeline"
-      "round-summary board marketplace"
-      "player-hand player-hand log-panel";
-
-    .timeline {
-      grid-area: timeline;
-    }
-
-    .round-summary {
-      grid-area: round-summary;
-    }
-
-    .board {
-      grid-area: board;
-    }
-
-    .marketplace {
-      grid-area: marketplace;
-    }
-
-    .player-hand {
-      grid-area: player-hand;
-    }
-
-    .log-panel {
-      grid-area: log-panel;
-    }
+      "current-phase timeline timeline"
+      "current-phase board marketplace"
+      "current-phase player-hand player-hand";
   }
+
+  .current-phase {
+    grid-area: current-phase;
+  }
+
+  .timeline {
+    grid-area: timeline;
+  }
+
+  .board {
+    grid-area: board;
+  }
+
+  .marketplace {
+    grid-area: marketplace;
+  }
+
+  .player-hand {
+    grid-area: player-hand;
+  }
+
 }
 
 
