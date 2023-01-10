@@ -1,12 +1,10 @@
-import { DialogContent, DialogOverlay } from "@reach/dialog";
-import { Button } from "components/common";
+import { Button, Dialog } from "components/common";
 import { useGameContext } from "contexts";
 import { useState } from "react";
 import { listSavegames, loadSavegame, savegame } from "services/db";
 import { logRender } from "utils/console";
 import MenuIcon from "./menu-icon.svg";
 
-import "@reach/dialog/styles.css";
 import "./menu.scss";
 
 function SavegameLoadItem({
@@ -58,33 +56,24 @@ export function Menu(): JSX.Element {
         <img src={MenuIcon} alt="Menu Icon" onClick={openMenuDialog} />
       </div>
 
-      <DialogOverlay
-        isOpen={showMenuDialog}
-        onDismiss={closeMenuDialog}
-        style={{ background: "hsla(0, 100%, 100%, 0.9)" }}
-      >
-        <DialogContent
-          className="menu-dialog"
-          style={{ boxShadow: "0px 10px 50px hsla(0, 0%, 0%, 0.33)" }}
-        >
-          {savegames.length === 0 ? (
-            <>
-              <Button onClick={saveHandler}>SAVE GAME</Button>
-              <Button onClick={loadHandler}>LOAD GAME</Button>
-            </>
-          ) : (
-            <>
-              {savegames.map((savegame) => (
-                <SavegameLoadItem
-                  key={savegame.createdAt}
-                  savegame={savegame}
-                  onLoad={gameContext.loadSavegame}
-                />
-              ))}
-            </>
-          )}
-        </DialogContent>
-      </DialogOverlay>
+      <Dialog isOpen={showMenuDialog} onClose={closeMenuDialog}>
+        {savegames.length === 0 ? (
+          <>
+            <Button onClick={saveHandler}>SAVE GAME</Button>
+            <Button onClick={loadHandler}>LOAD GAME</Button>
+          </>
+        ) : (
+          <>
+            {savegames.map((savegame) => (
+              <SavegameLoadItem
+                key={savegame.createdAt}
+                savegame={savegame}
+                onLoad={gameContext.loadSavegame}
+              />
+            ))}
+          </>
+        )}
+      </Dialog>
     </>
   );
 }

@@ -1,5 +1,7 @@
-import "./build-dialog.scss";
+import { Dialog } from "components/common";
 import c from "classnames";
+
+import "./build-dialog.scss";
 
 interface Props {
   onWallOption: () => void;
@@ -8,7 +10,7 @@ interface Props {
 
 function BuildDialog({ onWallOption, onUpgradeOption }: Props): JSX.Element {
   return (
-    <dialog className="build-dialog">
+    <Dialog className="build-dialog">
       <div
         className={c("build-dialog__option", "build-dialog__option__wall")}
         onClick={onWallOption}
@@ -17,7 +19,7 @@ function BuildDialog({ onWallOption, onUpgradeOption }: Props): JSX.Element {
         className={c("build-dialog__option", "build-dialog__option__upgrade")}
         onClick={onUpgradeOption}
       />
-    </dialog>
+    </Dialog>
   );
 }
 
