@@ -1,7 +1,7 @@
 import { Dialog } from "components/common";
 import c from "classnames";
 
-import "./build-dialog.scss";
+import "./option-dialog.scss";
 import { CardSilhouette } from "../cards";
 
 interface Props {
@@ -16,15 +16,18 @@ function BuildDialog({
   onClose,
 }: Props): JSX.Element {
   return (
-    <Dialog size='small' onClose={onClose}>
-      <div className="build-dialog">
+    <Dialog size="small" onClose={onClose}>
+      <div className="option-dialog">
         <div
-          className={c("build-dialog__option", "build-dialog__option__wall")}
+          className={c("option-dialog__option", "option-dialog__option__wall")}
         >
           <CardSilhouette card="build-walls" onClick={onWallOption} />
         </div>
         <div
-          className={c("build-dialog__option", "build-dialog__option__upgrade")}
+          className={c(
+            "option-dialog__option",
+            "option-dialog__option__upgrade"
+          )}
         >
           <CardSilhouette card="upgrade-settlement" onClick={onUpgradeOption} />
         </div>

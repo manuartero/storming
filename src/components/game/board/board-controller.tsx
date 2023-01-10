@@ -4,6 +4,7 @@ import { warnInconsistentState } from "utils/console";
 import Board from "./board";
 import BuildDialog from "./build-dialog";
 import { inferVisualBoardFromGameContext } from "./infer-visual-board";
+import { RecruitDialog } from "./recruit-dialog";
 
 /**
  * Renders depends on:
@@ -20,6 +21,7 @@ function BoardController(): JSX.Element {
   const gameContext = useGameContext();
   const [selectedTile, setSelectedTile] = useState<TileID | undefined>();
   const [buildingTile, setBuildingTile] = useState<TileID | undefined>();
+  const [recruitingTile, setRecruitingTile] = useState<TileID | undefined>();
 
   /* derived state */
   const board = inferVisualBoardFromGameContext(gameContext, selectedTile);
@@ -53,6 +55,7 @@ function BoardController(): JSX.Element {
     }
     setSelectedTile(undefined);
     setBuildingTile(undefined);
+    setRecruitingTile(undefined);
     gameContext.build({
       tile,
       building: {
@@ -73,6 +76,7 @@ function BoardController(): JSX.Element {
     }
     setSelectedTile(undefined);
     setBuildingTile(undefined);
+    setRecruitingTile(undefined);
     gameContext.build({
       tile,
       building: {
@@ -82,9 +86,10 @@ function BoardController(): JSX.Element {
     });
   };
 
-  const discardBuildingDialog = () => {
+  const discardOptionDialog = () => {
     setSelectedTile(undefined);
     setBuildingTile(undefined);
+    setRecruitingTile(undefined);
   };
 
   const moveFromTile = (tile: TileID) => {
@@ -105,7 +110,28 @@ function BoardController(): JSX.Element {
     setSelectedTile(tile);
   };
 
-  const recruitOnTile = (tile: TileID) => {
+  const recruitOnTile = (tile: TileID, piece: PieceType) => {
+    const building = board[tile].building;
+    if (!building) {
+      return warnInconsistentState(
+        `trying to recruit ${piece} on ${tile} but no building found`,
+        { tile: board[tile] }
+      );
+    }
+
+    setSelectedTile(undefined);
+    setBuildingTile(undefined);
+    setRecruitingTile(undefined);
+    return gameContext.recruit({
+      tile,
+      piece: {
+        type: piece,
+        owner: building.owner,
+      },
+    });
+  };
+
+  const resolveRecruitOnTile = (tile: TileID) => {
     const building = board[tile].building;
     if (!building) {
       return warnInconsistentState(
@@ -119,19 +145,7 @@ function BoardController(): JSX.Element {
         { tile: board[tile] }
       );
     }
-
-    const piece: Piece =
-      building.type === "city" // TODO show dialog for unit selection
-        ? {
-            type: "soldier",
-            owner: building.owner,
-          }
-        : {
-            type: "knight",
-            owner: building.owner,
-          };
-    setSelectedTile(undefined);
-    return gameContext.recruit({ tile, piece });
+    setRecruitingTile(tile);
   };
 
   const resolveBuildOnTile = (tile: TileID) => {
@@ -157,7 +171,7 @@ function BoardController(): JSX.Element {
       case "move":
         return moveFromTile(tile);
       case "recruit":
-        return recruitOnTile(tile);
+        return resolveRecruitOnTile(tile);
       default:
         break;
     }
@@ -182,7 +196,20 @@ function BoardController(): JSX.Element {
             upgradeBuildingOnTile(buildingTile);
           }}
           onClose={() => {
-            discardBuildingDialog();
+            discardOptionDialog();
+          }}
+        />
+      )}
+      {recruitingTile && (
+        <RecruitDialog
+          onSoldierOption={() => {
+            recruitOnTile(recruitingTile, "soldier");
+          }}
+          onKnightOption={() => {
+            recruitOnTile(recruitingTile, "knight");
+          }}
+          onClose={() => {
+            discardOptionDialog();
           }}
         />
       )}

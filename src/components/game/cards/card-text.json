@@ -6,5 +6,7 @@
   "next": "Drag here the card you wish to use next round",
   "future": "Drag here the card you wish to use in two rounds",
   "build-walls": "Surround settlement with defensive walls",
-  "upgrade-settlement": "Improve this settlement to next level"
+  "upgrade-settlement": "Improve this settlement to next level",
+  "recruit-soldier": "Recruit a solider on this settlement",
+  "recruit-knight": "Recruit a knight on this settlement"
 }

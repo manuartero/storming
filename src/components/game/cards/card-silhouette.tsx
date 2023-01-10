@@ -4,7 +4,13 @@ import CARD_TEXT from "./card-text.json";
 import "./card-silhouette.scss";
 
 interface Props {
-  card: "next" | "future" | "build-walls" | "upgrade-settlement";
+  card:
+    | "next"
+    | "future"
+    | "build-walls"
+    | "upgrade-settlement"
+    | "recruit-soldier"
+    | "recruit-knight";
   onClick?: () => void;
 }
 
