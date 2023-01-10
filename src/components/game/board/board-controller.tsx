@@ -82,6 +82,11 @@ function BoardController(): JSX.Element {
     });
   };
 
+  const discardBuildingDialog = () => {
+    setSelectedTile(undefined);
+    setBuildingTile(undefined);
+  };
+
   const moveFromTile = (tile: TileID) => {
     if (selectedTile) {
       const piece = board[selectedTile].piece;
@@ -175,6 +180,9 @@ function BoardController(): JSX.Element {
           }}
           onUpgradeOption={() => {
             upgradeBuildingOnTile(buildingTile);
+          }}
+          onClose={() => {
+            discardBuildingDialog();
           }}
         />
       )}

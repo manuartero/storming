@@ -6,11 +6,16 @@ import "./build-dialog.scss";
 interface Props {
   onWallOption: () => void;
   onUpgradeOption: () => void;
+  onClose: () => void;
 }
 
-function BuildDialog({ onWallOption, onUpgradeOption }: Props): JSX.Element {
+function BuildDialog({
+  onWallOption,
+  onUpgradeOption,
+  onClose,
+}: Props): JSX.Element {
   return (
-    <Dialog className="build-dialog">
+    <Dialog className="build-dialog" onClose={onClose}>
       <div
         className={c("build-dialog__option", "build-dialog__option__wall")}
         onClick={onWallOption}
