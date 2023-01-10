@@ -4,5 +4,7 @@
   "recruit": "Recruit units at up to two different Settlements",
   "diplo": "Take the Initial Player token",
   "next": "Drag here the card you wish to use next round",
-  "future": "Drag here the card you wish to use in two rounds"
+  "future": "Drag here the card you wish to use in two rounds",
+  "build-walls": "Surround settlement with defensive walls",
+  "upgrade-settlement": "Improve this settlement to next level"
 }

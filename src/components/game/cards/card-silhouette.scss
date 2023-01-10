@@ -1,12 +1,8 @@
-@use '/src/styles/fonts.scss';
-@use '/src/styles/shadows.scss';
 @use '/src/styles/colors.scss';
+@use './card.scss';
 
 .card-silhouette {
-  width: 180px;
-  height: 280px;
-  padding: 36px 24px;
-
+  @include card.card-container();
   position: relative;
   display: flex;
   flex-direction: column;
@@ -15,7 +11,6 @@
 
   border: 3px dashed #ADB5BD;
   border-radius: 16px;
-  background: #FFFFFF;
 
   &__title {}
 

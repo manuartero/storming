@@ -9,26 +9,13 @@
     cursor: pointer;
 
     opacity: 0.7;
+
     &:hover {
       opacity: 1;
     }
 
-    &__wall {
-      width: 80px;
-      height: 80px;
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-image: url('./assets/wall.png');
-    }
+    &__wall {}
 
-    &__upgrade {
-      width: 80px;
-      height: 80px;
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-image: url('./assets/upgrade.png');
-    }
+    &__upgrade {}
   }
 }

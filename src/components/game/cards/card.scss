@@ -18,19 +18,22 @@ $card-text-content-width: 120px;
   background-size: contain;
 }
 
-.card {
+@mixin card-container() {
   width: 180px;
   height: 280px;
   padding: 36px 24px;
+  background: #FFFFFF;
+  @include shadows.simple-box-shadow();
+}
+
+.card {
+  @include card-container();
 
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: left;
-
-  @include shadows.simple-box-shadow();
-  background: #FFFFFF;
 
   &--played {
 

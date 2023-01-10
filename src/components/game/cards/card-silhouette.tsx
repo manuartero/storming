@@ -4,7 +4,7 @@ import CARD_TEXT from "./card-text.json";
 import "./card-silhouette.scss";
 
 interface Props {
-  card: "next" | "future";
+  card: "next" | "future" | "build-walls" | "upgrade-settlement";
   onClick?: () => void;
 }
 

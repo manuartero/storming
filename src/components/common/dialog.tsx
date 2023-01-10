@@ -6,9 +6,9 @@ import "@reach/dialog/styles.css";
 import "./dialog.scss";
 
 interface Props extends HTMLAttributes<HTMLElement> {
-  children: ReactElement[];
+  children: ReactElement;
   isOpen?: boolean;
-  size?: "regular" | "large";
+  size?: "regular" | "small";
   onClose?: () => void;
 }
 
@@ -23,7 +23,7 @@ export function Dialog(props: Props): JSX.Element {
       <DialogContent
         className={c(
           "dialog",
-          props.size === "large" ? "dialog--large" : "dialog--regular"
+          props.size === "small" ? "dialog--small" : "dialog--regular"
         )}
       >
         {props.children}

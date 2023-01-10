@@ -1,13 +1,14 @@
 .dialog {
-  height: 80%;
   border-radius: 10px;
   box-shadow: 0px 10px 50px hsla(0, 0%, 0%, 0.33);
 
   &--regular {
     width: 60%;
+    height: 80%;
   }
 
-  &--large {
-    width: 80%;
+  &--small {
+    width: 50%;
+    height: 60%;
   }
 }
