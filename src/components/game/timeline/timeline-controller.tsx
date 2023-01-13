@@ -1,5 +1,5 @@
 import { useGameContext } from "contexts";
-import Timeline from "./timeline";
+import { Timeline } from "./timeline";
 
 /**
  * Renders depends on:
