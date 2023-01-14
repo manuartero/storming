@@ -16,32 +16,32 @@
 
   &--player {
     div {
-      outline: 3px solid colors.$player-highlight;
+      outline: 3px solid colors.$player-primary;
     }
   }
 
   &--enemy1 {
     div {
-      outline: 3px solid colors.$enemy1-highlight;
+      outline: 3px solid colors.$enemy1-primary;
     }
   }
 
   &--enemy2 {
     div {
-      outline: 3px solid colors.$enemy2-highlight;
+      outline: 3px solid colors.$enemy2-primary;
     }
   }
 
   &--enemy3 {
     div {
-      outline: 3px solid colors.$enemy3-highlight;
+      outline: 3px solid colors.$enemy3-primary;
     }
   }
 
   &__image {
     width: 60px;
     height: 60px;
-    border: 3px solid colors.$dark-grey;
+    border: 3px solid colors.$base-grey;
     border-radius: 50%;
 
     &--build {

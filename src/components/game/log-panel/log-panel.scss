@@ -8,19 +8,19 @@
   &__entry {
 
     &--player {
-      outline: 2px solid colors.$player-highlight;
+      outline: 2px solid colors.$player-primary;
     }
 
     &--enemy1 {
-      outline: 2px solid colors.$enemy1-highlight;
+      outline: 2px solid colors.$enemy1-primary;
     }
 
     &--enemy2 {
-      outline: 2px solid colors.$enemy2-highlight;
+      outline: 2px solid colors.$enemy2-primary;
     }
 
     &--enemy3 {
-      outline: 2px solid colors.$enemy3-highlight;
+      outline: 2px solid colors.$enemy3-primary;
     }
   }
 

@@ -1,23 +1,24 @@
-$player-highlight: #FFCA3A;
+$player-primary: #FFCA3A;
 $player-secondary: #FFE9AD;
 
-$enemy1-highlight: #FF595E;
+$enemy1-primary: #FF595E;
 $enemy1-secondary: #FFC2C4;
 
-$enemy2-highlight: #6A4C93;
+$enemy2-primary: #6A4C93;
 $enemy2-secondary: #9E86C1;
 
-$enemy3-highlight: #8AC926;
+$enemy3-primary: #8AC926;
 $enemy3-secondary: #C3E887;
 
-/* base grey */
-$dark-grey: #CED4DA;
+$base-grey: #CED4DA;
+$dark-grey: #ADB5BD;
 
-/* used at timeline.future (CHECK) */
-$medium-grey: #ADB5BD;
+$selected-tile: #fff8ae1e;
+
+// ---
 
 /* used as box shadows */
-$shadow-grey: rgba(0, 0, 0, 0.25);
+$shadow-grey: #00000040;
 
 /* TODO: check with Leyre */
 $selected-grey: rgba(0, 0, 0, 0.05)

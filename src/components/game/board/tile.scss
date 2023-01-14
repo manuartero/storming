@@ -1,6 +1,7 @@
+@use '/src/styles/colors.scss';
+
 $available-tile: rgba(195, 214, 191, 0.5);
 $forbidden-tile: rgba(190, 88, 88, 0.5);
-$selected-tile: rgba(255, 248, 174, 0.179);
 
 $horizontal-padding: 5px;
 
@@ -83,7 +84,9 @@ $horizontal-padding: 5px;
 
     &--selected {
       path {
-        fill: $selected-tile;
+        fill: colors.$selected-tile;
+        stroke: colors.$dark-grey;
+        stroke-width: 3px;
       }
     }
 
