@@ -1,22 +1,29 @@
 $available-tile: rgba(195, 214, 191, 0.5);
 $forbidden-tile: rgba(190, 88, 88, 0.5);
 $selected-tile: rgba(255, 248, 174, 0.179);
-$tile-border: black;
+
+$horizontal-padding: 5px;
 
 .tile {
   position: relative;
   width: 120px;
   height: 120px;
   margin: 0;
+  padding: 0 $horizontal-padding;
 
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
 
+  /* debug: turn on at tile.tsx */
   &__id {
-    margin: auto;
+    position: absolute;
+    font-size: larger;
+    background-color: white;
+    z-index: 1;
   }
+
+  &__content {}
 
   &__terrain {
     position: absolute;
@@ -53,26 +60,25 @@ $tile-border: black;
     &--player {
       background-image: url('./assets/castle--player.png');
     }
+
     &--enemy1 {
       background-image: url('./assets/castle--enemy1.png');
     }
+
     &--enemy2 {
       background-image: url('./assets/castle--enemy2.png');
     }
+
     &--enemy3 {
       background-image: url('./assets/castle--enemy3.png');
     }
   }
-
-
 
   &__hexagon {
     position: absolute;
 
     path {
       fill: none;
-      stroke: $tile-border;
-      stroke-width: 6px;
     }
 
     &--selected {
@@ -92,32 +98,21 @@ $tile-border: black;
         fill: $forbidden-tile;
       }
     }
-  }
 
-
-  .pointer-area {
-
-    /* inner area */
-    &::before {
-      content: '';
-      position: absolute;
-      top: 3%;
-      left: 3%;
-      width: 94%;
-      height: 94%;
-
-      cursor: pointer;
-
+    &__clickable-area {
       clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 
       // debug
       // background-color: rgba(255, 0, 0, 0.292);
+
+      // FIXME: this is absolutly manual, there should be a better way of solving this.
+      position: absolute;
+      top: 5%;
+      left: 5%;
+      width: 90%;
+      height: 90%;
+      // ---
     }
   }
 
-  // center
-  &__content {
-    display: flex;
-
-  }
 }

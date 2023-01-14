@@ -185,7 +185,7 @@ function BoardController(): JSX.Element {
   };
 
   return (
-    <div>
+    <>
       <Board state={board} onTileClick={onTileClick} />
       {buildingTile && (
         <BuildDialog
@@ -213,7 +213,7 @@ function BoardController(): JSX.Element {
           }}
         />
       )}
-    </div>
+    </>
   );
 }
 

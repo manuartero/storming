@@ -13,8 +13,8 @@ interface Props {
   terrain?: Terrain;
   building?: BuildingType;
   owner?: Player;
-  onClick?: (tileID: Coordinates) => void;
   children?: React.ReactNode;
+  onClick: (tileID: Coordinates) => void;
 }
 
 function Tile({
@@ -28,9 +28,12 @@ function Tile({
 }: Props): JSX.Element {
   const tileID = coordinates(id);
 
+  /* debug: turn on debug ID */
+  const debugTileID = false;
+
   return (
     <div className="tile">
-      {/* <span className="tile__id">{id}</span> */}
+      {debugTileID && <span className="tile__id">{id}</span>}
       {terrain === "mountain" && (
         <MountainSvg className={c("tile__terrain", "tile__terrain-mountain")} />
       )}
@@ -60,11 +63,12 @@ function Tile({
       />
 
       <div
-        className="pointer-area"
+        className={c("tile__hexagon__clickable-area", "clickable")}
         onClick={() => {
-          onClick && onClick(tileID);
+          onClick(tileID);
         }}
       />
+
       {children && <div className="tile__content">{children}</div>}
     </div>
   );
