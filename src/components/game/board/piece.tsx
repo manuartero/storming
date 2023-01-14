@@ -7,12 +7,13 @@ interface Props {
   owner?: Player;
 }
 
-function Piece({ type = "soldier", owner = "player" }: Props): JSX.Element {
+export function Piece({
+  type = "soldier",
+  owner = "player",
+}: Props): JSX.Element {
   logRender("Piece");
 
   return (
     <div className={c("piece", "ignore-clicks", `piece--${type}-${owner}`)} />
   );
 }
-
-export default Piece;

@@ -1,6 +1,5 @@
 @use '/src/styles/colors.scss';
 
-$available-tile: rgba(195, 214, 191, 0.5);
 $forbidden-tile: rgba(190, 88, 88, 0.5);
 
 $horizontal-padding: 5px;
@@ -88,11 +87,55 @@ $horizontal-padding: 5px;
         stroke: colors.$dark-grey;
         stroke-width: 3px;
       }
+
+      &-player {
+        path {
+          stroke: colors.$player-primary;
+        }
+      }
+
+      &-enemy1 {
+        path {
+          stroke: colors.$enemy1-primary;
+        }
+      }
+
+      &-enemy2 {
+        path {
+          stroke: colors.$enemy2-primary;
+        }
+      }
+
+      &-enemy3 {
+        path {
+          stroke: colors.$enemy3-primary;
+        }
+      }
     }
 
     &--available {
-      path {
-        fill: $available-tile;
+      &-player {
+        path {
+          stroke: colors.$player-primary;
+        }
+      }
+
+      &-enemy1 {
+        path {
+          stroke: colors.$enemy1-primary;
+        }
+      }
+
+      &-enemy2 {
+        path {
+          stroke: colors.$enemy2-primary;
+        }
+      }
+
+      &-enemy3 {
+        path {
+          stroke: colors.$enemy3-primary;
+        }
       }
     }
 

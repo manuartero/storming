@@ -1,7 +1,7 @@
-import Piece from "components/game/pieces/piece";
 import { row } from "models/tiles";
 import { logRender } from "utils/console";
-import Tile from "./tile";
+import { Piece } from "./piece";
+import { Tile } from "./tile";
 
 import "./board.scss";
 
@@ -18,12 +18,12 @@ function Board({ state, onTileClick }: Props): JSX.Element {
       const s = state[tileId];
       return (
         <Tile
-          key={tileId}
           id={tileId}
+          key={tileId}
+          status={s.status}
           terrain={s.terrain}
           building={s.building?.type}
-          owner={s.building?.owner}
-          status={s.status}
+          owner={s.building?.owner || s.piece?.owner}
           onClick={onTileClick}
         >
           {s.piece && <Piece type={s.piece.type} owner={s.piece.owner} />}

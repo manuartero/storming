@@ -17,7 +17,7 @@ interface Props {
   onClick: (tileID: Coordinates) => void;
 }
 
-function Tile({
+export function Tile({
   id,
   terrain,
   building,
@@ -57,8 +57,10 @@ function Tile({
         className={c(
           "tile__hexagon",
           status === "available" && "tile__hexagon--available",
+          status === "available" && owner && `tile__hexagon--available-${owner}`,
           status === "forbidden" && "tile__hexagon--forbidden",
-          status === "selected" && "tile__hexagon--selected"
+          status === "selected" && "tile__hexagon--selected",
+          status === 'selected' && owner && `tile__hexagon--selected-${owner}`
         )}
       />
 
@@ -73,5 +75,3 @@ function Tile({
     </div>
   );
 }
-
-export default Tile;
