@@ -1,58 +1,50 @@
 @use '/src/styles/colors.scss';
 
-$size: 60px;
+$piece-size: 60px;
 
-.piece {
-  position: relative;
-  bottom: 8px;
-  right: 8px; // player piece to the left
-
-  width: $size;
-  height: $size;
-
-  border-radius: 50%;
+@mixin piece-icon($piece, $owner) {
+  background-image: url('./assets/' + $piece + '-' + $owner + '.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  outline: 3px solid #555;
+}
 
-  &--soldier {
-    background-image: url('./soldier.png')
+.piece {
+  position: relative;
+
+
+  width: $piece-size;
+  height: $piece-size;
+
+  &--soldier-player {
+    @include piece-icon('soldier', 'player');
   }
 
-  &--knight {
-    background-image: url('./knight.png')
+  &--soldier-enemy1 {
+    @include piece-icon('soldier', 'enemy1');
   }
 
-  &--ballista {
-    background-image: url('./ballista.png')
+  &--soldier-enemy2 {
+    @include piece-icon('soldier', 'enemy2');
   }
 
-  &--enemy {
-    transform: rotateY(180deg);
-
-    left: 16px; // enemy piece to the right
+  &--soldier-enemy3 {
+    @include piece-icon('soldier', 'enemy3');
   }
 
-  &--player {
-    border: 3px solid colors.$player-highlight;
-    background-color: rgb(colors.$player-highlight, 0.1);
-
-
+  &--knight-player {
+    @include piece-icon('knight', 'player');
   }
 
-  &--enemy1 {
-    border: 3px solid colors.$enemy1-highlight;
-    background-color: rgb(colors.$enemy1-highlight, 0.1);
+  &--knight-enemy1 {
+    @include piece-icon('knight', 'enemy1');
   }
 
-  &--enemy2 {
-    border: 3px solid colors.$enemy2-highlight;
-    background-color: rgb(colors.$enemy2-highlight, 0.1);
+  &--knight-enemy2 {
+    @include piece-icon('knight', 'enemy2');
   }
 
-  &--enemy3 {
-    border: 3px solid colors.$enemy3-highlight;
-    background-color: rgb(colors.$enemy3-highlight, 0.1);
+  &--knight-enemy3 {
+    @include piece-icon('knight', 'enemy3');
   }
 }

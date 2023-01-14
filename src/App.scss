@@ -39,3 +39,7 @@
 .clickable, .expansible {
   cursor: pointer;
 }
+
+.ignore-clicks {
+  pointer-events: none;
+}
