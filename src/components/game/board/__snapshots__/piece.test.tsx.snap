@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Piece /> render: match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="piece ignore-clicks piece--soldier-player"
+  />
+</DocumentFragment>
+`;

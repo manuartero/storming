@@ -19,7 +19,8 @@
     "start": "vite",
     "build": "tsc && vite build",
     "test": "jest",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "blue-ball": "npm run test && npm run build"
   },
   "dependencies": {
     "@reach/dialog": "^0.18.0",

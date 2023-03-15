@@ -4,13 +4,18 @@ import { logRender } from "utils/console";
 import "./player-hand.scss";
 
 interface Props {
-  isActive: boolean;
-  player: Player | undefined;
   cards: PlayerHand;
+  isActive?: boolean;
+  player?: Player;
   onClick: (cardId: string) => void;
 }
 
-function PlayerHand({ isActive, player, cards, onClick }: Props): JSX.Element {
+function PlayerHand({
+  cards,
+  isActive = false,
+  player = undefined,
+  onClick,
+}: Props): JSX.Element {
   logRender("PlayerHand");
 
   const considerOnClickIfActive = (cardId: string) => {
@@ -20,7 +25,7 @@ function PlayerHand({ isActive, player, cards, onClick }: Props): JSX.Element {
   return (
     <div className="player-hand">
       {player &&
-        cards.map(({ card, status }, i) => {
+        cards.map(({ card, status }) => {
           return (
             <Card
               key={card.cardId}

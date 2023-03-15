@@ -6,16 +6,16 @@ import { CardSilhouette } from "components/game/cards";
 import "./current-phase.scss";
 
 interface Props {
-  phase: PhaseType;
-  activeCard: Card | undefined;
-  mustSkip: boolean;
+  phase?: PhaseType;
+  activeCard?: Card;
+  mustSkip?: boolean;
   onSkip: () => void;
 }
 
 export function CurrentPhase({
-  phase,
-  activeCard,
-  mustSkip,
+  phase = 'setup',
+  activeCard = undefined,
+  mustSkip = false,
   onSkip,
 }: Props): JSX.Element {
   logRender("CurrentPhase");

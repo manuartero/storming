@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Timeline /> render: match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="timeline"
+  >
+    <div
+      class="timeline__next timeline__section"
+    >
+      <span
+        class="timeline__section__name"
+      >
+        NEXT
+      </span>
+      <div
+        class="timeline__section__line"
+      >
+        <div
+          class="line-item"
+        >
+          <div
+            class="line-item__content line-item__content--enemy1"
+          />
+        </div>
+        <div
+          class="line-item"
+        >
+          <div
+            class="line-item__content line-item__content--enemy2"
+          />
+        </div>
+        <div
+          class="line-item"
+        >
+          <div
+            class="line-item__content line-item__content--enemy3"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      class="timeline__future timeline__section"
+    >
+      <span
+        class="timeline__section__name"
+      >
+        FUTURE
+      </span>
+      <div
+        class="timeline__section__line"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
