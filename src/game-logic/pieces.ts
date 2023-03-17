@@ -1,6 +1,6 @@
 type PieceMovementInfo = {
   range: number;
-  validTerrain: Terrain[];
+  validTerrain: TerrainType[];
 };
 
 export const pieces: Record<PieceType, PieceMovementInfo> = {

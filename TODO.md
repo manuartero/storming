@@ -35,3 +35,8 @@
 - [] plan actions: simulate on board
 - [] plan actions: simulate on timeline
 - [] save & load game
+
+## Internal
+
+- [] replace `@reach/dialog` (seems not to be maintained)
+- [] check `web-vitals`

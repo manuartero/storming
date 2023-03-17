@@ -16,7 +16,7 @@ const initialPlayerStatus: PlayerStatus[] = [
 function usePlayers() {
   const [players, setPlayers] = useState(initialPlayerStatus);
 
-  const firstPlayer = (player: Player) => {
+  const firstPlayer = (player: PlayerType) => {
     console.info(`GameContext.firstPlayer({ player: ${player} })`);
     const newFirstPlayer = players.find((p) => p.player === player);
     if (!newFirstPlayer) {
@@ -25,7 +25,7 @@ function usePlayers() {
     setPlayers([newFirstPlayer, ...players.filter((p) => p.player !== player)]);
   };
 
-  const scorePoint = (player: Player) => {
+  const scorePoint = (player: PlayerType) => {
     console.info(`GameContext.point({ player: ${player} })`);
     setPlayers((currentPlayers) =>
       currentPlayers.map((p) =>
@@ -34,7 +34,7 @@ function usePlayers() {
     );
   };
 
-  const declareGreatestEmpire = (player: Player) => {
+  const declareGreatestEmpire = (player: PlayerType) => {
     console.info(`GameContext.declareGreatestEmpire({ player: ${player} })`);
     setPlayers((currentPlayers) =>
       currentPlayers.map((p) =>

@@ -10,9 +10,9 @@ import "./tile.scss";
 interface Props {
   id: TileID;
   status?: TileStatus;
-  terrain?: Terrain;
+  terrain?: TerrainType;
   building?: BuildingType;
-  owner?: Player;
+  owner?: PlayerType;
   children?: React.ReactNode;
   onClick: (tileID: Coordinates) => void;
 }

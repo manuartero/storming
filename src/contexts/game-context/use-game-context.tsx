@@ -144,7 +144,7 @@ export function GameContextProvider({ children }: Props): JSX.Element {
           resolveActionCard();
         },
 
-        firstPlayer(player: Player) {
+        firstPlayer(player: PlayerType) {
           firstPlayer(player);
           resolveActionCard();
         },

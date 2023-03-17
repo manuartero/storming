@@ -3,7 +3,7 @@ export function isConquering({
   player,
 }: {
   targetTile: Tile;
-  player: Player;
+  player: PlayerType;
 }) {
   if (targetTile.building && targetTile.building.owner !== player) {
     console.info(`Score: ${player} is conquering a settlement`);
@@ -17,7 +17,7 @@ export function isCreatingGreatesEmpire({
   empires,
 }: {
   building: Building;
-  empires: Record<Player, number>;
+  empires: Record<PlayerType, number>;
 }) {
   const player = building.owner;
   const newEmpireSize = empires[player] + 1;

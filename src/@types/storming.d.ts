@@ -2,7 +2,7 @@
 // PLAYERS
 // --------------
 
-type Player =
+type PlayerType =
   | "player"
   | "enemy1" /* red */
   | "enemy2" /* blue */
@@ -33,21 +33,21 @@ type Board = Record<TileID, Tile>;
 
 type Building = {
   type: BuildingType;
-  owner: Player;
+  owner: PlayerType;
   hasWalls?: boolean;
 };
 
 type Piece = {
   type: PieceType;
-  owner: Player;
+  owner: PlayerType;
 };
 
-type Terrain = "field" | "mountain" | "lake" | "forest";
+type TerrainType = "field" | "mountain" | "lake" | "forest";
 type BuildingType = "village" | "town" | "city";
 type PieceType = "soldier" | "knight";
 
 interface Tile {
-  terrain: Terrain;
+  terrain: TerrainType;
   piece?: Piece;
   building?: Building;
 }
@@ -70,7 +70,7 @@ type Card = ActionCard | EventCard;
 interface ActionCard {
   cardType: "actionCard";
   action: ActionCardType;
-  owner: Player;
+  owner: PlayerType;
   cardId: string;
 }
 
@@ -79,7 +79,7 @@ type EventCardType = "even1" | "event2" | "event3";
 interface EventCard {
   cardType: "eventCard";
   event: EventCardType;
-  playedBy: Player;
+  playedBy: PlayerType;
   cardId: string;
 }
 
@@ -98,7 +98,7 @@ type Timeline = {
 // --------------
 
 interface ActionLog {
-  player?: Player; // TODO? make 'player' mandatory field
+  player?: PlayerType; // TODO? make 'player' mandatory field
   msg: string;
 }
 
@@ -130,14 +130,14 @@ interface RecruitAction {
 }
 
 interface PlanAction {
-  player: Player;
+  player: PlayerType;
   nextCard: ActionCard;
   futureCard: ActionCard;
   eventCard?: EventCard; // TODO !MVP
 }
 
 interface PlayerStatus {
-  player: Player;
+  player: PlayerType;
   points: number;
   greatestEmpirePoint: boolean;
 }
@@ -147,14 +147,14 @@ interface GameContext {
   board: Board;
   timeline: Timeline;
   activeCard: Card | undefined;
-  activePlayer: Player | undefined;
+  activePlayer: PlayerType | undefined;
   players: PlayerStatus[];
 
   build(action: BuildAction): void;
   move(action: MoveAction): void;
   recruit(action: RecruitAction): void;
   plan(action: PlanAction): void;
-  firstPlayer(player: Player): void;
+  firstPlayer(player: PlayerType): void;
   skip(): void;
 
   loadSavegame(gameContext: GameContext): void

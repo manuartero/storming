@@ -4,7 +4,7 @@ import { logRender } from "utils/console";
 
 interface Props {
   type?: PieceType;
-  owner?: Player;
+  owner?: PlayerType;
 }
 
 export function Piece({

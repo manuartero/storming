@@ -1,4 +1,4 @@
-const players: Player[] = ["player", "enemy1", "enemy2", "enemy3"];
+const players: PlayerType[] = ["player", "enemy1", "enemy2", "enemy3"];
 const actionCardIds = [
   "build_A",
   "move_A",
@@ -50,7 +50,7 @@ function defineCardStatus({
 export function inferPlayerHandsFromGameContext(
   timeline: Timeline,
   selectedCard?: ActionCard
-): Record<Player, PlayerHand> {
+): Record<PlayerType, PlayerHand> {
   const playedActionCards = getPlayedActionCards(timeline);
 
   return players.reduce((acc, player) => {
@@ -74,5 +74,5 @@ export function inferPlayerHandsFromGameContext(
       ...acc,
       [player]: playerHand,
     };
-  }, {} as Record<Player, PlayerHand>);
+  }, {} as Record<PlayerType, PlayerHand>);
 }

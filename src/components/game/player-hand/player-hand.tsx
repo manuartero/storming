@@ -6,7 +6,7 @@ import "./player-hand.scss";
 interface Props {
   cards: PlayerHand;
   isActive?: boolean;
-  player?: Player;
+  player?: PlayerType;
   onClick: (cardId: string) => void;
 }
 
