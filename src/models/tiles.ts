@@ -24,7 +24,7 @@
  *              [-2,+3] [-1,+3] [+0,+3] [1,+3] [2,+3]
  * ```
  */
-export const tiles = [
+export const TILES = [
   // 1st row
   "-2,-3",
   "-1,-3",
@@ -78,7 +78,7 @@ export const tiles = [
   "2,3",
 ] as const;
 
-export type _TileID = typeof tiles[number];
+export type _TileID = typeof TILES[number];
 
 export function coordinates(str: TileID) {
   const [x, y] = str.split(",").map(Number);
@@ -91,12 +91,12 @@ export function coordinates(str: TileID) {
 
 export function asTileID({ x, y }: { x: number; y: number }): TileID | null {
   const tileId = x + "," + y;
-  if (tiles.includes(tileId as TileID)) {
+  if (TILES.includes(tileId as TileID)) {
     return tileId as TileID;
   }
   return null;
 }
 
 export function row(n: -3 | -2 | -1 | 0 | 1 | 2 | 3): TileID[] {
-  return tiles.filter((id) => coordinates(id).y === n);
+  return TILES.filter((id) => coordinates(id).y === n);
 }

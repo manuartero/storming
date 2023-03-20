@@ -7,25 +7,25 @@ const timeline: Timeline = {
       cardType: "actionCard",
       action: "build",
       owner: "player",
-      cardId: "player_build_A",
+      cardId: "player_build_1",
     },
     {
       cardType: "actionCard",
       action: "move",
       owner: "enemy1",
-      cardId: "enemy1_move_A",
+      cardId: "enemy1_move_1",
     },
     {
       cardType: "actionCard",
       action: "recruit",
       owner: "enemy2",
-      cardId: "enemy2_recruit_A",
+      cardId: "enemy2_recruit_1",
     },
     {
       cardType: "actionCard",
       action: "move",
       owner: "enemy3",
-      cardId: "enemy3_move_B",
+      cardId: "enemy3_move_2",
     },
   ],
   future: [
@@ -33,25 +33,25 @@ const timeline: Timeline = {
       cardType: "actionCard",
       action: "move",
       owner: "player",
-      cardId: "player_move_A",
+      cardId: "player_move_1",
     },
     {
       cardType: "actionCard",
       action: "move",
       owner: "enemy1",
-      cardId: "enemy1_move_B",
+      cardId: "enemy1_move_2",
     },
     {
       cardType: "actionCard",
       action: "diplo",
       owner: "enemy2",
-      cardId: "enemy2_diplo_A",
+      cardId: "enemy2_diplo_1",
     },
     {
       cardType: "actionCard",
       action: "build",
       owner: "enemy3",
-      cardId: "enemy3_build_A",
+      cardId: "enemy3_build_1",
     },
   ],
 };
@@ -59,195 +59,199 @@ const timeline: Timeline = {
 describe("inferPlayerHandsFromGameContext()", () => {
   it("returns card status grouped by player", () => {
     const got = inferPlayerHandsFromGameContext(timeline);
-    expect(got).toEqual({
-      player: [
-        {
-          card: {
-            cardType: "actionCard",
-            action: "build",
-            owner: "player",
-            cardId: "player_build_A",
-          },
-          status: "played",
+
+    const player = [
+      {
+        card: {
+          cardType: "actionCard",
+          action: "build",
+          owner: "player",
+          cardId: "player_build_1",
         },
-        {
-          card: {
-            cardType: "actionCard",
-            action: "move",
-            owner: "player",
-            cardId: "player_move_A",
-          },
-          status: "played",
+        status: "played",
+      },
+      {
+        card: {
+          cardType: "actionCard",
+          action: "move",
+          owner: "player",
+          cardId: "player_move_1",
         },
-        {
-          card: {
-            cardType: "actionCard",
-            action: "move",
-            owner: "player",
-            cardId: "player_move_B",
-          },
-          status: "available",
+        status: "played",
+      },
+      {
+        card: {
+          cardType: "actionCard",
+          action: "move",
+          owner: "player",
+          cardId: "player_move_2",
         },
-        {
-          card: {
-            cardType: "actionCard",
-            action: "recruit",
-            owner: "player",
-            cardId: "player_recruit_A",
-          },
-          status: "available",
+        status: "available",
+      },
+      {
+        card: {
+          cardType: "actionCard",
+          action: "recruit",
+          owner: "player",
+          cardId: "player_recruit_1",
         },
-        {
-          card: {
-            cardType: "actionCard",
-            action: "diplo",
-            owner: "player",
-            cardId: "player_diplo_A",
-          },
-          status: "available",
+        status: "available",
+      },
+      {
+        card: {
+          cardType: "actionCard",
+          action: "diplo",
+          owner: "player",
+          cardId: "player_diplo_1",
         },
-      ],
-      enemy1: [
-        {
-          card: {
-            cardType: "actionCard",
-            action: "build",
-            owner: "enemy1",
-            cardId: "enemy1_build_A",
-          },
-          status: "available",
+        status: "available",
+      },
+    ];
+
+    const enemy1 = [
+      {
+        card: {
+          cardType: "actionCard",
+          action: "build",
+          owner: "enemy1",
+          cardId: "enemy1_build_1",
         },
-        {
-          card: {
-            cardType: "actionCard",
-            action: "move",
-            owner: "enemy1",
-            cardId: "enemy1_move_A",
-          },
-          status: "played",
+        status: "available",
+      },
+      {
+        card: {
+          cardType: "actionCard",
+          action: "move",
+          owner: "enemy1",
+          cardId: "enemy1_move_1",
         },
-        {
-          card: {
-            cardType: "actionCard",
-            action: "move",
-            owner: "enemy1",
-            cardId: "enemy1_move_B",
-          },
-          status: "played",
+        status: "played",
+      },
+      {
+        card: {
+          cardType: "actionCard",
+          action: "move",
+          owner: "enemy1",
+          cardId: "enemy1_move_2",
         },
-        {
-          card: {
-            cardType: "actionCard",
-            action: "recruit",
-            owner: "enemy1",
-            cardId: "enemy1_recruit_A",
-          },
-          status: "available",
+        status: "played",
+      },
+      {
+        card: {
+          cardType: "actionCard",
+          action: "recruit",
+          owner: "enemy1",
+          cardId: "enemy1_recruit_1",
         },
-        {
-          card: {
-            cardType: "actionCard",
-            action: "diplo",
-            owner: "enemy1",
-            cardId: "enemy1_diplo_A",
-          },
-          status: "available",
+        status: "available",
+      },
+      {
+        card: {
+          cardType: "actionCard",
+          action: "diplo",
+          owner: "enemy1",
+          cardId: "enemy1_diplo_1",
         },
-      ],
-      enemy2: [
-        {
-          card: {
-            cardType: "actionCard",
-            action: "build",
-            owner: "enemy2",
-            cardId: "enemy2_build_A",
-          },
-          status: "available",
+        status: "available",
+      },
+    ];
+
+    const enemy2 = [
+      {
+        card: {
+          cardType: "actionCard",
+          action: "build",
+          owner: "enemy2",
+          cardId: "enemy2_build_1",
         },
-        {
-          card: {
-            cardType: "actionCard",
-            action: "move",
-            owner: "enemy2",
-            cardId: "enemy2_move_A",
-          },
-          status: "available",
+        status: "available",
+      },
+      {
+        card: {
+          cardType: "actionCard",
+          action: "move",
+          owner: "enemy2",
+          cardId: "enemy2_move_1",
         },
-        {
-          card: {
-            cardType: "actionCard",
-            action: "move",
-            owner: "enemy2",
-            cardId: "enemy2_move_B",
-          },
-          status: "available",
+        status: "available",
+      },
+      {
+        card: {
+          cardType: "actionCard",
+          action: "move",
+          owner: "enemy2",
+          cardId: "enemy2_move_2",
         },
-        {
-          card: {
-            cardType: "actionCard",
-            action: "recruit",
-            owner: "enemy2",
-            cardId: "enemy2_recruit_A",
-          },
-          status: "played",
+        status: "available",
+      },
+      {
+        card: {
+          cardType: "actionCard",
+          action: "recruit",
+          owner: "enemy2",
+          cardId: "enemy2_recruit_1",
         },
-        {
-          card: {
-            cardType: "actionCard",
-            action: "diplo",
-            owner: "enemy2",
-            cardId: "enemy2_diplo_A",
-          },
-          status: "played",
+        status: "played",
+      },
+      {
+        card: {
+          cardType: "actionCard",
+          action: "diplo",
+          owner: "enemy2",
+          cardId: "enemy2_diplo_1",
         },
-      ],
-      enemy3: [
-        {
-          card: {
-            cardType: "actionCard",
-            action: "build",
-            owner: "enemy3",
-            cardId: "enemy3_build_A",
-          },
-          status: "played",
+        status: "played",
+      },
+    ];
+
+    const enemy3 = [
+      {
+        card: {
+          cardType: "actionCard",
+          action: "build",
+          owner: "enemy3",
+          cardId: "enemy3_build_1",
         },
-        {
-          card: {
-            cardType: "actionCard",
-            action: "move",
-            owner: "enemy3",
-            cardId: "enemy3_move_A",
-          },
-          status: "available",
+        status: "played",
+      },
+      {
+        card: {
+          cardType: "actionCard",
+          action: "move",
+          owner: "enemy3",
+          cardId: "enemy3_move_1",
         },
-        {
-          card: {
-            cardType: "actionCard",
-            action: "move",
-            owner: "enemy3",
-            cardId: "enemy3_move_B",
-          },
-          status: "played",
+        status: "available",
+      },
+      {
+        card: {
+          cardType: "actionCard",
+          action: "move",
+          owner: "enemy3",
+          cardId: "enemy3_move_2",
         },
-        {
-          card: {
-            cardType: "actionCard",
-            action: "recruit",
-            owner: "enemy3",
-            cardId: "enemy3_recruit_A",
-          },
-          status: "available",
+        status: "played",
+      },
+      {
+        card: {
+          cardType: "actionCard",
+          action: "recruit",
+          owner: "enemy3",
+          cardId: "enemy3_recruit_1",
         },
-        {
-          card: {
-            cardType: "actionCard",
-            action: "diplo",
-            owner: "enemy3",
-            cardId: "enemy3_diplo_A",
-          },
-          status: "available",
+        status: "available",
+      },
+      {
+        card: {
+          cardType: "actionCard",
+          action: "diplo",
+          owner: "enemy3",
+          cardId: "enemy3_diplo_1",
         },
-      ],
-    });
+        status: "available",
+      },
+    ];
+
+    expect(got).toEqual({ player, enemy1, enemy2, enemy3 });
   });
 });

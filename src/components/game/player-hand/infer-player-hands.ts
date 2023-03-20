@@ -1,15 +1,4 @@
-const players: PlayerType[] = ["player", "enemy1", "enemy2", "enemy3"];
-const actionCardIds = [
-  "build_A",
-  "move_A",
-  "move_B",
-  "recruit_A",
-  "diplo_A",
-] as const;
-
-function getActionCardType(actionId: string): ActionCardType {
-  return actionId.split("_")[0] as ActionCardType;
-}
+import { PLAYER_CARDS } from "models";
 
 function getPlayedActionCards(timeline: Timeline): ActionCard[] {
   const playedCards = [...timeline.next, ...timeline.future];
@@ -50,29 +39,23 @@ function defineCardStatus({
 export function inferPlayerHandsFromGameContext(
   timeline: Timeline,
   selectedCard?: ActionCard
-): Record<PlayerType, PlayerHand> {
+) {
   const playedActionCards = getPlayedActionCards(timeline);
 
-  return players.reduce((acc, player) => {
-    const playerHand: PlayerHand = actionCardIds.map((actionId) => {
-      const cardId = `${player}_${actionId}`;
-      const card: ActionCard = {
-        cardType: "actionCard",
-        action: getActionCardType(actionId),
-        cardId,
-        owner: player,
-      };
+  const players = Object.keys(PLAYER_CARDS) as PlayerType[];
+  const playerHands = players.reduce((acc, player) => {
+    const playerHand = PLAYER_CARDS[player].map((card) => {
       const status = defineCardStatus({
-        cardId,
+        cardId: card.cardId,
         selectedCard,
         playedActionCards,
       });
       return { card, status };
     });
-
     return {
       ...acc,
       [player]: playerHand,
     };
   }, {} as Record<PlayerType, PlayerHand>);
+  return playerHands;
 }
