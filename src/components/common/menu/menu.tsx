@@ -55,25 +55,26 @@ export function Menu(): JSX.Element {
       <div className="menu">
         <img src={MenuIcon} alt="Menu Icon" onClick={openMenuDialog} />
       </div>
-
-      <Dialog isOpen={showMenuDialog} onClose={closeMenuDialog}>
-        {savegames.length === 0 ? (
-          <>
-            <Button onClick={saveHandler}>SAVE GAME</Button>
-            <Button onClick={loadHandler}>LOAD GAME</Button>
-          </>
-        ) : (
-          <>
-            {savegames.map((savegame) => (
-              <SavegameLoadItem
-                key={savegame.createdAt}
-                savegame={savegame}
-                onLoad={gameContext.loadSavegame}
-              />
-            ))}
-          </>
-        )}
-      </Dialog>
+      {showMenuDialog && (
+        <Dialog onClose={closeMenuDialog}>
+          {savegames.length === 0 ? (
+            <>
+              <Button onClick={saveHandler}>SAVE GAME</Button>
+              <Button onClick={loadHandler}>LOAD GAME</Button>
+            </>
+          ) : (
+            <>
+              {savegames.map((savegame) => (
+                <SavegameLoadItem
+                  key={savegame.createdAt}
+                  savegame={savegame}
+                  onLoad={gameContext.loadSavegame}
+                />
+              ))}
+            </>
+          )}
+        </Dialog>
+      )}
     </>
   );
 }

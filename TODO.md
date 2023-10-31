@@ -38,5 +38,5 @@
 
 ## Internal
 
-- [] replace `@reach/dialog` (seems not to be maintained)
+- [x] replace `@reach/dialog` (seems not to be maintained)
 - [] check `web-vitals`

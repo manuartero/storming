@@ -1,33 +1,23 @@
 import c from "classnames";
-import { DialogContent, DialogOverlay } from "@reach/dialog";
 import type { HTMLAttributes, ReactElement } from "react";
 
-import "@reach/dialog/styles.css";
 import "./dialog.scss";
 
 interface Props extends HTMLAttributes<HTMLElement> {
   children: ReactElement;
-  isOpen?: boolean;
   size?: "regular" | "small";
-  onClose?: () => void;
+  onClose: () => void;
 }
 
-export function Dialog(props: Props): JSX.Element {
+export function Dialog({ children, size = "regular", onClose }: Props) {
   return (
-    <DialogOverlay
-      {...props}
-      isOpen={props.isOpen}
-      onDismiss={props.onClose}
-      style={{ background: "hsla(0, 100%, 100%, 0.9)" }}
-    >
-      <DialogContent
-        className={c(
-          "dialog",
-          props.size === "small" ? "dialog--small" : "dialog--regular"
-        )}
+    <div role="dialog" aria-modal="true" className="dialog">
+      <div
+        className={c(size === "small" ? "dialog--small" : "dialog--regular")}
       >
-        {props.children}
-      </DialogContent>
-    </DialogOverlay>
+        <button onClick={onClose}>X</button>
+        {children}
+      </div>
+    </div>
   );
 }
