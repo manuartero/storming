@@ -1,12 +1,21 @@
 {
   "name": "storming",
   "version": "0.3.0",
-  "private": true,
+  "description": "Storming BoardGame - An original board game in React",
   "type": "module",
   "engines": {
     "node": ">=18.17"
   },
   "engineStrict": true,
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manuartero/storming"
+  },
+  "author": {
+    "name": "Manuel Artero",
+    "email": "manutero.developer@gmail.com"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -52,7 +61,7 @@
     "sass": "^1.54.0",
     "semantic-release": "^22.0.6",
     "ts-jest": "^29.0.3",
-    "typescript": "^4.8.4",
+    "typescript": "^4.9.5",
     "vite": "^3.1.3",
     "vite-plugin-svgr": "^2.2.1",
     "vite-tsconfig-paths": "^3.5.1"
