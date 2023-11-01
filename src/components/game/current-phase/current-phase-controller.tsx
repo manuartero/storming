@@ -1,22 +1,24 @@
 import { useGameContext } from "contexts";
 import { CurrentPhase } from "./current-phase";
 import { mustSkip } from "./must-skip";
+import { warnInconsistentState } from "utils/console";
 
-/**
- * Renders depends on:
- *  - `useGameContext()`
- *
- * Defines visual current phase from GameContext
- *
- */
 export function CurrentPhaseController(): JSX.Element {
   const gameContext = useGameContext();
+
+  if (!gameContext.phase || !gameContext.activePlayer) {
+    warnInconsistentState(`<CurrentPhase />: no phase or active player found`, {
+      gameContext,
+    });
+    return <>ERROR</>;
+  }
 
   return (
     <CurrentPhase
       phase={gameContext.phase}
-      mustSkip={mustSkip(gameContext)}
+      activePlayer={gameContext.activePlayer}
       activeCard={gameContext.activeCard}
+      mustSkip={mustSkip(gameContext)}
       onSkip={() => {
         gameContext.skip();
       }}

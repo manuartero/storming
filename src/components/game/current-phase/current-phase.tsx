@@ -2,18 +2,21 @@ import { Button } from "components/common";
 import IconCard from "components/game/cards/icon-card"; // TODO: deprecated
 import { logRender } from "utils/console";
 import { CardSilhouette } from "components/game/cards";
+import c from "classnames";
 
 import "./current-phase.scss";
 
-interface Props {
-  phase?: PhaseType;
+type Props = {
+  phase: PhaseType;
+  activePlayer: PlayerType;
   activeCard?: Card;
   mustSkip?: boolean;
   onSkip: () => void;
-}
+};
 
 export function CurrentPhase({
-  phase = 'setup',
+  phase,
+  activePlayer,
   activeCard = undefined,
   mustSkip = false,
   onSkip,
@@ -21,22 +24,28 @@ export function CurrentPhase({
   logRender("CurrentPhase");
 
   return (
-    <div className="current-phase">
+    <div className={c("current-phase", activePlayer)}>
       <h2 className="current-phase__heading">{phase}</h2>
-      {phase === "action" ? (
-        <ActionPhase
-          activeCard={activeCard}
-          mustSkip={mustSkip}
-          onSkip={onSkip}
-        />
-      ) : (
-        <PlanningPhase />
-      )}
+      <div className="current-phase__content">
+        {phase === "action" ? (
+          <ActionPhase
+            activeCard={activeCard}
+            mustSkip={mustSkip}
+            onSkip={onSkip}
+          />
+        ) : (
+          <PlanningPhase />
+        )}
+      </div>
     </div>
   );
 }
 
-function ActionPhase({ activeCard, mustSkip, onSkip }: Omit<Props, "phase">) {
+function ActionPhase({
+  activeCard,
+  mustSkip,
+  onSkip,
+}: Omit<Props, "phase" | "activePlayer">) {
   return (
     <div className="current-phase__action">
       <IconCard card={activeCard} />
