@@ -1,12 +1,11 @@
-name: Blue Ball
+name: Release
 
 on:
-  pull_request:
-    branches:
-      - main
+  push:
+    branches: [main]
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,5 +15,4 @@ jobs:
           node-version: 18.17.1
 
       - run: npm ci --ignore-scripts
-      - run: npm test
-      - run: npm run build
+      - run: npm run release
