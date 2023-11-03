@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { useTimeline } from "./use-timeline";
+import { Card } from "models/card";
 
 function TestingComponent() {
   const { timeline, planification, nextCard, newTurn } = useTimeline();
@@ -11,12 +12,13 @@ function TestingComponent() {
       </div>
 
       <div data-testid="next-action-card">
-        {timeline.next[0]?.cardType === "actionCard" && timeline.next[0].action}
+        {timeline.next[0]?.card.cardType === "actionCard" &&
+          timeline.next[0].card.action}
       </div>
 
       <div data-testid="future-action-card">
-        {timeline.future[0]?.cardType === "actionCard" &&
-          timeline.future[0].action}
+        {timeline.future[0]?.card.cardType === "actionCard" &&
+          timeline.future[0].card.action}
       </div>
 
       <button
@@ -24,18 +26,8 @@ function TestingComponent() {
         onClick={() =>
           planification({
             player: "enemy3",
-            nextCard: {
-              owner: "enemy3",
-              action: "build",
-              cardType: "actionCard",
-              cardId: "enemy3_build_A",
-            },
-            futureCard: {
-              owner: "enemy3",
-              action: "recruit",
-              cardType: "actionCard",
-              cardId: "enemy3_recruit_A",
-            },
+            nextCard: Card("build", "enemy3"),
+            futureCard: Card("recruit", "enemy3"),
           })
         }
       />
@@ -61,7 +53,9 @@ describe("game-context", () => {
     fireEvent.click(planification);
 
     expect(screen.getByTestId("next-action-card")).toHaveTextContent("build");
-    expect(screen.getByTestId("future-action-card")).toHaveTextContent("recruit");
+    expect(screen.getByTestId("future-action-card")).toHaveTextContent(
+      "recruit"
+    );
   });
 
   test("useTimeline() returns nextCard()", () => {
@@ -73,9 +67,13 @@ describe("game-context", () => {
     const nextCard = screen.getByTestId("next-card");
     fireEvent.click(nextCard);
 
-    expect(screen.getByTestId("current-action-card")).toHaveTextContent("build");
+    expect(screen.getByTestId("current-action-card")).toHaveTextContent(
+      "build"
+    );
     expect(screen.getByTestId("next-action-card")).toHaveTextContent("");
-    expect(screen.getByTestId("future-action-card")).toHaveTextContent("recruit");
+    expect(screen.getByTestId("future-action-card")).toHaveTextContent(
+      "recruit"
+    );
   });
 
   test("useTimeline() returns newTurn()", () => {

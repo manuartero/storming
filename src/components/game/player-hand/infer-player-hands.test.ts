@@ -1,63 +1,53 @@
 import { inferPlayerHandsFromGameContext } from "./infer-player-hands";
+import { Card, _resetCardId } from "models/card";
 
-const timeline: Timeline = {
-  current: undefined,
-  next: [
-    {
-      cardType: "actionCard",
-      action: "build",
-      owner: "player",
-      cardId: "player_build_1",
-    },
-    {
-      cardType: "actionCard",
-      action: "move",
-      owner: "enemy1",
-      cardId: "enemy1_move_1",
-    },
-    {
-      cardType: "actionCard",
-      action: "recruit",
-      owner: "enemy2",
-      cardId: "enemy2_recruit_1",
-    },
-    {
-      cardType: "actionCard",
-      action: "move",
-      owner: "enemy3",
-      cardId: "enemy3_move_2",
-    },
-  ],
-  future: [
-    {
-      cardType: "actionCard",
-      action: "move",
-      owner: "player",
-      cardId: "player_move_1",
-    },
-    {
-      cardType: "actionCard",
-      action: "move",
-      owner: "enemy1",
-      cardId: "enemy1_move_2",
-    },
-    {
-      cardType: "actionCard",
-      action: "diplo",
-      owner: "enemy2",
-      cardId: "enemy2_diplo_1",
-    },
-    {
-      cardType: "actionCard",
-      action: "build",
-      owner: "enemy3",
-      cardId: "enemy3_build_1",
-    },
-  ],
-};
+function mockTimeline(): Timeline {
+  return {
+    current: undefined,
+    next: [
+      {
+        card: Card("build", "player"),
+        commited: true,
+      },
+      {
+        card: Card("move", "enemy1"),
+        commited: true,
+      },
+      {
+        card: Card("recruit", "enemy2"),
+        commited: true,
+      },
+      {
+        card: Card("move", "enemy3"),
+        commited: true,
+      },
+    ],
+    future: [
+      {
+        card: Card("move", "player"),
+        commited: true,
+      },
+      {
+        card: Card("move", "enemy1"),
+        commited: true,
+      },
+      {
+        card: Card("diplo", "enemy2"),
+        commited: true,
+      },
+      {
+        card: Card("build", "enemy3"),
+        commited: true,
+      },
+    ],
+  };
+}
 
 describe("inferPlayerHandsFromGameContext()", () => {
+  beforeEach(_resetCardId);
+
   it("returns card status grouped by player", () => {
+    const timeline = mockTimeline();
     const got = inferPlayerHandsFromGameContext(timeline);
 
     const player = [
@@ -221,7 +211,7 @@ describe("inferPlayerHandsFromGameContext()", () => {
           owner: "enemy3",
           cardId: "enemy3_move_1",
         },
-        status: "available",
+        status: "played",
       },
       {
         card: {
@@ -230,7 +220,7 @@ describe("inferPlayerHandsFromGameContext()", () => {
           owner: "enemy3",
           cardId: "enemy3_move_2",
         },
-        status: "played",
+        status: "available",
       },
       {
         card: {

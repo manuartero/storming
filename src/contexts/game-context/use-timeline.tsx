@@ -4,9 +4,9 @@ export function useTimeline() {
   const [timeline, setTimeline] = useState(emptyTimeline);
 
   const nextCard = () => {
-    console.info("GameContext.nextCard()");
+    console.info("nextCard()");
     setTimeline((currentTimeline) => {
-      const current = currentTimeline.next[0];
+      const current = currentTimeline.next[0]?.card;
       const next = currentTimeline.next.slice(1);
       return {
         current,
@@ -18,19 +18,20 @@ export function useTimeline() {
 
   const planification = ({ player, nextCard, futureCard }: PlanAction) => {
     console.info(
-      `GameContext.planification({ player: ${player}, next: ${nextCard.action}, future: ${futureCard.action} })`
+      `planification({ player: ${player}, next: ${nextCard.action}, future: ${futureCard.action} })`
     );
     const newTimeline = {
       current: undefined,
-      next: timeline.next.concat(nextCard),
-      future: timeline.future.concat(futureCard),
+      next: timeline.next.concat({ card: nextCard, commited: true }),
+      future: timeline.future.concat({ card: futureCard, commited: true }),
     };
     setTimeline(newTimeline);
     return newTimeline;
   };
 
+  /** action -> planification */
   const newTurn = () => {
-    console.info(`GameContext.newTurn()`);
+    console.info("newTurn()");
     const newTimeline = {
       current: undefined,
       next: timeline.next.concat(timeline.future),

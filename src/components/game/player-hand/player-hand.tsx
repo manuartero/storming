@@ -3,14 +3,14 @@ import { logRender } from "utils/console";
 
 import "./player-hand.scss";
 
-interface Props {
+type Props = {
   cards: PlayerHand;
   isActive?: boolean;
   player?: PlayerType;
-  onClick: (cardId: string) => void;
-}
+  onClick: (cardId: CardId) => void;
+};
 
-function PlayerHand({
+export function PlayerHand({
   cards,
   isActive = false,
   player = undefined,
@@ -18,7 +18,7 @@ function PlayerHand({
 }: Props): JSX.Element {
   logRender("PlayerHand");
 
-  const considerOnClickIfActive = (cardId: string) => {
+  const considerOnClickIfActive = (cardId: CardId) => {
     isActive && onClick(cardId);
   };
 
@@ -38,5 +38,3 @@ function PlayerHand({
     </div>
   );
 }
-
-export default PlayerHand;

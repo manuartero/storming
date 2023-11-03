@@ -4,7 +4,11 @@ export function _resetCardId() {
   cardIdCount.clear();
 }
 
-function isActionCard(
+export function isActionCard(card: Card): card is ActionCard {
+  return card.cardType === "actionCard";
+}
+
+function isActionCardType(
   type: ActionCardType | EventCardType
 ): type is ActionCardType {
   return (
@@ -15,11 +19,14 @@ function isActionCard(
   );
 }
 
-function getCardId(type: ActionCardType | EventCardType, player?: PlayerType) {
-  const baseCardId = `${player}_${type}`;
+function getCardId(
+  type: ActionCardType | EventCardType,
+  player: PlayerType
+): CardId {
+  const baseCardId = `${player}_${type}` as const;
   const count = cardIdCount.get(baseCardId) || 1;
   cardIdCount.set(baseCardId, count + 1);
-  const cardId = `${baseCardId}_${count}`;
+  const cardId = `${baseCardId}_${count}` as const;
   return cardId;
 }
 
@@ -34,7 +41,7 @@ export function Card(
   const cardId = getCardId(type, player);
   const toString = () => `Card{ ${type} (${player}) }`;
 
-  const card = isActionCard(type)
+  const card = isActionCardType(type)
     ? {
         cardType: "actionCard" as const,
         action: type,

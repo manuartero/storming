@@ -87,15 +87,17 @@ export function GameContextProvider({ children }: Props): JSX.Element {
         break;
       case "planification":
         nextPhase = "action";
-        nextCard(); // XXX
         break;
       case "action":
         nextPhase = "planification";
         break;
     }
-    console.info(`GameContext.changePhase() (${phase} -> ${nextPhase})`);
+    console.info(`changePhase() (${phase} -> ${nextPhase})`);
     if (nextPhase === "planification") {
       newTurn();
+    }
+    if (nextPhase === "action") {
+      nextCard();
     }
     setPhase(nextPhase);
   };
@@ -103,9 +105,7 @@ export function GameContextProvider({ children }: Props): JSX.Element {
   const resolveActionCard = () => {
     nextCard();
     if (timeline.next.length === 0) {
-      console.info(
-        "GameContext.resolveActionCard(): no more cards to resolve this turn"
-      );
+      console.info("resolveActionCard(): no more cards to resolve this turn");
       changePhase();
     }
   };
@@ -152,6 +152,7 @@ export function GameContextProvider({ children }: Props): JSX.Element {
         plan(action: PlanAction) {
           const { next } = planification(action);
           if (next.length % 4 === 0) {
+            console.info("plan(): all players have planned, change phase");
             changePhase();
           }
         },

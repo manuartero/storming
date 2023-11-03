@@ -1,59 +1,40 @@
 import { getAvailableTilesForActionCard } from "./available-tiles";
 import { initialBoard } from "contexts/game-context/initial-board";
+import { Card, _resetCardId } from "models/card";
 
 const recruitScenarios: { activeCard: ActionCard; expectedTiles: TileID[] }[] =
   [
     {
-      activeCard: {
-        owner: "player",
-        action: "recruit",
-        cardType: "actionCard",
-        cardId: "player_recruit_A",
-      },
+      activeCard: Card("recruit", "player"),
       expectedTiles: ["-4,0"],
     },
     {
-      activeCard: {
-        owner: "enemy1",
-        action: "recruit",
-        cardType: "actionCard",
-        cardId: "enemy1_recruit_A",
-      },
+      activeCard: Card("recruit", "enemy1"),
       expectedTiles: ["0,-3"],
     },
     {
-      activeCard: {
-        owner: "enemy2",
-        action: "recruit",
-        cardType: "actionCard",
-        cardId: "enemy2_recruit_A",
-      },
+      activeCard: Card("recruit", "enemy2"),
       expectedTiles: ["3,0"],
     },
     {
-      activeCard: {
-        owner: "enemy3",
-        action: "recruit",
-        cardType: "actionCard",
-        cardId: "enemy3_recruit_A",
-      },
+      activeCard: Card("recruit", "enemy3"),
       expectedTiles: ["0,3"],
     },
   ];
 
-recruitScenarios.forEach(({ activeCard, expectedTiles }) => {
-  test("getAvailableTilesForActionCard() returns empty villages for 'recruit' action", () => {
-    const got = getAvailableTilesForActionCard({
-      activeCard,
-      board: initialBoard,
-    });
-    expect(got).toEqual(expectedTiles);
-  });
-});
+describe("getAvailableTilesForActionCard()", () => {
+  beforeEach(_resetCardId);
 
-test.todo(
-  "getAvailableTilesForActionCard() returns building spots for 'building' action"
-);
-test.todo(
-  "getAvailableTilesForActionCard() returns tiles in range for 'move' action"
-);
+  recruitScenarios.forEach(({ activeCard, expectedTiles }) => {
+    test("returns empty villages for 'recruit' action", () => {
+      const got = getAvailableTilesForActionCard({
+        activeCard,
+        board: initialBoard,
+      });
+      expect(got).toEqual(expectedTiles);
+    });
+  });
+
+  test.todo("returns building spots for 'building' action");
+  test.todo("returns tiles in range for 'move' action");
+});

@@ -1,5 +1,25 @@
 import { render } from "@testing-library/react";
+import { Card } from "models/card";
 import { Timeline } from "./timeline";
+
+const timeline: Timeline = {
+  current: Card("move", "player"),
+  next: [
+    {
+      card: Card("move", "enemy1"),
+      commited: true,
+    },
+    {
+      card: Card("move", "enemy2"),
+      commited: true,
+    },
+    {
+      card: Card("move", "enemy3"),
+      commited: true,
+    },
+  ],
+  future: [],
+};
 
 describe("<Timeline />", () => {
   test("render: match snapshot", () => {
@@ -7,33 +27,3 @@ describe("<Timeline />", () => {
     expect(asFragment()).toMatchSnapshot();
   });
 });
-
-const timeline: Timeline = {
-  current: {
-    cardType: "actionCard",
-    action: "move",
-    owner: "player",
-    cardId: "player_move_A",
-  },
-  next: [
-    {
-      cardType: "actionCard",
-      action: "move",
-      owner: "enemy1",
-      cardId: "enemy1_move_A",
-    },
-    {
-      cardType: "actionCard",
-      action: "move",
-      owner: "enemy2",
-      cardId: "enemy2_move_A",
-    },
-    {
-      cardType: "actionCard",
-      action: "move",
-      owner: "enemy3",
-      cardId: "enemy3_move_A",
-    },
-  ],
-  future: [],
-};

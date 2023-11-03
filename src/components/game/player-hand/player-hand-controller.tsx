@@ -2,7 +2,7 @@ import { useGameContext } from "contexts";
 import { useEffect, useState } from "react";
 import { warnInconsistentState } from "utils/console";
 import { inferPlayerHandsFromGameContext } from "./infer-player-hands";
-import PlayerHand from "./player-hand";
+import { PlayerHand } from "./player-hand";
 
 /**
  * Renders depends on:
@@ -13,7 +13,7 @@ import PlayerHand from "./player-hand";
  */
 function PlayerHandController(): JSX.Element {
   const gameContext = useGameContext();
-  const [nextCard, setNextCard] = useState<ActionCard | undefined>(undefined);
+  const [nextCard, setNextCard] = useState<ActionCard>();
 
   // FIXME can I change the approach: new player -> no selected card
   useEffect(() => {
@@ -29,7 +29,7 @@ function PlayerHandController(): JSX.Element {
     ? playerCards[gameContext.activePlayer]
     : [];
 
-  const handlePlayerCardClick = (cardId: string) => {
+  const handlePlayerCardClick = (cardId: CardId) => {
     if (!gameContext.activePlayer) {
       return warnInconsistentState(
         `trying to handle click on ${cardId} while no activePlayer`
@@ -43,8 +43,8 @@ function PlayerHandController(): JSX.Element {
       );
     }
 
-    if (playerCard.status !== 'available') {
-      return
+    if (playerCard.status !== "available") {
+      return;
     }
 
     if (nextCard) {

@@ -3,15 +3,15 @@ import { ActionLineItem } from "./line-item";
 
 import "./timeline.scss";
 
-interface Props {
+type Props = {
   timeline: Timeline;
-}
+};
 
 export function Timeline({ timeline }: Props): JSX.Element {
   logRender("Timeline");
 
-  const renderLineItems = (section: Card[]) => {
-    return section.map((card) => {
+  const renderLineItems = (section: TimelineCard[]) => {
+    return section.map(({ card }) => {
       if (card.cardType === "actionCard")
         return <ActionLineItem key={card.cardId} card={card} />;
     });

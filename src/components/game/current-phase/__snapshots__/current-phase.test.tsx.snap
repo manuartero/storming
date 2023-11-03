@@ -3,50 +3,54 @@
 exports[`<CurrentPhase /> render: match snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="current-phase"
+    class="current-phase player"
   >
     <h2
       class="current-phase__heading"
     >
-      setup
+      planification
     </h2>
     <div
-      class="current-phase__planning"
+      class="current-phase__content"
     >
       <div
-        class="card-silhouette"
+        class="current-phase__planning"
       >
         <div
-          class="card-silhouette__title"
+          class="card-silhouette"
         >
-          next
+          <div
+            class="card-silhouette__title"
+          >
+            next
+          </div>
+          <div
+            class="card-silhouette__text"
+          >
+            Drag here the card you wish to use next round
+          </div>
         </div>
         <div
-          class="card-silhouette__text"
+          class="card-silhouette"
         >
-          Drag here the card you wish to use next round
+          <div
+            class="card-silhouette__title"
+          >
+            future
+          </div>
+          <div
+            class="card-silhouette__text"
+          >
+            Drag here the card you wish to use in two rounds
+          </div>
         </div>
+        <button
+          class="button"
+          disabled=""
+        >
+          GO
+        </button>
       </div>
-      <div
-        class="card-silhouette"
-      >
-        <div
-          class="card-silhouette__title"
-        >
-          future
-        </div>
-        <div
-          class="card-silhouette__text"
-        >
-          Drag here the card you wish to use in two rounds
-        </div>
-      </div>
-      <button
-        class="button"
-        disabled=""
-      >
-        GO
-      </button>
     </div>
   </div>
 </DocumentFragment>

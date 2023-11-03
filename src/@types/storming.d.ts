@@ -63,34 +63,41 @@ interface TileWithStatus extends Tile {
 // CARDS
 // --------------
 
+type CardId = `${PlayerType}_${ActionCardType | EventCardType}_${number}`;
+
 type ActionCardType = "build" | "diplo" | "move" | "recruit";
 
 type Card = ActionCard | EventCard;
 
-interface ActionCard {
+type ActionCard = {
   cardType: "actionCard";
   action: ActionCardType;
   owner: PlayerType;
-  cardId: string;
-}
+  cardId: CardId;
+};
 
-type EventCardType = "even1" | "event2" | "event3";
+type EventCardType = "event1" | "event2" | "event3";
 
-interface EventCard {
+type EventCard = {
   cardType: "eventCard";
   event: EventCardType;
   playedBy: PlayerType;
-  cardId: string;
-}
+  cardId: CardId;
+};
 
 // --------------
 // TIMELINE
 // --------------
 
+type TimelineCard = {
+  card: Card;
+  commited: boolean;
+};
+
 type Timeline = {
   current: Card | undefined;
-  next: Card[];
-  future: Card[];
+  next: TimelineCard[];
+  future: TimelineCard[];
 };
 
 // --------------
@@ -142,7 +149,7 @@ interface PlayerStatus {
   greatestEmpirePoint: boolean;
 }
 
-interface GameContext {
+type GameContext = {
   phase: PhaseType;
   board: Board;
   timeline: Timeline;
@@ -157,8 +164,8 @@ interface GameContext {
   firstPlayer(player: PlayerType): void;
   skip(): void;
 
-  loadSavegame(gameContext: GameContext): void
-}
+  loadSavegame(gameContext: GameContext): void;
+};
 
 // ----
 
@@ -166,4 +173,4 @@ type Savegame = {
   createdAt: string; // ms from Epoch
   playerEmpireSize: number;
   gameContext: GameContext;
-}
+};

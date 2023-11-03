@@ -1,13 +1,20 @@
-import { PLAYER_CARDS } from "models";
+import { PLAYER_CARDS } from "models/player-cards";
+import { isActionCard } from "models/card";
 
 function getPlayedActionCards(timeline: Timeline): ActionCard[] {
   const playedCards = [...timeline.next, ...timeline.future];
   if (timeline.current) {
-    playedCards.unshift(timeline.current); // insert timeline.current >> [X...]
+    if (isActionCard(timeline.current)) {
+      // insert timeline.current >> [X...]
+      playedCards.unshift({
+        card: timeline.current,
+        commited: true,
+      });
+    }
   }
-  return playedCards.filter(
-    (playedCard) => playedCard.cardType === "actionCard"
-  ) as ActionCard[];
+  return playedCards
+    .filter((playedCard) => isActionCard(playedCard.card))
+    .map((playedCard) => playedCard.card as ActionCard);
 }
 
 function defineCardStatus({
@@ -16,7 +23,7 @@ function defineCardStatus({
   playedActionCards,
 }: {
   playedActionCards: ActionCard[];
-  cardId: string;
+  cardId: CardId;
   selectedCard?: ActionCard;
 }): PlayerHandCardStatus {
   if (selectedCard && selectedCard.cardId === cardId) {
@@ -41,7 +48,6 @@ export function inferPlayerHandsFromGameContext(
   selectedCard?: ActionCard
 ) {
   const playedActionCards = getPlayedActionCards(timeline);
-
   const players = Object.keys(PLAYER_CARDS) as PlayerType[];
   const playerHands = players.reduce((acc, player) => {
     const playerHand = PLAYER_CARDS[player].map((card) => {

@@ -1,17 +1,11 @@
 import { initialBoard } from "contexts/game-context/initial-board";
 import { inferVisualBoardFromGameContext } from "./infer-visual-board";
+import { Card } from "models/card";
 
-test("board/inferVisualBoardFromGameContext()", () => {
-  const activeCard: Card = {
-    action: "build",
-    owner: "player",
-    cardType: "actionCard",
-    cardId: "player_build_A",
-  };
-
+test("inferVisualBoardFromGameContext()", () => {
   const board = inferVisualBoardFromGameContext({
     board: initialBoard,
-    activeCard,
+    activeCard: Card("build", "player"),
   });
 
   /* only settlement of player at "-4,0" */

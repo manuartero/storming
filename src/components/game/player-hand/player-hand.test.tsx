@@ -1,5 +1,21 @@
 import { render } from "@testing-library/react";
-import PlayerHand from "./player-hand";
+import { Card } from "models/card";
+import { PlayerHand } from "./player-hand";
+
+const playerHand: PlayerHand = [
+  {
+    card: Card("move", "player"),
+    status: "available",
+  },
+  {
+    card: Card("move", "player"),
+    status: "available",
+  },
+  {
+    card: Card("build", "player"),
+    status: "available",
+  },
+];
 
 describe("<PlayerHand />", () => {
   test("render: match snapshot", () => {
@@ -9,33 +25,3 @@ describe("<PlayerHand />", () => {
     expect(asFragment()).toMatchSnapshot();
   });
 });
-
-const playerHand: PlayerHand = [
-  {
-    card: {
-      cardType: "actionCard",
-      action: "move",
-      owner: "player",
-      cardId: "player_move_A",
-    },
-    status: "available",
-  },
-  {
-    card: {
-      cardType: "actionCard",
-      action: "move",
-      owner: "player",
-      cardId: "player_move_B",
-    },
-    status: "available",
-  },
-  {
-    card: {
-      cardType: "actionCard",
-      action: "build",
-      owner: "player",
-      cardId: "player_build_A",
-    },
-    status: "available",
-  },
-];

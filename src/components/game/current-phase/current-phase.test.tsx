@@ -3,7 +3,13 @@ import { CurrentPhase } from "./current-phase";
 
 describe("<CurrentPhase />", () => {
   test("render: match snapshot", () => {
-    const { asFragment } = render(<CurrentPhase onSkip={jest.fn()} />);
+    const { asFragment } = render(
+      <CurrentPhase
+        phase="planification"
+        activePlayer="player"
+        onSkip={jest.fn()}
+      />
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 });
