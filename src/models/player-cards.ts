@@ -1,35 +1,35 @@
-import { Card } from "./card";
+import { NewCard } from "./new-card";
 
 /**
  * Already calculated set of Player Cards
  */
 export const PLAYER_CARDS: Record<PlayerType, ActionCard[]> = {
   player: [
-    Card("build", "player"),
-    Card("move", "player"),
-    Card("move", "player"),
-    Card("recruit", "player"),
-    Card("diplo", "player"), // TODO: remove this
+    NewCard("build", "player"),
+    NewCard("move", "player"),
+    NewCard("move", "player"),
+    NewCard("recruit", "player"),
+    NewCard("diplo", "player"), // TODO: remove this
   ],
   enemy1: [
-    Card("build", "enemy1"),
-    Card("move", "enemy1"),
-    Card("move", "enemy1"),
-    Card("recruit", "enemy1"),
-    Card("diplo", "enemy1"), // TODO: remove this
+    NewCard("build", "enemy1"),
+    NewCard("move", "enemy1"),
+    NewCard("move", "enemy1"),
+    NewCard("recruit", "enemy1"),
+    NewCard("diplo", "enemy1"), // TODO: remove this
   ],
   enemy2: [
-    Card("build", "enemy2"),
-    Card("move", "enemy2"),
-    Card("move", "enemy2"),
-    Card("recruit", "enemy2"),
-    Card("diplo", "enemy2"), // TODO: remove this
+    NewCard("build", "enemy2"),
+    NewCard("move", "enemy2"),
+    NewCard("move", "enemy2"),
+    NewCard("recruit", "enemy2"),
+    NewCard("diplo", "enemy2"), // TODO: remove this
   ],
   enemy3: [
-    Card("build", "enemy3"),
-    Card("move", "enemy3"),
-    Card("move", "enemy3"),
-    Card("recruit", "enemy3"),
-    Card("diplo", "enemy3"), // TODO: remove this
+    NewCard("build", "enemy3"),
+    NewCard("move", "enemy3"),
+    NewCard("move", "enemy3"),
+    NewCard("recruit", "enemy3"),
+    NewCard("diplo", "enemy3"), // TODO: remove this
   ],
 };

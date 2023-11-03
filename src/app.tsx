@@ -6,12 +6,12 @@ import {
   PlayerHand,
   TimeLine,
 } from "components";
-import { GameContextProvider } from "contexts";
+import { GameContextProvider } from "game-context";
 import { StrictMode } from "react";
 
 import "./app.scss";
 
-function App() {
+export function App() {
   return (
     <StrictMode>
       <main className="game">
@@ -27,5 +27,3 @@ function App() {
     </StrictMode>
   );
 }
-
-export default App;
