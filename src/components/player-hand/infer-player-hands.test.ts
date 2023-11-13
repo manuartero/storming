@@ -1,9 +1,9 @@
 import { NewCard, _resetCardId } from "models/new-card";
 import { inferPlayerHandsFromGameContext } from "./infer-player-hands";
 
-function mockTimeline(): Timeline {
+function mockTimeline() {
   return {
-    current: undefined,
+    activeCard: undefined,
     next: [
       {
         card: NewCard("build", "player"),

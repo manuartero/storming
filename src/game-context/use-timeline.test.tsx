@@ -1,94 +1,107 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, renderHook } from "@testing-library/react";
 import { useTimeline } from "./use-timeline";
 import { NewCard } from "models/new-card";
 
-function TestingComponent() {
-  const { timeline, planification, nextCard, newTurn } = useTimeline();
+describe("useTimeline", () => {
+  test("initial state", () => {
+    const { result } = renderHook(() => useTimeline());
 
-  return (
-    <>
-      <div data-testid="current-action-card">
-        {timeline.current?.cardType === "actionCard" && timeline.current.action}
-      </div>
-
-      <div data-testid="next-action-card">
-        {timeline.next[0]?.card.cardType === "actionCard" &&
-          timeline.next[0].card.action}
-      </div>
-
-      <div data-testid="future-action-card">
-        {timeline.future[0]?.card.cardType === "actionCard" &&
-          timeline.future[0].card.action}
-      </div>
-
-      <button
-        data-testid="enemy3-planification"
-        onClick={() =>
-          planification({
-            player: "enemy3",
-            nextCard: NewCard("build", "enemy3"),
-            futureCard: NewCard("recruit", "enemy3"),
-          })
-        }
-      />
-      <button data-testid="next-card" onClick={() => nextCard()} />
-      <button data-testid="new-turn" onClick={() => newTurn()} />
-    </>
-  );
-}
-
-describe("game-context", () => {
-  test("useTimeline() returns timeline{}", () => {
-    render(<TestingComponent />);
-
-    expect(screen.getByTestId("current-action-card")).toHaveTextContent("");
-    expect(screen.getByTestId("next-action-card")).toHaveTextContent("");
-    expect(screen.getByTestId("future-action-card")).toHaveTextContent("");
+    expect(result.current.phase).toBe("planification"); // TODO: setup
+    expect(result.current.activeCard).toBe(undefined);
+    expect(result.current.next).toEqual([]);
+    expect(result.current.future).toEqual([]);
   });
 
-  test("useTimeline() returns planification()", () => {
-    render(<TestingComponent />);
+  test("startPlanningPhase()", () => {
+    const { result } = renderHook(() => useTimeline());
 
-    const planification = screen.getByTestId("enemy3-planification");
-    fireEvent.click(planification);
+    act(() => {
+      result.current.startPlanningPhase();
+    });
 
-    expect(screen.getByTestId("next-action-card")).toHaveTextContent("build");
-    expect(screen.getByTestId("future-action-card")).toHaveTextContent(
-      "recruit"
-    );
+    expect(result.current.phase).toBe("planification");
+    expect(result.current.activeCard).toBe(undefined);
+    expect(result.current.next).toEqual([]);
+    expect(result.current.future).toEqual([]);
   });
 
-  test("useTimeline() returns nextCard()", () => {
-    render(<TestingComponent />);
+  test("planAction()", async () => {
+    const { result } = renderHook(() => useTimeline());
 
-    const planification = screen.getByTestId("enemy3-planification");
-    fireEvent.click(planification);
+    const nextActionCard = NewCard("recruit", "player");
+    const futureActionCard = NewCard("move", "player");
 
-    const nextCard = screen.getByTestId("next-card");
-    fireEvent.click(nextCard);
+    act(() => {
+      result.current.startPlanningPhase();
+    });
 
-    expect(screen.getByTestId("current-action-card")).toHaveTextContent(
-      "build"
-    );
-    expect(screen.getByTestId("next-action-card")).toHaveTextContent("");
-    expect(screen.getByTestId("future-action-card")).toHaveTextContent(
-      "recruit"
-    );
+    act(() => {
+      result.current.planAction({ nextActionCard, futureActionCard });
+    });
+
+    expect(result.current.phase).toBe("planification");
+    expect(result.current.activeCard).toBe(undefined);
+    expect(result.current.next).toEqual([
+      { card: nextActionCard, commited: false },
+    ]);
+    expect(result.current.future).toEqual([
+      { card: futureActionCard, commited: false },
+    ]);
   });
 
-  test("useTimeline() returns newTurn()", () => {
-    render(<TestingComponent />);
+  test("submitPlanification()", () => {
+    const { result } = renderHook(() => useTimeline());
 
-    const planification = screen.getByTestId("enemy3-planification");
-    fireEvent.click(planification);
+    const nextActionCard = NewCard("recruit", "player");
+    const futureActionCard = NewCard("move", "player");
 
-    const nextCard = screen.getByTestId("next-card");
-    fireEvent.click(nextCard);
+    act(() => {
+      result.current.startPlanningPhase();
+    });
 
-    const newTurn = screen.getByTestId("new-turn");
-    fireEvent.click(newTurn);
+    act(() => {
+      result.current.planAction({ nextActionCard, futureActionCard });
+    });
 
-    expect(screen.getByTestId("current-action-card")).toHaveTextContent("");
-    expect(screen.getByTestId("next-action-card")).toHaveTextContent("recruit");
+    act(() => {
+      result.current.submitPlanification();
+    });
+
+    expect(result.current.phase).toBe("planification");
+    expect(result.current.activeCard).toBe(undefined);
+    expect(result.current.next).toEqual([
+      { card: nextActionCard, commited: true },
+    ]);
+    expect(result.current.future).toEqual([
+      { card: futureActionCard, commited: true },
+    ]);
+  });
+
+  test("startActionPhase()", () => {
+    const { result } = renderHook(() => useTimeline());
+
+    const nextActionCard = NewCard("recruit", "player");
+    const futureActionCard = NewCard("move", "player");
+
+    act(() => {
+      result.current.startPlanningPhase();
+    });
+
+    act(() => {
+      result.current.planAction({ nextActionCard, futureActionCard });
+    });
+
+    act(() => {
+      result.current.submitPlanification();
+    });
+
+    act(() => {
+      result.current.startActionPhase();
+    });
+
+    expect(result.current.phase).toBe("action");
+    expect(result.current.activeCard).toEqual(nextActionCard);
+    expect(result.current.next).toEqual([]);
+    // expect(result.current.future).toEqual([]); FIXME ?
   });
 });

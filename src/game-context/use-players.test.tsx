@@ -1,6 +1,8 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { usePlayers } from "./use-players";
 
+// TODO change to renderHook(() => usePlayers());
+
 function TestingComponent() {
   const { players, nextFirstPlayer, scorePoint, declareGreatestEmpire } =
     usePlayers();
@@ -66,22 +68,16 @@ describe("usePlayers()", () => {
     ]);
   });
 
-  test("returns firstPlayer()", () => {
+  test("returns nextFirstPlayer()", () => {
     render(<TestingComponent />);
-    fireEvent.click(screen.getByTestId("enemy2-first-player"));
+    fireEvent.click(screen.getByTestId("next-first-player"));
     expect(getPlayerList()).toEqual([
-      "enemy2 - 0 points",
-      "player - 0 points",
       "enemy1 - 0 points",
-      "enemy3 - 0 points",
-    ]);
-    fireEvent.click(screen.getByTestId("player-first-player"));
-    expect(getPlayerList()).toEqual([
-      "player - 0 points",
       "enemy2 - 0 points",
-      "enemy1 - 0 points",
       "enemy3 - 0 points",
+      "player - 0 points",
     ]);
+
   });
 
   test("returns declareGreatesEmpire()", () => {

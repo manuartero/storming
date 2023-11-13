@@ -23,9 +23,7 @@ type PlanningPhaseProps = {
   onSubmitPlan: () => void;
 };
 
-export function CurrentPhase(
-  props: ActionPhaseProps | PlanningPhaseProps
-): JSX.Element {
+export function CurrentPhase(props: ActionPhaseProps | PlanningPhaseProps) {
   logRender("CurrentPhase");
 
   return (

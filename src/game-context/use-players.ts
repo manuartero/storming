@@ -23,13 +23,11 @@ export function usePlayers() {
    * ```
    */
   const nextFirstPlayer = () => {
-    console.info(`nextFirstPlayer()`);
     const newPlayerOrder = [...players.slice(1), players[0]];
     setPlayers(newPlayerOrder);
   };
 
   const scorePoint = (player: PlayerType) => {
-    console.info(`scorePoint({ player: ${player} })`);
     setPlayers((currentPlayers) =>
       currentPlayers.map((p) =>
         p.player === player ? { ...p, points: p.points + 1 } : p
@@ -38,7 +36,6 @@ export function usePlayers() {
   };
 
   const declareGreatestEmpire = (player: PlayerType) => {
-    console.info(`declareGreatestEmpire({ player: ${player} })`);
     setPlayers((currentPlayers) =>
       currentPlayers.map((p) =>
         p.player === player

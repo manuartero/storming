@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
+import { GameContextProvider } from "game-context";
 import { CurrentPhaseController } from "./current-phase-controller";
-import { GameContextProvider } from "contexts";
 
 describe("<CurrentPhaseController />", () => {
   test("reads GameContext.phase", async () => {
