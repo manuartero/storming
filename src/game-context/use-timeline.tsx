@@ -37,10 +37,18 @@ export function useTimeline() {
     futureActionCard: ActionCard | undefined;
   }) => {
     if (nextActionCard) {
-      setNext(next.concat({ card: nextActionCard, commited: false }));
+      setNext(
+        next
+          .filter((card) => card.commited)
+          .concat({ card: nextActionCard, commited: false })
+      );
     }
     if (futureActionCard) {
-      setFuture(future.concat({ card: futureActionCard, commited: false }));
+      setFuture(
+        future
+          .filter((card) => card.commited)
+          .concat({ card: futureActionCard, commited: false })
+      );
     }
   };
 

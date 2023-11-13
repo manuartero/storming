@@ -20,24 +20,6 @@ function getPlayedActionCards({
     .map((playedCard) => playedCard.card as ActionCard);
 }
 
-function defineCardStatus({
-  cardId,
-  nextCard,
-  playedActionCards,
-}: {
-  cardId: CardId;
-  nextCard?: ActionCard;
-  playedActionCards: ActionCard[];
-}): PlayerHandCardStatus {
-  if (nextCard && nextCard.cardId === cardId) {
-    return "selected";
-  }
-  const hasBeenPlayed = playedActionCards.some(
-    (playedCard) => playedCard.cardId === cardId
-  );
-  return hasBeenPlayed ? "played" : "available";
-}
-
 /**
  * {
  *   "player": [ { card, status }, { card, status }, { card, status }... ]
@@ -46,23 +28,20 @@ function defineCardStatus({
  *   "enemy3": [ ... ]
  * }
  */
-export function inferPlayerHandsFromGameContext(
-  playedCards: {
-    activeCard: Card | undefined;
-    next: TimelineCard[];
-    future: TimelineCard[];
-  },
-  nextCard?: ActionCard
-) {
+export function inferPlayerHandsFromGameContext(playedCards: {
+  activeCard: Card | undefined;
+  next: TimelineCard[];
+  future: TimelineCard[];
+}) {
   const playedActionCards = getPlayedActionCards(playedCards);
   const players = Object.keys(PLAYER_CARDS) as PlayerType[];
   const playerHands = players.reduce((acc, player) => {
     const playerHand = PLAYER_CARDS[player].map((card) => {
-      const status = defineCardStatus({
-        nextCard,
-        cardId: card.cardId,
-        playedActionCards,
-      });
+      const status = playedActionCards.some(
+        (playedCard) => playedCard.cardId === card.cardId
+      )
+        ? "played"
+        : "available";
       return { card, status };
     });
     return {

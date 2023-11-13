@@ -20,7 +20,7 @@ export function PlayerHandController() {
   const nextCard = gameContext.next.find(
     (timelineCard) => !timelineCard.commited && isActionCard(timelineCard.card)
   )?.card as ActionCard;
-  const playerCards = inferPlayerHandsFromGameContext(gameContext, nextCard);
+  const playerCards = inferPlayerHandsFromGameContext(gameContext);
   const activePlayerHand = playerCards[gameContext.activePlayer];
 
   const handlePlayerCardClick = (cardId: CardId) => {
@@ -51,6 +51,7 @@ export function PlayerHandController() {
         futureActionCard: playerCard.card,
       });
     } else {
+      // FIXME: we may only modify future card once next card is set
       gameContext.plan({
         nextActionCard: playerCard.card,
       });
