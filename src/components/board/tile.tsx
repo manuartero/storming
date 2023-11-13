@@ -32,7 +32,7 @@ export function Tile({
   const debugTileID = false;
 
   return (
-    <div className="tile">
+    <div className={c("tile", status === "available" && "tile--available")}>
       {debugTileID && <span className="tile__id">{id}</span>}
       {terrain === "mountain" && (
         <MountainSvg className={c("tile__terrain", "tile__terrain-mountain")} />
@@ -56,11 +56,10 @@ export function Tile({
       <HexagonSvg
         className={c(
           "tile__hexagon",
-          status === "available" && "tile__hexagon--available",
-          status === "available" && owner && `tile__hexagon--available-${owner}`,
+          status === "available" && owner && `tile--available__${owner}`,
           status === "forbidden" && "tile__hexagon--forbidden",
           status === "selected" && "tile__hexagon--selected",
-          status === 'selected' && owner && `tile__hexagon--selected-${owner}`
+          status === "selected" && owner && `tile__hexagon--selected-${owner}`
         )}
       />
 

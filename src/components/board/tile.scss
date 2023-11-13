@@ -3,6 +3,26 @@
 $forbidden-tile: rgba(190, 88, 88, 0.5);
 
 $horizontal-padding: 5px;
+$tile-stroke: 3px;
+$default-opacity: 0.7;
+
+@mixin setStrokeColor($element, $color, $fill-color) {
+  &__#{$element} {
+    path {
+      stroke: $color;
+      fill: $fill-color;
+    }
+  }
+}
+
+@mixin setBackgroundImage($element, $image) {
+  &--#{$element} {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('./assets/#{$image}');
+  }
+}
 
 .tile {
   position: relative;
@@ -14,6 +34,21 @@ $horizontal-padding: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  opacity: $default-opacity;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &--available {
+    opacity: 1;
+
+    @include setStrokeColor(player, colors.$player-primary, colors.$player-secondary);
+    @include setStrokeColor(enemy1, colors.$enemy1-primary, colors.$enemy1-secondary);
+    @include setStrokeColor(enemy2, colors.$enemy2-primary, colors.$enemy2-secondary);
+    @include setStrokeColor(enemy3, colors.$enemy3-primary, colors.$enemy3-secondary);
+  }
 
   /* debug: turn on at tile.tsx */
   &__id {
@@ -53,90 +88,17 @@ $horizontal-padding: 5px;
     position: absolute;
     bottom: 5px; // building in the bottom
 
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-
-    &--player {
-      background-image: url('./assets/castle--player.png');
-    }
-
-    &--enemy1 {
-      background-image: url('./assets/castle--enemy1.png');
-    }
-
-    &--enemy2 {
-      background-image: url('./assets/castle--enemy2.png');
-    }
-
-    &--enemy3 {
-      background-image: url('./assets/castle--enemy3.png');
-    }
+    @include setBackgroundImage('player', 'castle--player.png');
+    @include setBackgroundImage('enemy1', 'castle--enemy1.png');
+    @include setBackgroundImage('enemy2', 'castle--enemy2.png');
+    @include setBackgroundImage('enemy3', 'castle--enemy3.png');
   }
 
   &__hexagon {
     position: absolute;
 
     path {
-      fill: none;
-    }
-
-    &--selected {
-      path {
-        fill: colors.$selected-tile;
-        stroke: colors.$dark-grey;
-        stroke-width: 3px;
-      }
-
-      &-player {
-        path {
-          stroke: colors.$player-primary;
-        }
-      }
-
-      &-enemy1 {
-        path {
-          stroke: colors.$enemy1-primary;
-        }
-      }
-
-      &-enemy2 {
-        path {
-          stroke: colors.$enemy2-primary;
-        }
-      }
-
-      &-enemy3 {
-        path {
-          stroke: colors.$enemy3-primary;
-        }
-      }
-    }
-
-    &--available {
-      &-player {
-        path {
-          stroke: colors.$player-primary;
-        }
-      }
-
-      &-enemy1 {
-        path {
-          stroke: colors.$enemy1-primary;
-        }
-      }
-
-      &-enemy2 {
-        path {
-          stroke: colors.$enemy2-primary;
-        }
-      }
-
-      &-enemy3 {
-        path {
-          stroke: colors.$enemy3-primary;
-        }
-      }
+      stroke-width: $tile-stroke;
     }
 
     &--forbidden {
