@@ -1,15 +1,12 @@
-import type { ButtonHTMLAttributes } from "react";
-
+import c from "classnames";
 import "./button.scss";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
-}
+type Props = { children: React.ReactNode } & React.ComponentProps<"button">;
 
-export function Button(props: ButtonProps): JSX.Element {
+export function Button({ className, children, ...props }: Props) {
   return (
-    <button className="button" {...props}>
-      {props.children}
+    <button className={c("button", className)} {...props}>
+      {children}
     </button>
   );
 }

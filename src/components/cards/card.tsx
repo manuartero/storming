@@ -30,11 +30,11 @@ function EventCard({ card }: { card: EventCard }): JSX.Element {
   return <div></div>;
 }
 
-interface Props {
+type Props = {
   card: Card;
   status?: PlayerHandCardStatus;
   onClick?: () => void;
-}
+};
 
 export function Card({
   card,
@@ -43,14 +43,15 @@ export function Card({
 }: Props): JSX.Element {
   return (
     <div
-      key={card.cardId}
       className={c(
         "card",
         status === "played" && "card--played",
         status === "selected" && "card--selected",
         onClick && status === "available" && "clickable"
       )}
+      key={card.cardId}
       onClick={onClick}
+      aria-disabled={!onClick}
     >
       {card.cardType === "actionCard" ? (
         <ActionCard card={card} />

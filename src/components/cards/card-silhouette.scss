@@ -1,15 +1,7 @@
 @use '/src/styles/colors.scss';
-@use './card.scss';
 
 .card-silhouette {
-  @include card.card-container();
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: left;
-
-  border: 3px dashed #ADB5BD;
+  border: 3px dashed colors.$base-grey;
   border-radius: 16px;
 
   &__title {}

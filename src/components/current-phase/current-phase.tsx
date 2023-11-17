@@ -27,8 +27,10 @@ export function CurrentPhase(props: ActionPhaseProps | PlanningPhaseProps) {
   logRender("CurrentPhase");
 
   return (
-    <div className={c("current-phase", props.activePlayer)}>
-      <h2 className="current-phase__heading">{props.phase}</h2>
+    <div className={c("current-phase")}>
+      <div className={c("current-phase__heading", props.activePlayer)}>
+        <h2>{props.phase}</h2>
+      </div>
       <div className="current-phase__content">
         {props.phase === "action" ? (
           <ActionPhase {...props} />
@@ -52,10 +54,12 @@ function ActionPhase({ activeCard, mustSkip, onSkip }: ActionPhaseProps) {
 }
 
 function PlanningPhase({
+  activePlayer,
   nextAction,
   futureAction,
   onSubmitPlan,
 }: PlanningPhaseProps) {
+  const buttonDisabled = !nextAction || !futureAction;
   return (
     <div className="current-phase__planification">
       {nextAction ? <Card card={nextAction} /> : <CardSilhouette card="next" />}
@@ -64,7 +68,13 @@ function PlanningPhase({
       ) : (
         <CardSilhouette card="future" />
       )}
-      <Button onClick={onSubmitPlan}>GO</Button>
+      <Button
+        className={c(activePlayer, buttonDisabled && "button--disabled")}
+        onClick={onSubmitPlan}
+        disabled={buttonDisabled}
+      >
+        GO
+      </Button>
     </div>
   );
 }

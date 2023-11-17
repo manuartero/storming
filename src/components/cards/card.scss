@@ -23,7 +23,10 @@ $card-text-content-width: 120px;
   height: 280px;
   padding: 36px 24px;
   background: #FFFFFF;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
   @include shadows.simple-box-shadow();
+
 }
 
 .card {
@@ -34,6 +37,8 @@ $card-text-content-width: 120px;
   flex-direction: column;
   justify-content: space-between;
   align-items: left;
+
+  // border: 3px none transparent;
 
   &--played {
 
