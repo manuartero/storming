@@ -1,6 +1,7 @@
 @use '/src/styles/colors.scss';
+@use './tile-size.scss' as *;
 
-$piece-size: 60px;
+$piece-size: calc($TILE_SIZE * 0.6);
 
 @mixin piece-icon($piece, $owner) {
   background-image: url('./assets/' + $piece + '-' + $owner + '.svg');
