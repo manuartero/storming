@@ -15,8 +15,21 @@ export function inferVisualBoardFromGameContext(
   { board, activeCard }: { board: Board; activeCard: Card | undefined },
   selectedTile?: TileID
 ): VisualBoard {
+  if (!activeCard) {
+    return Object.entries(board).reduce(
+      (acc, [tileId, tile]) => ({
+        ...acc,
+        [tileId]: {
+          ...tile,
+          status: "idle",
+        },
+      }),
+      {} as VisualBoard
+    );
+  }
+
   const availableTiles =
-    activeCard?.cardType === "actionCard"
+    activeCard.cardType === "actionCard"
       ? getAvailableTilesForActionCard({
           board,
           activeCard,

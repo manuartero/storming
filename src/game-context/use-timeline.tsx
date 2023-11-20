@@ -15,6 +15,7 @@ export function useTimeline() {
 
   const startPlanningPhase = () => {
     setPhase("planification");
+    setActiveCard(undefined);
     setNext(next.concat(future));
     setFuture([]);
   };
@@ -26,7 +27,10 @@ export function useTimeline() {
 
   const nextActiveCard = () => {
     setActiveCard(next[0].card);
-    setNext(next.slice(1));
+    // issue: we were loosing the commited state of the card
+    setNext(
+      next.slice(1).map((timelineCard) => ({ ...timelineCard, commited: true }))
+    );
   };
 
   const planAction = ({

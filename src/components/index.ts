@@ -1,4 +1,4 @@
-export { default as Board } from "./board/board-controller";
+export { BoardController as Board } from "./board/board-controller";
 export { CurrentPhaseController as CurrentPhase } from "./current-phase/current-phase-controller";
 export { default as Marketplace } from "./marketplace/marketplace";
 export { Menu } from "./menu/menu";

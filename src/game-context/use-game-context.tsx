@@ -88,6 +88,15 @@ export function GameContextProvider({ children }: Props) {
   };
 
   const build = (action: { tile: TileID; building: Building }) => {
+    if (timeline.phase !== "action") {
+      return warnInconsistentState(
+        `trying to build but not in "action" phase`,
+        { phase: timeline.phase, action }
+      );
+    }
+    console.info(
+      `buildOnTile({ tile: <${action.tile}>, building: ${action.building} })`
+    );
     if (isCreatingGreatesEmpire({ ...action, empires: empireSize(board) })) {
       declareGreatestEmpire(action.building.owner);
     }
@@ -96,6 +105,15 @@ export function GameContextProvider({ children }: Props) {
   };
 
   const move = (action: { piece: Piece; from: TileID; to: TileID }) => {
+    if (timeline.phase !== "action") {
+      return warnInconsistentState(`trying to move but not in "action" phase`, {
+        phase: timeline.phase,
+        action,
+      });
+    }
+    console.info(
+      `movePiece({ from: <${action.from}>, to: <${action.to}>, piece: ${action.piece} })`
+    );
     const player = action.piece.owner;
     if (isConquering({ player, targetTile: board[action.to] })) {
       scorePoint(player);
@@ -105,6 +123,15 @@ export function GameContextProvider({ children }: Props) {
   };
 
   const recruit = (action: { tile: TileID; piece: Piece }) => {
+    if (timeline.phase !== "action") {
+      return warnInconsistentState(
+        `trying to recruit but not in "action" phase`,
+        { phase: timeline.phase, action }
+      );
+    }
+    console.info(
+      `recruitOnTile({ tile: <${action.tile}>, piece: ${action.piece} })`
+    );
     recruitOnTile(action);
     _resolveActionCard();
   };

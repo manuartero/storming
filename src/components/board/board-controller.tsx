@@ -14,7 +14,7 @@ import { NewBuilding } from "models/new-building";
  *
  *  => state validation before changing GameContext <=
  */
-function BoardController() {
+export function BoardController() {
   const gameContext = useGameContext();
   const [selectedTile, setSelectedTile] = useState<TileID>();
   const [buildingTile, setBuildingTile] = useState<TileID>();
@@ -32,6 +32,8 @@ function BoardController() {
       );
     }
     setSelectedTile(undefined);
+    setBuildingTile(undefined);
+    setRecruitingTile(undefined);
     gameContext.build({
       tile,
       building: NewBuilding({ owner: piece.owner }),
@@ -93,6 +95,8 @@ function BoardController() {
       }
       if (piece.owner === gameContext.activePlayer) {
         setSelectedTile(undefined);
+        setBuildingTile(undefined);
+        setRecruitingTile(undefined);
         return gameContext.move({
           piece,
           from: selectedTile,
@@ -111,7 +115,6 @@ function BoardController() {
         { tile: board[tile] }
       );
     }
-
     setSelectedTile(undefined);
     setBuildingTile(undefined);
     setRecruitingTile(undefined);
@@ -165,8 +168,6 @@ function BoardController() {
         return moveFromTile(tile);
       case "recruit":
         return resolveRecruitOnTile(tile);
-      default:
-        break;
     }
   };
 
@@ -209,5 +210,3 @@ function BoardController() {
     </>
   );
 }
-
-export default BoardController;

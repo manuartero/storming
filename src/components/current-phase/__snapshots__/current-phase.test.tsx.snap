@@ -3,13 +3,15 @@
 exports[`<CurrentPhase /> render: match snapshot - action 1`] = `
 <DocumentFragment>
   <div
-    class="current-phase player"
+    class="current-phase"
   >
-    <h2
-      class="current-phase__heading"
+    <div
+      class="current-phase__heading player"
     >
-      action
-    </h2>
+      <h2>
+        action
+      </h2>
+    </div>
     <div
       class="current-phase__content"
     >
@@ -43,13 +45,15 @@ exports[`<CurrentPhase /> render: match snapshot - action 1`] = `
 exports[`<CurrentPhase /> render: match snapshot - planification 1`] = `
 <DocumentFragment>
   <div
-    class="current-phase player"
+    class="current-phase"
   >
-    <h2
-      class="current-phase__heading"
+    <div
+      class="current-phase__heading player"
     >
-      planification
-    </h2>
+      <h2>
+        planification
+      </h2>
+    </div>
     <div
       class="current-phase__content"
     >
@@ -57,7 +61,8 @@ exports[`<CurrentPhase /> render: match snapshot - planification 1`] = `
         class="current-phase__planification"
       >
         <div
-          class="card-silhouette"
+          aria-disabled="true"
+          class="card card-silhouette"
         >
           <div
             class="card-silhouette__title"
@@ -71,7 +76,8 @@ exports[`<CurrentPhase /> render: match snapshot - planification 1`] = `
           </div>
         </div>
         <div
-          class="card-silhouette"
+          aria-disabled="true"
+          class="card card-silhouette"
         >
           <div
             class="card-silhouette__title"
@@ -85,7 +91,8 @@ exports[`<CurrentPhase /> render: match snapshot - planification 1`] = `
           </div>
         </div>
         <button
-          class="button"
+          class="button player button--disabled"
+          disabled=""
         >
           GO
         </button>
@@ -98,13 +105,15 @@ exports[`<CurrentPhase /> render: match snapshot - planification 1`] = `
 exports[`<CurrentPhase /> render: match snapshot - planification with cards 1`] = `
 <DocumentFragment>
   <div
-    class="current-phase player"
+    class="current-phase"
   >
-    <h2
-      class="current-phase__heading"
+    <div
+      class="current-phase__heading player"
     >
-      planification
-    </h2>
+      <h2>
+        planification
+      </h2>
+    </div>
     <div
       class="current-phase__content"
     >
@@ -112,6 +121,7 @@ exports[`<CurrentPhase /> render: match snapshot - planification with cards 1`] 
         class="current-phase__planification"
       >
         <div
+          aria-disabled="true"
           class="card"
         >
           <div
@@ -132,6 +142,7 @@ exports[`<CurrentPhase /> render: match snapshot - planification with cards 1`] 
           />
         </div>
         <div
+          aria-disabled="true"
           class="card"
         >
           <div
@@ -152,7 +163,7 @@ exports[`<CurrentPhase /> render: match snapshot - planification with cards 1`] 
           />
         </div>
         <button
-          class="button"
+          class="button player"
         >
           GO
         </button>

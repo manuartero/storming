@@ -4,8 +4,10 @@ import { initialBoard } from "./initial-board";
 /**
  * plain react state + named update methods
  *
- * **direct update on the board; no validity check**
- * **no game logic here**
+ * - **direct update on the board; no validity check**
+ * - **no game logic**
+ * - **no console.log**
+ * - **no inconsistent state**
  */
 export function useBoard() {
   const [board, setBoard] = useState(initialBoard);
@@ -17,15 +19,13 @@ export function useBoard() {
     tile: TileID;
     building: Building;
   }) => {
-    console.info(`buildOnTile({ tile: <${tile}>, building: ${building} })`);
     setBoard((currentBoard) => {
-      const newTile: Tile = {
-        ...currentBoard[tile],
-        building,
-      };
       return {
         ...currentBoard,
-        [tile]: newTile,
+        [tile]: {
+          ...currentBoard[tile],
+          building,
+        },
       };
     });
   };
@@ -39,14 +39,7 @@ export function useBoard() {
     from: TileID;
     to: TileID;
   }) => {
-    console.info(
-      `movePiece({ from: <${from}>, to: <${to}>, piece: ${piece} })`
-    );
     setBoard((currentBoard) => {
-      const originTile: Tile = {
-        ...currentBoard[from],
-        piece: undefined,
-      };
       const targetTile: Tile = {
         ...currentBoard[to],
         piece,
@@ -59,14 +52,16 @@ export function useBoard() {
       }
       return {
         ...currentBoard,
-        [from]: originTile,
+        [from]: {
+          ...currentBoard[from],
+          piece: undefined,
+        },
         [to]: targetTile,
       };
     });
   };
 
   const recruitOnTile = ({ tile, piece }: { tile: TileID; piece: Piece }) => {
-    console.info(`recruitOnTile({ tile: <${tile}>, piece: ${piece}) })`);
     setBoard((currentBoard) => {
       const newTile: Tile = {
         ...currentBoard[tile],

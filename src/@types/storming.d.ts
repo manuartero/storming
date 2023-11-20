@@ -8,7 +8,7 @@ type PlayerType =
   | "enemy2" /* blue */
   | "enemy3" /* green */;
 
-type PlayerHandCardStatus = "available" | "played";
+type PlayerHandCardStatus = "selected" | "available" | "played";
 
 /**
  * ```ts
