@@ -1,0 +1,108 @@
+@use '/src/styles/colors.scss';
+@use 'tile-size.scss' as *;
+
+$forbidden-tile: rgba(190, 88, 88, 0.5);
+
+$horizontal-padding: calc($TILE_SIZE/ 30);
+
+$tile-stroke: 3px;
+$default-opacity: 0.7;
+
+@mixin setStroke($player, $color) {
+
+  // tile__available--player
+  &__#{$player} {
+    path {
+      stroke: $color;
+    }
+  }
+}
+
+@mixin setBackgroundImage($element, $image) {
+  &--#{$element} {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('./assets/#{$image}');
+  }
+}
+
+.tile {
+  position: relative;
+  width: $TILE_SIZE;
+  height: $TILE_SIZE;
+  margin: 0;
+  padding: 0 $horizontal-padding;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: $default-opacity;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &--available {
+    opacity: 1;
+
+    @include setStroke(player, colors.$player-primary, );
+    @include setStroke(enemy1, colors.$enemy1-primary, );
+    @include setStroke(enemy2, colors.$enemy2-primary, );
+    @include setStroke(enemy3, colors.$enemy3-primary, );
+  }
+
+  /* debug: turn on at tile.tsx */
+  &__id {
+    position: absolute;
+    font-size: larger;
+    background-color: white;
+    z-index: 1;
+  }
+
+  &__content {}
+
+  &__building {
+    // make it relative to $TILE_SIZE
+    width: calc(0.75 * #{$TILE_SIZE});
+    height: calc(0.75 * #{$TILE_SIZE});
+
+    position: absolute;
+    bottom: 1vh; // building in the bottom
+
+    @include setBackgroundImage('player', 'castle--player.png');
+    @include setBackgroundImage('enemy1', 'castle--enemy1.png');
+    @include setBackgroundImage('enemy2', 'castle--enemy2.png');
+    @include setBackgroundImage('enemy3', 'castle--enemy3.png');
+  }
+
+  &__hexagon {
+    position: absolute;
+
+    path {
+      stroke-width: $tile-stroke;
+    }
+
+    &--forbidden {
+      path {
+        fill: $forbidden-tile;
+      }
+    }
+
+    &__clickable-area {
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+
+      // debug
+      // background-color: rgba(255, 0, 0, 0.292);
+
+      // FIXME: this is absolutly manual, there should be a better way of solving this.
+      position: absolute;
+      top: 5%;
+      left: 5%;
+      width: 90%;
+      height: 90%;
+      // ---
+    }
+  }
+}

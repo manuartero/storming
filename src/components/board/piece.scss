@@ -1,0 +1,51 @@
+@use '/src/styles/colors.scss';
+@use './tile-size.scss' as *;
+
+$piece-size: calc($TILE_SIZE * 0.6);
+
+@mixin piece-icon($piece, $owner) {
+  background-image: url('./assets/' + $piece + '-' + $owner + '.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.piece {
+  position: relative;
+
+
+  width: $piece-size;
+  height: $piece-size;
+
+  &--soldier-player {
+    @include piece-icon('soldier', 'player');
+  }
+
+  &--soldier-enemy1 {
+    @include piece-icon('soldier', 'enemy1');
+  }
+
+  &--soldier-enemy2 {
+    @include piece-icon('soldier', 'enemy2');
+  }
+
+  &--soldier-enemy3 {
+    @include piece-icon('soldier', 'enemy3');
+  }
+
+  &--knight-player {
+    @include piece-icon('knight', 'player');
+  }
+
+  &--knight-enemy1 {
+    @include piece-icon('knight', 'enemy1');
+  }
+
+  &--knight-enemy2 {
+    @include piece-icon('knight', 'enemy2');
+  }
+
+  &--knight-enemy3 {
+    @include piece-icon('knight', 'enemy3');
+  }
+}

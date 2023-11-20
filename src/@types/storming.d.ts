@@ -8,7 +8,7 @@ type PlayerType =
   | "enemy2" /* blue */
   | "enemy3" /* green */;
 
-type PlayerHandCardStatus = "available" | "selected" | "played";
+type PlayerHandCardStatus = "selected" | "available" | "played";
 
 /**
  * ```ts
@@ -23,11 +23,11 @@ type PlayerHand = { card: Card; status: PlayerHandCardStatus }[];
 
 declare type TileID = import("models/tiles")._TileID;
 
-interface Coordinates {
+type Coordinates = {
   x: number;
   y: number;
   str: TileID;
-}
+};
 
 type Board = Record<TileID, Tile>;
 
@@ -63,34 +63,37 @@ interface TileWithStatus extends Tile {
 // CARDS
 // --------------
 
+type CardId = `${PlayerType}_${ActionCardType | EventCardType}_${number}`;
+
 type ActionCardType = "build" | "diplo" | "move" | "recruit";
 
 type Card = ActionCard | EventCard;
 
-interface ActionCard {
+type ActionCard = {
   cardType: "actionCard";
   action: ActionCardType;
   owner: PlayerType;
-  cardId: string;
-}
+  cardId: CardId;
+};
 
-type EventCardType = "even1" | "event2" | "event3";
+type EventCardType = "event1" | "event2" | "event3";
 
-interface EventCard {
+type EventCard = {
   cardType: "eventCard";
   event: EventCardType;
   playedBy: PlayerType;
-  cardId: string;
-}
+  cardId: CardId;
+};
 
 // --------------
 // TIMELINE
 // --------------
 
-type Timeline = {
-  current: Card | undefined;
-  next: Card[];
-  future: Card[];
+type PhaseType = "setup" | "planification" | "action";
+
+type TimelineCard = {
+  card: Card;
+  commited: boolean;
 };
 
 // --------------
@@ -111,54 +114,40 @@ interface GameLogContext {
 // GameContext
 // --------------
 
-type PhaseType = "setup" | "planification" | "action";
-
-interface BuildAction {
-  tile: TileID;
-  building: Building;
-}
-
-interface MoveAction {
-  from: TileID;
-  to: TileID;
-  piece: Piece;
-}
-
-interface RecruitAction {
-  tile: TileID;
-  piece: Piece;
-}
-
-interface PlanAction {
-  player: PlayerType;
-  nextCard: ActionCard;
-  futureCard: ActionCard;
-  eventCard?: EventCard; // TODO !MVP
-}
-
-interface PlayerStatus {
+type PlayerStatus = {
   player: PlayerType;
   points: number;
-  greatestEmpirePoint: boolean;
-}
+  greatestEmpirePoint: boolean; // deprecated
+};
 
-interface GameContext {
+type GameContext = {
   phase: PhaseType;
-  board: Board;
-  timeline: Timeline;
   activeCard: Card | undefined;
   activePlayer: PlayerType | undefined;
+  next: TimelineCard[];
+  future: TimelineCard[];
+  board: Board;
   players: PlayerStatus[];
 
-  build(action: BuildAction): void;
-  move(action: MoveAction): void;
-  recruit(action: RecruitAction): void;
-  plan(action: PlanAction): void;
-  firstPlayer(player: PlayerType): void;
+  // planning phase
+  plan(action: {
+    nextActionCard?: ActionCard;
+    futureActionCard?: ActionCard;
+    eventCard?: EventCard; // TODO !MVP
+  }): void;
+  submitPlanification(): void;
+
+  // action phase
+  build(action: { tile: TileID; building: Building }): void;
+  move(action: { from: TileID; to: TileID; piece: Piece }): void;
+  recruit(action: { tile: TileID; piece: Piece }): void;
   skip(): void;
 
-  loadSavegame(gameContext: GameContext): void
-}
+  firstPlayer(player: PlayerType): void; // deprecated?
+
+  // other
+  loadSavegame(gameContext: GameContext): void;
+};
 
 // ----
 
@@ -166,4 +155,4 @@ type Savegame = {
   createdAt: string; // ms from Epoch
   playerEmpireSize: number;
   gameContext: GameContext;
-}
+};

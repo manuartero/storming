@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CurrentPhase /> render: match snapshot - action 1`] = `
+<DocumentFragment>
+  <div
+    class="current-phase"
+  >
+    <div
+      class="current-phase__heading player"
+    >
+      <h2>
+        action
+      </h2>
+    </div>
+    <div
+      class="current-phase__content"
+    >
+      <div
+        class="current-phase__action"
+      >
+        <div
+          class="icon-card icon-card--player"
+        >
+          <div
+            class="icon-card__image icon-card__image--move"
+          />
+          <span
+            class="icon-card__text"
+          >
+            move
+          </span>
+        </div>
+        <button
+          class="button"
+          disabled=""
+        >
+          SKIP
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<CurrentPhase /> render: match snapshot - planification 1`] = `
+<DocumentFragment>
+  <div
+    class="current-phase"
+  >
+    <div
+      class="current-phase__heading player"
+    >
+      <h2>
+        planification
+      </h2>
+    </div>
+    <div
+      class="current-phase__content"
+    >
+      <div
+        class="current-phase__planification"
+      >
+        <div
+          aria-disabled="true"
+          class="card card-silhouette"
+        >
+          <div
+            class="card-silhouette__title"
+          >
+            next
+          </div>
+          <div
+            class="card-silhouette__text"
+          >
+            Drag here the card you wish to use next round
+          </div>
+        </div>
+        <div
+          aria-disabled="true"
+          class="card card-silhouette"
+        >
+          <div
+            class="card-silhouette__title"
+          >
+            future
+          </div>
+          <div
+            class="card-silhouette__text"
+          >
+            Drag here the card you wish to use in two rounds
+          </div>
+        </div>
+        <button
+          class="button player button--disabled"
+          disabled=""
+        >
+          GO
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`<CurrentPhase /> render: match snapshot - planification with cards 1`] = `
+<DocumentFragment>
+  <div
+    class="current-phase"
+  >
+    <div
+      class="current-phase__heading player"
+    >
+      <h2>
+        planification
+      </h2>
+    </div>
+    <div
+      class="current-phase__content"
+    >
+      <div
+        class="current-phase__planification"
+      >
+        <div
+          aria-disabled="true"
+          class="card"
+        >
+          <div
+            class="action-card__icon action-card__icon--move-player"
+          />
+          <div
+            class="action-card__title"
+          >
+            move
+          </div>
+          <div
+            class="action-card__text"
+          >
+            Move up to two different Units
+          </div>
+          <div
+            class="action-card__water-mark action-card__water-mark--move"
+          />
+        </div>
+        <div
+          aria-disabled="true"
+          class="card"
+        >
+          <div
+            class="action-card__icon action-card__icon--recruit-player"
+          />
+          <div
+            class="action-card__title"
+          >
+            recruit
+          </div>
+          <div
+            class="action-card__text"
+          >
+            Recruit units at up to two different Settlements
+          </div>
+          <div
+            class="action-card__water-mark action-card__water-mark--recruit"
+          />
+        </div>
+        <button
+          class="button player"
+        >
+          GO
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

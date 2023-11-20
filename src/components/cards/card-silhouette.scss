@@ -1,0 +1,10 @@
+@use '/src/styles/colors.scss';
+
+.card-silhouette {
+  border: 3px dashed colors.$base-grey;
+  border-radius: 16px;
+
+  &__title {}
+
+  &__text {}
+}

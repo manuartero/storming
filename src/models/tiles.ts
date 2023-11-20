@@ -96,7 +96,3 @@ export function asTileID({ x, y }: { x: number; y: number }): TileID | null {
   }
   return null;
 }
-
-export function row(n: -3 | -2 | -1 | 0 | 1 | 2 | 3): TileID[] {
-  return TILES.filter((id) => coordinates(id).y === n);
-}

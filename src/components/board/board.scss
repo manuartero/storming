@@ -1,0 +1,37 @@
+@use 'tile-size.scss' as *;
+
+$collapse-rows-y: calc($TILE_SIZE / 5); // 22px aprox
+$row-left-space: calc($TILE_SIZE / 2);
+
+.board {
+  grid-area: board;
+
+  position: relative;
+  width: -moz-fit-content;
+  width: fit-content;
+
+  &__row {
+    display: flex;
+    position: relative;
+
+    width: -moz-fit-content;
+    width: fit-content;
+
+    // Loop for collapsing rows
+    @for $i from 2 through 7 {
+      &:nth-child(#{$i}) {
+        margin-top: $collapse-rows-y * (-1) ;
+      }
+    }
+
+    // Loop for moving rows to the right
+    @for $i from 1 through 3 {
+      &--#{$i}-to-equator {
+        left: $row-left-space * $i;
+      }
+    }
+  }
+
+  // debug
+  border: 1px solid red;
+}

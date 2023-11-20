@@ -1,0 +1,524 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Board /> render: match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="board"
+  >
+    <div
+      class="board__row board__row--3-to-equator"
+    >
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <div
+          class="tile__building tile__building--village tile__building--enemy1"
+        />
+        <icon-mock
+          classname="tile__hexagon tile--available__enemy1"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+    </div>
+    <div
+      class="board__row board__row--2-to-equator"
+    >
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon tile--available__enemy1"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+        <div
+          class="tile__content"
+        >
+          <div
+            class="piece ignore-clicks piece--soldier-enemy1"
+          />
+        </div>
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+    </div>
+    <div
+      class="board__row board__row--1-to-equator"
+    >
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__terrain tile__terrain--lake"
+        />
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+    </div>
+    <div
+      class="board__row"
+    >
+      <div
+        class="tile tile--available"
+      >
+        <div
+          class="tile__building tile__building--village tile__building--player"
+        />
+        <icon-mock
+          classname="tile__hexagon tile--available__player"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon tile--available__player"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+        <div
+          class="tile__content"
+        >
+          <div
+            class="piece ignore-clicks piece--soldier-player"
+          />
+        </div>
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon tile--available__enemy2"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+        <div
+          class="tile__content"
+        >
+          <div
+            class="piece ignore-clicks piece--soldier-enemy2"
+          />
+        </div>
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <div
+          class="tile__building tile__building--village tile__building--enemy2"
+        />
+        <icon-mock
+          classname="tile__hexagon tile--available__enemy2"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+    </div>
+    <div
+      class="board__row board__row--1-to-equator"
+    >
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__terrain tile__terrain--lake"
+        />
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+    </div>
+    <div
+      class="board__row board__row--2-to-equator"
+    >
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon tile--available__enemy3"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+        <div
+          class="tile__content"
+        >
+          <div
+            class="piece ignore-clicks piece--soldier-enemy3"
+          />
+        </div>
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+    </div>
+    <div
+      class="board__row board__row--3-to-equator"
+    >
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <div
+          class="tile__building tile__building--village tile__building--enemy3"
+        />
+        <icon-mock
+          classname="tile__hexagon tile--available__enemy3"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+      <div
+        class="tile tile--available"
+      >
+        <icon-mock
+          classname="tile__hexagon"
+        />
+        <div
+          class="tile__hexagon__clickable-area clickable"
+        />
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,33 @@
+.current-phase {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  &__heading {
+    display: flex;
+    flex: 1;
+    align-items: center; // center Y
+    justify-content: center; // center X
+
+    max-height: 20%;
+
+    border-bottom: 1px solid #ccc;
+  }
+
+  &__content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center; // center Y
+    justify-content: flex-start;
+  }
+
+  &__planification {
+    display: flex;
+    flex-direction: column;
+    align-items: center; // center Y
+  }
+
+  &__action {}
+}
