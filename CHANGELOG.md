@@ -1,3 +1,17 @@
+# [0.4.0](https://github.com/manuartero/storming/compare/v0.3.0...v0.4.0) (2023-11-20)
+
+
+### Bug Fixes
+
+* review issue at PlayerHandController() ([0b84f0d](https://github.com/manuartero/storming/commit/0b84f0dc8726a359d0405ba00b0fbae1284f0582))
+* solve 2 issues when starting planning phase ([bbe45c4](https://github.com/manuartero/storming/commit/bbe45c4a824382e8671600a174e5b4a7cad9e83a))
+
+
+### Features
+
+* **planning:** including 'commit' or 'pending' actions ([6958c3f](https://github.com/manuartero/storming/commit/6958c3f01c8bf091081ed4aa3612e668fea805cd))
+* **planning:** planning phase in 2 steps ([39fa7f1](https://github.com/manuartero/storming/commit/39fa7f11cf7ba70f5e8a22b8341c68189a60303e))
+
 # 0.3.0 (2023-11-01)
 
 
