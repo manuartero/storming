@@ -18,6 +18,7 @@ export function Timeline({ next, future }: Props): JSX.Element {
         return (
           <motion.div
             key={card.cardId}
+            layout
             initial={{ opacity: 0, scale: 0 }}
             animate={{
               opacity: [0, 0.9, 0.9, 1, 1, 1, 1],
