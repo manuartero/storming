@@ -9,7 +9,16 @@ type Props = {
 
 export function ActionLineItem({ card, commited }: Props): JSX.Element {
   return (
-    <div className={c("line-item", card.owner === "player" && "expansible", !commited && 'line-item--pending')}>
+    <div
+      className={c(
+        "line-item",
+        card.owner === "player" &&
+          "line-item--player" &&
+          "player" &&
+          "expansible",
+        commited ? "line-item--commited" : "line-item--pending"
+      )}
+    >
       <div
         className={c("line-item__content", `line-item__content--${card.owner}`)}
       />

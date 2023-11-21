@@ -1,5 +1,6 @@
+@use '/src/styles/colors.scss';
 #root {
-  background-color: #fff;
+  background-color: colors.$white;
 
   .game {
     display: grid;
@@ -32,11 +33,10 @@
   .player-hand {
     grid-area: player-hand;
   }
-
 }
 
-
-.clickable, .expansible {
+.clickable,
+.expansible {
   cursor: pointer;
 }
 
