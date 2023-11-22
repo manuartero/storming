@@ -1,18 +1,18 @@
-@use '/src/styles/fonts.scss';
-@use '/src/styles/shadows.scss';
-@use '/src/styles/colors.scss';
+@use "/src/styles/fonts.scss";
+@use "/src/styles/shadows.scss";
+@use "/src/styles/colors.scss";
 
 $card-text-content-width: 120px;
 
 @mixin card-icon($action, $owner) {
-  background-image: url('./assets/' + $action + '-icn--' + $owner + '.svg');
+  background-image: url("./assets/" + $action + "-icn--" + $owner + ".svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
 }
 
 @mixin card-water-mark($action) {
-  background-image: url('./assets/' + $action + '-bg.svg');
+  background-image: url("./assets/" + $action + "-bg.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -22,11 +22,25 @@ $card-text-content-width: 120px;
   width: 180px;
   height: 280px;
   padding: 36px 24px;
-  background: #FFFFFF;
+  background: colors.$white;
   margin-top: 2vh;
   margin-bottom: 2vh;
   @include shadows.simple-box-shadow();
+}
 
+.action-card {
+  &--player {
+    --playerColor: #{colors.$player-primary};
+  }
+  &--enemy1 {
+    --playerColor: #{colors.$enemy1-primary};
+  }
+  &--enemy2 {
+    --playerColor: #{colors.$enemy2-primary};
+  }
+  &--enemy3 {
+    --playerColor: #{colors.$enemy3-primary};
+  }
 }
 
 .card {
@@ -36,14 +50,14 @@ $card-text-content-width: 120px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: left;
 
-  // border: 3px none transparent;
+  &--active {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
 
   &--played {
-
     // to every children
-    &>* {
+    & > * {
       opacity: 0.3;
     }
   }
@@ -53,73 +67,72 @@ $card-text-content-width: 120px;
   }
 
   .action-card {
-
     &__icon {
       width: 70px;
       height: 55px;
 
       &--build-player {
-        @include card-icon('build', 'player')
+        @include card-icon("build", "player");
       }
 
       &--build-enemy1 {
-        @include card-icon('build', 'enemy1')
+        @include card-icon("build", "enemy1");
       }
 
       &--build-enemy2 {
-        @include card-icon('build', 'enemy2')
+        @include card-icon("build", "enemy2");
       }
 
       &--build-enemy3 {
-        @include card-icon('build', 'enemy3')
+        @include card-icon("build", "enemy3");
       }
 
       &--diplo-player {
-        @include card-icon('diplo', 'player')
+        @include card-icon("diplo", "player");
       }
 
       &--diplo-enemy1 {
-        @include card-icon('diplo', 'enemy1')
+        @include card-icon("diplo", "enemy1");
       }
 
       &--diplo-enemy2 {
-        @include card-icon('diplo', 'enemy2')
+        @include card-icon("diplo", "enemy2");
       }
 
       &--diplo-enemy3 {
-        @include card-icon('diplo', 'enemy3')
+        @include card-icon("diplo", "enemy3");
       }
 
       &--move-player {
-        @include card-icon('move', 'player')
+        @include card-icon("move", "player");
       }
 
       &--move-enemy1 {
-        @include card-icon('move', 'enemy1')
+        @include card-icon("move", "enemy1");
       }
 
       &--move-enemy2 {
-        @include card-icon('move', 'enemy2')
+        @include card-icon("move", "enemy2");
       }
 
       &--move-enemy3 {
-        @include card-icon('move', 'enemy3')
+        @include card-icon("move", "enemy3");
       }
 
       &--recruit-player {
-        @include card-icon('recruit', 'player')
+        @include card-icon("recruit", "player");
       }
 
       &--recruit-enemy1 {
-        @include card-icon('recruit', 'enemy1')
+        @include card-icon("recruit", "enemy1");
       }
 
       &--recruit-enemy2 {
-        @include card-icon('recruit', 'enemy2')
+        @include card-icon("recruit", "enemy2");
       }
 
       &--recruit-enemy3 {
-        @include card-icon('recruit', 'enemy3')
+        @include card-icon("recruit", "enemy3");
       }
     }
 
@@ -147,21 +160,20 @@ $card-text-content-width: 120px;
       height: 60%;
 
       &--build {
-        @include card-water-mark('build');
+        @include card-water-mark("build");
       }
 
       &--diplo {
-        @include card-water-mark('diplo');
+        @include card-water-mark("diplo");
       }
 
       &--move {
-        @include card-water-mark('move');
+        @include card-water-mark("move");
       }
 
       &--recruit {
-        @include card-water-mark('recruit');
+        @include card-water-mark("recruit");
       }
     }
   }
-
 }

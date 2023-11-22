@@ -1,4 +1,6 @@
 @use '/src/styles/colors.scss';
+@use "/src/styles/animations.scss";
+
 #root {
   background-color: colors.$white;
 
@@ -26,7 +28,7 @@
     grid-area: board;
     display: flex;
     justify-content: center;
-    
+
   }
 
   .marketplace {

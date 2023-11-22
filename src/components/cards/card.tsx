@@ -1,9 +1,39 @@
 import c from "classnames";
+import { isActionCard } from "models/new-card";
 import CARD_TEXT from "./card-text.json";
 
 import "./card.scss";
 
-function ActionCard({ card }: { card: ActionCard }): JSX.Element {
+type Props = {
+  card: Card;
+  status?: PlayerHandCardStatus | CardStatus;
+  onClick?: () => void;
+};
+
+export function Card({ card, status = "available", onClick }: Props) {
+  return (
+    <div
+      className={c(
+        "card",
+        `card--${status}`,
+        isActionCard(card) ? "action-card" : "event-card",
+        isActionCard(card) && `action-card--${card.owner}`,
+        onClick && status === "available" && "clickable"
+      )}
+      key={card.cardId}
+      onClick={onClick}
+      aria-disabled={!onClick}
+    >
+      {card.cardType === "actionCard" ? (
+        <ActionCardContents card={card} />
+      ) : (
+        <EventCardContents card={card} />
+      )}
+    </div>
+  );
+}
+
+function ActionCardContents({ card }: { card: ActionCard }) {
   const { action, owner } = card;
   return (
     <>
@@ -25,39 +55,7 @@ function ActionCard({ card }: { card: ActionCard }): JSX.Element {
   );
 }
 
-function EventCard({ card }: { card: EventCard }): JSX.Element {
+function EventCardContents({ card }: { card: EventCard }) {
   // TODO: Alpha
   return <div></div>;
-}
-
-type Props = {
-  card: Card;
-  status?: PlayerHandCardStatus;
-  onClick?: () => void;
-};
-
-export function Card({
-  card,
-  status = "available",
-  onClick,
-}: Props): JSX.Element {
-  return (
-    <div
-      className={c(
-        "card",
-        status === "played" && "card--played",
-        status === "selected" && "card--selected",
-        onClick && status === "available" && "clickable"
-      )}
-      key={card.cardId}
-      onClick={onClick}
-      aria-disabled={!onClick}
-    >
-      {card.cardType === "actionCard" ? (
-        <ActionCard card={card} />
-      ) : (
-        <EventCard card={card} />
-      )}
-    </div>
-  );
 }
