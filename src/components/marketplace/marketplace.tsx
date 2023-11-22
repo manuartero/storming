@@ -1,7 +1,5 @@
 import "./marketplace.scss";
 
-function Marketplace(): JSX.Element {
+export function Marketplace() {
   return <div className="marketplace"></div>;
 }
-
-export default Marketplace;

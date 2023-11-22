@@ -2,9 +2,7 @@
 @use '/src/styles/fonts.scss';
 
 .timeline {
-  grid-area: timeline;
   height: 13vh;
-
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap; // single line

@@ -4,14 +4,13 @@ $collapse-rows-y: calc($TILE_SIZE / 5); // 22px aprox
 $row-left-space: calc($TILE_SIZE / 2);
 
 .board {
-  grid-area: board;
-
   position: relative;
+
   width: -moz-fit-content;
   width: fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  
+
   &__row {
     display: flex;
     position: relative;
@@ -35,5 +34,5 @@ $row-left-space: calc($TILE_SIZE / 2);
   }
 
   // debug
-  border: 1px solid red;
+  // border: 1px solid red;
 }

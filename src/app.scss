@@ -22,8 +22,11 @@
     grid-area: timeline;
   }
 
-  .board {
+  .board-container {
     grid-area: board;
+    display: flex;
+    justify-content: center;
+    
   }
 
   .marketplace {
@@ -45,17 +48,17 @@
 }
 
 .player {
-  background-color: #fffaaf;
+  background-color: colors.$player-secondary;
 }
 
 .enemy1 {
-  background-color: #ffafaf;
+  background-color: colors.$enemy1-secondary;
 }
 
 .enemy2 {
-  background-color: #afafff;
+  background-color: colors.$enemy2-secondary;
 }
 
 .enemy3 {
-  background-color: #afffaf;
+  background-color: colors.$enemy3-secondary;
 }

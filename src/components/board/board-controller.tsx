@@ -179,7 +179,7 @@ export function BoardController() {
   };
 
   return (
-    <>
+    <div className="board-container">
       <Board state={board} onTileClick={onTileClick} />
       {buildingTile && (
         <BuildDialog
@@ -207,6 +207,6 @@ export function BoardController() {
           }}
         />
       )}
-    </>
+    </div>
   );
 }
