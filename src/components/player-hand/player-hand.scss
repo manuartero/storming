@@ -1,8 +1,14 @@
 .player-hand {
+  grid-area: player-hand;
+
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
 
-  padding: 10px;
+  transition: transform 0.2s ease-in-out;
+
+  &--expansible:hover {
+    transform: translateY(-51%);
+  }
 }
