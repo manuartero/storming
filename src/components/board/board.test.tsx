@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import Board from "./board";
+import { Board } from "./board";
 
 describe("<Board />", () => {
   test("render: match snapshot", () => {
