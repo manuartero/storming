@@ -1,6 +1,6 @@
 import { logRender } from "utils/console";
 import { ActionLineItem } from "./line-item";
-import { motion } from "framer-motion";
+import { LayoutGroup, motion } from "framer-motion";
 
 import "./timeline.scss";
 
@@ -9,7 +9,7 @@ type Props = {
   future: TimelineCard[];
 };
 
-export function Timeline({ next, future }: Props): JSX.Element {
+export function Timeline({ next, future }: Props) {
   logRender("Timeline");
 
   const renderLineItems = (section: TimelineCard[]) => {
@@ -37,11 +37,17 @@ export function Timeline({ next, future }: Props): JSX.Element {
     <div className="timeline">
       <div className="timeline__next timeline__section">
         <span className="timeline__section__name">NEXT</span>
-        <div className="timeline__section__line">{renderLineItems(next)}</div>
+        <div className="timeline__section__line">
+          <LayoutGroup id="next-timeline">{renderLineItems(next)}</LayoutGroup>
+        </div>
       </div>
       <div className="timeline__future timeline__section">
         <span className="timeline__section__name">FUTURE</span>
-        <div className="timeline__section__line">{renderLineItems(future)}</div>
+        <div className="timeline__section__line">
+          <LayoutGroup id="future-timeline">
+            {renderLineItems(future)}
+          </LayoutGroup>
+        </div>
       </div>
     </div>
   );

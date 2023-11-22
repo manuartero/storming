@@ -7,13 +7,14 @@
   flex-direction: row;
   flex-wrap: nowrap; // single line
 
+
   &__next {
-    flex-grow: 1;
+    flex: 1;
     background-color: colors.$base-grey;
   }
 
   &__future {
-    flex-grow: 1;
+    flex: 1;
     background-color: colors.$dark-grey;
   }
 
