@@ -1,3 +1,10 @@
+## [0.4.1](https://github.com/manuartero/storming/compare/v0.4.0...v0.4.1) (2023-11-22)
+
+
+### Bug Fixes
+
+* **board:** highlight available tiles for move with player's color ([b95dac9](https://github.com/manuartero/storming/commit/b95dac93938084d8e91e874ef92e27e8d46260f7))
+
 # [0.4.0](https://github.com/manuartero/storming/compare/v0.3.0...v0.4.0) (2023-11-20)
 
 
