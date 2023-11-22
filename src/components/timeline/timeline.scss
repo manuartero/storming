@@ -2,33 +2,40 @@
 @use '/src/styles/fonts.scss';
 
 .timeline {
-  height: 92px;
-
+  height: 13vh;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap; // single line
 
+
   &__next {
-    flex-grow: 3;
+    flex: 1;
     background-color: colors.$base-grey;
   }
 
   &__future {
-    flex-grow: 2;
+    flex: 1;
     background-color: colors.$dark-grey;
   }
 
   &__section {
     position: relative;
     display: flex;
-    padding: 0 20px 0 80px;
+    padding: 0 20px;
     border-radius: 0px 0px 12px 12px;
 
-    &__name {
-      position: absolute;
-      top: 24px;
-      left: 12px;
+    &:hover {
+      .timeline__section__name {
+        opacity: 0.4;
+        transition: opacity 0.5s ease-in-out;
+      }
+    }
 
+    &__name {
+      position: absolute; // relative to timeline__section
+      top: 18px;
+      left: 12px;
+      opacity: 0;
       @include fonts.heading();
     }
 
@@ -47,9 +54,10 @@
         width: 100%;
 
         position: absolute;
-        top: 55px; // from timeline__section
+        top: 50%;
+        transform: translateY(-50%);
 
-        border-top: 2px solid black;
+        border-top: 2px solid colors.$darkest-grey;
       }
     }
   }

@@ -17,25 +17,37 @@ exports[`<Timeline /> render: match snapshot 1`] = `
         class="timeline__section__line"
       >
         <div
-          class="line-item"
+          style="opacity: 0; transform: scale(0) translateZ(0);"
         >
           <div
-            class="line-item__content line-item__content--enemy1"
-          />
+            class="line-item line-item--commited"
+          >
+            <div
+              class="line-item__content line-item__content--enemy1"
+            />
+          </div>
         </div>
         <div
-          class="line-item"
+          style="opacity: 0; transform: scale(0) translateZ(0);"
         >
           <div
-            class="line-item__content line-item__content--enemy2"
-          />
+            class="line-item line-item--commited"
+          >
+            <div
+              class="line-item__content line-item__content--enemy2"
+            />
+          </div>
         </div>
         <div
-          class="line-item"
+          style="opacity: 0; transform: scale(0) translateZ(0);"
         >
           <div
-            class="line-item__content line-item__content--enemy3"
-          />
+            class="line-item line-item--commited"
+          >
+            <div
+              class="line-item__content line-item__content--enemy3"
+            />
+          </div>
         </div>
       </div>
     </div>

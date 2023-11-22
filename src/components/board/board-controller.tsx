@@ -1,11 +1,11 @@
 import { useGameContext } from "game-context";
+import { NewBuilding } from "models/new-building";
 import { useState } from "react";
 import { warnInconsistentState } from "utils/console";
-import Board from "./board";
+import { Board } from "./board";
 import BuildDialog from "./build-dialog";
 import { inferVisualBoardFromGameContext } from "./infer-visual-board";
 import { RecruitDialog } from "./recruit-dialog";
-import { NewBuilding } from "models/new-building";
 
 /**
  * Defines visual board from GameContext:
@@ -179,8 +179,12 @@ export function BoardController() {
   };
 
   return (
-    <>
-      <Board state={board} onTileClick={onTileClick} />
+    <div className="board-container">
+      <Board
+        state={board}
+        activePlayer={gameContext.activePlayer}
+        onTileClick={onTileClick}
+      />
       {buildingTile && (
         <BuildDialog
           onWallOption={() => {
@@ -207,6 +211,6 @@ export function BoardController() {
           }}
         />
       )}
-    </>
+    </div>
   );
 }

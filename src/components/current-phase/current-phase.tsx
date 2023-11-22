@@ -43,9 +43,13 @@ export function CurrentPhase(props: ActionPhaseProps | PlanningPhaseProps) {
 }
 
 function ActionPhase({ activeCard, mustSkip, onSkip }: ActionPhaseProps) {
+  if (!activeCard) {
+    return <>ERROR</>;
+  }
+
   return (
     <div className="current-phase__action">
-      <IconCard card={activeCard} />
+      <Card card={activeCard} status="active" />
       <Button disabled={!mustSkip} onClick={onSkip}>
         SKIP
       </Button>

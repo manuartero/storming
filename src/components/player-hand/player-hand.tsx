@@ -1,5 +1,6 @@
 import { Card } from "components/cards/card";
 import { logRender } from "utils/console";
+import c from "classnames";
 
 import "./player-hand.scss";
 
@@ -23,7 +24,7 @@ export function PlayerHand({
   };
 
   return (
-    <div className="player-hand">
+    <div className={c("player-hand", isActive && "player-hand--expansible")}>
       {player &&
         cards.map(({ card, status }) => {
           return (

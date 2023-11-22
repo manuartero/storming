@@ -7,32 +7,40 @@ import { coordinates } from "models/tiles";
 
 import "./tile.scss";
 
-interface Props {
+type Props = {
   id: TileID;
   status?: TileStatus;
   terrain?: TerrainType;
   building?: BuildingType;
   owner?: PlayerType;
+  activePlayer?: PlayerType;
   children?: React.ReactNode;
   onClick: (tileID: Coordinates) => void;
-}
+};
 
 export function Tile({
   id,
   terrain,
   building,
   owner,
+  activePlayer,
   status,
   children,
   onClick,
-}: Props): JSX.Element {
+}: Props) {
   const tileID = coordinates(id);
 
   /* debug: turn on debug ID */
   const debugTileID = false;
 
   return (
-    <div className={c("tile", status === "available" && "tile--available")}>
+    <div
+      className={c(
+        "tile",
+        status && `tile--${status}`,
+        activePlayer && status === "available" && `tile--${activePlayer}`
+      )}
+    >
       {debugTileID && <span className="tile__id">{id}</span>}
       {terrain === "mountain" && (
         <MountainSvg className={c("tile__terrain", "tile__terrain-mountain")} />

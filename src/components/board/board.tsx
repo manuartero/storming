@@ -7,10 +7,11 @@ import "./board.scss";
 
 type Props = {
   state: VisualBoard;
+  activePlayer?: PlayerType;
   onTileClick: (titleID: Coordinates) => void;
 };
 
-function Board({ state, onTileClick }: Props) {
+export function Board({ state, activePlayer, onTileClick }: Props) {
   logRender("Board");
 
   const renderRow = (n: -3 | -2 | -1 | 0 | 1 | 2 | 3) =>
@@ -24,6 +25,7 @@ function Board({ state, onTileClick }: Props) {
           terrain={s.terrain}
           building={s.building?.type}
           owner={s.building?.owner || s.piece?.owner}
+          activePlayer={activePlayer}
           onClick={onTileClick}
         >
           {s.piece && <Piece type={s.piece.type} owner={s.piece.owner} />}
@@ -43,8 +45,6 @@ function Board({ state, onTileClick }: Props) {
     </div>
   );
 }
-
-export default Board;
 
 function row(n: -3 | -2 | -1 | 0 | 1 | 2 | 3): TileID[] {
   return TILES.filter((id) => coordinates(id).y === n);

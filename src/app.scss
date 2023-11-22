@@ -1,10 +1,13 @@
+@use '/src/styles/colors.scss';
+@use "/src/styles/animations.scss";
+
 #root {
-  background-color: #fff;
+  background-color: colors.$white;
 
   .game {
     display: grid;
     grid-template-columns: 0.5fr 2fr 0.5fr;
-    grid-template-rows: 0.2fr 2fr 0.8fr;
+    grid-template-rows: auto;
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
@@ -21,8 +24,11 @@
     grid-area: timeline;
   }
 
-  .board {
+  .board-container {
     grid-area: board;
+    display: flex;
+    justify-content: center;
+
   }
 
   .marketplace {
@@ -32,11 +38,10 @@
   .player-hand {
     grid-area: player-hand;
   }
-
 }
 
-
-.clickable, .expansible {
+.clickable,
+.expansible {
   cursor: pointer;
 }
 
@@ -45,17 +50,17 @@
 }
 
 .player {
-  background-color: #fffaaf;
+  background-color: colors.$player-secondary;
 }
 
 .enemy1 {
-  background-color: #ffafaf;
+  background-color: colors.$enemy1-secondary;
 }
 
 .enemy2 {
-  background-color: #afafff;
+  background-color: colors.$enemy2-secondary;
 }
 
 .enemy3 {
-  background-color: #afffaf;
+  background-color: colors.$enemy3-secondary;
 }
