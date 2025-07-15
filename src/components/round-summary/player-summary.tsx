@@ -15,7 +15,7 @@ function PlayerSummary({
   active,
   clickable,
   onClick,
-}: Props): JSX.Element {
+}: Props) {
   return (
     <div
       onClick={() => clickable && onClick(player)}

@@ -1,8 +1,8 @@
-import { Dialog } from "elements";
 import c from "classnames";
+import { Dialog } from "elements";
 
-import "./option-dialog.scss";
 import { CardSilhouette } from "../cards";
+import "./option-dialog.scss";
 
 interface Props {
   onSoldierOption: () => void;
@@ -17,7 +17,7 @@ export function RecruitDialog({
   onSoldierOption,
   onKnightOption,
   onClose,
-}: Props): JSX.Element {
+}: Props) {
   return (
     <Dialog size="small" onClose={onClose}>
       <div className="build-dialog">

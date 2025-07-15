@@ -5,7 +5,7 @@ import PlayerSummary from "./player-summary";
 import "./round-summary.scss";
 
 
-function RoundSummary(): JSX.Element {
+function RoundSummary() {
   logRender("RoundSummary");
 
   const gameContext = useGameContext();

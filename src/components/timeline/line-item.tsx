@@ -7,7 +7,7 @@ type Props = {
   commited: boolean;
 };
 
-export function ActionLineItem({ card, commited }: Props): JSX.Element {
+export function ActionLineItem({ card, commited }: Props) {
   return (
     <div
       className={c(

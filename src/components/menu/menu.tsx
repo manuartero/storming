@@ -13,7 +13,7 @@ function SavegameLoadItem({
 }: {
   savegame: Savegame;
   onLoad: (gameContext: GameContext) => void;
-}): JSX.Element {
+}) {
   const name = () => {
     return new Date(parseInt(savegame.createdAt)).toLocaleDateString();
   };
@@ -29,7 +29,7 @@ function SavegameLoadItem({
   );
 }
 
-export function Menu(): JSX.Element {
+export function Menu() {
   logRender("Menu");
 
   const gameContext = useGameContext();

@@ -1,8 +1,8 @@
-@use '/src/styles/colors.scss';
+@use "/src/styles/colors.scss";
 
 @mixin box-shadow($color) {
   box-shadow: inset -1px -3px 0px $color;
-  background: #FFFFFF; // override
+  background: #ffffff; // override
 }
 
 .button {

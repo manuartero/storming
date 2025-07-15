@@ -8,7 +8,7 @@ interface IconCardProps {
   onClick?: () => void;
 }
 
-function IconCard({ card, available, onClick }: IconCardProps): JSX.Element {
+function IconCard({ card, available, onClick }: IconCardProps) {
   if (card?.cardType === "actionCard") {
     return ActionIconCard({ card });
   }

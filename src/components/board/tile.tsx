@@ -1,9 +1,9 @@
 import c from "classnames";
-import { ReactComponent as ForestSvg } from "./assets/forest.svg";
-import { ReactComponent as HexagonSvg } from "./assets/hexagon.svg";
-import { ReactComponent as LakeSvg } from "./assets/lake.svg";
-import { ReactComponent as MountainSvg } from "./assets/mountain.svg";
 import { coordinates } from "models/tiles";
+import ForestSvg from "./assets/forest.svg?react";
+import HexagonSvg from "./assets/hexagon.svg?react";
+import LakeSvg from "./assets/lake.svg?react";
+import MountainSvg from "./assets/mountain.svg?react";
 
 import "./tile.scss";
 

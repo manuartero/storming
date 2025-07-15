@@ -1,6 +1,6 @@
+import c from "classnames";
 import { Card } from "components/cards/card";
 import { logRender } from "utils/console";
-import c from "classnames";
 
 import "./player-hand.scss";
 
@@ -16,7 +16,7 @@ export function PlayerHand({
   isActive = false,
   player = undefined,
   onClick,
-}: Props): JSX.Element {
+}: Props) {
   logRender("PlayerHand");
 
   const considerOnClickIfActive = (cardId: CardId) => {
