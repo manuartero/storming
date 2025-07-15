@@ -1,7 +1,6 @@
-@use "/src/styles/colors.scss";
 @use "tile-size.scss" as *;
 
-$forbidden-tile: rgba(190, 88, 88, 0.5);
+$forbidden-tile: #be585880;
 
 $horizontal-padding: calc($TILE_SIZE/ 30);
 
@@ -9,16 +8,19 @@ $tile-stroke: 3px;
 $default-opacity: 0.7;
 
 .tile--player {
-  --playerColor: #{colors.$player-primary};
+  --playerColor: var(--player-primary);
 }
+
 .tile--enemy1 {
-  --playerColor: #{colors.$enemy1-primary};
+  --playerColor: var(--enemy1-primary);
 }
+
 .tile--enemy2 {
-  --playerColor: #{colors.$enemy2-primary};
+  --playerColor: var(--enemy2-primary);
 }
+
 .tile--enemy3 {
-  --playerColor: #{colors.$enemy3-primary};
+  --playerColor: var(--enemy3-primary);
 }
 
 @mixin setBackgroundImage($element, $image) {
@@ -84,7 +86,7 @@ $default-opacity: 0.7;
 
     path {
       stroke-width: $tile-stroke;
-      stroke: colors.$base-grey;
+      stroke: var(--base-grey);
     }
 
     &--forbidden {

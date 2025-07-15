@@ -1,8 +1,7 @@
-@use '/src/styles/colors.scss';
 @use "/src/styles/animations.scss";
 
 #root {
-  background-color: colors.$white;
+  background-color: var(--white);
 
   .game {
     display: grid;
@@ -28,7 +27,6 @@
     grid-area: board;
     display: flex;
     justify-content: center;
-
   }
 
   .marketplace {
@@ -50,17 +48,17 @@
 }
 
 .player {
-  background-color: colors.$player-secondary;
+  background-color: var(--player-secondary);
 }
 
 .enemy1 {
-  background-color: colors.$enemy1-secondary;
+  background-color: var(--enemy1-secondary);
 }
 
 .enemy2 {
-  background-color: colors.$enemy2-secondary;
+  background-color: var(--enemy2-secondary);
 }
 
 .enemy3 {
-  background-color: colors.$enemy3-secondary;
+  background-color: var(--enemy3-secondary);
 }

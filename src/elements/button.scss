@@ -1,8 +1,6 @@
-@use "/src/styles/colors.scss";
-
 @mixin box-shadow($color) {
   box-shadow: inset -1px -3px 0px $color;
-  background: #ffffff; // override
+  background: var(--white);
 }
 
 .button {
@@ -11,11 +9,11 @@
 
   font-weight: bold;
 
-  border: 2px solid colors.$darkest-grey;
+  border: 2px solid var(--darkest-grey);
   border-radius: 12px;
 
   &--disabled {
-    border: 2px solid colors.$base-grey;
+    border: 2px solid var(--base-grey);
     box-shadow: none !important;
   }
 
@@ -27,17 +25,17 @@
 }
 
 .button.player {
-  @include box-shadow(colors.$player-primary);
+  @include box-shadow(var(--player-primary));
 }
 
 .button.enemy1 {
-  @include box-shadow(colors.$enemy1-primary);
+  @include box-shadow(var(--enemy1-primary));
 }
 
 .button.enemy2 {
-  @include box-shadow(colors.$enemy2-primary);
+  @include box-shadow(var(--enemy2-primary));
 }
 
 .button.enemy3 {
-  @include box-shadow(colors.$enemy3-primary);
+  @include box-shadow(var(--enemy3-primary));
 }

@@ -1,7 +1,5 @@
-@use '/src/styles/colors.scss';
-
 @mixin action-icn($action) {
-  background-image: url('./assets/' + $action + '-bg.svg');
+  background-image: url("./assets/" + $action + "-bg.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -16,48 +14,48 @@
 
   &--player {
     div {
-      outline: 3px solid colors.$player-primary;
+      outline: 3px solid var(--player-primary);
     }
   }
 
   &--enemy1 {
     div {
-      outline: 3px solid colors.$enemy1-primary;
+      outline: 3px solid var(--enemy1-primary);
     }
   }
 
   &--enemy2 {
     div {
-      outline: 3px solid colors.$enemy2-primary;
+      outline: 3px solid var(--enemy2-primary);
     }
   }
 
   &--enemy3 {
     div {
-      outline: 3px solid colors.$enemy3-primary;
+      outline: 3px solid var(--enemy3-primary);
     }
   }
 
   &__image {
     width: 60px;
     height: 60px;
-    border: 3px solid colors.$base-grey;
+    border: 3px solid var(--base-grey);
     border-radius: 50%;
 
     &--build {
-      @include action-icn('build');
+      @include action-icn("build");
     }
 
     &--diplo {
-      @include action-icn('diplo');
+      @include action-icn("diplo");
     }
 
     &--move {
-      @include action-icn('move');
+      @include action-icn("move");
     }
 
     &--recruit {
-      @include action-icn('recruit');
+      @include action-icn("recruit");
     }
   }
 
@@ -66,5 +64,4 @@
     font-weight: 600;
     padding-top: 6px;
   }
-
 }

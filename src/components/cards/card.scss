@@ -1,6 +1,5 @@
 @use "/src/styles/fonts.scss";
 @use "/src/styles/shadows.scss";
-@use "/src/styles/colors.scss";
 
 $card-text-content-width: 120px;
 
@@ -22,7 +21,7 @@ $card-text-content-width: 120px;
   width: 180px;
   height: 280px;
   padding: 36px 24px;
-  background: colors.$white;
+  background: var(--white);
   margin-top: 2vh;
   margin-bottom: 2vh;
   @include shadows.simple-box-shadow();
@@ -30,16 +29,16 @@ $card-text-content-width: 120px;
 
 .action-card {
   &--player {
-    --playerColor: #{colors.$player-primary};
+    --playerColor: var(--player-primary);
   }
   &--enemy1 {
-    --playerColor: #{colors.$enemy1-primary};
+    --playerColor: var(--enemy1-primary);
   }
   &--enemy2 {
-    --playerColor: #{colors.$enemy2-primary};
+    --playerColor: var(--enemy2-primary);
   }
   &--enemy3 {
-    --playerColor: #{colors.$enemy3-primary};
+    --playerColor: var(--enemy3-primary);
   }
 }
 
@@ -63,7 +62,7 @@ $card-text-content-width: 120px;
   }
 
   &--selected {
-    background-color: colors.$selected-grey;
+    background-color: var(--selected-grey);
   }
 
   .action-card {

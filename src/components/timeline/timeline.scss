@@ -1,5 +1,4 @@
-@use '/src/styles/colors.scss';
-@use '/src/styles/fonts.scss';
+@use "/src/styles/fonts.scss";
 
 .timeline {
   height: 13vh;
@@ -7,15 +6,14 @@
   flex-direction: row;
   flex-wrap: nowrap; // single line
 
-
   &__next {
     flex: 1;
-    background-color: colors.$base-grey;
+    background-color: var(--base-grey);
   }
 
   &__future {
     flex: 1;
-    background-color: colors.$dark-grey;
+    background-color: var(--dark-grey);
   }
 
   &__section {
@@ -49,7 +47,7 @@
 
       // black line
       &::before {
-        content: '';
+        content: "";
         height: 0px;
         width: 100%;
 
@@ -57,9 +55,8 @@
         top: 50%;
         transform: translateY(-50%);
 
-        border-top: 2px solid colors.$darkest-grey;
+        border-top: 2px solid var(--darkest-grey);
       }
     }
   }
-
 }

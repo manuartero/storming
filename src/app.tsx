@@ -9,6 +9,7 @@ import {
 import { GameContextProvider } from "game-context";
 import { StrictMode } from "react";
 
+import "./styles/colors.css";
 import "./app.scss";
 
 export function App() {
