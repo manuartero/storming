@@ -5,8 +5,6 @@ exports[`<Piece /> render: "soldier" piece 1`] = `
   aria-label="player soldier"
   aria-roledescription="game piece"
   class="piece ignore-clicks"
-  data-player="player"
-  data-type="soldier"
   role="img"
 />
 `;

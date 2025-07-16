@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`<CurrentPhase /> render: match snapshot - action 1`] = `
 <DocumentFragment>
@@ -20,23 +20,25 @@ exports[`<CurrentPhase /> render: match snapshot - action 1`] = `
       >
         <div
           aria-disabled="true"
-          class="card card--active action-card action-card--player"
+          aria-label="card player_move_1"
+          aria-pressed="false"
+          class="card card--active actionCard"
         >
           <div
-            class="action-card__icon action-card__icon--move-player"
+            class="actionCardIcon"
           />
           <div
-            class="action-card__title"
+            class="actionCardTitle title"
           >
             move
           </div>
           <div
-            class="action-card__text"
+            class="actionCardText paragraph"
           >
             Move up to two different Units
           </div>
           <div
-            class="action-card__water-mark action-card__water-mark--move"
+            class="actionCardWaterMark"
           />
         </div>
         <button
@@ -71,30 +73,30 @@ exports[`<CurrentPhase /> render: match snapshot - planification 1`] = `
       >
         <div
           aria-disabled="true"
-          class="card card-silhouette"
+          class="card cardSilhouette"
         >
           <div
-            class="card-silhouette__title"
+            class="silhouetteTitle"
           >
             next
           </div>
           <div
-            class="card-silhouette__text"
+            class="silhouetteText"
           >
             Drag here the card you wish to use next round
           </div>
         </div>
         <div
           aria-disabled="true"
-          class="card card-silhouette"
+          class="card cardSilhouette"
         >
           <div
-            class="card-silhouette__title"
+            class="silhouetteTitle"
           >
             future
           </div>
           <div
-            class="card-silhouette__text"
+            class="silhouetteText"
           >
             Drag here the card you wish to use in two rounds
           </div>
@@ -131,44 +133,48 @@ exports[`<CurrentPhase /> render: match snapshot - planification with cards 1`] 
       >
         <div
           aria-disabled="true"
-          class="card card--available action-card action-card--player"
+          aria-label="card player_move_2"
+          aria-pressed="false"
+          class="card card--available actionCard"
         >
           <div
-            class="action-card__icon action-card__icon--move-player"
+            class="actionCardIcon"
           />
           <div
-            class="action-card__title"
+            class="actionCardTitle title"
           >
             move
           </div>
           <div
-            class="action-card__text"
+            class="actionCardText paragraph"
           >
             Move up to two different Units
           </div>
           <div
-            class="action-card__water-mark action-card__water-mark--move"
+            class="actionCardWaterMark"
           />
         </div>
         <div
           aria-disabled="true"
-          class="card card--available action-card action-card--player"
+          aria-label="card player_recruit_1"
+          aria-pressed="false"
+          class="card card--available actionCard"
         >
           <div
-            class="action-card__icon action-card__icon--recruit-player"
+            class="actionCardIcon"
           />
           <div
-            class="action-card__title"
+            class="actionCardTitle title"
           >
             recruit
           </div>
           <div
-            class="action-card__text"
+            class="actionCardText paragraph"
           >
             Recruit units at up to two different Settlements
           </div>
           <div
-            class="action-card__water-mark action-card__water-mark--recruit"
+            class="actionCardWaterMark"
           />
         </div>
         <button

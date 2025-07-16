@@ -3,7 +3,7 @@ import { NewBuilding, upgradeBuilding } from "models/new-building";
 import { useState } from "react";
 import { warnInconsistentState } from "utils/console";
 import { Board } from "./board";
-import BuildDialog from "./build-dialog";
+import { BuildDialog } from "./build-dialog";
 import { inferVisualBoardFromGameContext } from "./infer-visual-board";
 import { RecruitDialog } from "./recruit-dialog";
 

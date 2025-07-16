@@ -7,13 +7,11 @@ exports[`<Tile /> render: button role 1`] = `
   class="tile"
   type="button"
 >
-  <svg
-    class="tile__hexagon"
-  >
-    svg-mock
-  </svg>
   <div
-    class="tile__hexagon__clickable-area clickable"
+    class="strokeLayer"
+  />
+  <div
+    class="innerLayer"
   />
 </button>
 `;

@@ -20,11 +20,10 @@
 }
 
 .dialog {
+  /* anchor */
+  position: relative;
   width: 100%;
   max-width: 768px;
-
-  display: flex;
-  flex-direction: column;
 
   border-radius: 0.75rem;
   padding: 2rem 1.5rem;
@@ -64,10 +63,23 @@
     padding: 1.25rem 0.5rem;
   }
 }
+.exitButton {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
 
 .header {
-  /* TODO */
+  margin: 1.5rem 0;
 }
+
 .content {
-  /* TODO */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
