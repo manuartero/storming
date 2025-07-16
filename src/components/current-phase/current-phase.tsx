@@ -1,7 +1,7 @@
 import c from "classnames";
 import { Button } from "elements";
 import { Card, CardSilhouette } from "components/cards";
-import IconCard from "components/cards/icon-card"; // TODO: deprecated
+
 import { logRender } from "utils/console";
 
 import "./current-phase.scss";

@@ -1,11 +1,11 @@
-@mixin title() {
+.title {
   font-style: normal;
   font-weight: 500;
   font-size: 28px;
   line-height: 33px;
 }
 
-@mixin heading() {
+.heading {
   font-style: normal;
   font-weight: 500;
   font-size: 20px;
@@ -14,7 +14,7 @@
   text-transform: uppercase;
 }
 
-@mixin paragraph() {
+.paragraph {
   font-style: normal;
   font-weight: 100;
   font-size: 12px;

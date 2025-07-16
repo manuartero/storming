@@ -1,5 +1,3 @@
-@use "/src/styles/fonts.scss";
-
 .timeline {
   height: 13vh;
   display: flex;
@@ -34,7 +32,7 @@
       top: 18px;
       left: 12px;
       opacity: 0;
-      @include fonts.heading();
+      // @include fonts.heading();
     }
 
     &__line {

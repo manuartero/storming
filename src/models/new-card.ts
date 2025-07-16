@@ -8,6 +8,10 @@ export function isActionCard(card: Card): card is ActionCard {
   return card.cardType === "actionCard";
 }
 
+export function isEventCard(card: Card): card is EventCard {
+  return card.cardType === "eventCard";
+}
+
 function isActionCardType(
   type: ActionCardType | EventCardType
 ): type is ActionCardType {
