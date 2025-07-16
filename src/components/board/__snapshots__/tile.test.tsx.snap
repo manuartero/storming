@@ -1,16 +1,19 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`<Tile /> render: match snapshot 1`] = `
-<DocumentFragment>
-  <div
-    class="tile"
+exports[`<Tile /> render: button role 1`] = `
+<button
+  aria-disabled="false"
+  aria-label="tile -1,0"
+  class="tile"
+  type="button"
+>
+  <svg
+    class="tile__hexagon"
   >
-    <icon-mock
-      classname="tile__hexagon"
-    />
-    <div
-      class="tile__hexagon__clickable-area clickable"
-    />
-  </div>
-</DocumentFragment>
+    svg-mock
+  </svg>
+  <div
+    class="tile__hexagon__clickable-area clickable"
+  />
+</button>
 `;

@@ -34,12 +34,15 @@ export function Tile({
   const debugTileID = false;
 
   return (
-    <div
+    <button
       className={c(
         "tile",
         status && `tile--${status}`,
         activePlayer && status === "available" && `tile--${activePlayer}`
       )}
+      aria-label={`tile ${id}`}
+      aria-disabled={status === "forbidden"}
+      type="button"
     >
       {debugTileID && <span className="tile__id">{id}</span>}
       {terrain === "mountain" && (
@@ -79,6 +82,6 @@ export function Tile({
       />
 
       {children && <div className="tile__content">{children}</div>}
-    </div>
+    </button>
   );
 }

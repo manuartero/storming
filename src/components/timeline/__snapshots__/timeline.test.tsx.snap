@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`<Timeline /> render: match snapshot 1`] = `
 <DocumentFragment>
@@ -17,7 +17,7 @@ exports[`<Timeline /> render: match snapshot 1`] = `
         class="timeline__section__line"
       >
         <div
-          style="opacity: 0; transform: scale(0) translateZ(0);"
+          style="opacity: 0; transform: scale(0);"
         >
           <div
             class="line-item line-item--commited"
@@ -28,7 +28,7 @@ exports[`<Timeline /> render: match snapshot 1`] = `
           </div>
         </div>
         <div
-          style="opacity: 0; transform: scale(0) translateZ(0);"
+          style="opacity: 0; transform: scale(0);"
         >
           <div
             class="line-item line-item--commited"
@@ -39,7 +39,7 @@ exports[`<Timeline /> render: match snapshot 1`] = `
           </div>
         </div>
         <div
-          style="opacity: 0; transform: scale(0) translateZ(0);"
+          style="opacity: 0; transform: scale(0);"
         >
           <div
             class="line-item line-item--commited"

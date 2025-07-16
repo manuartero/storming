@@ -1,0 +1,42 @@
+.piece {
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  /* FIXME: use relative size to Tile container? 0.6 * 12vh */
+  width: 7.2vh;
+  height: 7.2vh;
+}
+
+.piece[data-type="soldier"][data-player="player"] {
+  background-image: url("./assets/soldier-player.svg");
+}
+
+.piece[data-type="soldier"][data-player="enemy1"] {
+  background-image: url("./assets/soldier-enemy1.svg");
+}
+
+.piece[data-type="soldier"][data-player="enemy2"] {
+  background-image: url("./assets/soldier-enemy2.svg");
+}
+
+.piece[data-type="soldier"][data-player="enemy3"] {
+  background-image: url("./assets/soldier-enemy3.svg");
+}
+
+.piece[data-type="knight"][data-player="player"] {
+  background-image: url("./assets/knight-player.svg");
+}
+
+.piece[data-type="knight"][data-player="enemy1"] {
+  background-image: url("./assets/knight-enemy1.svg");
+}
+
+.piece[data-type="knight"][data-player="enemy2"] {
+  background-image: url("./assets/knight-enemy2.svg");
+}
+
+.piece[data-type="knight"][data-player="enemy3"] {
+  background-image: url("./assets/knight-enemy3.svg");
+}

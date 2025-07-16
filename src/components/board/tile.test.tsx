@@ -1,9 +1,10 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { Tile } from "./tile";
 
 describe("<Tile />", () => {
-  test("render: match snapshot", () => {
-    const { asFragment } = render(<Tile id="-1,0" onClick={jest.fn()} />);
-    expect(asFragment()).toMatchSnapshot();
+  test("render: button role", () => {
+    render(<Tile id="-1,0" onClick={jest.fn()} />);
+    const tile = screen.getByRole("button", { name: "tile -1,0" });
+    expect(tile).toMatchSnapshot();
   });
 });

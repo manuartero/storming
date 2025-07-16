@@ -1,6 +1,6 @@
-import "./piece.scss";
 import c from "classnames";
-import { logRender } from "utils/console";
+
+import styles from "./piece.module.css";
 
 type Props = {
   type?: PieceType;
@@ -8,9 +8,14 @@ type Props = {
 };
 
 export function Piece({ type = "soldier", owner = "player" }: Props) {
-  logRender("Piece");
-
   return (
-    <div className={c("piece", "ignore-clicks", `piece--${type}-${owner}`)} />
+    <div
+      role="img"
+      className={c(styles.piece, "ignore-clicks")}
+      data-type={type}
+      data-player={owner}
+      aria-roledescription="game piece"
+      aria-label={`${owner} ${type}`}
+    />
   );
 }
