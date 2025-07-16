@@ -73,9 +73,9 @@ function PlanningPhase({
         <CardSilhouette card="future" />
       )}
       <Button
-        className={c(activePlayer, buttonDisabled && "button--disabled")}
-        onClick={onSubmitPlan}
+        player={activePlayer}
         disabled={buttonDisabled}
+        onClick={onSubmitPlan}
       >
         GO
       </Button>

@@ -42,8 +42,7 @@ exports[`<CurrentPhase /> render: match snapshot - action 1`] = `
           />
         </div>
         <button
-          class="button"
-          disabled=""
+          class="button disabled"
         >
           SKIP
         </button>
@@ -102,8 +101,7 @@ exports[`<CurrentPhase /> render: match snapshot - planification 1`] = `
           </div>
         </div>
         <button
-          class="button player button--disabled"
-          disabled=""
+          class="button disabled player"
         >
           GO
         </button>
