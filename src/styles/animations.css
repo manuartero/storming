@@ -1,4 +1,3 @@
-// --playerColor
 @keyframes glow {
   0% {
     box-shadow: 0 0 3px var(--playerColor), 0 0 6px var(--playerColor);

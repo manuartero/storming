@@ -1,22 +1,27 @@
 import c from "classnames";
-import type { HTMLAttributes, ReactElement } from "react";
 
-import "./dialog.scss";
+import styles from "./dialog.module.css";
 
-interface Props extends HTMLAttributes<HTMLElement> {
-  children: ReactElement;
+type Props = {
+  title?: string;
   size?: "regular" | "small";
   onClose: () => void;
-}
+} & React.ComponentProps<"div">;
 
-export function Dialog({ children, size = "regular", onClose }: Props) {
+export function Dialog({ title, size = "regular", children, onClose }: Props) {
   return (
-    <div role="dialog" aria-modal="true" className="dialog">
+    <div role="dialog" aria-modal="true" className={c(styles.dialogScreen)}>
       <div
-        className={c(size === "small" ? "dialog--small" : "dialog--regular")}
+        className={c(
+          styles.dialog,
+          size === "small" ? styles.small : styles.regular
+        )}
       >
-        <button onClick={onClose}>X</button>
-        {children}
+        <div className={styles.header}>
+          {title && <h2 className={styles.title}>{title}</h2>}
+          <button onClick={onClose}>X</button>
+        </div>
+        <div className={styles.content}>{children}</div>
       </div>
     </div>
   );
