@@ -1,5 +1,5 @@
 import { useGameContext } from "game-context";
-import { NewBuilding } from "models/new-building";
+import { NewBuilding, upgradeBuilding } from "models/new-building";
 import { useState } from "react";
 import { warnInconsistentState } from "utils/console";
 import { Board } from "./board";
@@ -51,13 +51,10 @@ export function BoardController() {
     setSelectedTile(undefined);
     setBuildingTile(undefined);
     setRecruitingTile(undefined);
+
     gameContext.build({
       tile,
-      building: {
-        ...building,
-        type:
-          building.type === "village" ? ("town" as const) : ("city" as const),
-      },
+      building: upgradeBuilding(building),
     });
   };
 

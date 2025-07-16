@@ -1,0 +1,105 @@
+.tile {
+  --tile-size: 12vh;
+  --tile-stroke: 4px;
+  --tile-border-color: var(--base-grey);
+  --tile-bg: var(--white);
+
+  /* anchor */
+  position: relative;
+  width: var(--tile-size);
+  height: var(--tile-size);
+
+  /* hexagon path */
+  aspect-ratio: 1 / 1;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+
+  border: none;
+  padding: 0;
+  margin: 0 0.25vh;
+  background: transparent;
+  cursor: pointer;
+  isolation: isolate;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.strokeLayer {
+  position: absolute;
+  inset: 0;
+  background: var(--tile-border-color);
+  clip-path: inherit;
+}
+
+/* Inner content hex shape */
+.innerLayer {
+  position: absolute;
+  inset: var(--tile-stroke);
+  background: var(--tile-bg);
+  clip-path: inherit;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+/* debug: turn on at tile.tsx */
+.tileId {
+  position: absolute;
+  background-color: white;
+  z-index: 1;
+}
+
+.available {
+  opacity: 1;
+}
+
+.activePlayer {
+  /* TODO */
+  opacity: 1;
+}
+
+.forbidden {
+  opacity: 0.5;
+  --tile-border-color: var(--forbidden-tile);
+}
+
+.player {
+  --tile-border-color: var(--player-primary);
+  --tile-bg: var(--player-secondary);
+}
+
+.enemy1 {
+  --tile-border-color: var(--enemy1-primary);
+  --tile-bg: var(--enemy1-secondary);
+}
+
+.enemy2 {
+  --tile-border-color: var(--enemy2-primary);
+  --tile-bg: var(--enemy2-secondary);
+}
+
+.enemy3 {
+  --tile-border-color: var(--enemy3-primary);
+  --tile-bg: var(--enemy3-secondary);
+}
+
+.building {
+  width: calc(0.7 * var(--tile-size));
+  height: min(calc(0.7 * var(--tile-size)), 6vh);
+
+  position: absolute;
+  bottom: 2vh;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  pointer-events: none;
+}

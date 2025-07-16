@@ -2,28 +2,28 @@ import { empireSize } from "./empire-size";
 
 const board = {
   "-2,3": {
-    terrain: "field",
-    building: { owner: "player", type: "town" },
+    terrain: undefined,
+    building: { owner: "player", type: "tower" },
     piece: undefined,
   },
   "-1,3": {
-    terrain: "field",
+    terrain: undefined,
     building: undefined,
     piece: undefined,
   },
   "0,3": {
-    terrain: "field",
-    building: { owner: "enemy3", type: "village" },
+    terrain: undefined,
+    building: { owner: "enemy3", type: "tower" },
     piece: undefined,
   },
   "1,3": {
-    terrain: "field",
-    building: { owner: "enemy3", type: "city" },
+    terrain: undefined,
+    building: { owner: "enemy3", type: "castle" },
     piece: undefined,
   },
   "2,3": {
-    terrain: "field",
-    building: { owner: "enemy1", type: "city" },
+    terrain: undefined,
+    building: { owner: "enemy1", type: "castle" },
     piece: undefined,
   },
 } as Board;

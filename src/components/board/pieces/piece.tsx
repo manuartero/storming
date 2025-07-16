@@ -1,4 +1,5 @@
 import c from "classnames";
+import { piecesAssets } from "./assets";
 
 import styles from "./piece.module.css";
 
@@ -8,14 +9,15 @@ type Props = {
 };
 
 export function Piece({ type = "soldier", owner = "player" }: Props) {
+  const icon = piecesAssets[type][owner];
+  
   return (
     <div
       role="img"
       className={c(styles.piece, "ignore-clicks")}
-      data-type={type}
-      data-player={owner}
       aria-roledescription="game piece"
       aria-label={`${owner} ${type}`}
+      style={{ backgroundImage: `url(${icon})` }}
     />
   );
 }

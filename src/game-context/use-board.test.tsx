@@ -36,7 +36,7 @@ function TestingComponent() {
         data-testid="build-on-tile-12"
         onClick={() =>
           buildOnTile({
-            building: { owner: "enemy3", type: "village" },
+            building: { owner: "enemy3", type: "tower" },
             tile: "1,2",
           })
         }

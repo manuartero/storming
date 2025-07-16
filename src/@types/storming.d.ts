@@ -9,7 +9,7 @@ type PlayerType =
   | "enemy3" /* green */;
 
 type PlayerHandCardStatus = "selected" | "available" | "played" | "active";
-type CardStatus = "active"
+type CardStatus = "active";
 
 /**
  * ```ts
@@ -43,12 +43,12 @@ type Piece = {
   owner: PlayerType;
 };
 
-type TerrainType = "field" | "mountain" | "lake" | "forest";
-type BuildingType = "village" | "town" | "city";
+type TerrainType = "mountain" | "lake" | "forest";
+type BuildingType = "tower" | "castle" | "citadel";
 type PieceType = "soldier" | "knight";
 
 interface Tile {
-  terrain: TerrainType;
+  terrain?: TerrainType;
   piece?: Piece;
   building?: Building;
 }

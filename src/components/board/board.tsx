@@ -1,7 +1,7 @@
 import { TILES, coordinates } from "models/tiles";
 import { logRender } from "utils/console";
-import { Piece } from "./piece";
-import { Tile } from "./tile";
+import { Piece } from "./pieces/piece";
+import { Tile } from "./tiles/tile";
 
 import "./board.scss";
 

@@ -1,5 +1,4 @@
-@use 'tile-size.scss' as *;
-
+$TILE_SIZE: 12vh;
 $collapse-rows-y: calc($TILE_SIZE / 5); // 22px aprox
 $row-left-space: calc($TILE_SIZE / 2);
 
@@ -21,7 +20,7 @@ $row-left-space: calc($TILE_SIZE / 2);
     // Loop for collapsing rows
     @for $i from 2 through 7 {
       &:nth-child(#{$i}) {
-        margin-top: $collapse-rows-y * (-1) ;
+        margin-top: $collapse-rows-y * (-1);
       }
     }
 

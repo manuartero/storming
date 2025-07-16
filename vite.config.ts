@@ -17,6 +17,7 @@ export default defineConfig(({ mode }) => {
       open: true,
     },
     build: {
+      assetsInlineLimit: 0, // forces file URL
       outDir: "build",
     },
     plugins: [react(), html({ minify: true }), svgr(), tsconfigPaths()],
