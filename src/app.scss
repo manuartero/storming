@@ -3,10 +3,10 @@
 
   .game {
     display: grid;
-    grid-template-columns: 0.5fr 2fr 0.5fr;
-    grid-template-rows: auto;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-rows: 1fr 6fr 3fr;
     gap: 0px 0px;
-    grid-auto-flow: row;
+
     grid-template-areas:
       "current-phase timeline timeline"
       "current-phase board marketplace"
@@ -15,10 +15,6 @@
 
   .current-phase {
     grid-area: current-phase;
-  }
-
-  .timeline {
-    grid-area: timeline;
   }
 
   .board-container {

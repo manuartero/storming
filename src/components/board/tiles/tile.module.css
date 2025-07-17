@@ -56,7 +56,7 @@
   z-index: 1;
 }
 
-.available {
+.tile.available {
   opacity: 1;
 }
 
@@ -65,27 +65,27 @@
   opacity: 1;
 }
 
-.forbidden {
+.tile.forbidden {
   opacity: 0.5;
   --tile-border-color: var(--forbidden-tile);
 }
 
-.player {
+.tile.player {
   --tile-border-color: var(--player-primary);
   --tile-bg: var(--player-secondary);
 }
 
-.enemy1 {
+.tile.enemy1 {
   --tile-border-color: var(--enemy1-primary);
   --tile-bg: var(--enemy1-secondary);
 }
 
-.enemy2 {
+.tile.enemy2 {
   --tile-border-color: var(--enemy2-primary);
   --tile-bg: var(--enemy2-secondary);
 }
 
-.enemy3 {
+.tile.enemy3 {
   --tile-border-color: var(--enemy3-primary);
   --tile-bg: var(--enemy3-secondary);
 }

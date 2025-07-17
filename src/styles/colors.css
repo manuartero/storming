@@ -1,17 +1,18 @@
 :root {
   --player-primary: #ffca3a;
-  --player-secondary: #fbf3da;
+  --player-secondary: #f6f1e1;
 
   --enemy1-primary: #ff595e;
   --enemy1-secondary: #fdebec;
 
   --enemy2-primary: #6a4c93;
-  --enemy2-secondary: #ccc3d7;
+  --enemy2-secondary: #e7e2ee;
 
   --enemy3-primary: #8ac926;
-  --enemy3-secondary: #e0e9cf;
+  --enemy3-secondary: #ebf3dd;
 
-  --ligh-grey: #0000000d;
+  --lightest-grey: #f0f1f2;
+  --light-grey: #e1e4e7;
   --base-grey: #ced4da;
   --dark-grey: #adb5bd;
   --darkest-grey: #3f4347;

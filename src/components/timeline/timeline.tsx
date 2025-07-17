@@ -1,8 +1,8 @@
-import { logRender } from "utils/console";
-import { ActionLineItem } from "./line-item";
+import c from "classnames";
 import { LayoutGroup, motion } from "framer-motion";
+import { ActionLineItem } from "./line-item";
 
-import "./timeline.scss";
+import styles from "./timeline.module.css";
 
 type Props = {
   next: TimelineCard[];
@@ -10,8 +10,6 @@ type Props = {
 };
 
 export function Timeline({ next, future }: Props) {
-  logRender("Timeline");
-
   const renderLineItems = (section: TimelineCard[]) => {
     return section.map(({ card, commited }) => {
       if (card.cardType === "actionCard")
@@ -34,16 +32,16 @@ export function Timeline({ next, future }: Props) {
   };
 
   return (
-    <div className="timeline">
-      <div className="timeline__next timeline__section">
-        <span className="timeline__section__name">NEXT</span>
-        <div className="timeline__section__line">
+    <div className={styles.timeline}>
+      <div className={c(styles.next, styles.section)}>
+        <span className={styles.sectionName}>NEXT</span>
+        <div className={styles.line}>
           <LayoutGroup id="next-timeline">{renderLineItems(next)}</LayoutGroup>
         </div>
       </div>
-      <div className="timeline__future timeline__section">
-        <span className="timeline__section__name">FUTURE</span>
-        <div className="timeline__section__line">
+      <div className={c(styles.future, styles.section)}>
+        <span className={styles.sectionName}>FUTURE</span>
+        <div className={styles.line}>
           <LayoutGroup id="future-timeline">
             {renderLineItems(future)}
           </LayoutGroup>

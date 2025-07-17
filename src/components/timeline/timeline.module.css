@@ -1,0 +1,125 @@
+.timeline {
+  /** main grid layout */
+  grid-area: timeline;
+  margin-bottom: 1vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap; /* single line */
+}
+
+.next {
+  flex: 1;
+  background-color: var(--lightest-grey);
+}
+
+.future {
+  flex: 1;
+  background-color: var(--light-grey);
+}
+
+.section {
+  position: relative;
+  display: flex;
+  padding: 0 20px;
+  border-radius: 0px 0px 12px 12px;
+
+  &:hover {
+    .sectionName {
+      opacity: 0.4;
+    }
+  }
+}
+
+.sectionName {
+  position: absolute;
+  bottom: 12px;
+  left: 20px;
+  opacity: 0.2;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.line {
+  /** anchor */
+  position: relative;
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  /* black line decoration */
+  &::before {
+    position: absolute;
+    content: "";
+    height: 0px;
+    width: 100%;
+
+    top: 50%;
+    transform: translateY(-50%);
+
+    border-top: 1px solid var(--darkest-grey);
+  }
+}
+
+.lineItem {
+  --item-size: 42px;
+  --content-size: 22px;
+
+  position: relative; /* to .line */
+  top: 50%;
+  transform: translateY(-50%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: var(--item-size);
+  height: var(--item-size);
+  border-radius: 50%;
+  background-color: var(--white);
+}
+
+.lineItem.pending {
+  border: 2px dotted var(--dark-grey);
+}
+
+.lineItem.commited {
+  border: 2px solid var(--dark-grey);
+}
+
+.lineItem.expansible {
+  cursor: pointer;
+  &:hover {
+    .lineItemContent {
+      width: 90%;
+      height: 90%;
+    }
+  }
+}
+
+.lineItemContent {
+  --player-color: var(--base-grey);
+
+  width: var(--content-size);
+  height: var(--content-size);
+  border-radius: 50%;
+  background-color: var(--player-color);
+
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+
+.lineItemContent.player {
+  --player-color: var(--player-primary);
+}
+
+.lineItemContent.enemy1 {
+  --player-color: var(--enemy1-primary);
+}
+
+.lineItemContent.enemy2 {
+  --player-color: var(--enemy2-primary);
+}
+
+.lineItemContent.enemy3 {
+  --player-color: var(--enemy3-primary);
+}
