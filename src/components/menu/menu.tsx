@@ -2,36 +2,11 @@ import { Button, Dialog } from "elements";
 import { useGameContext } from "game-context";
 import { useState } from "react";
 import { listSavegames, loadSavegame, savegame } from "services/db";
-import { logRender } from "utils/console";
 import MenuIcon from "./menu-icon.svg";
 
-import "./menu.scss";
-
-function SavegameLoadItem({
-  savegame,
-  onLoad,
-}: {
-  savegame: Savegame;
-  onLoad: (gameContext: GameContext) => void;
-}) {
-  const name = () => {
-    return new Date(parseInt(savegame.createdAt)).toLocaleDateString();
-  };
-
-  return (
-    <Button
-      onClick={() => {
-        onLoad(savegame.gameContext);
-      }}
-    >
-      {name()} ({savegame.playerEmpireSize})
-    </Button>
-  );
-}
+import styles from "./menu.module.css";
 
 export function Menu() {
-  logRender("Menu");
-
   const gameContext = useGameContext();
   const [showMenuDialog, setShowMenuDialog] = useState(false);
   const [savegames, setSavegames] = useState<Savegame[]>([]);
@@ -52,17 +27,19 @@ export function Menu() {
 
   return (
     <>
-      <div className="menu">
+      <div className={styles.menu}>
         <img src={MenuIcon} alt="Menu Icon" onClick={openMenuDialog} />
       </div>
+
       {showMenuDialog && (
-        <Dialog onClose={closeMenuDialog}>
-          {savegames.length === 0 ? (
+        <Dialog size="small" title="Menu" onClose={closeMenuDialog}>
+          {savegames.length === 0 && (
             <>
               <Button onClick={saveHandler}>SAVE GAME</Button>
               <Button onClick={loadHandler}>LOAD GAME</Button>
             </>
-          ) : (
+          )}
+          {savegames.length > 0 && (
             <>
               {savegames.map((savegame) => (
                 <SavegameLoadItem
@@ -76,5 +53,26 @@ export function Menu() {
         </Dialog>
       )}
     </>
+  );
+}
+
+function SavegameLoadItem({
+  savegame,
+  onLoad,
+}: {
+  savegame: Savegame;
+  onLoad: (gameContext: GameContext) => void;
+}) {
+  const name = () =>
+    new Date(parseInt(savegame.createdAt)).toLocaleDateString();
+
+  return (
+    <Button
+      onClick={() => {
+        onLoad(savegame.gameContext);
+      }}
+    >
+      {name()} ({savegame.playerEmpireSize})
+    </Button>
   );
 }

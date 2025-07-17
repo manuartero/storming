@@ -1,13 +1,14 @@
 .marketplace {
-  width: 100%;
-  height: 100%;
-  background-color: var(--base-grey);
+  /* main grid layout */
+  grid-area: marketplace;
+
+  border: 2px solid var(--base-grey);
 
   position: relative;
 
   &::before {
-    content: "MARKETPLACE";
     position: absolute;
+    content: "MARKETPLACE";
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

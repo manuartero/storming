@@ -1,49 +1,33 @@
 import c from "classnames";
-import starPng from "./assets/star.png";
 
-import "./player-summary.scss";
+import styles from "./player-summary.module.css";
 
-interface Props {
+type Props = {
   player: PlayerStatus;
   active?: boolean;
   clickable?: boolean;
   onClick: (player: PlayerStatus) => void;
-}
+};
 
-function PlayerSummary({
-  player,
-  active,
-  clickable,
-  onClick,
-}: Props) {
+export function PlayerSummary({ player, active, clickable, onClick }: Props) {
   return (
     <div
       onClick={() => clickable && onClick(player)}
       className={c(
-        "player-summary",
-        clickable && `player-summary--clickable`,
-        active && `player-summary--active`
+        styles.playerSummary,
+        clickable && styles.clickable,
+        active && styles.active
       )}
     >
-      <div className="player-summary__info">
-        <div
-          className={c(
-            "player-summary__info__avatar",
-            `player-summary__info__avatar--${player.player}`
-          )}
-        />
-        <div className="player-summary__info__points">
-          {player.points}
-          <img src={starPng} />
-        </div>
+      <div className={styles.playerSummaryInfo}>
+        <div className={c(styles.avatar)} />
+        <div className={styles.points}>{player.points}</div>
       </div>
-      <div className="player-summary__extra">
-        <div className="player-summary__extra__greatest-empire">
+      <div className={styles.extra}>
+        <div className={styles.greatestEmpire}>
           {player.greatestEmpirePoint ? "GREATEST EMPIRE" : ""}
         </div>
       </div>
     </div>
   );
 }
-
-export default PlayerSummary;

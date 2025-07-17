@@ -1,35 +1,27 @@
-#root {
-  background-color: var(--white);
+.game {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-rows: 1fr 6fr 3fr;
+  gap: 0px 0px;
 
-  .game {
-    display: grid;
-    grid-template-columns: 1fr 4fr 1fr;
-    grid-template-rows: 1fr 6fr 3fr;
-    gap: 0px 0px;
+  grid-template-areas:
+    "current-phase timeline timeline"
+    "current-phase board marketplace"
+    "round-summary player-hand player-hand";
+}
 
-    grid-template-areas:
-      "current-phase timeline timeline"
-      "current-phase board marketplace"
-      "current-phase player-hand player-hand";
-  }
+.board-container {
+  grid-area: board;
+  display: flex;
+  justify-content: center;
+}
 
-  .current-phase {
-    grid-area: current-phase;
-  }
+.marketplace {
+  grid-area: marketplace;
+}
 
-  .board-container {
-    grid-area: board;
-    display: flex;
-    justify-content: center;
-  }
-
-  .marketplace {
-    grid-area: marketplace;
-  }
-
-  .player-hand {
-    grid-area: player-hand;
-  }
+.player-hand {
+  grid-area: player-hand;
 }
 
 .clickable,

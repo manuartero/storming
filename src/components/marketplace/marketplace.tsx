@@ -1,5 +1,11 @@
-import "./marketplace.scss";
+import styles from "./marketplace.module.css";
 
 export function Marketplace() {
-  return <div className="marketplace"></div>;
+  return (
+    <section
+      role="region"
+      className={styles.marketplace}
+      aria-label="marketplace"
+    ></section>
+  );
 }

@@ -1,0 +1,8 @@
+.roundSummary {
+  /* main grid layout */
+  grid-area: round-summary;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
