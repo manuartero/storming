@@ -40,18 +40,18 @@ export function Tile({
       className={c(
         styles.tile,
         status && styles[status],
-        status === "available" && activePlayer && styles[activePlayer],
-        status !== "available" && owner && styles[owner],
-        owner && activePlayer && owner === activePlayer && styles.activePlayer
+        owner && styles[owner],
+        owner && styles.controlled,
+        status === "available" && activePlayer && styles[activePlayer]
       )}
       aria-label={`tile ${id}`}
       aria-disabled={status === "forbidden"}
       type="button"
       onClick={() => onClick(coordinates(id))}
     >
-      <div className={styles.strokeLayer} />
+      <div className={styles.strokeLayer} aria-hidden="true" />
 
-      <div className={styles.innerLayer}>
+      <div className={styles.innerLayer} aria-hidden="true">
         {terrain && <Terrain variant={terrain} />}
         {debugTileID && <span className={styles.tileId}>{id}</span>}
       </div>

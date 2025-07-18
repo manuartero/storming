@@ -23,9 +23,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: crosshair; /* + */
 
   &:hover {
     opacity: 1;
+    transform: translateY(-2px);
   }
 }
 
@@ -33,8 +35,7 @@
   position: absolute;
   clip-path: inherit;
   inset: 0;
-
-  /* border-color */
+  /* hexagon border-color */
   background: var(--base-grey);
 }
 
@@ -64,6 +65,8 @@
 
 .tile.available {
   cursor: pointer;
+  pointer-events: auto;
+
   & .strokeLayer {
     background: var(--tile-border-color);
   }
@@ -75,9 +78,7 @@
   }
 }
 
-.tile.activePlayer {
-  opacity: 1;
-
+.tile.controlled {
   & .innerLayer {
     background: var(--tile-bg);
   }
