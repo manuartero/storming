@@ -1,6 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { Tile } from "./tile";
 
+jest.mock("./use-piece-offset");
+
 describe("<Tile />", () => {
   test("render: button role", () => {
     render(<Tile id="-1,0" onClick={jest.fn()} />);

@@ -1,6 +1,8 @@
 import { render } from "@testing-library/react";
 import { Board } from "./board";
 
+jest.mock("./tiles/use-piece-offset");
+
 describe("<Board />", () => {
   test("render: match snapshot", () => {
     const { asFragment } = render(

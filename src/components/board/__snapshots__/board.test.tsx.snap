@@ -19,9 +19,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -32,22 +34,26 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
       <button
         aria-disabled="false"
         aria-label="tile 0,-3"
-        class="tile available enemy1"
+        class="tile available enemy1 controlled"
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
         <div
@@ -64,9 +70,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -77,9 +85,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -96,9 +106,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -109,34 +121,37 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
       <button
         aria-disabled="false"
         aria-label="tile -1,-2"
-        class="tile available enemy1"
+        class="tile available enemy1 controlled"
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
+        />
+        <div
+          class="piece"
         >
           <div
-            class="content"
-          >
-            <div
-              aria-label="enemy1 soldier"
-              aria-roledescription="game piece"
-              class="piece"
-              role="img"
-            />
-          </div>
+            aria-label="enemy1 soldier"
+            aria-roledescription="game piece"
+            class="piece"
+            role="img"
+          />
         </div>
       </button>
       <button
@@ -146,9 +161,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -159,9 +176,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -172,9 +191,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -191,9 +212,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -204,9 +227,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -217,9 +242,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         >
           <div
@@ -237,9 +264,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -250,9 +279,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -263,9 +294,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -276,9 +309,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -291,13 +326,15 @@ exports[`<Board /> render: match snapshot 1`] = `
       <button
         aria-disabled="false"
         aria-label="tile -4,0"
-        class="tile available player"
+        class="tile available player controlled"
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
         <div
@@ -310,25 +347,26 @@ exports[`<Board /> render: match snapshot 1`] = `
       <button
         aria-disabled="false"
         aria-label="tile -3,0"
-        class="tile available player"
+        class="tile available player controlled"
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
+        />
+        <div
+          class="piece"
         >
           <div
-            class="content"
-          >
-            <div
-              aria-label="player soldier"
-              aria-roledescription="game piece"
-              class="piece"
-              role="img"
-            />
-          </div>
+            aria-label="player soldier"
+            aria-roledescription="game piece"
+            class="piece"
+            role="img"
+          />
         </div>
       </button>
       <button
@@ -338,9 +376,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -351,9 +391,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -364,9 +406,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -377,46 +421,51 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
       <button
         aria-disabled="false"
         aria-label="tile 2,0"
-        class="tile available enemy2"
+        class="tile available enemy2 controlled"
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
+        />
+        <div
+          class="piece"
         >
           <div
-            class="content"
-          >
-            <div
-              aria-label="enemy2 soldier"
-              aria-roledescription="game piece"
-              class="piece"
-              role="img"
-            />
-          </div>
+            aria-label="enemy2 soldier"
+            aria-roledescription="game piece"
+            class="piece"
+            role="img"
+          />
         </div>
       </button>
       <button
         aria-disabled="false"
         aria-label="tile 3,0"
-        class="tile available enemy2"
+        class="tile available enemy2 controlled"
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
         <div
@@ -439,9 +488,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -452,9 +503,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -465,9 +518,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -478,9 +533,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -491,9 +548,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         >
           <div
@@ -511,9 +570,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -524,9 +585,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -543,9 +606,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -556,9 +621,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -569,34 +636,37 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
       <button
         aria-disabled="false"
         aria-label="tile 0,2"
-        class="tile available enemy3"
+        class="tile available enemy3 controlled"
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
+        />
+        <div
+          class="piece"
         >
           <div
-            class="content"
-          >
-            <div
-              aria-label="enemy3 soldier"
-              aria-roledescription="game piece"
-              class="piece"
-              role="img"
-            />
-          </div>
+            aria-label="enemy3 soldier"
+            aria-roledescription="game piece"
+            class="piece"
+            role="img"
+          />
         </div>
       </button>
       <button
@@ -606,9 +676,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -619,9 +691,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -638,9 +712,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -651,22 +727,26 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
       <button
         aria-disabled="false"
         aria-label="tile 0,3"
-        class="tile available enemy3"
+        class="tile available enemy3 controlled"
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
         <div
@@ -683,9 +763,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>
@@ -696,9 +778,11 @@ exports[`<Board /> render: match snapshot 1`] = `
         type="button"
       >
         <div
+          aria-hidden="true"
           class="strokeLayer"
         />
         <div
+          aria-hidden="true"
           class="innerLayer"
         />
       </button>

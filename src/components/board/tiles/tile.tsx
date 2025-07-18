@@ -3,7 +3,7 @@ import { coordinates } from "models/tiles";
 import { tileAssets } from "./assets";
 
 import styles from "./tile.module.css";
-import { useRef } from "react";
+import { usePieceOffset } from "./use-piece-offset";
 
 type Props = React.PropsWithChildren<{
   id: TileID;
@@ -28,11 +28,7 @@ export function Tile({
   /* debug: turn on debug ID */
   const debugTileID = false;
 
-  // add a minor random positioning offset to the piece to simulate pieces on a board
-  const pieceOffsetRef = useRef<"left" | "right">(
-    children ? (Math.random() > 0.5 ? "left" : "right") : "left"
-  );
-  const pieceStyle = children ? { [pieceOffsetRef.current]: "4vh" } : undefined;
+  const pieceStyle = usePieceOffset(children);
 
   return (
     <button

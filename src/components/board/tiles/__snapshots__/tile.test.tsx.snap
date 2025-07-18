@@ -4,13 +4,15 @@ exports[`<Tile /> render: building 1`] = `
 <button
   aria-disabled="false"
   aria-label="tile -1,0"
-  class="tile player"
+  class="tile player controlled"
   type="button"
 >
   <div
+    aria-hidden="true"
     class="strokeLayer"
   />
   <div
+    aria-hidden="true"
     class="innerLayer"
   />
   <div
@@ -30,9 +32,11 @@ exports[`<Tile /> render: button role 1`] = `
   type="button"
 >
   <div
+    aria-hidden="true"
     class="strokeLayer"
   />
   <div
+    aria-hidden="true"
     class="innerLayer"
   />
 </button>
