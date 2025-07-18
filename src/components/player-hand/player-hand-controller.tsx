@@ -1,11 +1,10 @@
 import { useGameContext } from "game-context";
 import { isActionCard } from "models/new-card";
-import { logRender, warnInconsistentState } from "utils/console";
+import { warnInconsistentState } from "utils/console";
 import { inferPlayerHandsFromGameContext } from "./infer-player-hands";
 import { PlayerHand } from "./player-hand";
 
 export function PlayerHandController() {
-  logRender("PlayerHandController");
   const gameContext = useGameContext();
 
   if (!gameContext.activePlayer) {

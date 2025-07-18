@@ -1,31 +1,24 @@
 import { getAvailableTilesForActionCard } from "game-logic/available-tiles";
 
 /**
+ * ```
  * {
  *   ...
  *   [tileID]: {
  *     terrain: '';
  *     piece: {};
  *     building: {};
- *     +status: "idle" | "selected" | "available" | "forbidden"
+ *     +status: "selected" | "available" | "forbidden"
  *   }
  * }
+ * ```
  */
 export function inferVisualBoardFromGameContext(
   { board, activeCard }: { board: Board; activeCard: Card | undefined },
   selectedTile?: TileID
-): VisualBoard {
+) {
   if (!activeCard) {
-    return Object.entries(board).reduce(
-      (acc, [tileId, tile]) => ({
-        ...acc,
-        [tileId]: {
-          ...tile,
-          status: "idle",
-        },
-      }),
-      {} as VisualBoard
-    );
+    return board as VisualBoard;
   }
 
   const availableTiles =
@@ -41,7 +34,10 @@ export function inferVisualBoardFromGameContext(
     if (tileId === selectedTile) {
       return "selected";
     }
-    return availableTiles.includes(tileId as TileID) ? "available" : "idle";
+    if (availableTiles.includes(tileId)) {
+      return "available";
+    }
+    return undefined;
   };
 
   return Object.entries(board).reduce(

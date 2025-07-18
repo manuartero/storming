@@ -2,28 +2,30 @@
 
 exports[`<Timeline /> render: match snapshot 1`] = `
 <DocumentFragment>
-  <div
+  <section
+    aria-label="timeline"
     class="timeline"
+    role="region"
   >
     <div
-      class="timeline__next timeline__section"
+      class="next section"
     >
       <span
-        class="timeline__section__name"
+        class="sectionName"
       >
         NEXT
       </span>
       <div
-        class="timeline__section__line"
+        class="line"
       >
         <div
           style="opacity: 0; transform: scale(0);"
         >
           <div
-            class="line-item line-item--commited"
+            class="lineItem committed"
           >
             <div
-              class="line-item__content line-item__content--enemy1"
+              class="lineItemContent enemy1"
             />
           </div>
         </div>
@@ -31,10 +33,10 @@ exports[`<Timeline /> render: match snapshot 1`] = `
           style="opacity: 0; transform: scale(0);"
         >
           <div
-            class="line-item line-item--commited"
+            class="lineItem committed"
           >
             <div
-              class="line-item__content line-item__content--enemy2"
+              class="lineItemContent enemy2"
             />
           </div>
         </div>
@@ -42,27 +44,27 @@ exports[`<Timeline /> render: match snapshot 1`] = `
           style="opacity: 0; transform: scale(0);"
         >
           <div
-            class="line-item line-item--commited"
+            class="lineItem committed"
           >
             <div
-              class="line-item__content line-item__content--enemy3"
+              class="lineItemContent enemy3"
             />
           </div>
         </div>
       </div>
     </div>
     <div
-      class="timeline__future timeline__section"
+      class="future section"
     >
       <span
-        class="timeline__section__name"
+        class="sectionName"
       >
         FUTURE
       </span>
       <div
-        class="timeline__section__line"
+        class="line"
       />
     </div>
-  </div>
+  </section>
 </DocumentFragment>
 `;

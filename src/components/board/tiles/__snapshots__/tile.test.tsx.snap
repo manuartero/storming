@@ -1,5 +1,27 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
+exports[`<Tile /> render: building 1`] = `
+<button
+  aria-disabled="false"
+  aria-label="tile -1,0"
+  class="tile player"
+  type="button"
+>
+  <div
+    class="strokeLayer"
+  />
+  <div
+    class="innerLayer"
+  />
+  <div
+    aria-label="player tower"
+    aria-roledescription="game building"
+    class="building"
+    role="img"
+  />
+</button>
+`;
+
 exports[`<Tile /> render: button role 1`] = `
 <button
   aria-disabled="false"

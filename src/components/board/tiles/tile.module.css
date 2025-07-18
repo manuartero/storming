@@ -18,7 +18,6 @@
   padding: 0;
   margin: 0 0.25vh;
   background: transparent;
-  cursor: pointer;
   opacity: 0.7;
 
   display: flex;
@@ -33,10 +32,10 @@
 .strokeLayer {
   position: absolute;
   clip-path: inherit;
+  inset: 0;
 
   /* border-color */
-  inset: 0;
-  background: var(--tile-border-color);
+  background: var(--base-grey);
 }
 
 /* Inner content hex shape */
@@ -48,7 +47,7 @@
   inset: var(--tile-stroke);
 
   /* background color */
-  background: var(--tile-bg);
+  background: var(--white);
 
   display: flex;
   justify-content: center;
@@ -64,12 +63,24 @@
 }
 
 .tile.available {
-  opacity: 1;
+  cursor: pointer;
+  & .strokeLayer {
+    background: var(--tile-border-color);
+  }
 }
 
-.activePlayer {
-  /* TODO */
+.tile.selected {
+  & .strokeLayer {
+    background: var(--tile-border-color);
+  }
+}
+
+.tile.activePlayer {
   opacity: 1;
+
+  & .innerLayer {
+    background: var(--tile-bg);
+  }
 }
 
 .tile.forbidden {
@@ -107,6 +118,13 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+
+  pointer-events: none;
+}
+
+.piece {
+  position: absolute;
+  bottom: 4vh;
 
   pointer-events: none;
 }

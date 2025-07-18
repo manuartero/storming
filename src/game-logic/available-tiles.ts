@@ -72,16 +72,19 @@ export function getInRangeMovements({ tileId, board }: _TileInBoard): TileID[] {
   }
 
   const { range, specialTerrain } = pieces[piece.type];
-
   const tiles = tilesInRange(tileId, { range });
+
   return tiles.filter((candidateTile) => {
-    const terrain = board[candidateTile].terrain;
-    return (
-      terrain !== undefined &&
-      specialTerrain.includes(terrain) &&
-      (!board[candidateTile].piece ||
-        board[candidateTile].piece?.owner !== board[tileId].piece?.owner)
-    );
+    const targetTerrain = board[candidateTile].terrain;
+
+    const isAllowedTerrain =
+      targetTerrain === undefined || specialTerrain.includes(targetTerrain);
+
+    const isEmptyOrOpponentTile =
+      !board[candidateTile].piece ||
+      board[candidateTile].piece?.owner !== board[tileId].piece?.owner;
+
+    return isAllowedTerrain && isEmptyOrOpponentTile;
   });
 }
 

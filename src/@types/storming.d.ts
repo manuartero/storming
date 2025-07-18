@@ -47,18 +47,19 @@ type TerrainType = "mountain" | "lake" | "forest";
 type BuildingType = "tower" | "castle" | "citadel";
 type PieceType = "soldier" | "knight";
 
-interface Tile {
+type Tile = {
   terrain?: TerrainType;
   piece?: Piece;
   building?: Building;
-}
+};
 
 type VisualBoard = Record<TileID, TileWithStatus>;
 
-type TileStatus = "idle" | "selected" | "available" | "forbidden";
-interface TileWithStatus extends Tile {
+type TileStatus = "selected" | "available" | "forbidden";
+
+type TileWithStatus = Tile & {
   status: TileStatus;
-}
+};
 
 // --------------
 // CARDS

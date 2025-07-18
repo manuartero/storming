@@ -2,11 +2,15 @@
 
 exports[`<Board /> render: match snapshot 1`] = `
 <DocumentFragment>
-  <div
+  <section
+    aria-label="game board"
     class="board"
+    role="board"
   >
     <div
-      class="board__row board__row--3-to-equator"
+      aria-label="board row -3"
+      class="row row3ToEquator"
+      role="row"
     >
       <button
         aria-disabled="false"
@@ -81,7 +85,9 @@ exports[`<Board /> render: match snapshot 1`] = `
       </button>
     </div>
     <div
-      class="board__row board__row--2-to-equator"
+      aria-label="board row -2"
+      class="row row2ToEquator"
+      role="row"
     >
       <button
         aria-disabled="false"
@@ -127,7 +133,7 @@ exports[`<Board /> render: match snapshot 1`] = `
             <div
               aria-label="enemy1 soldier"
               aria-roledescription="game piece"
-              class="piece ignore-clicks"
+              class="piece"
               role="img"
             />
           </div>
@@ -174,7 +180,9 @@ exports[`<Board /> render: match snapshot 1`] = `
       </button>
     </div>
     <div
-      class="board__row board__row--1-to-equator"
+      aria-label="board row -1"
+      class="row row1ToEquator"
+      role="row"
     >
       <button
         aria-disabled="false"
@@ -276,7 +284,9 @@ exports[`<Board /> render: match snapshot 1`] = `
       </button>
     </div>
     <div
-      class="board__row"
+      aria-label="board row 0"
+      class="row"
+      role="row"
     >
       <button
         aria-disabled="false"
@@ -315,7 +325,7 @@ exports[`<Board /> render: match snapshot 1`] = `
             <div
               aria-label="player soldier"
               aria-roledescription="game piece"
-              class="piece ignore-clicks"
+              class="piece"
               role="img"
             />
           </div>
@@ -391,7 +401,7 @@ exports[`<Board /> render: match snapshot 1`] = `
             <div
               aria-label="enemy2 soldier"
               aria-roledescription="game piece"
-              class="piece ignore-clicks"
+              class="piece"
               role="img"
             />
           </div>
@@ -418,7 +428,9 @@ exports[`<Board /> render: match snapshot 1`] = `
       </button>
     </div>
     <div
-      class="board__row board__row--1-to-equator"
+      aria-label="board row 1"
+      class="row row1ToEquator"
+      role="row"
     >
       <button
         aria-disabled="false"
@@ -520,7 +532,9 @@ exports[`<Board /> render: match snapshot 1`] = `
       </button>
     </div>
     <div
-      class="board__row board__row--2-to-equator"
+      aria-label="board row 2"
+      class="row row2ToEquator"
+      role="row"
     >
       <button
         aria-disabled="false"
@@ -579,7 +593,7 @@ exports[`<Board /> render: match snapshot 1`] = `
             <div
               aria-label="enemy3 soldier"
               aria-roledescription="game piece"
-              class="piece ignore-clicks"
+              class="piece"
               role="img"
             />
           </div>
@@ -613,7 +627,9 @@ exports[`<Board /> render: match snapshot 1`] = `
       </button>
     </div>
     <div
-      class="board__row board__row--3-to-equator"
+      aria-label="board row 3"
+      class="row row3ToEquator"
+      role="row"
     >
       <button
         aria-disabled="false"
@@ -687,6 +703,6 @@ exports[`<Board /> render: match snapshot 1`] = `
         />
       </button>
     </div>
-  </div>
+  </section>
 </DocumentFragment>
 `;

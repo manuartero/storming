@@ -43,7 +43,7 @@ export function NewCard(
   player: PlayerType
 ): ActionCard | EventCard {
   const cardId = getCardId(type, player);
-  const toString = () => `Card{ ${type} (${player}) }`;
+  const toString = () => `Card { ${type}(${player}) }`;
 
   const card = isActionCardType(type)
     ? {

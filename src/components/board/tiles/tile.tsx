@@ -3,6 +3,7 @@ import { coordinates } from "models/tiles";
 import { tileAssets } from "./assets";
 
 import styles from "./tile.module.css";
+import { useRef } from "react";
 
 type Props = React.PropsWithChildren<{
   id: TileID;
@@ -27,13 +28,20 @@ export function Tile({
   /* debug: turn on debug ID */
   const debugTileID = false;
 
+  // add a minor random positioning offset to the piece to simulate pieces on a board
+  const pieceOffsetRef = useRef<"left" | "right">(
+    children ? (Math.random() > 0.5 ? "left" : "right") : "left"
+  );
+  const pieceStyle = children ? { [pieceOffsetRef.current]: "4vh" } : undefined;
+
   return (
     <button
       key={`tile(${id})`}
       className={c(
         styles.tile,
         status && styles[status],
-        owner && styles[owner],
+        status === "available" && activePlayer && styles[activePlayer],
+        status !== "available" && owner && styles[owner],
         owner && activePlayer && owner === activePlayer && styles.activePlayer
       )}
       aria-label={`tile ${id}`}
@@ -46,10 +54,14 @@ export function Tile({
       <div className={styles.innerLayer}>
         {terrain && <Terrain variant={terrain} />}
         {debugTileID && <span className={styles.tileId}>{id}</span>}
-        {children && <div className={styles.content}>{children}</div>}
       </div>
 
       {building && owner && <Building variant={building} owner={owner} />}
+      {children && (
+        <div className={c(styles.piece)} style={pieceStyle}>
+          {children}
+        </div>
+      )}
     </button>
   );
 }

@@ -2,27 +2,29 @@
 
 exports[`<CurrentPhase /> render: match snapshot - action 1`] = `
 <DocumentFragment>
-  <div
-    class="current-phase"
+  <section
+    aria-label="current phase"
+    class="currentPhase"
+    role="region"
   >
     <div
-      class="current-phase__heading player"
+      class="heading player"
     >
       <h2>
         action
       </h2>
     </div>
     <div
-      class="current-phase__content"
+      class="content"
     >
       <div
-        class="current-phase__action"
+        class="action"
       >
         <div
           aria-disabled="true"
           aria-label="card player_move_1"
           aria-pressed="false"
-          class="card card--active actionCard"
+          class="card active actionCard"
         >
           <div
             class="actionCardIcon"
@@ -48,27 +50,29 @@ exports[`<CurrentPhase /> render: match snapshot - action 1`] = `
         </button>
       </div>
     </div>
-  </div>
+  </section>
 </DocumentFragment>
 `;
 
 exports[`<CurrentPhase /> render: match snapshot - planification 1`] = `
 <DocumentFragment>
-  <div
-    class="current-phase"
+  <section
+    aria-label="current phase"
+    class="currentPhase"
+    role="region"
   >
     <div
-      class="current-phase__heading player"
+      class="heading player"
     >
       <h2>
         planification
       </h2>
     </div>
     <div
-      class="current-phase__content"
+      class="content"
     >
       <div
-        class="current-phase__planification"
+        class="planification"
       >
         <div
           aria-disabled="true"
@@ -107,33 +111,35 @@ exports[`<CurrentPhase /> render: match snapshot - planification 1`] = `
         </button>
       </div>
     </div>
-  </div>
+  </section>
 </DocumentFragment>
 `;
 
 exports[`<CurrentPhase /> render: match snapshot - planification with cards 1`] = `
 <DocumentFragment>
-  <div
-    class="current-phase"
+  <section
+    aria-label="current phase"
+    class="currentPhase"
+    role="region"
   >
     <div
-      class="current-phase__heading player"
+      class="heading player"
     >
       <h2>
         planification
       </h2>
     </div>
     <div
-      class="current-phase__content"
+      class="content"
     >
       <div
-        class="current-phase__planification"
+        class="planification"
       >
         <div
           aria-disabled="true"
           aria-label="card player_move_2"
           aria-pressed="false"
-          class="card card--available actionCard"
+          class="card available actionCard"
         >
           <div
             class="actionCardIcon"
@@ -156,7 +162,7 @@ exports[`<CurrentPhase /> render: match snapshot - planification with cards 1`] 
           aria-disabled="true"
           aria-label="card player_recruit_1"
           aria-pressed="false"
-          class="card card--available actionCard"
+          class="card available actionCard"
         >
           <div
             class="actionCardIcon"
@@ -182,6 +188,6 @@ exports[`<CurrentPhase /> render: match snapshot - planification with cards 1`] 
         </button>
       </div>
     </div>
-  </div>
+  </section>
 </DocumentFragment>
 `;
