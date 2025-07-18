@@ -3,6 +3,7 @@
   --tile-stroke: 4px;
   --tile-border-color: var(--base-grey);
   --tile-bg: var(--white);
+  --forbidden-tile: red;
 
   /* anchor */
   position: relative;
@@ -18,8 +19,8 @@
   margin: 0 0.25vh;
   background: transparent;
   cursor: pointer;
-  isolation: isolate;
   opacity: 0.7;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,17 +32,23 @@
 
 .strokeLayer {
   position: absolute;
+  clip-path: inherit;
+
+  /* border-color */
   inset: 0;
   background: var(--tile-border-color);
-  clip-path: inherit;
 }
 
 /* Inner content hex shape */
 .innerLayer {
   position: absolute;
-  inset: var(--tile-stroke);
-  background: var(--tile-bg);
   clip-path: inherit;
+
+  /* border-width */
+  inset: var(--tile-stroke);
+
+  /* background color */
+  background: var(--tile-bg);
 
   display: flex;
   justify-content: center;

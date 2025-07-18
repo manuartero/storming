@@ -17,10 +17,10 @@ export function Card({ card, status = "available", onClick }: Props) {
     <div
       className={c(
         styles.card,
-        `card--${status}`,
+        styles[status],
         isActionCard(card) && styles.actionCard,
         isEventCard(card) && styles.eventCard,
-        onClick && status === "available" && "clickable"
+        onClick && status === "available" && styles.clickable
       )}
       key={card.cardId}
       aria-label={`card ${card.cardId}`}

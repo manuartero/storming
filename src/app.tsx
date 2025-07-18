@@ -10,14 +10,12 @@ import {
 import { GameContextProvider } from "game-context";
 import { StrictMode } from "react";
 
-import "./styles/colors.css";
-import "./styles/animations.css";
-import "./app.scss";
+import styles from "./app.module.css";
 
 export function App() {
   return (
     <StrictMode>
-      <main className="game">
+      <main className={styles.app}>
         <GameContextProvider>
           <CurrentPhase />
           <TimeLine />

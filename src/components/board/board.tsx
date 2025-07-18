@@ -1,9 +1,10 @@
+import c from "classnames";
 import { TILES, coordinates } from "models/tiles";
 import { logRender } from "utils/console";
 import { Piece } from "./pieces/piece";
 import { Tile } from "./tiles/tile";
 
-import "./board.scss";
+import styles from "./board.module.css";
 
 type Props = {
   state: VisualBoard;
@@ -34,15 +35,53 @@ export function Board({ state, activePlayer, onTileClick }: Props) {
     });
 
   return (
-    <div className="board">
-      <div className="board__row board__row--3-to-equator">{renderRow(-3)}</div>
-      <div className="board__row board__row--2-to-equator">{renderRow(-2)}</div>
-      <div className="board__row board__row--1-to-equator">{renderRow(-1)}</div>
-      <div className="board__row">{renderRow(0)}</div>
-      <div className="board__row board__row--1-to-equator">{renderRow(1)}</div>
-      <div className="board__row board__row--2-to-equator">{renderRow(2)}</div>
-      <div className="board__row board__row--3-to-equator">{renderRow(3)}</div>
-    </div>
+    <section className={styles.board} role="board" aria-label="game board">
+      <div
+        className={c(styles.row, styles.row3ToEquator)}
+        role="row"
+        aria-label="board row -3"
+      >
+        {renderRow(-3)}
+      </div>
+      <div
+        className={c(styles.row, styles.row2ToEquator)}
+        role="row"
+        aria-label="board row -2"
+      >
+        {renderRow(-2)}
+      </div>
+      <div
+        className={c(styles.row, styles.row1ToEquator)}
+        role="row"
+        aria-label="board row -1"
+      >
+        {renderRow(-1)}
+      </div>
+      <div className={c(styles.row)} role="row" aria-label="board row 0">
+        {renderRow(0)}
+      </div>
+      <div
+        className={c(styles.row, styles.row1ToEquator)}
+        role="row"
+        aria-label="board row 1"
+      >
+        {renderRow(1)}
+      </div>
+      <div
+        className={c(styles.row, styles.row2ToEquator)}
+        role="row"
+        aria-label="board row 2"
+      >
+        {renderRow(2)}
+      </div>
+      <div
+        className={c(styles.row, styles.row3ToEquator)}
+        role="row"
+        aria-label="board row 3"
+      >
+        {renderRow(3)}
+      </div>
+    </section>
   );
 }
 

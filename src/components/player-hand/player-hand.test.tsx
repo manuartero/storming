@@ -1,8 +1,8 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { NewCard } from "models/new-card";
 import { PlayerHand } from "./player-hand";
 
-const playerHand: PlayerHand = [
+const cards: PlayerHand = [
   {
     card: NewCard("move", "player"),
     status: "available",
@@ -18,10 +18,10 @@ const playerHand: PlayerHand = [
 ];
 
 describe("<PlayerHand />", () => {
-  test("render: match snapshot", () => {
-    const { asFragment } = render(
-      <PlayerHand cards={playerHand} onClick={jest.fn()} />
-    );
-    expect(asFragment()).toMatchSnapshot();
+  test("render: region role", () => {
+    render(<PlayerHand cards={cards} player="player" onClick={jest.fn()} />);
+
+    const playerHand = screen.getByRole("region", { name: "player hand" });
+    expect(playerHand).toMatchSnapshot();
   });
 });

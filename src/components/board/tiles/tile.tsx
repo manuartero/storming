@@ -45,7 +45,6 @@ export function Tile({
 
       <div className={styles.innerLayer}>
         {terrain && <Terrain variant={terrain} />}
-
         {debugTileID && <span className={styles.tileId}>{id}</span>}
         {children && <div className={styles.content}>{children}</div>}
       </div>

@@ -2,16 +2,16 @@
   /* main grid layout */
   grid-area: marketplace;
 
-  border: 2px solid var(--base-grey);
-
+  /* anchor text */
   position: relative;
+  border: 2px solid var(--base-grey);
+}
 
-  &::before {
-    position: absolute;
-    content: "MARKETPLACE";
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-  }
+.title {
+  position: relative;
+  top: 2rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--base-grey);
 }

@@ -7,4 +7,6 @@
   /* FIXME: use relative size to Tile container? 0.6 * 12vh */
   width: 6vh;
   height: 6vh;
+
+  pointer-events: none;
 }

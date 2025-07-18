@@ -5,9 +5,7 @@
   height: 280px;
   padding: 36px 24px;
   background: var(--white);
-
-  margin-top: 2vh;
-  margin-bottom: 2vh;
+  margin: 1vh;
   box-shadow: 0px 0px 8px var(--shadow-grey);
   border-radius: 16px;
 
@@ -16,26 +14,31 @@
   justify-content: space-between;
 }
 
-.active {
+.card.active {
   animation: glow 2s ease-in-out infinite alternate;
 }
 
-.played {
+.card.played {
   & > * {
     /* to every children */
     opacity: 0.3;
   }
 }
 
-.selected {
+.card.selected {
   background-color: var(--selected-grey);
+}
+
+.card.clickable {
+  cursor: pointer;
 }
 
 /* *** */
 
-.silhouette {
+.cardSilhouette {
   border: 3px dashed var(--base-grey);
   border-radius: 16px;
+  box-shadow: none;
 }
 
 .actionCard {
@@ -45,6 +48,7 @@
 .actionCardIcon {
   width: 70px;
   height: 55px;
+
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;

@@ -6,6 +6,8 @@ export function Marketplace() {
       role="region"
       className={styles.marketplace}
       aria-label="marketplace"
-    ></section>
+    >
+      <h2 className={styles.title}>MARKETPLACE</h2>
+    </section>
   );
 }

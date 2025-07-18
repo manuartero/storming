@@ -1,0 +1,43 @@
+.board {
+  --tile-size: 12vh;
+  --collapse-rows-y: calc(var(--tile-size) / -5);
+  --row-left-space: calc(var(--tile-size) / 2);
+
+  /** main grid layout */
+  grid-area: board;
+
+  position: relative;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.row {
+  display: flex;
+  position: relative;
+
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.row:nth-child(2),
+.row:nth-child(3),
+.row:nth-child(4),
+.row:nth-child(5),
+.row:nth-child(6),
+.row:nth-child(7) {
+  margin-top: var(--collapse-rows-y);
+}
+
+.row.row1ToEquator {
+  left: var(--row-left-space);
+}
+
+.row.row2ToEquator {
+  left: calc(var(--row-left-space) * 2);
+}
+
+.row.row3ToEquator {
+  left: calc(var(--row-left-space) * 3);
+}

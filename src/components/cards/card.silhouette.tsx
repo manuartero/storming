@@ -17,9 +17,13 @@ type Props = {
 export function CardSilhouette({ card, onClick }: Props) {
   return (
     <div
-      className={c(styles.card, styles.cardSilhouette, onClick && "clickable")}
-      onClick={onClick}
+      className={c(
+        styles.card,
+        styles.cardSilhouette,
+        onClick && styles.clickable
+      )}
       aria-disabled={!onClick}
+      onClick={onClick}
     >
       <div className={styles.silhouetteTitle}>{card}</div>
       <div className={styles.silhouetteText}>{CARD_TEXT[card]}</div>

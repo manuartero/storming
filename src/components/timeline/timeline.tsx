@@ -32,7 +32,7 @@ export function Timeline({ next, future }: Props) {
   };
 
   return (
-    <div className={styles.timeline}>
+    <section role="region" className={styles.timeline} aria-label="timeline">
       <div className={c(styles.next, styles.section)}>
         <span className={styles.sectionName}>NEXT</span>
         <div className={styles.line}>
@@ -47,6 +47,6 @@ export function Timeline({ next, future }: Props) {
           </LayoutGroup>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

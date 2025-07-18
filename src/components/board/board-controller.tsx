@@ -176,7 +176,7 @@ export function BoardController() {
   };
 
   return (
-    <div className="board-container">
+    <>
       <Board
         state={board}
         activePlayer={gameContext.activePlayer}
@@ -208,6 +208,6 @@ export function BoardController() {
           }}
         />
       )}
-    </div>
+    </>
   );
 }
