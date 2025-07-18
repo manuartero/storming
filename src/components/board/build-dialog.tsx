@@ -1,8 +1,5 @@
-import c from "classnames";
-import { Dialog } from "elements";
 import { CardSilhouette } from "components/cards";
-
-import "./option-dialog.scss";
+import { Dialog } from "elements";
 
 type Props = {
   onWallOption: () => void;
@@ -10,26 +7,17 @@ type Props = {
   onClose: () => void;
 };
 
-function BuildDialog({ onWallOption, onUpgradeOption, onClose }: Props) {
+export function BuildDialog({ onWallOption, onUpgradeOption, onClose }: Props) {
   return (
-    <Dialog size="small" onClose={onClose}>
-      <div className="option-dialog">
-        <div
-          className={c("option-dialog__option", "option-dialog__option__wall")}
-        >
-          <CardSilhouette card="build-walls" onClick={onWallOption} />
-        </div>
-        <div
-          className={c(
-            "option-dialog__option",
-            "option-dialog__option__upgrade"
-          )}
-        >
-          <CardSilhouette card="upgrade-settlement" onClick={onUpgradeOption} />
-        </div>
-      </div>
+    <Dialog
+      size="small"
+      title="Choose How to Improve your Building"
+      onClose={onClose}
+    >
+      <>
+        <CardSilhouette card="build-walls" onClick={onWallOption} />
+        <CardSilhouette card="upgrade-settlement" onClick={onUpgradeOption} />
+      </>
     </Dialog>
   );
 }
-
-export default BuildDialog;

@@ -1,0 +1,22 @@
+.title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 33px;
+}
+
+.heading {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.paragraph {
+  font-style: normal;
+  font-weight: 100;
+  font-size: 12px;
+  line-height: 14px;
+}

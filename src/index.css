@@ -1,6 +1,7 @@
 @font-face {
-  font-family: 'Roboto';
-  src: local('Roboto'), url(./fonts/Roboto/Roboto-Regular.ttf) format('truetype');
+  font-family: "Roboto";
+  src: local("Roboto"),
+    url(./fonts/Roboto/Roboto-Regular.ttf) format("truetype");
 }
 
 * {
@@ -10,12 +11,16 @@
 }
 
 body {
-  font-family: Roboto;
+  font-family: "Roboto";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+#root {
+  background-color: var(--white);
 }

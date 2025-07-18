@@ -1,8 +1,7 @@
-import { Card } from "components/cards/card";
-import { logRender } from "utils/console";
 import c from "classnames";
+import { Card } from "components/cards/card";
 
-import "./player-hand.scss";
+import styles from "./player-hand.module.css";
 
 type Props = {
   cards: PlayerHand;
@@ -16,15 +15,17 @@ export function PlayerHand({
   isActive = false,
   player = undefined,
   onClick,
-}: Props): JSX.Element {
-  logRender("PlayerHand");
-
+}: Props) {
   const considerOnClickIfActive = (cardId: CardId) => {
     isActive && onClick(cardId);
   };
 
   return (
-    <div className={c("player-hand", isActive && "player-hand--expansible")}>
+    <section
+      role="region"
+      className={c(styles.playerHand, isActive && styles.expansible)}
+      aria-label="player hand"
+    >
       {player &&
         cards.map(({ card, status }) => {
           return (
@@ -36,6 +37,6 @@ export function PlayerHand({
             ></Card>
           );
         })}
-    </div>
+    </section>
   );
 }

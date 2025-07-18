@@ -1,0 +1,131 @@
+.tile {
+  --tile-size: 12vh;
+  --tile-stroke: 4px;
+  --tile-border-color: var(--base-grey);
+  --tile-bg: var(--white);
+  --forbidden-tile: red;
+
+  /* anchor */
+  position: relative;
+  width: var(--tile-size);
+  height: var(--tile-size);
+
+  /* hexagon path */
+  aspect-ratio: 1 / 1;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+
+  border: none;
+  padding: 0;
+  margin: 0 0.25vh;
+  background: transparent;
+  opacity: 0.7;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: crosshair; /* + */
+
+  &:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+.strokeLayer {
+  position: absolute;
+  clip-path: inherit;
+  inset: 0;
+  /* hexagon border-color */
+  background: var(--base-grey);
+}
+
+/* Inner content hex shape */
+.innerLayer {
+  position: absolute;
+  clip-path: inherit;
+
+  /* border-width */
+  inset: var(--tile-stroke);
+
+  /* background color */
+  background: var(--white);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+/* debug: turn on at tile.tsx */
+.tileId {
+  position: absolute;
+  background-color: white;
+  z-index: 1;
+}
+
+.tile.available {
+  cursor: pointer;
+  pointer-events: auto;
+
+  & .strokeLayer {
+    background: var(--tile-border-color);
+  }
+}
+
+.tile.selected {
+  & .strokeLayer {
+    background: var(--tile-border-color);
+  }
+}
+
+.tile.controlled {
+  & .innerLayer {
+    background: var(--tile-bg);
+  }
+}
+
+.tile.forbidden {
+  opacity: 0.5;
+  --tile-border-color: var(--forbidden-tile);
+}
+
+.tile.player {
+  --tile-border-color: var(--player-primary);
+  --tile-bg: var(--player-secondary);
+}
+
+.tile.enemy1 {
+  --tile-border-color: var(--enemy1-primary);
+  --tile-bg: var(--enemy1-secondary);
+}
+
+.tile.enemy2 {
+  --tile-border-color: var(--enemy2-primary);
+  --tile-bg: var(--enemy2-secondary);
+}
+
+.tile.enemy3 {
+  --tile-border-color: var(--enemy3-primary);
+  --tile-bg: var(--enemy3-secondary);
+}
+
+.building {
+  width: calc(0.7 * var(--tile-size));
+  height: min(calc(0.7 * var(--tile-size)), 6vh);
+
+  position: absolute;
+  bottom: 2vh;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  pointer-events: none;
+}
+
+.piece {
+  position: absolute;
+  bottom: 4vh;
+
+  pointer-events: none;
+}

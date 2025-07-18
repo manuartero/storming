@@ -2,10 +2,10 @@ import { isConquering, isCreatingGreatesEmpire } from "./score-check";
 
 test("scoreCheck.isConquering() checks if player is scoring when moving to targetTile", () => {
   const targetTile: Tile = {
-    terrain: "field",
-    building: { owner: "enemy1", type: "village" },
+    building: { owner: "enemy1", type: "tower" },
     piece: undefined,
   };
+
   expect(isConquering({ targetTile, player: "player" })).toEqual(true);
   expect(isConquering({ targetTile, player: "enemy1" })).toEqual(false);
 });
@@ -23,7 +23,7 @@ test("scoreCheck.isCreatingGreatestEmpire() checks if player would have more set
       empires,
       building: {
         owner: "player",
-        type: "village",
+        type: "tower",
       },
     })
   ).toEqual(true);
@@ -32,7 +32,7 @@ test("scoreCheck.isCreatingGreatestEmpire() checks if player would have more set
       empires,
       building: {
         owner: "enemy1",
-        type: "village",
+        type: "tower",
       },
     })
   ).toEqual(false);
@@ -41,7 +41,7 @@ test("scoreCheck.isCreatingGreatestEmpire() checks if player would have more set
       empires,
       building: {
         owner: "enemy2",
-        type: "village",
+        type: "tower",
       },
     })
   ).toEqual(false);
@@ -50,7 +50,7 @@ test("scoreCheck.isCreatingGreatestEmpire() checks if player would have more set
       empires,
       building: {
         owner: "enemy3",
-        type: "village",
+        type: "tower",
       },
     })
   ).toEqual(true);

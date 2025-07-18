@@ -1,0 +1,43 @@
+.button {
+  --player-color: var(--base-grey);
+
+  width: 12vh;
+  height: 4vh;
+
+  border: 2px solid var(--darkest-grey);
+  border-radius: 8px;
+  box-shadow: inset -1px -3px 0px var(--player-color);
+  background: var(--white);
+
+  &:hover {
+    cursor: pointer;
+    font-weight: bold;
+  }
+}
+
+.disabled {
+  border: 2px solid var(--base-grey);
+  box-shadow: none;
+  font-weight: normal;
+
+  &:hover {
+    cursor: not-allowed;
+    font-weight: normal;
+  }
+}
+
+.player {
+  --player-color: var(--player-primary);
+}
+
+.enemy1 {
+  --player-color: var(--enemy1-primary);
+}
+
+.enemy2 {
+  --player-color: var(--enemy2-primary);
+}
+
+.enemy3 {
+  --player-color: var(--enemy3-primary);
+}

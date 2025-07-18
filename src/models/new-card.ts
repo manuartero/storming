@@ -8,6 +8,10 @@ export function isActionCard(card: Card): card is ActionCard {
   return card.cardType === "actionCard";
 }
 
+export function isEventCard(card: Card): card is EventCard {
+  return card.cardType === "eventCard";
+}
+
 function isActionCardType(
   type: ActionCardType | EventCardType
 ): type is ActionCardType {
@@ -39,7 +43,7 @@ export function NewCard(
   player: PlayerType
 ): ActionCard | EventCard {
   const cardId = getCardId(type, player);
-  const toString = () => `Card{ ${type} (${player}) }`;
+  const toString = () => `Card { ${type}(${player}) }`;
 
   const card = isActionCardType(type)
     ? {

@@ -6,7 +6,7 @@ import { TILES } from "models/tiles";
  */
 export const emptyBoard: Board = TILES.reduce((acc, key) => {
   acc[key] = {
-    terrain: "field",
+    terrain: undefined,
     piece: undefined,
     building: undefined,
   };

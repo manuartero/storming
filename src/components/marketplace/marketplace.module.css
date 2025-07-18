@@ -1,0 +1,17 @@
+.marketplace {
+  /* main grid layout */
+  grid-area: marketplace;
+
+  /* anchor text */
+  position: relative;
+  border: 2px solid var(--base-grey);
+}
+
+.title {
+  position: relative;
+  top: 2rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--base-grey);
+}

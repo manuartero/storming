@@ -1,11 +1,28 @@
 import c from "classnames";
-import "./button.scss";
 
-type Props = { children: React.ReactNode } & React.ComponentProps<"button">;
+import styles from "./button.module.css";
 
-export function Button({ className, children, ...props }: Props) {
+type Props = {
+  player?: PlayerType;
+} & React.ComponentProps<"button">;
+
+export function Button({
+  player,
+  disabled = false,
+  className,
+  children,
+  ...props
+}: Props) {
   return (
-    <button className={c("button", className)} {...props}>
+    <button
+      className={c(
+        styles.button,
+        className,
+        disabled && styles.disabled,
+        player && styles[player]
+      )}
+      {...props}
+    >
       {children}
     </button>
   );

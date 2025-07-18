@@ -20,7 +20,7 @@ function hasBuilderOrBuildingFromSameOwner(
     (tile.piece?.owner === card.owner &&
       tile.piece?.type === "soldier" &&
       isBuildingPlot({ tileId: tileId as TileID, board })) ||
-    (tile.building?.owner === card.owner && tile.building.type !== "city");
+    (tile.building?.owner === card.owner && tile.building.type !== "castle");
 }
 
 function asTileID([t, _]: [string, Tile]): TileID {
@@ -71,16 +71,21 @@ export function getInRangeMovements({ tileId, board }: _TileInBoard): TileID[] {
     return [];
   }
 
-  const { range, validTerrain } = pieces[piece.type];
-
+  const { range, specialTerrain } = pieces[piece.type];
   const tiles = tilesInRange(tileId, { range });
-  return tiles.filter(
-    (candidateTile) =>
-      /* valid options: valid tile && (empty || enemy)  */
-      validTerrain.includes(board[candidateTile].terrain) &&
-      (!board[candidateTile].piece ||
-        board[candidateTile].piece?.owner !== board[tileId].piece?.owner)
-  );
+
+  return tiles.filter((candidateTile) => {
+    const targetTerrain = board[candidateTile].terrain;
+
+    const isAllowedTerrain =
+      targetTerrain === undefined || specialTerrain.includes(targetTerrain);
+
+    const isEmptyOrOpponentTile =
+      !board[candidateTile].piece ||
+      board[candidateTile].piece?.owner !== board[tileId].piece?.owner;
+
+    return isAllowedTerrain && isEmptyOrOpponentTile;
+  });
 }
 
 export function isBuildingPlot({ tileId, board }: _TileInBoard) {

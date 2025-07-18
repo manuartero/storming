@@ -11,8 +11,8 @@ test("inferVisualBoardFromGameContext()", () => {
   /* only settlement of player at "-4,0" */
   expect(board["-4,0"]).toEqual({
     status: "available",
-    building: { owner: "player", type: "village" },
+    building: { owner: "player", type: "tower" },
     piece: undefined,
-    terrain: "field",
+    terrain: undefined,
   });
 });

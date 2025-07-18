@@ -3,5 +3,5 @@ export { CurrentPhaseController as CurrentPhase } from "./current-phase/current-
 export { Marketplace } from "./marketplace/marketplace";
 export { Menu } from "./menu/menu";
 export { PlayerHandController as PlayerHand } from "./player-hand/player-hand-controller";
-export { default as RoundSummary } from "./round-summary/round-summary";
+export { RoundSummary } from "./round-summary/round-summary";
 export { TimelineController as TimeLine } from "./timeline/timeline-controller";

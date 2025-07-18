@@ -1,0 +1,73 @@
+.card {
+  position: relative; /* anchor */
+
+  width: 180px;
+  height: 280px;
+  padding: 36px 24px;
+  background: var(--white);
+  margin: 1vh;
+  box-shadow: 0px 0px 8px var(--shadow-grey);
+  border-radius: 16px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card.active {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.card.played {
+  & > * {
+    /* to every children */
+    opacity: 0.3;
+  }
+}
+
+.card.selected {
+  background-color: var(--selected-grey);
+}
+
+.card.clickable {
+  cursor: pointer;
+}
+
+/* *** */
+
+.cardSilhouette {
+  border: 3px dashed var(--base-grey);
+  border-radius: 16px;
+  box-shadow: none;
+}
+
+.actionCard {
+  --title-width: 120px;
+}
+
+.actionCardIcon {
+  width: 70px;
+  height: 55px;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.actionCardTitle {
+  width: var(--title-width);
+  height: 24px;
+
+  text-transform: uppercase;
+}
+
+.actionCardWaterMark {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 60%;
+  height: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}

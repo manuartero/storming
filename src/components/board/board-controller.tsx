@@ -1,9 +1,9 @@
 import { useGameContext } from "game-context";
-import { NewBuilding } from "models/new-building";
+import { NewBuilding, upgradeBuilding } from "models/new-building";
 import { useState } from "react";
 import { warnInconsistentState } from "utils/console";
 import { Board } from "./board";
-import BuildDialog from "./build-dialog";
+import { BuildDialog } from "./build-dialog";
 import { inferVisualBoardFromGameContext } from "./infer-visual-board";
 import { RecruitDialog } from "./recruit-dialog";
 
@@ -51,13 +51,10 @@ export function BoardController() {
     setSelectedTile(undefined);
     setBuildingTile(undefined);
     setRecruitingTile(undefined);
+
     gameContext.build({
       tile,
-      building: {
-        ...building,
-        type:
-          building.type === "village" ? ("town" as const) : ("city" as const),
-      },
+      building: upgradeBuilding(building),
     });
   };
 
@@ -179,7 +176,7 @@ export function BoardController() {
   };
 
   return (
-    <div className="board-container">
+    <>
       <Board
         state={board}
         activePlayer={gameContext.activePlayer}
@@ -211,6 +208,6 @@ export function BoardController() {
           }}
         />
       )}
-    </div>
+    </>
   );
 }

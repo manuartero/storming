@@ -1,22 +1,53 @@
 import c from "classnames";
-import type { HTMLAttributes, ReactElement } from "react";
+import { useId } from "react";
 
-import "./dialog.scss";
+import styles from "./dialog.module.css";
 
-interface Props extends HTMLAttributes<HTMLElement> {
-  children: ReactElement;
+type Props = {
+  title?: string;
   size?: "regular" | "small";
   onClose: () => void;
-}
+} & React.ComponentProps<"div">;
 
-export function Dialog({ children, size = "regular", onClose }: Props) {
+export function Dialog({
+  title,
+  size = "regular",
+  children,
+  onClose,
+  ...rest
+}: Props) {
+  const titleId = title ? `dialog-title-${useId()}` : undefined;
+
   return (
-    <div role="dialog" aria-modal="true" className="dialog">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={title ? titleId : undefined}
+      className={c(styles.dialogScreen)}
+      tabIndex={-1}
+      {...rest}
+    >
       <div
-        className={c(size === "small" ? "dialog--small" : "dialog--regular")}
+        className={c(
+          styles.dialog,
+          size === "small" ? styles.small : styles.regular
+        )}
       >
-        <button onClick={onClose}>X</button>
-        {children}
+        <button
+          className={styles.exitButton}
+          aria-label="close dialog"
+          onClick={onClose}
+        >
+          X
+        </button>
+        <div className={styles.header}>
+          {title && (
+            <h2 className={styles.title} id={titleId}>
+              {title}
+            </h2>
+          )}
+        </div>
+        <div className={styles.content}>{children}</div>
       </div>
     </div>
   );

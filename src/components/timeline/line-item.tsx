@@ -1,27 +1,22 @@
 import c from "classnames";
 
-import "./line-item.scss";
+import styles from "./timeline.module.css";
 
 type Props = {
   card: ActionCard;
   commited: boolean;
 };
 
-export function ActionLineItem({ card, commited }: Props): JSX.Element {
+export function ActionLineItem({ card, commited }: Props) {
   return (
     <div
       className={c(
-        "line-item",
-        card.owner === "player" &&
-          "line-item--player" &&
-          "player" &&
-          "expansible",
-        commited ? "line-item--commited" : "line-item--pending"
+        styles.lineItem,
+        card.owner === "player" && styles.expansible,
+        commited ? styles.committed : styles.pending
       )}
     >
-      <div
-        className={c("line-item__content", `line-item__content--${card.owner}`)}
-      />
+      <div className={c(styles.lineItemContent, styles[card.owner])} />
     </div>
   );
 }

@@ -1,10 +1,8 @@
 import c from "classnames";
 import { Button } from "elements";
 import { Card, CardSilhouette } from "components/cards";
-import IconCard from "components/cards/icon-card"; // TODO: deprecated
-import { logRender } from "utils/console";
 
-import "./current-phase.scss";
+import styles from "./current-phase.module.css";
 
 type ActionPhaseProps = {
   phase: "action";
@@ -24,21 +22,20 @@ type PlanningPhaseProps = {
 };
 
 export function CurrentPhase(props: ActionPhaseProps | PlanningPhaseProps) {
-  logRender("CurrentPhase");
-
   return (
-    <div className={c("current-phase")}>
-      <div className={c("current-phase__heading", props.activePlayer)}>
+    <section
+      className={styles.currentPhase}
+      role="region"
+      aria-label="current phase"
+    >
+      <div className={c(styles.heading, props.activePlayer)}>
         <h2>{props.phase}</h2>
       </div>
-      <div className="current-phase__content">
-        {props.phase === "action" ? (
-          <ActionPhase {...props} />
-        ) : (
-          <PlanningPhase {...props} />
-        )}
+      <div className={styles.content}>
+        {props.phase === "action" && <ActionPhase {...props} />}
+        {props.phase === "planification" && <PlanningPhase {...props} />}
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -48,7 +45,7 @@ function ActionPhase({ activeCard, mustSkip, onSkip }: ActionPhaseProps) {
   }
 
   return (
-    <div className="current-phase__action">
+    <div className={styles.action}>
       <Card card={activeCard} status="active" />
       <Button disabled={!mustSkip} onClick={onSkip}>
         SKIP
@@ -65,7 +62,7 @@ function PlanningPhase({
 }: PlanningPhaseProps) {
   const buttonDisabled = !nextAction || !futureAction;
   return (
-    <div className="current-phase__planification">
+    <div className={styles.planification}>
       {nextAction ? <Card card={nextAction} /> : <CardSilhouette card="next" />}
       {futureAction ? (
         <Card card={futureAction} />
@@ -73,9 +70,9 @@ function PlanningPhase({
         <CardSilhouette card="future" />
       )}
       <Button
-        className={c(activePlayer, buttonDisabled && "button--disabled")}
-        onClick={onSubmitPlan}
+        player={activePlayer}
         disabled={buttonDisabled}
+        onClick={onSubmitPlan}
       >
         GO
       </Button>

@@ -1,0 +1,38 @@
+.currentPhase {
+  /* main grid layout */
+  grid-area: current-phase;
+
+  display: grid;
+  grid-template-rows: 1fr 6fr;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "heading"
+    "content";
+
+}
+
+.heading {
+  grid-area: heading;
+  margin-bottom: 1vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  grid-area: content;
+
+  display: flex;
+  flex-direction: column;
+ 
+}
+
+.planification {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.action {
+}

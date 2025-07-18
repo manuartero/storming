@@ -1,9 +1,82 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`<PlayerHand /> render: match snapshot 1`] = `
-<DocumentFragment>
+exports[`<PlayerHand /> render: region role 1`] = `
+<section
+  aria-label="player hand"
+  class="playerHand"
+  role="region"
+>
   <div
-    class="player-hand"
-  />
-</DocumentFragment>
+    aria-disabled="false"
+    aria-label="card player_move_1"
+    aria-pressed="false"
+    class="card available actionCard clickable"
+  >
+    <div
+      class="actionCardIcon"
+    />
+    <div
+      class="actionCardTitle title"
+    >
+      move
+    </div>
+    <div
+      class="actionCardText paragraph"
+    >
+      Move up to two different Units
+    </div>
+    <div
+      class="actionCardWaterMark"
+    />
+  </div>
+  <div
+    aria-disabled="false"
+    aria-label="card player_move_2"
+    aria-pressed="false"
+    class="card available actionCard clickable"
+  >
+    <div
+      class="actionCardIcon"
+    />
+    <div
+      class="actionCardTitle title"
+    >
+      move
+    </div>
+    <div
+      class="actionCardText paragraph"
+    >
+      Move up to two different Units
+    </div>
+    <div
+      class="actionCardWaterMark"
+    />
+  </div>
+  <div
+    aria-disabled="false"
+    aria-label="card player_build_1"
+    aria-pressed="false"
+    class="card available actionCard clickable"
+  >
+    <div
+      class="actionCardIcon"
+    />
+    <div
+      class="actionCardTitle title"
+    >
+      build
+    </div>
+    <div
+      class="actionCardText paragraph"
+    >
+      2x:
+ Found a Settlement
+ Improve a City
+Build Walls
+    </div>
+    <div
+      class="actionCardWaterMark"
+    />
+  </div>
+</section>
 `;

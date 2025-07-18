@@ -1,8 +1,10 @@
 import c from "classnames";
-import { isActionCard } from "models/new-card";
+import { isActionCard, isEventCard } from "models/new-card";
 import CARD_TEXT from "./card-text.json";
+import { actionCardAssets } from "./assets";
 
-import "./card.scss";
+import styles from "./card.module.css";
+import fontStyles from "styles/fonts.module.css";
 
 type Props = {
   card: Card;
@@ -14,42 +16,44 @@ export function Card({ card, status = "available", onClick }: Props) {
   return (
     <div
       className={c(
-        "card",
-        `card--${status}`,
-        isActionCard(card) ? "action-card" : "event-card",
-        isActionCard(card) && `action-card--${card.owner}`,
-        onClick && status === "available" && "clickable"
+        styles.card,
+        styles[status],
+        isActionCard(card) && styles.actionCard,
+        isEventCard(card) && styles.eventCard,
+        onClick && status === "available" && styles.clickable
       )}
       key={card.cardId}
-      onClick={onClick}
+      aria-label={`card ${card.cardId}`}
+      aria-pressed={status === "selected"}
       aria-disabled={!onClick}
+      onClick={onClick}
     >
-      {card.cardType === "actionCard" ? (
-        <ActionCardContents card={card} />
-      ) : (
-        <EventCardContents card={card} />
-      )}
+      {card.cardType === "actionCard" && <ActionCardContents card={card} />}
+      {card.cardType === "eventCard" && <EventCardContents card={card} />}
     </div>
   );
 }
 
-function ActionCardContents({ card }: { card: ActionCard }) {
-  const { action, owner } = card;
+function ActionCardContents({ card: actionCard }: { card: ActionCard }) {
+  const { action, owner } = actionCard;
+  const cardIcon = actionCardAssets[action][owner];
+  const backgroundWaterMark = actionCardAssets[action].bgWaterMark;
+
   return (
     <>
       <div
-        className={c(
-          "action-card__icon",
-          `action-card__icon--${action}-${owner}`
-        )}
+        className={styles.actionCardIcon}
+        style={{ backgroundImage: `url(${cardIcon})` }}
       ></div>
-      <div className="action-card__title">{action}</div>
-      <div className="action-card__text">{CARD_TEXT[action]}</div>
+      <div className={c(styles.actionCardTitle, fontStyles.title)}>
+        {action}
+      </div>
+      <div className={c(styles.actionCardText, fontStyles.paragraph)}>
+        {CARD_TEXT[action]}
+      </div>
       <div
-        className={c(
-          "action-card__water-mark",
-          `action-card__water-mark--${action}`
-        )}
+        className={styles.actionCardWaterMark}
+        style={{ backgroundImage: `url(${backgroundWaterMark})` }}
       ></div>
     </>
   );

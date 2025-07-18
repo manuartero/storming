@@ -1,0 +1,12 @@
+.piece {
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  /* FIXME: use relative size to Tile container? 0.6 * 12vh */
+  width: 6vh;
+  height: 6vh;
+
+  pointer-events: none;
+}

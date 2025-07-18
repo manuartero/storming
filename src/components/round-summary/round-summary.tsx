@@ -1,13 +1,9 @@
 import { useGameContext } from "game-context";
-import { logRender } from "utils/console";
-import PlayerSummary from "./player-summary";
+import { PlayerSummary } from "./player-summary";
 
-import "./round-summary.scss";
+import styles from "./round-summary.module.css";
 
-
-function RoundSummary(): JSX.Element {
-  logRender("RoundSummary");
-
+export function RoundSummary() {
   const gameContext = useGameContext();
 
   const isResolvingDiploAction = ({ player }: PlayerStatus) => {
@@ -25,7 +21,11 @@ function RoundSummary(): JSX.Element {
   };
 
   return (
-    <div className="round-summary">
+    <section
+      className={styles.roundSummary}
+      aria-label="round summary"
+      role="region"
+    >
       {gameContext.players.map((playerStatus) => (
         <PlayerSummary
           key={`player-summary-${playerStatus.player}`}
@@ -35,8 +35,6 @@ function RoundSummary(): JSX.Element {
           onClick={onPlayerSummaryClick}
         />
       ))}
-    </div>
+    </section>
   );
 }
-
-export default RoundSummary;
