@@ -49,6 +49,35 @@ describe("useTimeline()", () => {
     ]);
   });
 
+  test("planAction() - clean action card", () => {
+    const { result } = renderHook(() => useTimeline());
+
+    const nextActionCard = NewCard("recruit", "player");
+    const futureActionCard = NewCard("move", "player");
+
+    act(() => {
+      result.current.startPlanningPhase();
+    });
+
+    act(() => {
+      result.current.planAction({ nextActionCard, futureActionCard });
+    });
+
+    act(() => {
+      result.current.planAction({
+        nextActionCard: null,
+        futureActionCard: undefined,
+      });
+    });
+
+    expect(result.current.phase).toBe("planification");
+    expect(result.current.activeCard).toBe(undefined);
+    expect(result.current.next).toEqual([]);
+    expect(result.current.future).toEqual([
+      { card: futureActionCard, commited: false },
+    ]);
+  });
+
   test("submitPlanification()", () => {
     const { result } = renderHook(() => useTimeline());
 
