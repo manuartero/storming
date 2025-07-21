@@ -1,4 +1,5 @@
 import { useGameContext } from "game-context";
+import { isActionCard } from "models/new-card";
 import { warnInconsistentState } from "utils/console";
 import { CurrentPhase } from "./current-phase";
 import { mustSkip } from "./must-skip";
@@ -39,6 +40,8 @@ export function CurrentPhaseController() {
 function nextNotCommitedActionCard(
   timelineCards: TimelineCard[]
 ): ActionCard | undefined {
-  return timelineCards.find((timelineCard) => !timelineCard.commited)
-    ?.card as ActionCard;
+  const card = timelineCards.find(
+    (timelineCard) => !timelineCard.commited
+  )?.card;
+  return card && isActionCard(card) ? card : undefined;
 }
