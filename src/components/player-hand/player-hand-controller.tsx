@@ -47,12 +47,14 @@ export function PlayerHandController() {
 
     if (nextCard) {
       gameContext.plan({
+        nextActionCard: undefined,
         futureActionCard: playerCard.card,
       });
     } else {
       // FIXME: we may only modify future card once next card is set
       gameContext.plan({
         nextActionCard: playerCard.card,
+        futureActionCard: undefined,
       });
     }
   };

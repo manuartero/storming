@@ -1,6 +1,6 @@
 import c from "classnames";
-import { Button } from "elements";
 import { Card, CardSilhouette } from "components/cards";
+import { Button } from "elements";
 
 import styles from "./current-phase.module.css";
 
@@ -15,10 +15,11 @@ type ActionPhaseProps = {
 type PlanningPhaseProps = {
   phase: "planification";
   activePlayer: PlayerType;
-  nextAction?: ActionCard;
-  futureAction?: ActionCard;
+  nextActionCard?: ActionCard;
+  futureActionCard?: ActionCard;
   event?: EventCard; // TODO Event Cards
   onSubmitPlan: () => void;
+  onCleanActionCard: (actions: Actions) => void;
 };
 
 export function CurrentPhase(props: ActionPhaseProps | PlanningPhaseProps) {
@@ -45,27 +46,49 @@ function ActionPhase({ activeCard, mustSkip, onSkip }: ActionPhaseProps) {
   }
 
   return (
-    <div className={styles.action}>
+    <>
       <Card card={activeCard} status="active" />
       <Button disabled={!mustSkip} onClick={onSkip}>
         SKIP
       </Button>
-    </div>
+    </>
   );
 }
 
 function PlanningPhase({
   activePlayer,
-  nextAction,
-  futureAction,
+  nextActionCard,
+  futureActionCard,
   onSubmitPlan,
+  onCleanActionCard,
 }: PlanningPhaseProps) {
-  const buttonDisabled = !nextAction || !futureAction;
+  const buttonDisabled = !nextActionCard || !futureActionCard;
+
   return (
-    <div className={styles.planification}>
-      {nextAction ? <Card card={nextAction} /> : <CardSilhouette card="next" />}
-      {futureAction ? (
-        <Card card={futureAction} />
+    <>
+      {nextActionCard ? (
+        <Card
+          card={nextActionCard}
+          onClick={() => {
+            onCleanActionCard({
+              nextActionCard: null,
+              futureActionCard: undefined,
+            });
+          }}
+        />
+      ) : (
+        <CardSilhouette card="next" />
+      )}
+      {futureActionCard ? (
+        <Card
+          card={futureActionCard}
+          onClick={() => {
+            onCleanActionCard({
+              nextActionCard: undefined,
+              futureActionCard: null,
+            });
+          }}
+        />
       ) : (
         <CardSilhouette card="future" />
       )}
@@ -76,6 +99,6 @@ function PlanningPhase({
       >
         GO
       </Button>
-    </div>
+    </>
   );
 }

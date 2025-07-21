@@ -98,6 +98,11 @@ type TimelineCard = {
   commited: boolean;
 };
 
+type Actions = {
+  nextActionCard: ActionCard | undefined | null;
+  futureActionCard: ActionCard | undefined | null;
+};
+
 // --------------
 // Contexts
 // --------------
@@ -132,11 +137,7 @@ type GameContext = {
   players: PlayerStatus[];
 
   // planning phase
-  plan(action: {
-    nextActionCard?: ActionCard;
-    futureActionCard?: ActionCard;
-    eventCard?: EventCard; // TODO !MVP
-  }): void;
+  plan(action: Actions): void;
   submitPlanification(): void;
 
   // action phase

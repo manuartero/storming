@@ -2,7 +2,7 @@ import { act, renderHook } from "@testing-library/react";
 import { useTimeline } from "./use-timeline";
 import { NewCard } from "models/new-card";
 
-describe("useTimeline", () => {
+describe("useTimeline()", () => {
   test("initial state", () => {
     const { result } = renderHook(() => useTimeline());
 
@@ -102,6 +102,8 @@ describe("useTimeline", () => {
     expect(result.current.phase).toBe("action");
     expect(result.current.activeCard).toEqual(nextActionCard);
     expect(result.current.next).toEqual([]);
-    // expect(result.current.future).toEqual([]); FIXME ?
+    expect(result.current.future).toEqual([
+      { card: futureActionCard, commited: true },
+    ]);
   });
 });
