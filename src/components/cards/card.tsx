@@ -14,13 +14,12 @@ type Props = {
 
 export function Card({ card, status = "available", onClick }: Props) {
   return (
-    <div
+    <article
       className={c(
         styles.card,
         styles[status],
         isActionCard(card) && styles.actionCard,
-        isEventCard(card) && styles.eventCard,
-        onClick && status === "available" && styles.clickable
+        isEventCard(card) && styles.eventCard
       )}
       key={card.cardId}
       aria-label={`card ${card.cardId}`}
@@ -30,7 +29,7 @@ export function Card({ card, status = "available", onClick }: Props) {
     >
       {card.cardType === "actionCard" && <ActionCardContents card={card} />}
       {card.cardType === "eventCard" && <EventCardContents card={card} />}
-    </div>
+    </article>
   );
 }
 
@@ -41,20 +40,24 @@ function ActionCardContents({ card: actionCard }: { card: ActionCard }) {
 
   return (
     <>
-      <div
-        className={styles.actionCardIcon}
-        style={{ backgroundImage: `url(${cardIcon})` }}
-      ></div>
-      <div className={c(styles.actionCardTitle, fontStyles.title)}>
-        {action}
+      <div className={styles.heading}>
+        <div
+          className={styles.icon}
+          style={{ backgroundImage: `url(${cardIcon})` }}
+        ></div>
+        <div className={c(styles.title, fontStyles.title)}>{action}</div>
       </div>
-      <div className={c(styles.actionCardText, fontStyles.paragraph)}>
-        {CARD_TEXT[action]}
+      <div className={styles.content}>
+        <div className={c(styles.text, fontStyles.paragraph)}>
+          {CARD_TEXT[action].map((p, idx) => (
+            <p key={idx}>{p}</p>
+          ))}
+        </div>
+        <div
+          className={styles.waterMark}
+          style={{ backgroundImage: `url(${backgroundWaterMark})` }}
+        ></div>
       </div>
-      <div
-        className={styles.actionCardWaterMark}
-        style={{ backgroundImage: `url(${backgroundWaterMark})` }}
-      ></div>
     </>
   );
 }

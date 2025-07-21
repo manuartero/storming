@@ -5,3 +5,4 @@ export { Menu } from "./menu/menu";
 export { PlayerHandController as PlayerHand } from "./player-hand/player-hand-controller";
 export { RoundSummary } from "./round-summary/round-summary";
 export { TimelineController as TimeLine } from "./timeline/timeline-controller";
+export { PlayerInventory } from "./player-inventory/player-inventory";

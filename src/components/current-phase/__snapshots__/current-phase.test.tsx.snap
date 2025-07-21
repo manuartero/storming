@@ -1,193 +1,205 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`<CurrentPhase /> render: match snapshot - action 1`] = `
-<DocumentFragment>
-  <section
-    aria-label="current phase"
-    class="currentPhase"
-    role="region"
+exports[`<CurrentPhase /> render: section role - action 1`] = `
+<section
+  aria-label="current phase"
+  class="currentPhase"
+  role="region"
+>
+  <div
+    class="heading player"
   >
-    <div
-      class="heading player"
-    >
-      <h2>
-        action
-      </h2>
-    </div>
-    <div
-      class="content"
+    <h2>
+      action
+    </h2>
+  </div>
+  <div
+    class="content"
+  >
+    <article
+      aria-disabled="true"
+      aria-label="card player_move_1"
+      aria-pressed="false"
+      class="card active actionCard"
     >
       <div
-        class="action"
+        class="heading"
       >
         <div
-          aria-disabled="true"
-          aria-label="card player_move_1"
-          aria-pressed="false"
-          class="card active actionCard"
+          class="icon"
+        />
+        <div
+          class="title title"
         >
-          <div
-            class="actionCardIcon"
-          />
-          <div
-            class="actionCardTitle title"
-          >
-            move
-          </div>
-          <div
-            class="actionCardText paragraph"
-          >
-            Move up to two different Units
-          </div>
-          <div
-            class="actionCardWaterMark"
-          />
+          move
         </div>
-        <button
-          class="button disabled"
-        >
-          SKIP
-        </button>
       </div>
-    </div>
-  </section>
-</DocumentFragment>
+      <div
+        class="content"
+      >
+        <div
+          class="text paragraph"
+        >
+          <p>
+            Move up to two different Units
+          </p>
+        </div>
+        <div
+          class="waterMark"
+        />
+      </div>
+    </article>
+    <button
+      class="button disabled"
+    >
+      SKIP
+    </button>
+  </div>
+</section>
 `;
 
-exports[`<CurrentPhase /> render: match snapshot - planification 1`] = `
-<DocumentFragment>
-  <section
-    aria-label="current phase"
-    class="currentPhase"
-    role="region"
+exports[`<CurrentPhase /> render: section role - planification 1`] = `
+<section
+  aria-label="current phase"
+  class="currentPhase"
+  role="region"
+>
+  <div
+    class="heading player"
+  >
+    <h2>
+      planification
+    </h2>
+  </div>
+  <div
+    class="content"
   >
     <div
-      class="heading player"
-    >
-      <h2>
-        planification
-      </h2>
-    </div>
-    <div
-      class="content"
+      aria-disabled="true"
+      class="card silhouette"
     >
       <div
-        class="planification"
+        class="title title"
       >
-        <div
-          aria-disabled="true"
-          class="card cardSilhouette"
-        >
-          <div
-            class="silhouetteTitle"
-          >
-            next
-          </div>
-          <div
-            class="silhouetteText"
-          >
-            Drag here the card you wish to use next round
-          </div>
-        </div>
-        <div
-          aria-disabled="true"
-          class="card cardSilhouette"
-        >
-          <div
-            class="silhouetteTitle"
-          >
-            future
-          </div>
-          <div
-            class="silhouetteText"
-          >
-            Drag here the card you wish to use in two rounds
-          </div>
-        </div>
-        <button
-          class="button disabled player"
-        >
-          GO
-        </button>
+        next
+      </div>
+      <div
+        class="text"
+      >
+        Drag here the card you wish to use next round
       </div>
     </div>
-  </section>
-</DocumentFragment>
-`;
-
-exports[`<CurrentPhase /> render: match snapshot - planification with cards 1`] = `
-<DocumentFragment>
-  <section
-    aria-label="current phase"
-    class="currentPhase"
-    role="region"
-  >
     <div
-      class="heading player"
-    >
-      <h2>
-        planification
-      </h2>
-    </div>
-    <div
-      class="content"
+      aria-disabled="true"
+      class="card silhouette"
     >
       <div
-        class="planification"
+        class="title title"
+      >
+        future
+      </div>
+      <div
+        class="text"
+      >
+        Drag here the card you wish to use in two rounds
+      </div>
+    </div>
+    <button
+      class="button disabled player"
+    >
+      GO
+    </button>
+  </div>
+</section>
+`;
+
+exports[`<CurrentPhase /> render: section role - planification with cards 1`] = `
+<section
+  aria-label="current phase"
+  class="currentPhase"
+  role="region"
+>
+  <div
+    class="heading player"
+  >
+    <h2>
+      planification
+    </h2>
+  </div>
+  <div
+    class="content"
+  >
+    <article
+      aria-disabled="false"
+      aria-label="card player_move_2"
+      aria-pressed="false"
+      class="card available actionCard"
+    >
+      <div
+        class="heading"
       >
         <div
-          aria-disabled="true"
-          aria-label="card player_move_2"
-          aria-pressed="false"
-          class="card available actionCard"
+          class="icon"
+        />
+        <div
+          class="title title"
         >
-          <div
-            class="actionCardIcon"
-          />
-          <div
-            class="actionCardTitle title"
-          >
-            move
-          </div>
-          <div
-            class="actionCardText paragraph"
-          >
+          move
+        </div>
+      </div>
+      <div
+        class="content"
+      >
+        <div
+          class="text paragraph"
+        >
+          <p>
             Move up to two different Units
-          </div>
-          <div
-            class="actionCardWaterMark"
-          />
+          </p>
         </div>
         <div
-          aria-disabled="true"
-          aria-label="card player_recruit_1"
-          aria-pressed="false"
-          class="card available actionCard"
+          class="waterMark"
+        />
+      </div>
+    </article>
+    <article
+      aria-disabled="false"
+      aria-label="card player_recruit_1"
+      aria-pressed="false"
+      class="card available actionCard"
+    >
+      <div
+        class="heading"
+      >
+        <div
+          class="icon"
+        />
+        <div
+          class="title title"
         >
-          <div
-            class="actionCardIcon"
-          />
-          <div
-            class="actionCardTitle title"
-          >
-            recruit
-          </div>
-          <div
-            class="actionCardText paragraph"
-          >
+          recruit
+        </div>
+      </div>
+      <div
+        class="content"
+      >
+        <div
+          class="text paragraph"
+        >
+          <p>
             Recruit units at up to two different Settlements
-          </div>
-          <div
-            class="actionCardWaterMark"
-          />
+          </p>
         </div>
-        <button
-          class="button player"
-        >
-          GO
-        </button>
+        <div
+          class="waterMark"
+        />
       </div>
-    </div>
-  </section>
-</DocumentFragment>
+    </article>
+    <button
+      class="button player"
+    >
+      GO
+    </button>
+  </div>
+</section>
 `;

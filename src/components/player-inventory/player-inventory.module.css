@@ -1,0 +1,8 @@
+.playerInventory {
+  /** main grid layout */
+  grid-area: player-inventory;
+
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 8px;
+}

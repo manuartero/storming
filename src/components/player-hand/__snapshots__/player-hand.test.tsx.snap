@@ -6,77 +6,113 @@ exports[`<PlayerHand /> render: region role 1`] = `
   class="playerHand"
   role="region"
 >
-  <div
+  <article
     aria-disabled="false"
     aria-label="card player_move_1"
     aria-pressed="false"
-    class="card available actionCard clickable"
+    class="card available actionCard"
   >
     <div
-      class="actionCardIcon"
-    />
-    <div
-      class="actionCardTitle title"
+      class="heading"
     >
-      move
+      <div
+        class="icon"
+      />
+      <div
+        class="title title"
+      >
+        move
+      </div>
     </div>
     <div
-      class="actionCardText paragraph"
+      class="content"
     >
-      Move up to two different Units
+      <div
+        class="text paragraph"
+      >
+        <p>
+          Move up to two different Units
+        </p>
+      </div>
+      <div
+        class="waterMark"
+      />
     </div>
-    <div
-      class="actionCardWaterMark"
-    />
-  </div>
-  <div
+  </article>
+  <article
     aria-disabled="false"
     aria-label="card player_move_2"
     aria-pressed="false"
-    class="card available actionCard clickable"
+    class="card available actionCard"
   >
     <div
-      class="actionCardIcon"
-    />
-    <div
-      class="actionCardTitle title"
+      class="heading"
     >
-      move
+      <div
+        class="icon"
+      />
+      <div
+        class="title title"
+      >
+        move
+      </div>
     </div>
     <div
-      class="actionCardText paragraph"
+      class="content"
     >
-      Move up to two different Units
+      <div
+        class="text paragraph"
+      >
+        <p>
+          Move up to two different Units
+        </p>
+      </div>
+      <div
+        class="waterMark"
+      />
     </div>
-    <div
-      class="actionCardWaterMark"
-    />
-  </div>
-  <div
+  </article>
+  <article
     aria-disabled="false"
     aria-label="card player_build_1"
     aria-pressed="false"
-    class="card available actionCard clickable"
+    class="card available actionCard"
   >
     <div
-      class="actionCardIcon"
-    />
-    <div
-      class="actionCardTitle title"
+      class="heading"
     >
-      build
+      <div
+        class="icon"
+      />
+      <div
+        class="title title"
+      >
+        build
+      </div>
     </div>
     <div
-      class="actionCardText paragraph"
+      class="content"
     >
-      2x:
- Found a Settlement
- Improve a City
-Build Walls
+      <div
+        class="text paragraph"
+      >
+        <p>
+          Choose one:
+        </p>
+        <p>
+          Found a new Settlement
+        </p>
+        <p>
+          Improve a City
+        </p>
+        <p>
+          Build Walls on a Settlement
+        </p>
+      </div>
+      <div
+        class="waterMark"
+      />
     </div>
-    <div
-      class="actionCardWaterMark"
-    />
-  </div>
+  </article>
 </section>
 `;

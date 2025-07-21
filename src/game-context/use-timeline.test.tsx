@@ -2,7 +2,7 @@ import { act, renderHook } from "@testing-library/react";
 import { useTimeline } from "./use-timeline";
 import { NewCard } from "models/new-card";
 
-describe("useTimeline", () => {
+describe("useTimeline()", () => {
   test("initial state", () => {
     const { result } = renderHook(() => useTimeline());
 
@@ -44,6 +44,35 @@ describe("useTimeline", () => {
     expect(result.current.next).toEqual([
       { card: nextActionCard, commited: false },
     ]);
+    expect(result.current.future).toEqual([
+      { card: futureActionCard, commited: false },
+    ]);
+  });
+
+  test("planAction() - clean action card", () => {
+    const { result } = renderHook(() => useTimeline());
+
+    const nextActionCard = NewCard("recruit", "player");
+    const futureActionCard = NewCard("move", "player");
+
+    act(() => {
+      result.current.startPlanningPhase();
+    });
+
+    act(() => {
+      result.current.planAction({ nextActionCard, futureActionCard });
+    });
+
+    act(() => {
+      result.current.planAction({
+        nextActionCard: null,
+        futureActionCard: undefined,
+      });
+    });
+
+    expect(result.current.phase).toBe("planification");
+    expect(result.current.activeCard).toBe(undefined);
+    expect(result.current.next).toEqual([]);
     expect(result.current.future).toEqual([
       { card: futureActionCard, commited: false },
     ]);
@@ -102,6 +131,8 @@ describe("useTimeline", () => {
     expect(result.current.phase).toBe("action");
     expect(result.current.activeCard).toEqual(nextActionCard);
     expect(result.current.next).toEqual([]);
-    // expect(result.current.future).toEqual([]); FIXME ?
+    expect(result.current.future).toEqual([
+      { card: futureActionCard, commited: true },
+    ]);
   });
 });

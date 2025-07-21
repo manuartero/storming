@@ -2,6 +2,7 @@ import c from "classnames";
 import CARD_TEXT from "./card-text.json";
 
 import styles from "./card.module.css";
+import fontStyles from "styles/fonts.module.css";
 
 type Props = {
   card:
@@ -17,16 +18,12 @@ type Props = {
 export function CardSilhouette({ card, onClick }: Props) {
   return (
     <div
-      className={c(
-        styles.card,
-        styles.cardSilhouette,
-        onClick && styles.clickable
-      )}
+      className={c(styles.card, styles.silhouette, onClick && styles.clickable)}
       aria-disabled={!onClick}
       onClick={onClick}
     >
-      <div className={styles.silhouetteTitle}>{card}</div>
-      <div className={styles.silhouetteText}>{CARD_TEXT[card]}</div>
+      <div className={c(styles.title, fontStyles.title)}>{card}</div>
+      <div className={styles.text}>{CARD_TEXT[card]}</div>
     </div>
   );
 }

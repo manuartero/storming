@@ -1,21 +1,18 @@
 .card {
-  position: relative; /* anchor */
-
-  width: 180px;
-  height: 280px;
-  padding: 36px 24px;
-  background: var(--white);
-  margin: 1vh;
-  box-shadow: 0px 0px 8px var(--shadow-grey);
-  border-radius: 16px;
+  /* anchor */
+  position: relative;
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-}
+  justify-content: space-around;
 
-.card.active {
-  animation: glow 2s ease-in-out infinite alternate;
+  width: 22vh;
+  height: 33vh;
+  padding: 2vh;
+  background: var(--white);
+  margin: 1vh;
+  box-shadow: 0vh 0vh 0.5vh var(--shadow-grey);
+  border-radius: 16px;
 }
 
 .card.played {
@@ -23,45 +20,55 @@
     /* to every children */
     opacity: 0.3;
   }
+  box-shadow: 0vh 0vh 0.4vh var(--light-grey);
 }
 
 .card.selected {
-  background-color: var(--selected-grey);
+  background-color: red;
 }
 
-.card.clickable {
+.card.available {
   cursor: pointer;
+}
+
+.card.silhouette {
+  border: 2px dashed var(--base-grey);
+  box-shadow: none;
 }
 
 /* *** */
 
-.cardSilhouette {
-  border: 3px dashed var(--base-grey);
-  border-radius: 16px;
-  box-shadow: none;
+.heading {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-around;
 }
 
-.actionCard {
-  --title-width: 120px;
+.content {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1vh;
 }
 
-.actionCardIcon {
-  width: 70px;
-  height: 55px;
+.icon {
+  width: 10vh;
+  height: 7.5vh;
 
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
 }
 
-.actionCardTitle {
-  width: var(--title-width);
-  height: 24px;
-
+.title {
   text-transform: uppercase;
 }
 
-.actionCardWaterMark {
+.text {
+  z-index: 1;
+}
+
+.waterMark {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -70,4 +77,5 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+  z-index: 0;
 }

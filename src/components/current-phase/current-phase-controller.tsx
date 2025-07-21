@@ -1,8 +1,8 @@
 import { useGameContext } from "game-context";
+import { isActionCard } from "models/new-card";
+import { warnInconsistentState } from "utils/console";
 import { CurrentPhase } from "./current-phase";
 import { mustSkip } from "./must-skip";
-import { warnInconsistentState } from "utils/console";
-import { isActionCard } from "models/new-card";
 
 export function CurrentPhaseController() {
   const gameContext = useGameContext();
@@ -16,23 +16,13 @@ export function CurrentPhaseController() {
     return <div className="current-phase" />;
   }
 
-  const nextAction = gameContext.next.find(
-    (timelineCard) =>
-      timelineCard.commited === false && isActionCard(timelineCard.card)
-  )?.card as ActionCard;
-
-  const futureAction = gameContext.future.find(
-    (timelineCard) =>
-      timelineCard.commited === false && isActionCard(timelineCard.card)
-  )?.card as ActionCard;
-
   return (
     <CurrentPhase
       phase={gameContext.phase}
       activePlayer={gameContext.activePlayer}
       activeCard={gameContext.activeCard}
-      nextAction={nextAction}
-      futureAction={futureAction}
+      nextActionCard={nextNotCommitedActionCard(gameContext.next)}
+      futureActionCard={nextNotCommitedActionCard(gameContext.future)}
       mustSkip={mustSkip(gameContext)}
       onSkip={() => {
         gameContext.skip();
@@ -40,6 +30,18 @@ export function CurrentPhaseController() {
       onSubmitPlan={() => {
         gameContext.submitPlanification();
       }}
+      onCleanActionCard={(actions) => {
+        gameContext.plan(actions);
+      }}
     />
   );
+}
+
+function nextNotCommitedActionCard(
+  timelineCards: TimelineCard[]
+): ActionCard | undefined {
+  const card = timelineCards.find(
+    (timelineCard) => !timelineCard.commited
+  )?.card;
+  return card && isActionCard(card) ? card : undefined;
 }

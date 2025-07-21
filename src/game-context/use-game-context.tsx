@@ -141,20 +141,18 @@ export function GameContextProvider({ children }: Props) {
     _resolveActionCard();
   };
 
-  const plan = (action: {
-    nextActionCard: ActionCard | undefined;
-    futureActionCard: ActionCard | undefined;
-  }) => {
+  const plan = (actions: Actions) => {
     console.info(
-      `plan({ next: ${action.nextActionCard}, future: ${action.futureActionCard} })`
+      `plan({ next: ${actions.nextActionCard}, future: ${actions.futureActionCard} })`
     );
     if (timeline.phase !== "planification") {
       return warnInconsistentState(
         `trying to plan action but phase is not "planification"`,
-        { phase: timeline.phase, action }
+        { phase: timeline.phase, action: actions }
       );
     }
-    timeline.planAction(action);
+
+    timeline.planAction(actions);
   };
 
   const submitPlanification = () => {

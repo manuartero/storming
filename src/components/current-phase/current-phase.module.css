@@ -25,14 +25,5 @@
 
   display: flex;
   flex-direction: column;
- 
-}
 
-.planification {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.action {
 }

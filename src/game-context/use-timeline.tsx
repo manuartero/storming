@@ -27,38 +27,36 @@ export function useTimeline() {
 
   const nextActiveCard = () => {
     setActiveCard(next[0].card);
-    // issue: we were loosing the commited state of the card
-    setNext(
-      next.slice(1).map((timelineCard) => ({ ...timelineCard, commited: true }))
-    );
+    setNext(next.slice(1).map((timelineCard) => ({ ...timelineCard })));
   };
 
-  const planAction = ({
-    nextActionCard,
-    futureActionCard,
-  }: {
-    nextActionCard: ActionCard | undefined;
-    futureActionCard: ActionCard | undefined;
-  }) => {
+  const planAction = ({ nextActionCard, futureActionCard }: Actions) => {
     if (nextActionCard) {
-      setNext(
+      setNext((next) =>
         next
           .filter((card) => card.commited)
           .concat({ card: nextActionCard, commited: false })
       );
+    } else if (nextActionCard === null) {
+      setNext((next) => next.filter((card) => card.commited));
     }
+
     if (futureActionCard) {
-      setFuture(
+      setFuture((future) =>
         future
           .filter((card) => card.commited)
           .concat({ card: futureActionCard, commited: false })
       );
+    } else if (futureActionCard === null) {
+      setFuture((future) => future.filter((card) => card.commited));
     }
   };
 
   const submitPlanification = () => {
-    setNext(next.map((timelineCard) => ({ ...timelineCard, commited: true })));
-    setFuture(
+    setNext((next) =>
+      next.map((timelineCard) => ({ ...timelineCard, commited: true }))
+    );
+    setFuture((future) =>
       future.map((timelineCard) => ({ ...timelineCard, commited: true }))
     );
   };
