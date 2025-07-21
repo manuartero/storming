@@ -33,7 +33,9 @@ export function PlayerHand({
               key={card.cardId}
               status={status}
               card={card}
-              onClick={() => considerOnClickIfActive(card.cardId)}
+              onClick={() => {
+                considerOnClickIfActive(card.cardId);
+              }}
             ></Card>
           );
         })}

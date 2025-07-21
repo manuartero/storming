@@ -7,7 +7,7 @@
   grid-template-areas:
     "current-phase timeline timeline"
     "current-phase board marketplace"
-    "round-summary player-hand player-hand";
+    "round-summary player-hand player-inventory";
 
   height: 100vh;
 }

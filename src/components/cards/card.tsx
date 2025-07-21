@@ -14,7 +14,7 @@ type Props = {
 
 export function Card({ card, status = "available", onClick }: Props) {
   return (
-    <div
+    <article
       className={c(
         styles.card,
         styles[status],
@@ -30,7 +30,7 @@ export function Card({ card, status = "available", onClick }: Props) {
     >
       {card.cardType === "actionCard" && <ActionCardContents card={card} />}
       {card.cardType === "eventCard" && <EventCardContents card={card} />}
-    </div>
+    </article>
   );
 }
 

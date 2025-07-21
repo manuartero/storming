@@ -6,6 +6,7 @@ import {
   PlayerHand,
   RoundSummary,
   TimeLine,
+  PlayerInventory,
 } from "components";
 import { GameContextProvider } from "game-context";
 import { StrictMode } from "react";
@@ -24,6 +25,7 @@ export function App() {
           <Marketplace />
           <RoundSummary />
           <PlayerHand />
+          <PlayerInventory />
         </GameContextProvider>
       </main>
     </StrictMode>
