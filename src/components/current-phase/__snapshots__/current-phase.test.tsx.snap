@@ -20,29 +20,39 @@ exports[`<CurrentPhase /> render: match snapshot - action 1`] = `
       <div
         class="action"
       >
-        <div
+        <article
           aria-disabled="true"
           aria-label="card player_move_1"
           aria-pressed="false"
           class="card active actionCard"
         >
           <div
-            class="actionCardIcon"
-          />
-          <div
-            class="actionCardTitle title"
+            class="heading"
           >
-            move
+            <div
+              class="icon"
+            />
+            <div
+              class="title title"
+            >
+              move
+            </div>
           </div>
           <div
-            class="actionCardText paragraph"
+            class="content"
           >
-            Move up to two different Units
+            <div
+              class="text paragraph"
+            >
+              <p>
+                Move up to two different Units
+              </p>
+            </div>
+            <div
+              class="waterMark"
+            />
           </div>
-          <div
-            class="actionCardWaterMark"
-          />
-        </div>
+        </article>
         <button
           class="button disabled"
         >
@@ -76,30 +86,30 @@ exports[`<CurrentPhase /> render: match snapshot - planification 1`] = `
       >
         <div
           aria-disabled="true"
-          class="card cardSilhouette"
+          class="card silhouette"
         >
           <div
-            class="silhouetteTitle"
+            class="title title"
           >
             next
           </div>
           <div
-            class="silhouetteText"
+            class="text"
           >
             Drag here the card you wish to use next round
           </div>
         </div>
         <div
           aria-disabled="true"
-          class="card cardSilhouette"
+          class="card silhouette"
         >
           <div
-            class="silhouetteTitle"
+            class="title title"
           >
             future
           </div>
           <div
-            class="silhouetteText"
+            class="text"
           >
             Drag here the card you wish to use in two rounds
           </div>
@@ -135,52 +145,72 @@ exports[`<CurrentPhase /> render: match snapshot - planification with cards 1`] 
       <div
         class="planification"
       >
-        <div
+        <article
           aria-disabled="true"
           aria-label="card player_move_2"
           aria-pressed="false"
           class="card available actionCard"
         >
           <div
-            class="actionCardIcon"
-          />
-          <div
-            class="actionCardTitle title"
+            class="heading"
           >
-            move
+            <div
+              class="icon"
+            />
+            <div
+              class="title title"
+            >
+              move
+            </div>
           </div>
           <div
-            class="actionCardText paragraph"
+            class="content"
           >
-            Move up to two different Units
+            <div
+              class="text paragraph"
+            >
+              <p>
+                Move up to two different Units
+              </p>
+            </div>
+            <div
+              class="waterMark"
+            />
           </div>
-          <div
-            class="actionCardWaterMark"
-          />
-        </div>
-        <div
+        </article>
+        <article
           aria-disabled="true"
           aria-label="card player_recruit_1"
           aria-pressed="false"
           class="card available actionCard"
         >
           <div
-            class="actionCardIcon"
-          />
-          <div
-            class="actionCardTitle title"
+            class="heading"
           >
-            recruit
+            <div
+              class="icon"
+            />
+            <div
+              class="title title"
+            >
+              recruit
+            </div>
           </div>
           <div
-            class="actionCardText paragraph"
+            class="content"
           >
-            Recruit units at up to two different Settlements
+            <div
+              class="text paragraph"
+            >
+              <p>
+                Recruit units at up to two different Settlements
+              </p>
+            </div>
+            <div
+              class="waterMark"
+            />
           </div>
-          <div
-            class="actionCardWaterMark"
-          />
-        </div>
+        </article>
         <button
           class="button player"
         >
