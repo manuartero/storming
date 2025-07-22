@@ -1,5 +1,5 @@
-import { Avatar } from "./avatar/avatar";
 import c from "classnames";
+import { Avatar } from "./avatar/avatar";
 
 import styles from "./player-card.module.css";
 
@@ -10,7 +10,7 @@ type Props = {
   onClick: (player: PlayerStatus) => void;
 };
 
-export function PlayerSummary({ player, active, clickable, onClick }: Props) {
+export function PlayerCard({ player, active, clickable, onClick }: Props) {
   return (
     <article
       className={c(
@@ -19,7 +19,6 @@ export function PlayerSummary({ player, active, clickable, onClick }: Props) {
         clickable && styles.clickable,
         active && styles.active
       )}
-      role="button"
       aria-label={`${player.player} summary`}
       aria-disabled={!clickable}
       aria-roledescription="player summary"

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`<Avatar /> render: "player" avatar 1`] = `
+<div
+  aria-label="player avatar"
+  aria-roledescription="game avatar"
+  class="avatar player"
+  role="img"
+/>
+`;
