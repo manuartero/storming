@@ -1,0 +1,31 @@
+.avatar {
+  --player-color: var(--dark-grey);
+
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  width: 6vh;
+  height: 6vh;
+
+  pointer-events: none;
+}
+
+/*
+.avatar.player {
+  --player-color: var(--player-primary);
+}
+
+.avatar.enemy1 {
+  --player-color: var(--enemy1-primary);
+}
+
+.avatar.enemy2 {
+  --player-color: var(--enemy2-primary);
+}
+
+.avatar.enemy3 {
+  --player-color: var(--enemy3-primary);
+}
+*/

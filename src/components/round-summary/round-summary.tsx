@@ -1,5 +1,5 @@
 import { useGameContext } from "game-context";
-import { PlayerSummary } from "./player-summary";
+import { PlayerCard } from "./player-card";
 
 import styles from "./round-summary.module.css";
 
@@ -27,7 +27,7 @@ export function RoundSummary() {
       role="region"
     >
       {gameContext.players.map((playerStatus) => (
-        <PlayerSummary
+        <PlayerCard
           key={`player-summary-${playerStatus.player}`}
           player={playerStatus}
           active={playerStatus.player === gameContext.activePlayer}

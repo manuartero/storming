@@ -5,4 +5,61 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  background: var(--white);
+}
+
+.roundSummary {
+  & article {
+    /* XXX card overlap: is it possible to use some flex magic instead? */
+    margin-top: -4vh;
+
+    transition: transform 0.3s ease-in-out;
+  }
+
+  & article:first-child {
+    margin-top: 0;
+  }
+
+  & article:nth-child(1) {
+    z-index: 4;
+  }
+
+  & article:nth-child(2) {
+    z-index: 3;
+  }
+
+  & article:nth-child(3) {
+    z-index: 2;
+  }
+}
+
+.roundSummary:hover {
+  & article:nth-child(1) {
+    transform: translateY(-18vh);
+  }
+
+  & article:nth-child(1):hover {
+    transform: translateY(-18vh) scale(1.05);
+  }
+
+  & article:nth-child(2) {
+    transform: translateY(-12vh);
+  }
+
+  & article:nth-child(2):hover {
+    transform: translateY(-12vh) scale(1.05);
+  }
+
+  & article:nth-child(3) {
+    transform: translateY(-6vh);
+  }
+
+  & article:nth-child(3):hover {
+    transform: translateY(-6vh) scale(1.05);
+  }
+
+  & article:nth-child(4):hover {
+    transform: scale(1.05);
+  }
 }
