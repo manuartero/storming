@@ -1,6 +1,6 @@
 {
   "name": "storming",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Storming BoardGame - An original board game in React",
   "type": "module",
   "engines": {
