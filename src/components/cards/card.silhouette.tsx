@@ -1,5 +1,4 @@
 import c from "classnames";
-import CARD_TEXT from "./card-text.json";
 import { Piece, Tile } from "elements";
 
 import styles from "./card.module.css";
@@ -13,11 +12,17 @@ type Props = {
     | "upgrade-settlement"
     | "recruit-soldier"
     | "recruit-knight";
+  player?: PlayerType;
   disabled?: boolean;
   onClick?: () => void;
 };
 
-export function CardSilhouette({ card, disabled = false, onClick }: Props) {
+export function CardSilhouette({
+  card,
+  player = "player",
+  disabled = false,
+  onClick,
+}: Props) {
   const title = card.replace(/-/g, " ");
 
   return (
@@ -38,12 +43,12 @@ export function CardSilhouette({ card, disabled = false, onClick }: Props) {
       <div className={styles.content}>
         {card === "recruit-soldier" && (
           <Tile id={null} disableChildrenOffset>
-            <Piece owner="player" type="soldier" />
+            <Piece owner={player} type="soldier" />
           </Tile>
         )}
         {card === "recruit-knight" && (
           <Tile id={null} disableChildrenOffset>
-            <Piece owner="player" type="knight" />
+            <Piece owner={player} type="knight" />
           </Tile>
         )}
       </div>

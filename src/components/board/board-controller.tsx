@@ -196,6 +196,7 @@ export function BoardController() {
 
       {selectedTile?.mode === "recruiting" && (
         <RecruitDialog
+          player={gameContext.activePlayer}
           recruitSoldier={() => {
             recruitOnTile(selectedTile.tile, "soldier");
           }}
