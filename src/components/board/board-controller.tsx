@@ -7,10 +7,9 @@ import { BuildDialog } from "./build-dialog";
 import { inferVisualBoardFromGameContext } from "./infer-visual-board";
 import { RecruitDialog } from "./recruit-dialog";
 
-type SelectedTile = {
-  tile: TileID;
-  mode: "selected" | "building" | "recruiting";
-};
+type SelectedTile =
+  | { tile: TileID; mode: "selected" | "building" }
+  | { tile: TileID; mode: "recruiting"; knightsUnlocked: boolean };
 
 /**
  * Defines visual board from GameContext:
@@ -111,6 +110,14 @@ export function BoardController() {
   };
 
   const resolveRecruitOnTile = (tile: TileID) => {
+    if (board[tile].piece) {
+      warnInconsistentState(
+        `trying to recruit on ${tile} but piece already found`,
+        { tile: board[tile] }
+      );
+      return;
+    }
+
     const building = board[tile].building;
     if (!building) {
       warnInconsistentState(
@@ -120,15 +127,11 @@ export function BoardController() {
       return;
     }
 
-    if (board[tile].piece) {
-      warnInconsistentState(
-        `trying to recruit on ${tile} but piece already found`,
-        { tile: board[tile] }
-      );
-      return;
-    }
-
-    setSelectedTile({ tile, mode: "recruiting" });
+    setSelectedTile({
+      tile,
+      mode: "recruiting",
+      knightsUnlocked: building.type !== "tower",
+    });
   };
 
   const resolveBuildOnTile = (tile: TileID) => {
@@ -176,6 +179,7 @@ export function BoardController() {
         activePlayer={gameContext.activePlayer}
         onTileClick={onTileClick}
       />
+
       {selectedTile?.mode === "building" && (
         <BuildDialog
           onWallOption={() => {
@@ -189,15 +193,20 @@ export function BoardController() {
           }}
         />
       )}
+
       {selectedTile?.mode === "recruiting" && (
         <RecruitDialog
-          onSoldierOption={() => {
+          recruitSoldier={() => {
             recruitOnTile(selectedTile.tile, "soldier");
           }}
-          onKnightOption={() => {
-            recruitOnTile(selectedTile.tile, "knight");
-          }}
-          onClose={() => {
+          recruitKnight={
+            selectedTile.knightsUnlocked
+              ? () => {
+                  recruitOnTile(selectedTile.tile, "knight");
+                }
+              : undefined
+          }
+          close={() => {
             discardOptionDialog();
           }}
         />

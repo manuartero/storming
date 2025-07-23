@@ -11,26 +11,33 @@ describe("<Tile />", () => {
     expect(tile).toMatchSnapshot();
   });
 
-  test('render: status "selected"', () => {
+  test('status "selected"', () => {
     render(<Tile id="-1,0" status="selected" onClick={jest.fn()} />);
 
     const tile = screen.getByRole("button", { name: "tile -1,0" });
     expect(tile).toHaveClass("selected");
   });
 
-  test('render: status "available"', () => {
+  test('status "available"', () => {
     render(<Tile id="-1,0" status="available" onClick={jest.fn()} />);
 
     const tile = screen.getByRole("button", { name: "tile -1,0" });
     expect(tile).toHaveClass("available");
   });
 
-  test("render: building", () => {
+  test("building", () => {
     render(
       <Tile id="-1,0" building="tower" owner="player" onClick={jest.fn()} />
     );
 
     const tile = screen.getByRole("button", { name: "tile -1,0" });
+    expect(tile).toMatchSnapshot();
+  });
+
+  test("fake Tile with no id", () => {
+    render(<Tile id={null} />);
+
+    const tile = screen.getByRole("button", { name: "tile null" });
     expect(tile).toMatchSnapshot();
   });
 });

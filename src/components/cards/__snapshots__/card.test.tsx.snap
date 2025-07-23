@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`<Card /> render: article role 1`] = `
+<article
+  aria-disabled="false"
+  aria-label="card player_build_1"
+  aria-pressed="false"
+  class="card available actionCard"
+>
+  <div
+    class="heading"
+  >
+    <div
+      class="icon"
+    />
+    <div
+      class="title title"
+    >
+      build
+    </div>
+  </div>
+  <div
+    class="content"
+  >
+    <div
+      class="text paragraph"
+    >
+      <p>
+        Choose one:
+      </p>
+      <p>
+        Found a new Settlement
+      </p>
+      <p>
+        Improve a City
+      </p>
+      <p>
+        Build Walls on a Settlement
+      </p>
+    </div>
+    <div
+      class="waterMark"
+    />
+  </div>
+</article>
+`;

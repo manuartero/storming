@@ -2,21 +2,21 @@ import { CardSilhouette } from "components/cards";
 import { Dialog } from "elements";
 
 type Props = {
-  onSoldierOption: () => void;
-  onKnightOption: () => void;
-  onClose: () => void;
+  recruitSoldier: () => void;
+  recruitKnight?: () => void;
+  close: () => void;
 };
 
-export function RecruitDialog({
-  onSoldierOption,
-  onKnightOption,
-  onClose,
-}: Props) {
+export function RecruitDialog({ recruitSoldier, recruitKnight, close }: Props) {
   return (
-    <Dialog size="small" title="Choose Which Unit to Recruit" onClose={onClose}>
+    <Dialog size="small" title="Choose Which Unit to Recruit" onClose={close}>
       <>
-        <CardSilhouette card="recruit-soldier" onClick={onSoldierOption} />
-        <CardSilhouette card="recruit-knight" onClick={onKnightOption} />
+        <CardSilhouette card="recruit-soldier" onClick={recruitSoldier} />
+        <CardSilhouette
+          card="recruit-knight"
+          disabled={!recruitKnight}
+          onClick={recruitKnight}
+        />
       </>
     </Dialog>
   );

@@ -74,8 +74,9 @@ exports[`<CurrentPhase /> render: section role - planification 1`] = `
   <div
     class="content"
   >
-    <div
+    <article
       aria-disabled="true"
+      aria-label="card silhouette next"
       class="card silhouette"
     >
       <div
@@ -88,9 +89,10 @@ exports[`<CurrentPhase /> render: section role - planification 1`] = `
       >
         Drag here the card you wish to use next round
       </div>
-    </div>
-    <div
+    </article>
+    <article
       aria-disabled="true"
+      aria-label="card silhouette future"
       class="card silhouette"
     >
       <div
@@ -103,7 +105,7 @@ exports[`<CurrentPhase /> render: section role - planification 1`] = `
       >
         Drag here the card you wish to use in two rounds
       </div>
-    </div>
+    </article>
     <button
       class="button disabled player"
     >

@@ -1,8 +1,7 @@
 import c from "classnames";
 import { TILES, coordinates } from "models/tiles";
 import { logRender } from "utils/console";
-import { Piece } from "./pieces/piece";
-import { Tile } from "./tiles/tile";
+import { Tile, Piece } from "elements";
 
 import styles from "./board.module.css";
 
