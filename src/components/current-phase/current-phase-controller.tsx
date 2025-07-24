@@ -21,8 +21,8 @@ export function CurrentPhaseController() {
       phase={gameContext.phase}
       activePlayer={gameContext.activePlayer}
       activeCard={gameContext.activeCard}
-      nextActionCard={nextNotCommitedActionCard(gameContext.next)}
-      futureActionCard={nextNotCommitedActionCard(gameContext.future)}
+      nextActionCard={nextNotCommittedActionCard(gameContext.next)}
+      futureActionCard={nextNotCommittedActionCard(gameContext.future)}
       mustSkip={mustSkip(gameContext)}
       onSkip={() => {
         gameContext.skip();
@@ -37,7 +37,7 @@ export function CurrentPhaseController() {
   );
 }
 
-function nextNotCommitedActionCard(timelineCards: TimelineCard[]) {
+function nextNotCommittedActionCard(timelineCards: TimelineCard[]) {
   const card = timelineCards.find(
     (timelineCard) => !timelineCard.commited
   )?.card;
