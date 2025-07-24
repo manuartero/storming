@@ -5,8 +5,8 @@ import styles from "./recruit-dialog.module.css";
 
 type Props = {
   player?: PlayerType;
-  buildWalls: () => void | undefined;
-  upgradeBuilding: () => void | undefined;
+  buildWalls: (() => void) | undefined;
+  upgradeBuilding: (() => void) | undefined;
   close: () => void;
 };
 

@@ -37,9 +37,7 @@ export function CurrentPhaseController() {
   );
 }
 
-function nextNotCommitedActionCard(
-  timelineCards: TimelineCard[]
-): ActionCard | undefined {
+function nextNotCommitedActionCard(timelineCards: TimelineCard[]) {
   const card = timelineCards.find(
     (timelineCard) => !timelineCard.commited
   )?.card;

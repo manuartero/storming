@@ -9,9 +9,9 @@ exports[`<CurrentPhase /> render: section role - action 1`] = `
   <div
     class="heading player"
   >
-    <h2>
+    <h1>
       action
-    </h2>
+    </h1>
   </div>
   <div
     class="content"
@@ -67,9 +67,9 @@ exports[`<CurrentPhase /> render: section role - planification 1`] = `
   <div
     class="heading player"
   >
-    <h2>
+    <h1>
       planification
-    </h2>
+    </h1>
   </div>
   <div
     class="content"
@@ -128,9 +128,9 @@ exports[`<CurrentPhase /> render: section role - planification with cards 1`] = 
   <div
     class="heading player"
   >
-    <h2>
+    <h1>
       planification
-    </h2>
+    </h1>
   </div>
   <div
     class="content"

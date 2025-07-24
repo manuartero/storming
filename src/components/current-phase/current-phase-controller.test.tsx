@@ -4,10 +4,12 @@ import { CurrentPhaseController } from "./current-phase-controller";
 
 describe("<CurrentPhaseController />", () => {
   test("reads GameContext.phase", async () => {
-    render(<CurrentPhaseController />, {
-      wrapper: GameContextProvider,
-    });
-    const currentPhase = await screen.findByRole("heading");
+    render(
+      <GameContextProvider>
+        <CurrentPhaseController />
+      </GameContextProvider>
+    );
+    const currentPhase = await screen.findByRole("heading", { level: 1 });
     expect(currentPhase.textContent).toBe("planification");
   });
 });

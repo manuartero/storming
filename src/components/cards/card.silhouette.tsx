@@ -1,8 +1,8 @@
 import c from "classnames";
 import { Piece, Tile } from "elements";
 
-import styles from "./card.module.css";
 import fontStyles from "styles/fonts.module.css";
+import styles from "./card.module.css";
 
 type Props = {
   card:
@@ -49,6 +49,11 @@ export function CardSilhouette({
         {card === "recruit-knight" && (
           <Tile id={null} disableChildrenOffset>
             <Piece owner={player} type="knight" />
+          </Tile>
+        )}
+        {card === "build-walls" && (
+          <Tile id={null} disableChildrenOffset>
+            {/* TODO: include Walls assets */}
           </Tile>
         )}
         {card === "upgrade-settlement" && (
