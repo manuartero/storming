@@ -51,6 +51,14 @@ export function CardSilhouette({
             <Piece owner={player} type="knight" />
           </Tile>
         )}
+        {card === "upgrade-settlement" && (
+          <Tile
+            id={null}
+            disableChildrenOffset
+            building="citadel"
+            owner={player}
+          ></Tile>
+        )}
       </div>
     </article>
   );

@@ -39,7 +39,7 @@
 }
 
 .card.silhouette {
-  border: 2px dashed var(--base-grey);
+  border: 2px dotted var(--base-grey);
   box-shadow: none;
 
   & button {

@@ -4,14 +4,14 @@ import { Dialog } from "elements";
 import styles from "./recruit-dialog.module.css";
 
 type Props = {
-  player: PlayerType;
+  player?: PlayerType;
   recruitSoldier: () => void;
   recruitKnight?: () => void;
   close: () => void;
 };
 
 export function RecruitDialog({
-  player,
+  player = "player",
   recruitSoldier,
   recruitKnight,
   close,

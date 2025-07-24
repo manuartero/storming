@@ -7,9 +7,10 @@ import { BuildDialog } from "./build-dialog";
 import { inferVisualBoardFromGameContext } from "./infer-visual-board";
 import { RecruitDialog } from "./recruit-dialog";
 
-type SelectedTile =
-  | { tile: TileID; mode: "selected" | "building" }
-  | { tile: TileID; mode: "recruiting"; knightsUnlocked: boolean };
+type SelectedTile = {
+  tile: TileID;
+  mode: "selected" | "building" | "recruiting";
+};
 
 /**
  * Defines visual board from GameContext:
@@ -127,12 +128,20 @@ export function BoardController() {
       return;
     }
 
-    setSelectedTile({
-      tile,
-      mode: "recruiting",
-      knightsUnlocked: building.type !== "tower",
-    });
+    setSelectedTile({ tile, mode: "recruiting" });
   };
+
+  const knightsUnlocked =
+    selectedTile?.mode === "recruiting" &&
+    board[selectedTile.tile]?.building?.type !== "tower";
+
+  const wallsAvailable =
+    selectedTile?.mode === "building" &&
+    !board[selectedTile.tile]?.building?.hasWalls;
+
+  const upgradeBuildingAvailable =
+    selectedTile?.mode === "building" &&
+    board[selectedTile.tile]?.building?.type !== "citadel";
 
   const resolveBuildOnTile = (tile: TileID) => {
     if (!board[tile].building && board[tile].piece?.type === "soldier") {
@@ -182,15 +191,22 @@ export function BoardController() {
 
       {selectedTile?.mode === "building" && (
         <BuildDialog
-          onWallOption={() => {
-            buildWallsOnTile(selectedTile.tile);
-          }}
-          onUpgradeOption={() => {
-            upgradeBuildingOnTile(selectedTile.tile);
-          }}
-          onClose={() => {
-            discardOptionDialog();
-          }}
+          player={gameContext.activePlayer}
+          buildWalls={
+            wallsAvailable
+              ? () => {
+                  buildWallsOnTile(selectedTile.tile);
+                }
+              : undefined
+          }
+          upgradeBuilding={
+            upgradeBuildingAvailable
+              ? () => {
+                  upgradeBuildingOnTile(selectedTile.tile);
+                }
+              : undefined
+          }
+          close={discardOptionDialog}
         />
       )}
 
@@ -201,15 +217,13 @@ export function BoardController() {
             recruitOnTile(selectedTile.tile, "soldier");
           }}
           recruitKnight={
-            selectedTile.knightsUnlocked
+            knightsUnlocked
               ? () => {
                   recruitOnTile(selectedTile.tile, "knight");
                 }
               : undefined
           }
-          close={() => {
-            discardOptionDialog();
-          }}
+          close={discardOptionDialog}
         />
       )}
     </>
