@@ -1,22 +1,40 @@
 import { CardSilhouette } from "components/cards";
 import { Dialog } from "elements";
 
+import styles from "./recruit-dialog.module.css";
+
 type Props = {
-  onSoldierOption: () => void;
-  onKnightOption: () => void;
-  onClose: () => void;
+  player?: PlayerType;
+  recruitSoldier: () => void;
+  recruitKnight?: () => void;
+  close: () => void;
 };
 
 export function RecruitDialog({
-  onSoldierOption,
-  onKnightOption,
-  onClose,
+  player = "player",
+  recruitSoldier,
+  recruitKnight,
+  close,
 }: Props) {
   return (
-    <Dialog size="small" title="Choose Which Unit to Recruit" onClose={onClose}>
+    <Dialog size="small" title="Choose Which Unit to Recruit" onClose={close}>
       <>
-        <CardSilhouette card="recruit-soldier" onClick={onSoldierOption} />
-        <CardSilhouette card="recruit-knight" onClick={onKnightOption} />
+        <CardSilhouette
+          card="recruit-soldier"
+          player={player}
+          onClick={recruitSoldier}
+        />
+        <div className={styles.column}>
+          <CardSilhouette
+            card="recruit-knight"
+            player={player}
+            disabled={!recruitKnight}
+            onClick={recruitKnight}
+          />
+          {!recruitKnight && (
+            <span>Knights could be recruited if the tower is upgraded</span>
+          )}
+        </div>
       </>
     </Dialog>
   );

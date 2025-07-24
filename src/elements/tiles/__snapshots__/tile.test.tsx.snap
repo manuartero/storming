@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`<Tile /> render: building 1`] = `
+exports[`<Tile /> building 1`] = `
 <button
   aria-disabled="false"
   aria-label="tile -1,0"
@@ -20,6 +20,24 @@ exports[`<Tile /> render: building 1`] = `
     aria-roledescription="game building"
     class="building"
     role="img"
+  />
+</button>
+`;
+
+exports[`<Tile /> fake Tile with no id 1`] = `
+<button
+  aria-disabled="false"
+  aria-label="tile null"
+  class="tile"
+  type="button"
+>
+  <div
+    aria-hidden="true"
+    class="strokeLayer"
+  />
+  <div
+    aria-hidden="true"
+    class="innerLayer"
   />
 </button>
 `;

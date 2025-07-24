@@ -1,19 +1,30 @@
 import c from "classnames";
 import { coordinates } from "models/tiles";
 import { tileAssets } from "./assets";
-
-import styles from "./tile.module.css";
 import { usePieceOffset } from "./use-piece-offset";
 
-type Props = React.PropsWithChildren<{
-  id: TileID;
+import styles from "./tile.module.css";
+
+type _BaseProps = React.PropsWithChildren<{
   status?: TileStatus;
   terrain?: TerrainType;
   building?: BuildingType;
   owner?: PlayerType;
   activePlayer?: PlayerType;
-  onClick: (tileID: Coordinates) => void;
+  disableChildrenOffset?: boolean;
 }>;
+
+type _TileProps = _BaseProps & {
+  id: TileID;
+  onClick: (tileID: Coordinates) => void;
+};
+
+type _FakeTile = _BaseProps & {
+  id: null;
+  onClick?: undefined;
+};
+
+type Props = _TileProps | _FakeTile;
 
 export function Tile({
   id,
@@ -23,16 +34,16 @@ export function Tile({
   activePlayer,
   status,
   children,
+  disableChildrenOffset = false,
   onClick,
 }: Props) {
   /* debug: turn on debug ID */
   const debugTileID = false;
 
-  const pieceStyle = usePieceOffset(children);
+  const pieceStyle = usePieceOffset({ children, disableChildrenOffset });
 
   return (
     <button
-      key={`tile(${id})`}
       className={c(
         styles.tile,
         status && styles[status],
@@ -43,7 +54,7 @@ export function Tile({
       aria-label={`tile ${id}`}
       aria-disabled={status === "forbidden"}
       type="button"
-      onClick={() => onClick(coordinates(id))}
+      onClick={id ? () => onClick(coordinates(id)) : undefined}
     >
       <div className={styles.strokeLayer} aria-hidden="true" />
 

@@ -27,13 +27,32 @@
   background-color: red;
 }
 
-.card.available {
+.card.available,
+.card.clickable {
   cursor: pointer;
 }
 
+.card.disabled {
+  cursor: not-allowed;
+  background-color: var(--lightest-grey);
+  opacity: 0.3;
+}
+
 .card.silhouette {
-  border: 2px dashed var(--base-grey);
+  border: 2px dotted var(--base-grey);
   box-shadow: none;
+
+  & button {
+    pointer-events: none;
+  }
+
+  & .heading {
+    flex: 2;
+  }
+
+  & .content {
+    flex: 3;
+  }
 }
 
 /* *** */
@@ -41,13 +60,14 @@
 .heading {
   display: flex;
   flex-direction: column;
-
   justify-content: space-around;
 }
 
 .content {
+  width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin-top: 1vh;
 }
 

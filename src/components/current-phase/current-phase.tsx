@@ -30,7 +30,7 @@ export function CurrentPhase(props: ActionPhaseProps | PlanningPhaseProps) {
       aria-label="current phase"
     >
       <div className={c(styles.heading, props.activePlayer)}>
-        <h2>{props.phase}</h2>
+        <h1>{props.phase}</h1>
       </div>
       <div className={styles.content}>
         {props.phase === "action" && <ActionPhase {...props} />}
