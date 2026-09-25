@@ -78,14 +78,13 @@ function getInRangeMovements({ tileId, board }: _TileInBoard) {
   const tiles = tilesInRange({ tileId, range });
 
   return tiles.filter((candidateTile) => {
-    const targetTerrain = board[candidateTile].terrain;
+    const target = board[candidateTile];
 
     const isAllowedTerrain =
-      targetTerrain === undefined || specialTerrain.includes(targetTerrain);
+      target.terrain === undefined || specialTerrain.includes(target.terrain);
 
     const isEmptyOrOpponentTile =
-      !board[candidateTile].piece ||
-      board[candidateTile].piece?.owner !== board[tileId].piece?.owner;
+      !target.piece || target.piece.owner !== piece.owner;
 
     return isAllowedTerrain && isEmptyOrOpponentTile;
   });

@@ -26,20 +26,17 @@ export function inferVisualBoardFromGameContext({
     return board;
   }
 
-  const availableTiles =
+  const availableTiles = new Set(
     activeCard.cardType === "actionCard"
-      ? getAvailableTilesForActionCard({
-          board,
-          activeCard,
-          selectedTile,
-        })
-      : [];
+      ? getAvailableTilesForActionCard({ board, activeCard, selectedTile })
+      : []
+  );
 
   const tileStatus = (tileId: TileID) => {
     if (tileId === selectedTile) {
       return "selected";
     }
-    if (availableTiles.includes(tileId)) {
+    if (availableTiles.has(tileId)) {
       return "available";
     }
     return undefined;

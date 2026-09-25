@@ -13,8 +13,8 @@ type Props = {
 export function Board({ state, activePlayer, onTileClick }: Props) {
   logRender("Board");
 
-  const renderRow = (n: RowNumber) =>
-    row(n).map((tileId) => {
+  const renderRow = (tileIds: readonly TileID[]) =>
+    tileIds.map((tileId) => {
       const s = state[tileId];
       return (
         <Tile
@@ -34,24 +34,22 @@ export function Board({ state, activePlayer, onTileClick }: Props) {
 
   return (
     <section className={styles.board} role="board" aria-label="game board">
-      {ROWS.map((n) => (
+      {ROWS.map(({ y, tileIds }) => (
         <div
-          key={n}
+          key={y}
           className={styles.row}
           role="row"
-          aria-label={`board row ${n}`}
+          aria-label={`board row ${y}`}
         >
-          {renderRow(n)}
+          {renderRow(tileIds)}
         </div>
       ))}
     </section>
   );
 }
 
-const ROWS = [-3, -2, -1, 0, 1, 2, 3] as const;
-
-type RowNumber = (typeof ROWS)[number];
-
-function row(n: RowNumber) {
-  return TILES.filter((id) => coordinates(id).y === n);
-}
+/* the board never changes shape: split the tiles into rows once */
+const ROWS = [-3, -2, -1, 0, 1, 2, 3].map((y) => ({
+  y,
+  tileIds: TILES.filter((id) => coordinates(id).y === y),
+}));
