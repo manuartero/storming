@@ -1,5 +1,5 @@
 import c from "classnames";
-import { LayoutGroup, motion } from "framer-motion";
+import { LayoutGroup, MotionConfig, motion } from "framer-motion";
 import { ActionLineItem } from "./line-item";
 
 import styles from "./timeline.module.css";
@@ -32,21 +32,26 @@ export function Timeline({ next, future }: Props) {
   };
 
   return (
-    <section role="region" className={styles.timeline} aria-label="timeline">
-      <div className={c(styles.next, styles.section)}>
-        <span className={styles.sectionName}>NEXT</span>
-        <div className={styles.line}>
-          <LayoutGroup id="next-timeline">{renderLineItems(next)}</LayoutGroup>
+    // reducedMotion="user": no bounce with prefers-reduced-motion: reduce
+    <MotionConfig reducedMotion="user">
+      <section role="region" className={styles.timeline} aria-label="timeline">
+        <div className={c(styles.next, styles.section)}>
+          <span className={styles.sectionName}>NEXT</span>
+          <div className={styles.line}>
+            <LayoutGroup id="next-timeline">
+              {renderLineItems(next)}
+            </LayoutGroup>
+          </div>
         </div>
-      </div>
-      <div className={c(styles.future, styles.section)}>
-        <span className={styles.sectionName}>FUTURE</span>
-        <div className={styles.line}>
-          <LayoutGroup id="future-timeline">
-            {renderLineItems(future)}
-          </LayoutGroup>
+        <div className={c(styles.future, styles.section)}>
+          <span className={styles.sectionName}>FUTURE</span>
+          <div className={styles.line}>
+            <LayoutGroup id="future-timeline">
+              {renderLineItems(future)}
+            </LayoutGroup>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </MotionConfig>
   );
 }

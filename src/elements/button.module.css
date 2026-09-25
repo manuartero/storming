@@ -11,9 +11,12 @@
   box-shadow: inset -1px -3px 0px var(--player-color);
   background: var(--white);
 
-  &:hover {
-    cursor: pointer;
-    font-weight: bold;
+  cursor: pointer;
+
+  @media (hover: hover) {
+    &:hover {
+      font-weight: bold;
+    }
   }
 }
 
@@ -22,8 +25,9 @@
   box-shadow: none;
   font-weight: normal;
 
+  cursor: not-allowed;
+
   &:hover {
-    cursor: not-allowed;
     font-weight: normal;
   }
 }
