@@ -10,6 +10,6 @@ describe("<CurrentPhaseController />", () => {
       </GameContextProvider>
     );
     const currentPhase = await screen.findByRole("heading", { level: 1 });
-    expect(currentPhase.textContent).toBe("planification");
+    expect(currentPhase.textContent).toBe("Planning");
   });
 });

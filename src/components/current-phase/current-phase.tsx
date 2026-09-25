@@ -22,6 +22,11 @@ type PlanningPhaseProps = {
   onCleanActionCard: (actions: Actions) => void;
 };
 
+const PHASE_TITLE = {
+  planification: "Planning",
+  action: "Action",
+};
+
 export function CurrentPhase(props: ActionPhaseProps | PlanningPhaseProps) {
   return (
     <section
@@ -29,8 +34,13 @@ export function CurrentPhase(props: ActionPhaseProps | PlanningPhaseProps) {
       role="region"
       aria-label="current phase"
     >
-      <div className={c(styles.heading, props.activePlayer)}>
-        <h1>{props.phase}</h1>
+      <div className={styles.heading}>
+        <span
+          className={c(styles.turn, styles[props.activePlayer])}
+          role="img"
+          aria-label={`${props.activePlayer}'s turn`}
+        />
+        <h1>{PHASE_TITLE[props.phase]}</h1>
       </div>
       <div className={styles.content}>
         {props.phase === "action" && <ActionPhase {...props} />}
@@ -49,7 +59,7 @@ function ActionPhase({ activeCard, mustSkip, onSkip }: ActionPhaseProps) {
     <>
       <Card card={activeCard} status="active" />
       <Button disabled={!mustSkip} onClick={onSkip}>
-        SKIP
+        Skip
       </Button>
     </>
   );
@@ -97,7 +107,7 @@ function PlanningPhase({
         disabled={buttonDisabled}
         onClick={onSubmitPlan}
       >
-        GO
+        Confirm plan
       </Button>
     </>
   );

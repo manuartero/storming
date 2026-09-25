@@ -6,6 +6,13 @@ import { actionCardAssets } from "./assets";
 import styles from "./card.module.css";
 import fontStyles from "styles/fonts.module.css";
 
+const CARD_TITLE: Record<ActionCardType, string> = {
+  build: "Build",
+  move: "Move",
+  recruit: "Recruit",
+  diplo: "Diplomacy",
+};
+
 type Props = {
   card: Card;
   status?: PlayerHandCardStatus | CardStatus;
@@ -26,6 +33,7 @@ export function Card({
         styles.card,
         styles[status],
         isActionCard(card) && styles.actionCard,
+        isActionCard(card) && styles[card.owner],
         isEventCard(card) && styles.eventCard
       )}
       key={card.cardId}
@@ -52,7 +60,9 @@ function ActionCardContents({ card: actionCard }: { card: ActionCard }) {
           className={styles.icon}
           style={{ backgroundImage: `url(${cardIcon})` }}
         ></div>
-        <div className={c(styles.title, fontStyles.title)}>{action}</div>
+        <div className={c(styles.title, fontStyles.title)}>
+          {CARD_TITLE[action]}
+        </div>
       </div>
       <div className={styles.content}>
         <div className={c(styles.text, fontStyles.paragraph)}>

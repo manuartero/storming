@@ -7,10 +7,15 @@ exports[`<CurrentPhase /> render: section role - action 1`] = `
   role="region"
 >
   <div
-    class="heading player"
+    class="heading"
   >
+    <span
+      aria-label="player's turn"
+      class="turn player"
+      role="img"
+    />
     <h1>
-      action
+      Action
     </h1>
   </div>
   <div
@@ -20,7 +25,7 @@ exports[`<CurrentPhase /> render: section role - action 1`] = `
       aria-disabled="true"
       aria-label="card player_move_1"
       aria-pressed="false"
-      class="card active actionCard"
+      class="card active actionCard player"
     >
       <div
         class="heading"
@@ -31,7 +36,7 @@ exports[`<CurrentPhase /> render: section role - action 1`] = `
         <div
           class="title title"
         >
-          move
+          Move
         </div>
       </div>
       <div
@@ -51,8 +56,9 @@ exports[`<CurrentPhase /> render: section role - action 1`] = `
     </article>
     <button
       class="button disabled"
+      disabled=""
     >
-      SKIP
+      Skip
     </button>
   </div>
 </section>
@@ -65,10 +71,15 @@ exports[`<CurrentPhase /> render: section role - planification 1`] = `
   role="region"
 >
   <div
-    class="heading player"
+    class="heading"
   >
+    <span
+      aria-label="player's turn"
+      class="turn player"
+      role="img"
+    />
     <h1>
-      planification
+      Planning
     </h1>
   </div>
   <div
@@ -112,8 +123,9 @@ exports[`<CurrentPhase /> render: section role - planification 1`] = `
     </article>
     <button
       class="button disabled player"
+      disabled=""
     >
-      GO
+      Confirm plan
     </button>
   </div>
 </section>
@@ -126,10 +138,15 @@ exports[`<CurrentPhase /> render: section role - planification with cards 1`] = 
   role="region"
 >
   <div
-    class="heading player"
+    class="heading"
   >
+    <span
+      aria-label="player's turn"
+      class="turn player"
+      role="img"
+    />
     <h1>
-      planification
+      Planning
     </h1>
   </div>
   <div
@@ -139,7 +156,7 @@ exports[`<CurrentPhase /> render: section role - planification with cards 1`] = 
       aria-disabled="false"
       aria-label="card player_move_2"
       aria-pressed="false"
-      class="card available actionCard"
+      class="card available actionCard player"
     >
       <div
         class="heading"
@@ -150,7 +167,7 @@ exports[`<CurrentPhase /> render: section role - planification with cards 1`] = 
         <div
           class="title title"
         >
-          move
+          Move
         </div>
       </div>
       <div
@@ -172,7 +189,7 @@ exports[`<CurrentPhase /> render: section role - planification with cards 1`] = 
       aria-disabled="false"
       aria-label="card player_recruit_1"
       aria-pressed="false"
-      class="card available actionCard"
+      class="card available actionCard player"
     >
       <div
         class="heading"
@@ -183,7 +200,7 @@ exports[`<CurrentPhase /> render: section role - planification with cards 1`] = 
         <div
           class="title title"
         >
-          recruit
+          Recruit
         </div>
       </div>
       <div
@@ -204,7 +221,7 @@ exports[`<CurrentPhase /> render: section role - planification with cards 1`] = 
     <button
       class="button player"
     >
-      GO
+      Confirm plan
     </button>
   </div>
 </section>

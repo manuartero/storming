@@ -21,6 +21,7 @@ export function Button({
         disabled && styles.disabled,
         player && styles[player]
       )}
+      disabled={disabled}
       {...props}
     >
       {children}
