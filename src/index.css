@@ -1,7 +1,30 @@
+/* one face per weight in use, so the browser never fakes bold or light */
 @font-face {
   font-family: "Roboto";
-  src: local("Roboto"),
-    url(./fonts/Roboto/Roboto-Regular.ttf) format("truetype");
+  font-weight: 100;
+  font-display: swap;
+  src: url(./fonts/Roboto/Roboto-Thin.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-display: swap;
+  src: url(./fonts/Roboto/Roboto-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-weight: 500;
+  font-display: swap;
+  src: url(./fonts/Roboto/Roboto-Medium.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-weight: 700;
+  font-display: swap;
+  src: url(./fonts/Roboto/Roboto-Bold.ttf) format("truetype");
 }
 
 * {

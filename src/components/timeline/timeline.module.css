@@ -87,7 +87,7 @@
   border: 2px dotted var(--dark-grey);
 }
 
-.lineItem.commited {
+.lineItem.committed {
   border: 2px solid var(--dark-grey);
 }
 
