@@ -135,4 +135,37 @@ describe("useTimeline()", () => {
       { card: futureActionCard, commited: true },
     ]);
   });
+
+  test("submitPlanification() + startActionPhase() in the same event keep the commit", () => {
+    const { result } = renderHook(() => useTimeline());
+
+    const firstNext = NewCard("recruit", "player");
+    const secondNext = NewCard("move", "enemy1");
+
+    act(() => {
+      result.current.planAction({
+        nextActionCard: firstNext,
+        futureActionCard: NewCard("build", "player"),
+      });
+    });
+    act(() => {
+      result.current.submitPlanification();
+    });
+    act(() => {
+      result.current.planAction({
+        nextActionCard: secondNext,
+        futureActionCard: NewCard("build", "enemy1"),
+      });
+    });
+
+    // what the provider does when the last player submits their plan
+    act(() => {
+      result.current.submitPlanification();
+      result.current.startActionPhase();
+    });
+
+    expect(result.current.phase).toBe("action");
+    expect(result.current.activeCard).toEqual(firstNext);
+    expect(result.current.next).toEqual([{ card: secondNext, commited: true }]);
+  });
 });

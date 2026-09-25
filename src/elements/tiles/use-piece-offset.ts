@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useState } from "react";
 
 /* % of the tile width, from the left or the right edge */
 const PIECE_OFFSET = "30%";
@@ -13,15 +13,14 @@ export function usePieceOffset({
   children: React.ReactNode;
   disableChildrenOffset?: boolean;
 }) {
-  const pieceOffsetRef = useRef<"left" | "right">(
-    children ? (Math.random() > 0.5 ? "left" : "right") : "left"
+  // picked once per tile, whether or not it holds a piece yet
+  const [side] = useState<"left" | "right">(() =>
+    Math.random() > 0.5 ? "left" : "right"
   );
 
   if (disableChildrenOffset) {
     return undefined;
   }
 
-  const pieceStyle = children ? { [pieceOffsetRef.current]: PIECE_OFFSET } : undefined;
-
-  return pieceStyle;
+  return children ? { [side]: PIECE_OFFSET } : undefined;
 }

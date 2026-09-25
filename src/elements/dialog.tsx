@@ -16,13 +16,14 @@ export function Dialog({
   onClose,
   ...rest
 }: Props) {
-  const titleId = title ? `dialog-title-${useId()}` : undefined;
+  const id = useId();
+  const titleId = title ? `dialog-title-${id}` : undefined;
 
   return (
     <div
       role="dialog"
       aria-modal="true"
-      aria-labelledby={title ? titleId : undefined}
+      aria-labelledby={titleId}
       className={c(styles.dialogScreen)}
       tabIndex={-1}
       {...rest}

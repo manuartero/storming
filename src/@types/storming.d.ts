@@ -149,13 +149,19 @@ type GameContext = {
   firstPlayer(player: PlayerType): void; // deprecated?
 
   // other
-  loadSavegame(gameContext: GameContext): void;
+  loadSavegame(state: GameState): void;
 };
 
 // ----
 
+/* the part of GameContext that is data (what a savegame stores) */
+type GameState = Pick<
+  GameContext,
+  "phase" | "activeCard" | "next" | "future" | "board" | "players"
+>;
+
 type Savegame = {
   createdAt: string; // ms from Epoch
   playerEmpireSize: number;
-  gameContext: GameContext;
+  state: GameState;
 };

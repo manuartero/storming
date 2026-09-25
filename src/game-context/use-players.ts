@@ -23,8 +23,10 @@ export function usePlayers() {
    * ```
    */
   const nextFirstPlayer = () => {
-    const newPlayerOrder = [...players.slice(1), players[0]];
-    setPlayers(newPlayerOrder);
+    setPlayers((currentPlayers) => [
+      ...currentPlayers.slice(1),
+      currentPlayers[0],
+    ]);
   };
 
   const scorePoint = (player: PlayerType) => {

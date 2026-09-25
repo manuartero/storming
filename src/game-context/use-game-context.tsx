@@ -64,14 +64,7 @@ export function GameContextProvider({ children }: Props) {
     future,
     board,
     players,
-  }: {
-    phase: PhaseType;
-    activeCard: Card | undefined;
-    next: TimelineCard[];
-    future: TimelineCard[];
-    board: Board;
-    players: PlayerStatus[];
-  }) => {
+  }: GameState) => {
     _overrideBoard(board);
     timeline._overrideTimeline({ phase, activeCard, next, future });
     _overridePlayers(players);

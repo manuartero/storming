@@ -21,7 +21,15 @@ type SelectedTile = {
  */
 export function BoardController() {
   const gameContext = useGameContext();
-  const [selectedTile, setSelectedTile] = useState<SelectedTile>();
+  // a selection belongs to the card being resolved: a new card starts clean
+  const activeCardId = gameContext.activeCard?.cardId;
+  const [selection, setSelection] = useState<
+    SelectedTile & { cardId: CardId | undefined }
+  >();
+  const selectedTile =
+    selection?.cardId === activeCardId ? selection : undefined;
+  const setSelectedTile = (tile: SelectedTile | undefined) =>
+    setSelection(tile && { ...tile, cardId: activeCardId });
 
   const board = inferVisualBoardFromGameContext(
     gameContext,

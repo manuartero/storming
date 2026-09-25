@@ -36,7 +36,6 @@ export function Card({
         isActionCard(card) && styles[card.owner],
         isEventCard(card) && styles.eventCard
       )}
-      key={card.cardId}
       aria-label={`card ${card.cardId}`}
       aria-pressed={status === "selected"}
       aria-disabled={!onClick}

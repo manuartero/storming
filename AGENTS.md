@@ -44,7 +44,3 @@ src/
   - `feat` → minor
   - `fix`, `chore` and `style` → patch
   - `docs`, `test` and `refactor` → no release
-
-## Known gotchas
-
-- `useTimeline`'s `nextActiveCard` and `startPlanningPhase` read `next` and `future` from the closure instead of using functional updates. Be careful when one action triggers more than one transition.

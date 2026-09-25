@@ -28,7 +28,7 @@ exports[`<Dialog /> render: dialog role [no title] 1`] = `
 
 exports[`<Dialog /> render: dialog role [with title] 1`] = `
 <div
-  aria-labelledby="dialog-title-«r0»"
+  aria-labelledby="dialog-title-«r1»"
   aria-modal="true"
   class="dialogScreen"
   role="dialog"
@@ -48,7 +48,7 @@ exports[`<Dialog /> render: dialog role [with title] 1`] = `
     >
       <h2
         class="title"
-        id="dialog-title-«r0»"
+        id="dialog-title-«r1»"
       >
         Test Dialog
       </h2>

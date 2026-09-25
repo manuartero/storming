@@ -1,5 +1,10 @@
 import c from "classnames";
-import { LayoutGroup, MotionConfig, motion } from "framer-motion";
+import {
+  AnimatePresence,
+  LayoutGroup,
+  MotionConfig,
+  motion,
+} from "framer-motion";
 import { ActionLineItem } from "./line-item";
 
 import styles from "./timeline.module.css";
@@ -39,7 +44,7 @@ export function Timeline({ next, future }: Props) {
           <span className={styles.sectionName}>NEXT</span>
           <div className={styles.line}>
             <LayoutGroup id="next-timeline">
-              {renderLineItems(next)}
+              <AnimatePresence>{renderLineItems(next)}</AnimatePresence>
             </LayoutGroup>
           </div>
         </div>
@@ -47,7 +52,7 @@ export function Timeline({ next, future }: Props) {
           <span className={styles.sectionName}>FUTURE</span>
           <div className={styles.line}>
             <LayoutGroup id="future-timeline">
-              {renderLineItems(future)}
+              <AnimatePresence>{renderLineItems(future)}</AnimatePresence>
             </LayoutGroup>
           </div>
         </div>
