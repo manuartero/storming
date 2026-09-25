@@ -36,6 +36,40 @@ describe("getAvailableTilesForActionCard()", () => {
     }
   );
 
+  test.each([
+    { name: "a village", building: { type: "tower" }, available: true },
+    {
+      name: "a walled village",
+      building: { type: "tower", hasWalls: true },
+      available: true,
+    },
+    { name: "a town", building: { type: "castle" }, available: true },
+    {
+      name: "a walled town",
+      building: { type: "castle", hasWalls: true },
+      available: true,
+    },
+    { name: "a city", building: { type: "citadel" }, available: true },
+    {
+      name: "a walled city",
+      building: { type: "citadel", hasWalls: true },
+      available: false,
+    },
+  ] as const)(
+    "'build' action on $name: available is $available",
+    ({ building, available }) => {
+      const board = {
+        "0,0": { building: { owner: "player", ...building } },
+        "1,0": { building: { owner: "enemy1", type: "tower" } },
+      } as Board;
+      const got = getAvailableTilesForActionCard({
+        activeCard: NewCard({ type: "build", player: "player" }),
+        board,
+      });
+      expect(got).toEqual(available ? ["0,0"] : []);
+    }
+  );
+
   test.todo("returns building spots for 'building' action");
   test.todo("returns tiles in range for 'move' action");
 });
