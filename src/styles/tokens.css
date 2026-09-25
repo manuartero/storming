@@ -1,0 +1,20 @@
+/*
+  Spacing, radius and elevation shared by every component.
+  Colours live in colors.css, type sizes in fonts.module.css.
+*/
+:root {
+  /* 4px base */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  /* two radii: small for controls, large for surfaces */
+  --radius-s: 8px;
+  --radius-l: 14px;
+
+  --elevation-1: 0 1px 2px #1d28331f, 0 1px 1px #1d283314;
+  --elevation-2: 0 6px 16px #1d283326, 0 2px 4px #1d28331a;
+}

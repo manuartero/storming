@@ -37,6 +37,7 @@
     "blue-ball": "npm run test && npm run build"
   },
   "dependencies": {
+    "@fontsource-variable/figtree": "5.3.0",
     "classnames": "2.5.1",
     "framer-motion": "12.23.5",
     "react": "19.1.0",

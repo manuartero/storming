@@ -38,6 +38,10 @@
 .row {
   display: flex;
   gap: var(--tile-gap);
+
+  /* tile thickness: a solid edge under every hexagon, like a cardboard tile.
+     On the row, not the tile: the tile's clip-path would cut it off. */
+  filter: drop-shadow(0 calc(var(--tile-w) * 0.04) 0 var(--base-grey));
 }
 
 /* rows overlap: next row starts one row step below the previous one */
