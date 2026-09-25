@@ -1,7 +1,10 @@
 .menu {
-  position: absolute;
-  top: 0;
-  right: 0;
+  /* main grid layout */
+  grid-area: menu;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
 
   img {
     width: 32px;
