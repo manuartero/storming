@@ -7,6 +7,10 @@
   align-items: flex-start;
 
   img {
-    width: 32px;
+    /* 32px icon, 44px tap target */
+    width: 44px;
+    height: 44px;
+    padding: 6px;
+    cursor: pointer;
   }
 }
