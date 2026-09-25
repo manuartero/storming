@@ -4,9 +4,9 @@
   background-repeat: no-repeat;
   background-size: contain;
 
-  /* FIXME: use relative size to Tile container? 0.6 * 12vh */
-  width: 6vh;
-  height: 6vh;
+  /* fills its container (the tile sizes it) */
+  width: 100%;
+  aspect-ratio: 1;
 
   pointer-events: none;
 }
