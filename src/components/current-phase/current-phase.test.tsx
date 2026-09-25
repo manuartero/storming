@@ -8,7 +8,7 @@ describe("<CurrentPhase />", () => {
       <CurrentPhase
         phase="action"
         activePlayer="player"
-        activeCard={NewCard("move", "player")}
+        activeCard={NewCard({ type: "move", player: "player" })}
         mustSkip={false}
         onSkip={jest.fn()}
       />
@@ -37,8 +37,8 @@ describe("<CurrentPhase />", () => {
       <CurrentPhase
         phase="planification"
         activePlayer="player"
-        nextActionCard={NewCard("move", "player")}
-        futureActionCard={NewCard("recruit", "player")}
+        nextActionCard={NewCard({ type: "move", player: "player" })}
+        futureActionCard={NewCard({ type: "recruit", player: "player" })}
         onSubmitPlan={jest.fn()}
         onCleanActionCard={jest.fn()}
       />

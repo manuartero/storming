@@ -6,37 +6,37 @@ function mockTimeline() {
     activeCard: undefined,
     next: [
       {
-        card: NewCard("build", "player"),
+        card: NewCard({ type: "build", player: "player" }),
         commited: true,
       },
       {
-        card: NewCard("move", "enemy1"),
+        card: NewCard({ type: "move", player: "enemy1" }),
         commited: true,
       },
       {
-        card: NewCard("recruit", "enemy2"),
+        card: NewCard({ type: "recruit", player: "enemy2" }),
         commited: true,
       },
       {
-        card: NewCard("move", "enemy3"),
+        card: NewCard({ type: "move", player: "enemy3" }),
         commited: true,
       },
     ],
     future: [
       {
-        card: NewCard("move", "player"),
+        card: NewCard({ type: "move", player: "player" }),
         commited: true,
       },
       {
-        card: NewCard("move", "enemy1"),
+        card: NewCard({ type: "move", player: "enemy1" }),
         commited: true,
       },
       {
-        card: NewCard("diplo", "enemy2"),
+        card: NewCard({ type: "diplo", player: "enemy2" }),
         commited: true,
       },
       {
-        card: NewCard("build", "enemy3"),
+        card: NewCard({ type: "build", player: "enemy3" }),
         commited: true,
       },
     ],

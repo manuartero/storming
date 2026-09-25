@@ -7,7 +7,7 @@
  */
 
 import { empireSize } from "game-logic/empire-size";
-import { warnInconsistentState } from "utils/console";
+import { warnInconsistentState } from "lib/console";
 
 const KEY_PREFIX = "storming:v1:";
 

@@ -1,6 +1,6 @@
 import { useGameContext } from "game-context";
 import { isActionCard } from "models/new-card";
-import { warnInconsistentState } from "utils/console";
+import { warnInconsistentState } from "lib/console";
 import { inferPlayerHandsFromGameContext } from "./infer-player-hands";
 import { PlayerHand } from "./player-hand";
 
@@ -18,7 +18,7 @@ export function PlayerHandController() {
   /* infered state */
   const nextCard = gameContext.next.find(
     (timelineCard) => !timelineCard.commited && isActionCard(timelineCard.card)
-  )?.card as ActionCard;
+  )?.card;
   const playerCards = inferPlayerHandsFromGameContext(gameContext);
   const activePlayerHand = playerCards[gameContext.activePlayer];
 

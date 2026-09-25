@@ -28,8 +28,8 @@ describe("useTimeline()", () => {
   test("planAction()", async () => {
     const { result } = renderHook(() => useTimeline());
 
-    const nextActionCard = NewCard("recruit", "player");
-    const futureActionCard = NewCard("move", "player");
+    const nextActionCard = NewCard({ type: "recruit", player: "player" });
+    const futureActionCard = NewCard({ type: "move", player: "player" });
 
     act(() => {
       result.current.startPlanningPhase();
@@ -52,8 +52,8 @@ describe("useTimeline()", () => {
   test("planAction() - clean action card", () => {
     const { result } = renderHook(() => useTimeline());
 
-    const nextActionCard = NewCard("recruit", "player");
-    const futureActionCard = NewCard("move", "player");
+    const nextActionCard = NewCard({ type: "recruit", player: "player" });
+    const futureActionCard = NewCard({ type: "move", player: "player" });
 
     act(() => {
       result.current.startPlanningPhase();
@@ -81,8 +81,8 @@ describe("useTimeline()", () => {
   test("submitPlanification()", () => {
     const { result } = renderHook(() => useTimeline());
 
-    const nextActionCard = NewCard("recruit", "player");
-    const futureActionCard = NewCard("move", "player");
+    const nextActionCard = NewCard({ type: "recruit", player: "player" });
+    const futureActionCard = NewCard({ type: "move", player: "player" });
 
     act(() => {
       result.current.startPlanningPhase();
@@ -109,8 +109,8 @@ describe("useTimeline()", () => {
   test("startActionPhase()", () => {
     const { result } = renderHook(() => useTimeline());
 
-    const nextActionCard = NewCard("recruit", "player");
-    const futureActionCard = NewCard("move", "player");
+    const nextActionCard = NewCard({ type: "recruit", player: "player" });
+    const futureActionCard = NewCard({ type: "move", player: "player" });
 
     act(() => {
       result.current.startPlanningPhase();
@@ -139,13 +139,13 @@ describe("useTimeline()", () => {
   test("submitPlanification() + startActionPhase() in the same event keep the commit", () => {
     const { result } = renderHook(() => useTimeline());
 
-    const firstNext = NewCard("recruit", "player");
-    const secondNext = NewCard("move", "enemy1");
+    const firstNext = NewCard({ type: "recruit", player: "player" });
+    const secondNext = NewCard({ type: "move", player: "enemy1" });
 
     act(() => {
       result.current.planAction({
         nextActionCard: firstNext,
-        futureActionCard: NewCard("build", "player"),
+        futureActionCard: NewCard({ type: "build", player: "player" }),
       });
     });
     act(() => {
@@ -154,7 +154,7 @@ describe("useTimeline()", () => {
     act(() => {
       result.current.planAction({
         nextActionCard: secondNext,
-        futureActionCard: NewCard("build", "enemy1"),
+        futureActionCard: NewCard({ type: "build", player: "enemy1" }),
       });
     });
 

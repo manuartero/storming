@@ -1,5 +1,5 @@
 import { tilesInRange } from "game-logic/tiles-in-range";
-import { warnInconsistentState } from "utils/console";
+import { warnInconsistentState } from "lib/console";
 import { pieces } from "./pieces";
 
 type _FilterPredicate = (_: [string, Tile]) => boolean;
@@ -12,10 +12,13 @@ function hasPieceFromSameOwner(card: ActionCard): _FilterPredicate {
   return ([_, tile]) => tile.piece?.owner === card.owner;
 }
 
-function hasBuilderOrBuildingFromSameOwner(
-  card: ActionCard,
-  board: Board
-): _FilterPredicate {
+function hasBuilderOrBuildingFromSameOwner({
+  card,
+  board,
+}: {
+  card: ActionCard;
+  board: Board;
+}): _FilterPredicate {
   return ([tileId, tile]) =>
     (tile.piece?.owner === card.owner &&
       tile.piece?.type === "soldier" &&
@@ -23,8 +26,8 @@ function hasBuilderOrBuildingFromSameOwner(
     (tile.building?.owner === card.owner && tile.building.type !== "castle");
 }
 
-function asTileID([t, _]: [string, Tile]): TileID {
-  return t as TileID;
+function entryTileId([tileId]: [string, Tile]) {
+  return tileId as TileID;
 }
 
 export function getAvailableTilesForActionCard({
@@ -35,33 +38,33 @@ export function getAvailableTilesForActionCard({
   board: Board;
   activeCard: ActionCard;
   selectedTile?: TileID | undefined;
-}): TileID[] {
+}) {
   if (activeCard.action === "move") {
     if (selectedTile && board[selectedTile].piece?.owner === activeCard.owner) {
       return getInRangeMovements({ tileId: selectedTile, board });
     }
     return Object.entries(board)
       .filter(hasPieceFromSameOwner(activeCard))
-      .map(asTileID);
+      .map(entryTileId);
   }
 
   if (activeCard.action === "build") {
     return Object.entries(board)
-      .filter(hasBuilderOrBuildingFromSameOwner(activeCard, board))
-      .map(asTileID);
+      .filter(hasBuilderOrBuildingFromSameOwner({ card: activeCard, board }))
+      .map(entryTileId);
   }
 
   if (activeCard.action === "recruit") {
     return Object.entries(board)
       .filter(hasEmptyBuildingFromSameOwner(activeCard))
-      .map(asTileID);
+      .map(entryTileId);
   }
   return [];
 }
 
 type _TileInBoard = { tileId: TileID; board: Board };
 
-export function getInRangeMovements({ tileId, board }: _TileInBoard): TileID[] {
+function getInRangeMovements({ tileId, board }: _TileInBoard) {
   const piece = board[tileId].piece;
   if (!piece) {
     warnInconsistentState(
@@ -72,7 +75,7 @@ export function getInRangeMovements({ tileId, board }: _TileInBoard): TileID[] {
   }
 
   const { range, specialTerrain } = pieces[piece.type];
-  const tiles = tilesInRange(tileId, { range });
+  const tiles = tilesInRange({ tileId, range });
 
   return tiles.filter((candidateTile) => {
     const targetTerrain = board[candidateTile].terrain;
@@ -88,7 +91,7 @@ export function getInRangeMovements({ tileId, board }: _TileInBoard): TileID[] {
   });
 }
 
-export function isBuildingPlot({ tileId, board }: _TileInBoard) {
-  // TODO
+// TODO: a village can't be built next to another settlement, nor on terrain
+function isBuildingPlot(_: _TileInBoard) {
   return true;
 }

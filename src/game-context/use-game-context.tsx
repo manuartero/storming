@@ -1,7 +1,8 @@
 import { empireSize } from "game-logic/empire-size";
-import { isConquering, isCreatingGreatesEmpire } from "game-logic/score-check";
+import { isConquering, isCreatingGreatestEmpire } from "game-logic/score-check";
 import { createContext, useContext } from "react";
-import { logRender, warnInconsistentState } from "utils/console";
+import type { ReactNode } from "react";
+import { logRender, warnInconsistentState } from "lib/console";
 import { emptyBoard } from "./empty-board";
 import { useBoard } from "./use-board";
 import { usePlayers } from "./use-players";
@@ -25,7 +26,7 @@ const GameContext = createContext<GameContext>({
   loadSavegame: () => {},
 });
 
-type Props = { children: React.ReactNode };
+type Props = { children: ReactNode };
 
 /**
  * GameController
@@ -53,7 +54,12 @@ export function GameContextProvider({ children }: Props) {
   } = usePlayers();
 
   /* derived state */
-  const activePlayer = defineActivePlayer(timeline, { players });
+  const activePlayer = defineActivePlayer({
+    activeCard: timeline.activeCard,
+    phase: timeline.phase,
+    next: timeline.next,
+    players,
+  });
 
   /* API */
 
@@ -87,10 +93,8 @@ export function GameContextProvider({ children }: Props) {
         { phase: timeline.phase, action }
       );
     }
-    console.info(
-      `buildOnTile({ tile: <${action.tile}>, building: ${action.building} })`
-    );
-    if (isCreatingGreatesEmpire({ ...action, empires: empireSize(board) })) {
+    console.info("buildOnTile()", action);
+    if (isCreatingGreatestEmpire({ ...action, empires: empireSize(board) })) {
       declareGreatestEmpire(action.building.owner);
     }
     buildOnTile(action);
@@ -104,9 +108,7 @@ export function GameContextProvider({ children }: Props) {
         action,
       });
     }
-    console.info(
-      `movePiece({ from: <${action.from}>, to: <${action.to}>, piece: ${action.piece} })`
-    );
+    console.info("movePiece()", action);
     const player = action.piece.owner;
     if (isConquering({ player, targetTile: board[action.to] })) {
       scorePoint(player);
@@ -122,9 +124,7 @@ export function GameContextProvider({ children }: Props) {
         { phase: timeline.phase, action }
       );
     }
-    console.info(
-      `recruitOnTile({ tile: <${action.tile}>, piece: ${action.piece} })`
-    );
+    console.info("recruitOnTile()", action);
     recruitOnTile(action);
     _resolveActionCard();
   };
@@ -135,9 +135,7 @@ export function GameContextProvider({ children }: Props) {
   };
 
   const plan = (actions: Actions) => {
-    console.info(
-      `plan({ next: ${actions.nextActionCard}, future: ${actions.futureActionCard} })`
-    );
+    console.info("plan()", actions);
     if (timeline.phase !== "planification") {
       return warnInconsistentState(
         `trying to plan action but phase is not "planification"`,
@@ -224,14 +222,17 @@ export function useGameContext() {
 }
 
 // TODO move to state
-function defineActivePlayer(
-  {
-    activeCard,
-    phase,
-    next,
-  }: { activeCard: Card | undefined; phase: PhaseType; next: TimelineCard[] },
-  { players }: { players: PlayerStatus[] }
-) {
+function defineActivePlayer({
+  activeCard,
+  phase,
+  next,
+  players,
+}: {
+  activeCard: Card | undefined;
+  phase: PhaseType;
+  next: TimelineCard[];
+  players: PlayerStatus[];
+}) {
   if (phase === "planification") {
     // [ . . . . ]  playerOrder[0]    0, 4
     // [ . ]        playerOrder[1]    1, 5

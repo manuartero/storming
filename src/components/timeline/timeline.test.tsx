@@ -4,15 +4,15 @@ import { Timeline } from "./timeline";
 
 const next: TimelineCard[] = [
   {
-    card: NewCard("move", "enemy1"),
+    card: NewCard({ type: "move", player: "enemy1" }),
     commited: true,
   },
   {
-    card: NewCard("move", "enemy2"),
+    card: NewCard({ type: "move", player: "enemy2" }),
     commited: true,
   },
   {
-    card: NewCard("move", "enemy3"),
+    card: NewCard({ type: "move", player: "enemy3" }),
     commited: true,
   },
 ];

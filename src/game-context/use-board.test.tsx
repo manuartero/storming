@@ -82,6 +82,4 @@ describe("useBoard()", () => {
     fireEvent.click(screen.getByTestId("recruit-on-tile-03"));
     expect(getTileInfo("tile-0,3")).toEqual("tower (enemy3)soldier (enemy3)");
   });
-
-  it.todo("returns isConquering()");
 });

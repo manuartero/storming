@@ -77,10 +77,9 @@ describe("usePlayers()", () => {
       "enemy3 - 0 points",
       "player - 0 points",
     ]);
-
   });
 
-  test("returns declareGreatesEmpire()", () => {
+  test("returns declareGreatestEmpire()", () => {
     render(<TestingComponent />);
     fireEvent.click(screen.getByTestId("enemy3-greatest-empire"));
     expect(getPlayerList()).toEqual([

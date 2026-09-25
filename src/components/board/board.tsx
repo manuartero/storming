@@ -1,5 +1,5 @@
 import { TILES, coordinates } from "models/tiles";
-import { logRender } from "utils/console";
+import { logRender } from "lib/console";
 import { Tile, Piece } from "elements";
 
 import styles from "./board.module.css";
@@ -7,7 +7,7 @@ import styles from "./board.module.css";
 type Props = {
   state: VisualBoard;
   activePlayer?: PlayerType;
-  onTileClick: (titleID: Coordinates) => void;
+  onTileClick: (tileID: Coordinates) => void;
 };
 
 export function Board({ state, activePlayer, onTileClick }: Props) {
@@ -52,6 +52,6 @@ const ROWS = [-3, -2, -1, 0, 1, 2, 3] as const;
 
 type RowNumber = (typeof ROWS)[number];
 
-function row(n: RowNumber): TileID[] {
+function row(n: RowNumber) {
   return TILES.filter((id) => coordinates(id).y === n);
 }

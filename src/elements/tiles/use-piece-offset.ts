@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { ReactNode } from "react";
 
 /* % of the tile width, from the left or the right edge */
 const PIECE_OFFSET = "30%";
@@ -10,7 +11,7 @@ export function usePieceOffset({
   children,
   disableChildrenOffset,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   disableChildrenOffset?: boolean;
 }) {
   // picked once per tile, whether or not it holds a piece yet

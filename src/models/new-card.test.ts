@@ -4,7 +4,7 @@ describe("NewCard()", () => {
   beforeEach(_resetCardId);
 
   test("creates an ActionCard{}", () => {
-    const card = NewCard("build", "enemy1");
+    const card = NewCard({ type: "build", player: "enemy1" });
     expect(card).toEqual({
       cardType: "actionCard",
       action: "build",
@@ -14,7 +14,7 @@ describe("NewCard()", () => {
   });
 
   test("creates an EventCard{}", () => {
-    const card = NewCard("event3", "enemy1");
+    const card = NewCard({ type: "event3", player: "enemy1" });
     expect(card).toEqual({
       cardType: "eventCard",
       event: "event3",
@@ -25,19 +25,19 @@ describe("NewCard()", () => {
 
   [
     {
-      card: NewCard("move", "enemy1"),
+      card: NewCard({ type: "move", player: "enemy1" }),
       expectedId: "enemy1_move_1",
     },
     {
-      card: NewCard("move", "enemy1"),
+      card: NewCard({ type: "move", player: "enemy1" }),
       expectedId: "enemy1_move_2",
     },
     {
-      card: NewCard("move", "enemy2"),
+      card: NewCard({ type: "move", player: "enemy2" }),
       expectedId: "enemy2_move_1",
     },
     {
-      card: NewCard("move", "enemy2"),
+      card: NewCard({ type: "move", player: "enemy2" }),
       expectedId: "enemy2_move_2",
     },
   ].forEach(({ card, expectedId }) => {
@@ -45,5 +45,4 @@ describe("NewCard()", () => {
       expect(card.cardId).toEqual(expectedId);
     });
   });
-
 });

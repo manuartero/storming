@@ -78,7 +78,7 @@ export const TILES = [
   "2,3",
 ] as const;
 
-export type _TileID = typeof TILES[number];
+export type _TileID = (typeof TILES)[number];
 
 export function coordinates(str: TileID) {
   const [x, y] = str.split(",").map(Number);
@@ -89,7 +89,7 @@ export function coordinates(str: TileID) {
   };
 }
 
-export function asTileID({ x, y }: { x: number; y: number }): TileID | null {
+export function asTileID({ x, y }: { x: number; y: number }) {
   const tileId = x + "," + y;
   if (TILES.includes(tileId as TileID)) {
     return tileId as TileID;
