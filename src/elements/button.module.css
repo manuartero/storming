@@ -1,8 +1,10 @@
 .button {
   --player-color: var(--base-grey);
 
-  width: 12vh;
-  height: 4vh;
+  /* 44px: the smallest comfortable tap target */
+  min-width: 96px;
+  min-height: 44px;
+  padding: 0 1em;
 
   border: 2px solid var(--darkest-grey);
   border-radius: 8px;

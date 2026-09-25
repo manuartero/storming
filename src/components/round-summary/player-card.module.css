@@ -3,13 +3,13 @@
   flex-direction: row;
   isolation: isolate;
 
-  width: 20vh;
-  height: 8vh;
-  padding: 1vh;
+  width: calc(var(--pc-h) * 2.5);
+  height: var(--pc-h);
+  padding: calc(var(--pc-h) * 0.125);
   background: var(--white);
 
   border: 2px solid var(--light-grey);
-  box-shadow: 0vh 0vh 0.5vh var(--shadow-grey);
+  box-shadow: 0 0 4px var(--shadow-grey);
   border-radius: 6px;
 
   cursor: crosshair; /* + */
@@ -18,26 +18,26 @@
 .playerCard.active {
   z-index: 5 !important; /* FIXME */
 
-  transform: translateX(2vh);
+  transform: translateX(calc(var(--pc-h) * 0.25));
 
   &.player {
     border: 2px solid var(--player-primary);
-    box-shadow: 0vh 0vh 0.5vh var(--player-secondary);
+    box-shadow: 0 0 4px var(--player-secondary);
   }
 
   &.enemy1 {
     border: 2px solid var(--enemy1-primary);
-    box-shadow: 0vh 0vh 0.5vh var(--enemy1-secondary);
+    box-shadow: 0 0 4px var(--enemy1-secondary);
   }
 
   &.enemy2 {
     border: 2px solid var(--enemy2-primary);
-    box-shadow: 0vh 0vh 0.5vh var(--enemy2-secondary);
+    box-shadow: 0 0 4px var(--enemy2-secondary);
   }
 
   &.enemy3 {
     border: 2px solid var(--enemy3-primary);
-    box-shadow: 0vh 0vh 0.5vh var(--enemy3-secondary);
+    box-shadow: 0 0 4px var(--enemy3-secondary);
   }
 }
 
@@ -54,7 +54,7 @@
 }
 
 .points {
-  font-size: 1.5rem;
+  font-size: calc(var(--pc-h) * 0.33);
   font-weight: bold;
   color: var(--darkest-grey);
 }

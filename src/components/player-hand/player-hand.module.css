@@ -1,15 +1,24 @@
 .playerHand {
   /** main grid layout */
   grid-area: player-hand;
+  container-type: size;
+
+  /*
+    Like a hand held over the table: the cards are 1.4× the row height and
+    their bottom part hangs off the screen (.app clips it). Hover lifts a
+    card into full view. 5 overlapping cards still fit the width.
+  */
+  --card-w: min(140cqh / 1.5, 100cqw / 4);
 
   display: flex;
   justify-content: space-evenly;
+  align-items: flex-start;
 }
 
 .playerHand.expansible {
   & article {
     /* XXX card overlap: is it possible to use some flex magic instead? */
-    margin-left: -6vh;
+    margin-left: calc(var(--card-w) * -0.27);
 
     z-index: 1;
     transition: transform 0.2s ease-in-out, z-index 0.2s;
@@ -28,7 +37,10 @@
 /* portrait: the hand is wider than the screen, so it scrolls sideways */
 @media (orientation: portrait) {
   .playerHand {
-    justify-content: flex-start;
+    /* mid-screen here, so the cards stay whole */
+    --card-w: calc(92cqh / 1.5);
+    align-items: center;
+    justify-content: safe center;
     overflow-x: auto;
     overflow-y: hidden;
   }

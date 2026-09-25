@@ -11,6 +11,8 @@
 
   /* dvh: iOS Safari's address bar would cut the bottom row with vh */
   height: 100dvh;
+  /* the hand's cards hang off the bottom edge on purpose */
+  overflow: clip;
 }
 
 @media (orientation: portrait) {

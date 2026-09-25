@@ -1,7 +1,8 @@
 .timeline {
   /** main grid layout */
   grid-area: timeline;
-  margin-bottom: 1vh;
+  container-type: size;
+  margin-bottom: 8px;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap; /* single line */
@@ -62,8 +63,9 @@
 }
 
 .lineItem {
-  --item-size: 42px;
-  --content-size: 22px;
+  /* scale with the timeline row */
+  --item-size: clamp(16px, 45cqh, 48px);
+  --content-size: calc(var(--item-size) * 0.52);
 
   position: relative; /* to .line */
   top: 50%;
