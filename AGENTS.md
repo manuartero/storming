@@ -1,4 +1,4 @@
-Storming is a browser original board game
+Storming is a browser version of an original board game.
 
 **rules live in [`rules.md`](rules.md).**
 
@@ -15,7 +15,6 @@ src/
   services/              services (no UI)
 ```
 
-- **State:** `GameContextProvider`
 - **The hooks are plain state:** named setters, no game logic, no validation. Rule decisions go in `game-logic/`, and the provider calls them before it updates state.
 - **Controller / view split:** a controller reads `useGameContext()`, derives visual state (`infer-*.ts`) and passes props to a pure view. Views don't read the context.
 - **Phases:** `planification` (each player puts a card on NEXT and on FUTURE, in player order) → `action` (resolve NEXT one card at a time) → back to `planification`.
