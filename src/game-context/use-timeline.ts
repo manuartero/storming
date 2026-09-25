@@ -15,7 +15,7 @@ type TimelineAction =
   | { type: "submitPlanification" }
   | { type: "override"; state: TimelineState };
 
-const initialTimeline: TimelineState = {
+export const initialTimeline: TimelineState = {
   phase: "planification", // TODO: setup
   activeCard: undefined,
   next: [],
