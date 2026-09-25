@@ -1,10 +1,14 @@
+import c from "classnames";
 import { useGameContext } from "game-context";
+import { useState } from "react";
 import { PlayerCard } from "./player-card";
 
 import styles from "./round-summary.module.css";
 
 export function RoundSummary() {
   const gameContext = useGameContext();
+  // touch screens can't hover: a tap toggles the stack open
+  const [open, setOpen] = useState(false);
 
   const isResolvingDiploAction = ({ player }: PlayerStatus) => {
     return (
@@ -22,7 +26,8 @@ export function RoundSummary() {
 
   return (
     <section
-      className={styles.roundSummary}
+      className={c(styles.roundSummary, open && styles.open)}
+      onClick={() => setOpen((isOpen) => !isOpen)}
       aria-label="round summary"
       role="region"
     >

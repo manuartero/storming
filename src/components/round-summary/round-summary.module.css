@@ -38,32 +38,30 @@
   }
 }
 
-.roundSummary:hover {
-  & article:nth-child(1) {
-    transform: translateY(calc(var(--pc-h) * -2.25));
+/* each card moves up so the stack fans out (4th card stays in place) */
+.roundSummary article:nth-child(1) {
+  --spread: -2.25;
+}
+
+.roundSummary article:nth-child(2) {
+  --spread: -1.5;
+}
+
+.roundSummary article:nth-child(3) {
+  --spread: -0.75;
+}
+
+/* touch: a tap toggles the stack open */
+.roundSummary.open article {
+  transform: translateY(calc(var(--pc-h) * var(--spread, 0)));
+}
+
+@media (hover: hover) {
+  .roundSummary:hover article {
+    transform: translateY(calc(var(--pc-h) * var(--spread, 0)));
   }
 
-  & article:nth-child(1):hover {
-    transform: translateY(calc(var(--pc-h) * -2.25)) scale(1.05);
-  }
-
-  & article:nth-child(2) {
-    transform: translateY(calc(var(--pc-h) * -1.5));
-  }
-
-  & article:nth-child(2):hover {
-    transform: translateY(calc(var(--pc-h) * -1.5)) scale(1.05);
-  }
-
-  & article:nth-child(3) {
-    transform: translateY(calc(var(--pc-h) * -0.75));
-  }
-
-  & article:nth-child(3):hover {
-    transform: translateY(calc(var(--pc-h) * -0.75)) scale(1.05);
-  }
-
-  & article:nth-child(4):hover {
-    transform: scale(1.05);
+  .roundSummary:hover article:hover {
+    transform: translateY(calc(var(--pc-h) * var(--spread, 0))) scale(1.05);
   }
 }

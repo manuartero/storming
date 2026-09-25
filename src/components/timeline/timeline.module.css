@@ -24,9 +24,11 @@
   padding: 0 20px;
   border-radius: 0px 0px 12px 12px;
 
-  &:hover {
-    .sectionName {
-      opacity: 0.4;
+  @media (hover: hover) {
+    &:hover {
+      .sectionName {
+        opacity: 0.4;
+      }
     }
   }
 }
@@ -91,10 +93,13 @@
 
 .lineItem.expansible {
   cursor: pointer;
-  &:hover {
-    .lineItemContent {
-      width: 90%;
-      height: 90%;
+
+  @media (hover: hover) {
+    &:hover {
+      .lineItemContent {
+        width: 90%;
+        height: 90%;
+      }
     }
   }
 }

@@ -29,8 +29,10 @@
   justify-content: center;
   cursor: crosshair; /* + */
 
-  &:hover {
-    transform: translateY(-2px);
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-2px);
+    }
   }
 
   /* the clip-path hides any outline: recolour the stroke instead */
