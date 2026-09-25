@@ -6,15 +6,12 @@ import { logRender, warnInconsistentState } from "lib/console";
 import { emptyBoard } from "./empty-board";
 import { useBoard } from "./use-board";
 import { usePlayers } from "./use-players";
-import { useTimeline } from "./use-timeline";
+import { initialTimeline, useTimeline } from "./use-timeline";
 
 const GameContext = createContext<GameContext>({
-  phase: "setup",
-  activeCard: undefined,
+  ...initialTimeline,
   activePlayer: undefined,
   board: emptyBoard,
-  next: [],
-  future: [],
   players: [],
   build: () => {},
   move: () => {},
