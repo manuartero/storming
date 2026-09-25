@@ -1,34 +1,58 @@
+/*
+  Secondary by default: white, a thin outline.
+  With a player it becomes the primary action of that player's turn:
+  ink fill with an edge in their colour.
+*/
 .button {
   --player-color: var(--base-grey);
 
   /* 44px: the smallest comfortable tap target */
   min-width: 96px;
   min-height: 44px;
-  padding: 0 1em;
+  padding: 0 var(--space-4);
 
-  border: 2px solid var(--darkest-grey);
-  border-radius: 8px;
-  box-shadow: inset -1px -3px 0px var(--player-color);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+
+  border: 1.5px solid var(--base-grey);
+  border-radius: var(--radius-s);
   background: var(--white);
+  box-shadow: var(--elevation-1);
 
   cursor: pointer;
+  transition: background-color 0.15s, transform 0.1s;
 
   @media (hover: hover) {
     &:hover {
-      font-weight: bold;
+      background: var(--lightest-grey);
     }
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
   }
 }
 
-.disabled {
-  border: 2px solid var(--base-grey);
-  box-shadow: none;
-  font-weight: normal;
+.player,
+.enemy1,
+.enemy2,
+.enemy3 {
+  color: var(--white);
+  border: none;
+  background: var(--ink);
+  box-shadow: inset 0 -4px 0 var(--player-color), var(--elevation-1);
 
-  cursor: not-allowed;
-
-  &:hover {
-    font-weight: normal;
+  @media (hover: hover) {
+    &:hover {
+      background: var(--darkest-grey);
+    }
   }
 }
 
@@ -46,4 +70,21 @@
 
 .enemy3 {
   --player-color: var(--enemy3-primary);
+}
+
+/* after the player variants: a disabled primary looks like any disabled button */
+.button.disabled {
+  color: var(--dark-grey);
+  border: 1.5px dashed var(--base-grey);
+  background: transparent;
+  box-shadow: none;
+  cursor: not-allowed;
+
+  &:hover {
+    background: transparent;
+  }
+
+  &:active {
+    transform: none;
+  }
 }

@@ -21,13 +21,14 @@
     margin-left: calc(var(--card-w) * -0.27);
 
     z-index: 1;
-    transition: transform 0.2s ease-in-out, z-index 0.2s;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, z-index 0.2s;
   }
 
   /* touch: the first tap lifts a card (.inspected), the second plays it */
   & article.inspected {
     transform: translateY(-60%) scale(1.05);
     z-index: 2;
+    box-shadow: var(--elevation-2);
   }
 
   & article:first-child {
@@ -39,6 +40,7 @@
   .playerHand.expansible article:hover {
     transform: translateY(-60%) scale(1.05);
     z-index: 2;
+    box-shadow: var(--elevation-2);
   }
 }
 

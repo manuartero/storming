@@ -10,7 +10,7 @@ exports[`<PlayerHand /> render: region role 1`] = `
     aria-disabled="false"
     aria-label="card player_move_1"
     aria-pressed="false"
-    class="card available actionCard"
+    class="card available actionCard player"
   >
     <div
       class="heading"
@@ -21,7 +21,7 @@ exports[`<PlayerHand /> render: region role 1`] = `
       <div
         class="title title"
       >
-        move
+        Move
       </div>
     </div>
     <div
@@ -43,7 +43,7 @@ exports[`<PlayerHand /> render: region role 1`] = `
     aria-disabled="false"
     aria-label="card player_move_2"
     aria-pressed="false"
-    class="card available actionCard"
+    class="card available actionCard player"
   >
     <div
       class="heading"
@@ -54,7 +54,7 @@ exports[`<PlayerHand /> render: region role 1`] = `
       <div
         class="title title"
       >
-        move
+        Move
       </div>
     </div>
     <div
@@ -76,7 +76,7 @@ exports[`<PlayerHand /> render: region role 1`] = `
     aria-disabled="false"
     aria-label="card player_build_1"
     aria-pressed="false"
-    class="card available actionCard"
+    class="card available actionCard player"
   >
     <div
       class="heading"
@@ -87,7 +87,7 @@ exports[`<PlayerHand /> render: region role 1`] = `
       <div
         class="title title"
       >
-        build
+        Build
       </div>
     </div>
     <div
