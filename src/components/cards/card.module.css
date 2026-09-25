@@ -4,10 +4,10 @@
   everything inside is in cqw of the card and scales as one piece.
   2:3 like a real card.
 
-  On .card itself cqw would still point at the area, hence --w.
+  On .card itself cqw would still point at the area, hence --card-self-w.
 */
 .card {
-  --w: var(--card-w, clamp(100px, 20vmin, 200px));
+  --card-self-w: var(--card-w, clamp(100px, 20vmin, 200px));
 
   /* anchor */
   position: relative;
@@ -18,25 +18,18 @@
   justify-content: space-around;
   flex-shrink: 0;
 
-  width: var(--w);
+  width: var(--card-self-w);
   aspect-ratio: 2 / 3;
-  padding: calc(var(--w) * 0.09);
+  padding: calc(var(--card-self-w) * 0.09);
   background: var(--white);
-  margin: calc(var(--w) * 0.045);
+  margin: calc(var(--card-self-w) * 0.045);
   box-shadow: 0 0 4px var(--shadow-grey);
-  border-radius: clamp(6px, calc(var(--w) * 0.06), 12px);
+  border-radius: clamp(6px, calc(var(--card-self-w) * 0.06), 12px);
 }
 
 .card.played {
-  & > * {
-    /* to every children */
-    opacity: 0.3;
-  }
+  opacity: 0.3;
   box-shadow: 0 0 3px var(--light-grey);
-}
-
-.card.selected {
-  background-color: red;
 }
 
 .card.available,

@@ -6,7 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #00000040;
+  background: var(--shadow-grey);
   animation: dialog-fade-in 0.2s;
 }
 
@@ -22,8 +22,7 @@
 .dialog {
   /* anchor */
   position: relative;
-  width: 100%;
-  max-width: 768px;
+  overflow: auto;
 
   border-radius: 0.75rem;
   padding: 2rem 1.5rem;
@@ -32,36 +31,15 @@
   outline: none;
 }
 
+/* a fixed size on big screens, 90% of the viewport on small ones */
 .regular {
-  width: 60%;
-  height: 80%;
-  min-width: 320px;
-  min-height: 200px;
+  width: min(768px, 90vw);
+  height: min(640px, 90dvh);
 }
 
 .small {
-  width: 50%;
-  height: 60%;
-  min-width: 240px;
-  min-height: 120px;
-}
-
-@media (max-width: 900px) {
-  .regular {
-    width: 90vw;
-    height: 90vh;
-    max-width: 98vw;
-    max-height: 98vh;
-  }
-  .small {
-    width: 80vw;
-    height: 60vh;
-    max-width: 98vw;
-    max-height: 98vh;
-  }
-  .content {
-    padding: 1.25rem 0.5rem;
-  }
+  width: min(640px, 90vw);
+  height: min(480px, 90dvh);
 }
 
 .exitButton {
