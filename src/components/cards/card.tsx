@@ -9,13 +9,20 @@ import fontStyles from "styles/fonts.module.css";
 type Props = {
   card: Card;
   status?: PlayerHandCardStatus | CardStatus;
+  className?: string;
   onClick?: () => void;
 };
 
-export function Card({ card, status = "available", onClick }: Props) {
+export function Card({
+  card,
+  status = "available",
+  className,
+  onClick,
+}: Props) {
   return (
     <article
       className={c(
+        className,
         styles.card,
         styles[status],
         isActionCard(card) && styles.actionCard,
