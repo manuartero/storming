@@ -1,43 +1,46 @@
+/*
+  Pointy-top hexagon board: rows of 5-6-7-8-7-6-5 tiles.
+
+  A regular pointy-top hexagon is √3/2 (0.866) wide per 1 tall.
+  Centring every row gives the half-tile offset between rows for free.
+
+  The board fills its grid area and is a size container: the tile width
+  is the largest one that fits both its width and its height.
+
+    width  = 8 tiles + 7 gaps
+    height = 1 tile height + 6 row steps
+             tile height = w / 0.866
+             row step    = (w + gap) * 0.866
+*/
 .board {
-  --tile-size: 12vh;
-  --collapse-rows-y: calc(var(--tile-size) / -5);
-  --row-left-space: calc(var(--tile-size) / 2);
+  --gap-ratio: 0.06; /* gap between tiles, relative to the tile width */
+  --tile-w: min(
+    100cqw / (8 + 7 * var(--gap-ratio)),
+    100cqh / (1 / 0.866 + 6 * 0.866 * (1 + var(--gap-ratio)))
+  );
+  --tile-gap: calc(var(--tile-w) * var(--gap-ratio));
+  --row-step: calc((var(--tile-w) + var(--tile-gap)) * 0.866);
 
   /** main grid layout */
   grid-area: board;
 
-  position: relative;
-  width: -moz-fit-content;
-  width: fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+  container-type: size;
+  width: 100%;
+  height: 100%;
+  padding: min(1rem, 2vmin); /* cq units measure the content box */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .row {
   display: flex;
-  position: relative;
-
-  width: -moz-fit-content;
-  width: fit-content;
+  gap: var(--tile-gap);
 }
 
-.row:nth-child(2),
-.row:nth-child(3),
-.row:nth-child(4),
-.row:nth-child(5),
-.row:nth-child(6),
-.row:nth-child(7) {
-  margin-top: var(--collapse-rows-y);
-}
-
-.row.row1ToEquator {
-  left: var(--row-left-space);
-}
-
-.row.row2ToEquator {
-  left: calc(var(--row-left-space) * 2);
-}
-
-.row.row3ToEquator {
-  left: calc(var(--row-left-space) * 3);
+/* rows overlap: next row starts one row step below the previous one */
+.row + .row {
+  margin-top: calc(var(--row-step) - var(--tile-w) / 0.866);
 }

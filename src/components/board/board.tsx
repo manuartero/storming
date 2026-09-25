@@ -1,4 +1,3 @@
-import c from "classnames";
 import { TILES, coordinates } from "models/tiles";
 import { logRender } from "utils/console";
 import { Tile, Piece } from "elements";
@@ -14,7 +13,7 @@ type Props = {
 export function Board({ state, activePlayer, onTileClick }: Props) {
   logRender("Board");
 
-  const renderRow = (n: -3 | -2 | -1 | 0 | 1 | 2 | 3) =>
+  const renderRow = (n: RowNumber) =>
     row(n).map((tileId) => {
       const s = state[tileId];
       return (
@@ -35,55 +34,24 @@ export function Board({ state, activePlayer, onTileClick }: Props) {
 
   return (
     <section className={styles.board} role="board" aria-label="game board">
-      <div
-        className={c(styles.row, styles.row3ToEquator)}
-        role="row"
-        aria-label="board row -3"
-      >
-        {renderRow(-3)}
-      </div>
-      <div
-        className={c(styles.row, styles.row2ToEquator)}
-        role="row"
-        aria-label="board row -2"
-      >
-        {renderRow(-2)}
-      </div>
-      <div
-        className={c(styles.row, styles.row1ToEquator)}
-        role="row"
-        aria-label="board row -1"
-      >
-        {renderRow(-1)}
-      </div>
-      <div className={c(styles.row)} role="row" aria-label="board row 0">
-        {renderRow(0)}
-      </div>
-      <div
-        className={c(styles.row, styles.row1ToEquator)}
-        role="row"
-        aria-label="board row 1"
-      >
-        {renderRow(1)}
-      </div>
-      <div
-        className={c(styles.row, styles.row2ToEquator)}
-        role="row"
-        aria-label="board row 2"
-      >
-        {renderRow(2)}
-      </div>
-      <div
-        className={c(styles.row, styles.row3ToEquator)}
-        role="row"
-        aria-label="board row 3"
-      >
-        {renderRow(3)}
-      </div>
+      {ROWS.map((n) => (
+        <div
+          key={n}
+          className={styles.row}
+          role="row"
+          aria-label={`board row ${n}`}
+        >
+          {renderRow(n)}
+        </div>
+      ))}
     </section>
   );
 }
 
-function row(n: -3 | -2 | -1 | 0 | 1 | 2 | 3): TileID[] {
+const ROWS = [-3, -2, -1, 0, 1, 2, 3] as const;
+
+type RowNumber = (typeof ROWS)[number];
+
+function row(n: RowNumber): TileID[] {
   return TILES.filter((id) => coordinates(id).y === n);
 }

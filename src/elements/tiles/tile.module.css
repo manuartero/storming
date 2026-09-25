@@ -1,24 +1,28 @@
+/*
+  Regular pointy-top hexagon: √3/2 (0.866) wide per 1 tall.
+
+  The width comes from the board (--tile-w). Outside the board
+  (e.g. inside a card) the fallback keeps the old 12vh tile height.
+*/
 .tile {
-  --tile-size: 12vh;
-  --tile-stroke: 4px;
-  --tile-border-color: var(--base-grey);
+  --w: var(--tile-w, calc(12vh * 0.866));
+  --tile-stroke: max(2px, calc(var(--w) * 0.04));
+  --tile-border-color: var(--light-grey);
   --tile-bg: var(--white);
-  --forbidden-tile: red;
 
   /* anchor */
   position: relative;
-  width: var(--tile-size);
-  height: var(--tile-size);
+  flex-shrink: 0;
+  width: var(--w);
+  aspect-ratio: 0.866;
 
   /* hexagon path */
-  aspect-ratio: 1 / 1;
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 
   border: none;
   padding: 0;
-  margin: 0 0.25vh;
+  margin: 0;
   background: transparent;
-  opacity: 0.7;
 
   display: flex;
   align-items: center;
@@ -26,8 +30,16 @@
   cursor: crosshair; /* + */
 
   &:hover {
-    opacity: 1;
     transform: translateY(-2px);
+  }
+
+  /* the clip-path hides any outline: recolour the stroke instead */
+  &:focus-visible {
+    outline: none;
+
+    & .strokeLayer {
+      background: var(--darkest-grey);
+    }
   }
 }
 
@@ -36,7 +48,7 @@
   clip-path: inherit;
   inset: 0;
   /* hexagon border-color */
-  background: var(--base-grey);
+  background: var(--light-grey);
 }
 
 /* Inner content hex shape */
@@ -109,12 +121,23 @@
   --tile-bg: var(--enemy3-secondary);
 }
 
+/* sizes and positions are relative to the tile (% of width / height) */
+
+.terrain {
+  width: 70%;
+  height: 60%;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 .building {
-  width: calc(0.7 * var(--tile-size));
-  height: min(calc(0.7 * var(--tile-size)), 6vh);
+  width: 70%;
+  height: 50%;
 
   position: absolute;
-  bottom: 2vh;
+  bottom: 17%;
 
   background-position: center;
   background-repeat: no-repeat;
@@ -124,8 +147,10 @@
 }
 
 .piece {
+  width: 58%;
+
   position: absolute;
-  bottom: 4vh;
+  bottom: 33%;
 
   pointer-events: none;
 }
