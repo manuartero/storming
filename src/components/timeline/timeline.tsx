@@ -14,22 +14,23 @@ type Props = {
   future: TimelineCard[];
 };
 
+/* a new card pops in with a bounce, a resolved one shrinks away */
+const LINE_ITEM_MOTION = {
+  initial: { opacity: 0, scale: 0 },
+  animate: {
+    opacity: [0, 0.9, 0.9, 1, 1, 1, 1],
+    scale: [0, 1.3, 0.8, 1.2, 0.9, 1.1, 1],
+  },
+  exit: { opacity: 0, scale: 0 },
+  transition: { duration: 0.3 },
+};
+
 export function Timeline({ next, future }: Props) {
   const renderLineItems = (section: TimelineCard[]) => {
     return section.map(({ card, commited }) => {
       if (card.cardType === "actionCard")
         return (
-          <motion.div
-            key={card.cardId}
-            layout
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{
-              opacity: [0, 0.9, 0.9, 1, 1, 1, 1],
-              scale: [0, 1.3, 0.8, 1.2, 0.9, 1.1, 1],
-            }}
-            exit={{ opacity: 0, scale: 0 }}
-            transition={{ duration: 0.3 }}
-          >
+          <motion.div key={card.cardId} layout {...LINE_ITEM_MOTION}>
             <ActionLineItem card={card} commited={commited} />
           </motion.div>
         );

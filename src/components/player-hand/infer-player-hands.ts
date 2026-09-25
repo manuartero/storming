@@ -31,24 +31,16 @@ export function inferPlayerHandsFromGameContext(playedCards: {
   next: TimelineCard[];
   future: TimelineCard[];
 }) {
-  const playedActionCards = getPlayedActionCards(playedCards);
-  const players = Object.keys(PLAYER_CARDS) as PlayerType[];
-  const playerHands = players.reduce(
-    (acc, player) => {
-      const playerHand = PLAYER_CARDS[player].map((card) => {
-        const status = playedActionCards.some(
-          (playedCard) => playedCard.cardId === card.cardId
-        )
-          ? "played"
-          : "available";
-        return { card, status };
-      });
-      return {
-        ...acc,
-        [player]: playerHand,
-      };
-    },
-    {} as Record<PlayerType, PlayerHand>
+  const playedCardIds = new Set(
+    getPlayedActionCards(playedCards).map((card) => card.cardId)
   );
-  return playerHands;
+  return Object.fromEntries(
+    Object.entries(PLAYER_CARDS).map(([player, cards]) => [
+      player,
+      cards.map((card) => ({
+        card,
+        status: playedCardIds.has(card.cardId) ? "played" : "available",
+      })),
+    ])
+  ) as Record<PlayerType, PlayerHand>; // fromEntries loses the PlayerType keys
 }
