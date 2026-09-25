@@ -23,7 +23,11 @@ function hasBuilderOrBuildingFromSameOwner({
     (tile.piece?.owner === card.owner &&
       tile.piece?.type === "soldier" &&
       isBuildingPlot({ tileId: tileId as TileID, board })) ||
-    (tile.building?.owner === card.owner && tile.building.type !== "castle");
+    (tile.building?.owner === card.owner && canBuildOn(tile.building));
+}
+
+function canBuildOn(building: Building) {
+  return building.type !== "citadel" || !building.hasWalls;
 }
 
 function entryTileId([tileId]: [string, Tile]) {
