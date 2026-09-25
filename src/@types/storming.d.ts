@@ -9,7 +9,6 @@ type PlayerType =
   | "enemy3" /* green */;
 
 type PlayerHandCardStatus = "selected" | "available" | "played" | "active";
-type CardStatus = "active";
 
 /**
  * ```ts
@@ -58,7 +57,7 @@ type VisualBoard = Record<TileID, TileWithStatus>;
 type TileStatus = "selected" | "available" | "forbidden";
 
 type TileWithStatus = Tile & {
-  status: TileStatus;
+  status?: TileStatus;
 };
 
 // --------------
@@ -102,20 +101,6 @@ type Actions = {
   nextActionCard: ActionCard | undefined | null;
   futureActionCard: ActionCard | undefined | null;
 };
-
-// --------------
-// Contexts
-// --------------
-
-interface ActionLog {
-  player?: PlayerType; // TODO? make 'player' mandatory field
-  msg: string;
-}
-
-interface GameLogContext {
-  actions: ActionLog[];
-  log(action: ActionLog): void;
-}
 
 // --------------
 // GameContext

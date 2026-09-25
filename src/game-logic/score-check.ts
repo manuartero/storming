@@ -12,7 +12,7 @@ export function isConquering({
   return false;
 }
 
-export function isCreatingGreatesEmpire({
+export function isCreatingGreatestEmpire({
   building,
   empires,
 }: {

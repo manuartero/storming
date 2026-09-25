@@ -13,12 +13,17 @@ import { getAvailableTilesForActionCard } from "game-logic/available-tiles";
  * }
  * ```
  */
-export function inferVisualBoardFromGameContext(
-  { board, activeCard }: { board: Board; activeCard: Card | undefined },
-  selectedTile?: TileID
-) {
+export function inferVisualBoardFromGameContext({
+  board,
+  activeCard,
+  selectedTile,
+}: {
+  board: Board;
+  activeCard: Card | undefined;
+  selectedTile?: TileID;
+}): VisualBoard {
   if (!activeCard) {
-    return board as VisualBoard;
+    return board;
   }
 
   const availableTiles =
@@ -40,14 +45,10 @@ export function inferVisualBoardFromGameContext(
     return undefined;
   };
 
-  return Object.entries(board).reduce(
-    (acc, [tileId, tile]) => ({
-      ...acc,
-      [tileId]: {
-        ...tile,
-        status: tileStatus(tileId as TileID),
-      },
-    }),
-    {} as VisualBoard
-  );
+  return Object.fromEntries(
+    Object.entries(board).map(([tileId, tile]) => [
+      tileId,
+      { ...tile, status: tileStatus(tileId as TileID) },
+    ])
+  ) as VisualBoard; // fromEntries loses the TileID keys
 }

@@ -23,29 +23,39 @@ function isActionCardType(
   );
 }
 
-function getCardId(
-  type: ActionCardType | EventCardType,
-  player: PlayerType
-): CardId {
+function getCardId({
+  type,
+  player,
+}: {
+  type: ActionCardType | EventCardType;
+  player: PlayerType;
+}) {
   const baseCardId = `${player}_${type}` as const;
   const count = cardIdCount.get(baseCardId) || 1;
   cardIdCount.set(baseCardId, count + 1);
-  const cardId = `${baseCardId}_${count}` as const;
-  return cardId;
+  return `${baseCardId}_${count}` as const;
 }
 
-export function NewCard(type: ActionCardType, player: PlayerType): ActionCard;
+export function NewCard(args: {
+  type: ActionCardType;
+  player: PlayerType;
+}): ActionCard;
 
-export function NewCard(type: EventCardType, player: PlayerType): EventCard;
+export function NewCard(args: {
+  type: EventCardType;
+  player: PlayerType;
+}): EventCard;
 
-export function NewCard(
-  type: ActionCardType | EventCardType,
-  player: PlayerType
-): ActionCard | EventCard {
-  const cardId = getCardId(type, player);
-  const toString = () => `Card { ${type}(${player}) }`;
+export function NewCard({
+  type,
+  player,
+}: {
+  type: ActionCardType | EventCardType;
+  player: PlayerType;
+}) {
+  const cardId = getCardId({ type, player });
 
-  const card = isActionCardType(type)
+  return isActionCardType(type)
     ? {
         cardType: "actionCard" as const,
         action: type,
@@ -58,7 +68,4 @@ export function NewCard(
         playedBy: player,
         cardId,
       };
-
-  Object.setPrototypeOf(card, { toString });
-  return card;
 }

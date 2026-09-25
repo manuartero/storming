@@ -1,5 +1,6 @@
 import c from "classnames";
 import { useId } from "react";
+import type { ComponentProps } from "react";
 
 import styles from "./dialog.module.css";
 
@@ -7,7 +8,7 @@ type Props = {
   title?: string;
   size?: "regular" | "small";
   onClose: () => void;
-} & React.ComponentProps<"div">;
+} & ComponentProps<"div">;
 
 export function Dialog({
   title,

@@ -1,10 +1,11 @@
 import c from "classnames";
+import type { ComponentProps } from "react";
 
 import styles from "./button.module.css";
 
 type Props = {
   player?: PlayerType;
-} & React.ComponentProps<"button">;
+} & ComponentProps<"button">;
 
 export function Button({
   player,

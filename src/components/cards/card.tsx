@@ -15,7 +15,7 @@ const CARD_TITLE: Record<ActionCardType, string> = {
 
 type Props = {
   card: Card;
-  status?: PlayerHandCardStatus | CardStatus;
+  status?: PlayerHandCardStatus;
   className?: string;
   onClick?: () => void;
 };
@@ -78,7 +78,7 @@ function ActionCardContents({ card: actionCard }: { card: ActionCard }) {
   );
 }
 
-function EventCardContents({ card }: { card: EventCard }) {
+function EventCardContents(_: { card: EventCard }) {
   // TODO: Alpha
   return <div></div>;
 }

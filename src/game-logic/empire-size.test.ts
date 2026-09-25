@@ -28,11 +28,13 @@ const board = {
   },
 } as Board;
 
-test("empireSize() returns number of buildings grouped by player", () => {
-  expect(empireSize(board)).toEqual({
-    player: 1,
-    enemy1: 1,
-    enemy2: 0,
-    enemy3: 2,
+describe("empireSize()", () => {
+  test("returns the number of buildings grouped by player", () => {
+    expect(empireSize(board)).toEqual({
+      player: 1,
+      enemy1: 1,
+      enemy2: 0,
+      enemy3: 2,
+    });
   });
 });

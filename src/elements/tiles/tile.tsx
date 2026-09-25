@@ -1,11 +1,12 @@
 import c from "classnames";
+import type { PropsWithChildren } from "react";
 import { coordinates } from "models/tiles";
 import { tileAssets } from "./assets";
 import { usePieceOffset } from "./use-piece-offset";
 
 import styles from "./tile.module.css";
 
-type _BaseProps = React.PropsWithChildren<{
+type _BaseProps = PropsWithChildren<{
   status?: TileStatus;
   terrain?: TerrainType;
   building?: BuildingType;
@@ -37,9 +38,6 @@ export function Tile({
   disableChildrenOffset = false,
   onClick,
 }: Props) {
-  /* debug: turn on debug ID */
-  const debugTileID = false;
-
   const pieceStyle = usePieceOffset({ children, disableChildrenOffset });
 
   return (
@@ -61,7 +59,6 @@ export function Tile({
 
       <div className={styles.innerLayer} aria-hidden="true">
         {terrain && <Terrain variant={terrain} />}
-        {debugTileID && <span className={styles.tileId}>{id}</span>}
       </div>
 
       {building && owner && <Building variant={building} owner={owner} />}

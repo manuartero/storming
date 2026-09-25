@@ -1,7 +1,7 @@
 import { useGameContext } from "game-context";
 import { NewBuilding, upgradeBuilding } from "models/new-building";
 import { useState } from "react";
-import { warnInconsistentState } from "utils/console";
+import { warnInconsistentState } from "lib/console";
 import { Board } from "./board";
 import { BuildDialog } from "./build-dialog";
 import { inferVisualBoardFromGameContext } from "./infer-visual-board";
@@ -31,10 +31,12 @@ export function BoardController() {
   const setSelectedTile = (tile: SelectedTile | undefined) =>
     setSelection(tile && { ...tile, cardId: activeCardId });
 
-  const board = inferVisualBoardFromGameContext(
-    gameContext,
-    selectedTile?.mode === "selected" ? selectedTile.tile : undefined
-  );
+  const board = inferVisualBoardFromGameContext({
+    board: gameContext.board,
+    activeCard: gameContext.activeCard,
+    selectedTile:
+      selectedTile?.mode === "selected" ? selectedTile.tile : undefined,
+  });
 
   const settleOnTile = (tile: TileID) => {
     const piece = board[tile].piece;
@@ -101,7 +103,13 @@ export function BoardController() {
     setSelectedTile({ tile, mode: "selected" });
   };
 
-  const recruitOnTile = (tile: TileID, piece: PieceType) => {
+  const recruitOnTile = ({
+    tile,
+    piece,
+  }: {
+    tile: TileID;
+    piece: PieceType;
+  }) => {
     const building = board[tile].building;
     if (!building) {
       warnInconsistentState(
@@ -222,12 +230,12 @@ export function BoardController() {
         <RecruitDialog
           player={gameContext.activePlayer}
           recruitSoldier={() => {
-            recruitOnTile(selectedTile.tile, "soldier");
+            recruitOnTile({ tile: selectedTile.tile, piece: "soldier" });
           }}
           recruitKnight={
             knightsUnlocked
               ? () => {
-                  recruitOnTile(selectedTile.tile, "knight");
+                  recruitOnTile({ tile: selectedTile.tile, piece: "knight" });
                 }
               : undefined
           }

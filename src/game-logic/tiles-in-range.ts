@@ -1,35 +1,48 @@
-import { merge } from "utils/array";
-import { asTileID, coordinates } from "../models/tiles";
+import { asTileID, coordinates } from "models/tiles";
 
-const NEIGHBOUR_TILES_MEM_CACHE = {} as Record<TileID, TileID[]>;
+const NEIGHBOUR_TILES_MEM_CACHE: Partial<Record<TileID, TileID[]>> = {};
 
-export function tilesInRange(
-  tileId: TileID,
-  { range }: { range?: number } = {}
-) {
-  return tilesInRangeRec(tileId, range || 1, []).filter((t) => t !== tileId);
+export function tilesInRange({
+  tileId,
+  range = 1,
+}: {
+  tileId: TileID;
+  range?: number;
+}) {
+  return tilesInRangeRec({ tileId, range, acc: [] }).filter(
+    (t) => t !== tileId
+  );
 }
 
-function tilesInRangeRec(
-  tileId: TileID,
-  range: number,
-  acc: TileID[]
-): TileID[] {
+// annotated: recursive
+function tilesInRangeRec({
+  tileId,
+  range,
+  acc,
+}: {
+  tileId: TileID;
+  range: number;
+  acc: TileID[];
+}): TileID[] {
   const neighbourTiles = tilesInRange1Cached(tileId);
   if (range === 1) {
-    return merge(acc, neighbourTiles);
+    return union({ a: acc, b: neighbourTiles });
   }
-  const tiles = neighbourTiles.flatMap((tileId) =>
-    tilesInRangeRec(tileId, range - 1, acc)
+  const tiles = neighbourTiles.flatMap((neighbour) =>
+    tilesInRangeRec({ tileId: neighbour, range: range - 1, acc })
   );
-  return merge(acc, tiles);
+  return union({ a: acc, b: tiles });
+}
+
+/** both arrays, without duplicates */
+function union<T>({ a, b }: { a: T[]; b: T[] }) {
+  return Array.from(new Set([...a, ...b]));
 }
 
 function tilesInRange1Cached(tileId: TileID) {
-  if (!NEIGHBOUR_TILES_MEM_CACHE[tileId]) {
-    NEIGHBOUR_TILES_MEM_CACHE[tileId] = tilesInRange1(tileId);
-  }
-  return NEIGHBOUR_TILES_MEM_CACHE[tileId];
+  const cached = NEIGHBOUR_TILES_MEM_CACHE[tileId] ?? tilesInRange1(tileId);
+  NEIGHBOUR_TILES_MEM_CACHE[tileId] = cached;
+  return cached;
 }
 
 function tilesInRange1(tileId: TileID) {

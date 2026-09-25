@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { NewCard } from "models/new-card";
 import { Card } from "./card";
 
-const actionCard = NewCard("build", "player");
+const actionCard = NewCard({ type: "build", player: "player" });
 
 describe("<Card />", () => {
   it("render: article role", () => {

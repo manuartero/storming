@@ -9,15 +9,13 @@ function getPlayedActionCards({
   activeCard: Card | undefined;
   next: TimelineCard[];
   future: TimelineCard[];
-}): ActionCard[] {
+}) {
   const playedCards = [...next, ...future];
   if (activeCard && isActionCard(activeCard)) {
     // insert timeline.current >> [X...]
     playedCards.unshift({ card: activeCard, commited: true });
   }
-  return playedCards
-    .filter((playedCard) => isActionCard(playedCard.card))
-    .map((playedCard) => playedCard.card as ActionCard);
+  return playedCards.map((playedCard) => playedCard.card).filter(isActionCard);
 }
 
 /**
@@ -35,19 +33,22 @@ export function inferPlayerHandsFromGameContext(playedCards: {
 }) {
   const playedActionCards = getPlayedActionCards(playedCards);
   const players = Object.keys(PLAYER_CARDS) as PlayerType[];
-  const playerHands = players.reduce((acc, player) => {
-    const playerHand = PLAYER_CARDS[player].map((card) => {
-      const status = playedActionCards.some(
-        (playedCard) => playedCard.cardId === card.cardId
-      )
-        ? "played"
-        : "available";
-      return { card, status };
-    });
-    return {
-      ...acc,
-      [player]: playerHand,
-    };
-  }, {} as Record<PlayerType, PlayerHand>);
+  const playerHands = players.reduce(
+    (acc, player) => {
+      const playerHand = PLAYER_CARDS[player].map((card) => {
+        const status = playedActionCards.some(
+          (playedCard) => playedCard.cardId === card.cardId
+        )
+          ? "played"
+          : "available";
+        return { card, status };
+      });
+      return {
+        ...acc,
+        [player]: playerHand,
+      };
+    },
+    {} as Record<PlayerType, PlayerHand>
+  );
   return playerHands;
 }

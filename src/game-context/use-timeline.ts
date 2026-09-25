@@ -35,8 +35,12 @@ const replacePending = ({
   if (card === undefined) {
     return timelineCards;
   }
-  const committed = timelineCards.filter((timelineCard) => timelineCard.commited);
-  return card === null ? committed : committed.concat({ card, commited: false });
+  const committed = timelineCards.filter(
+    (timelineCard) => timelineCard.commited
+  );
+  return card === null
+    ? committed
+    : committed.concat({ card, commited: false });
 };
 
 /*
@@ -81,7 +85,11 @@ function timelineReducer(
         }),
       };
     case "submitPlanification":
-      return { ...state, next: commit(state.next), future: commit(state.future) };
+      return {
+        ...state,
+        next: commit(state.next),
+        future: commit(state.future),
+      };
     case "override":
       return action.state;
   }

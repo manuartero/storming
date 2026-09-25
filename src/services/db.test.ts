@@ -4,7 +4,7 @@ import { listSavegames, loadSavegame, savegame } from "./db";
 const gameContext = {
   phase: "planification",
   activeCard: undefined,
-  next: [{ card: NewCard("move", "player"), commited: true }],
+  next: [{ card: NewCard({ type: "move", player: "player" }), commited: true }],
   future: [],
   board: {},
   players: [],
