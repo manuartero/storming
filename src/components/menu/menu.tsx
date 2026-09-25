@@ -21,7 +21,7 @@ export function Menu() {
   const loadHandler = () => {
     const savegames = listSavegames()
       .map((key) => loadSavegame(key))
-      .filter((savegame) => savegame) as Savegame[];
+      .filter((savegame) => savegame !== undefined);
     setSavegames(savegames);
   };
 
@@ -61,7 +61,7 @@ function SavegameLoadItem({
   onLoad,
 }: {
   savegame: Savegame;
-  onLoad: (gameContext: GameContext) => void;
+  onLoad: (state: GameState) => void;
 }) {
   const name = () =>
     new Date(parseInt(savegame.createdAt)).toLocaleDateString();
@@ -69,7 +69,7 @@ function SavegameLoadItem({
   return (
     <Button
       onClick={() => {
-        onLoad(savegame.gameContext);
+        onLoad(savegame.state);
       }}
     >
       {name()} ({savegame.playerEmpireSize})
