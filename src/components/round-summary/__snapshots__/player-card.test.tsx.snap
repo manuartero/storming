@@ -8,23 +8,18 @@ exports[`<PlayerCard /> render: article role 1`] = `
   class="playerCard player"
 >
   <div
-    class="playerPoints"
-  >
-    <div
-      aria-label="player avatar"
-      aria-roledescription="game avatar"
-      class="avatar player"
-      role="img"
-    />
-    <span
-      class="points"
-    >
-      3
-      p
-    </span>
-  </div>
-  <div
-    class="extraPoints"
+    aria-label="player avatar"
+    aria-roledescription="game avatar"
+    class="avatar player"
+    role="img"
   />
+  <span
+    class="points"
+  >
+    3
+    <small>
+      pts
+    </small>
+  </span>
 </article>
 `;

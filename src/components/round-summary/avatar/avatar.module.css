@@ -4,8 +4,8 @@
   background-repeat: no-repeat;
   background-size: contain;
 
-  width: calc(var(--pc-h) * 0.75);
-  height: calc(var(--pc-h) * 0.75);
+  width: calc(var(--row-h) * 0.7);
+  height: calc(var(--row-h) * 0.7);
 
   pointer-events: none;
 }

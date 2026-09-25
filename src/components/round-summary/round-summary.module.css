@@ -1,65 +1,27 @@
+/*
+  Turn order: one row per player, top to bottom, all visible at once.
+  The row height comes from the cell: 4 rows fit its height.
+*/
 .roundSummary {
   /* main grid layout */
   grid-area: round-summary;
   container-type: size;
 
-  /* 4 player cards, each overlapping the one above by half its height */
-  --pc-h: min(100cqh / 2.6, 100cqw / 3.1); /* room for the active shift */
+  --row-h: min((100cqh - 16px) / 4.4, 100cqw / 3.5);
 
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  padding: 8px;
+
+  counter-reset: turn;
 }
 
-.roundSummary {
-  & article {
-    /* XXX card overlap: is it possible to use some flex magic instead? */
-    margin-top: calc(var(--pc-h) * -0.5);
-
-    transition: transform 0.3s ease-in-out;
-  }
-
-  & article:first-child {
-    margin-top: 0;
-  }
-
-  & article:nth-child(1) {
-    z-index: 4;
-  }
-
-  & article:nth-child(2) {
-    z-index: 3;
-  }
-
-  & article:nth-child(3) {
-    z-index: 2;
-  }
-}
-
-/* each card moves up so the stack fans out (4th card stays in place) */
-.roundSummary article:nth-child(1) {
-  --spread: -2.25;
-}
-
-.roundSummary article:nth-child(2) {
-  --spread: -1.5;
-}
-
-.roundSummary article:nth-child(3) {
-  --spread: -0.75;
-}
-
-/* touch: a tap toggles the stack open */
-.roundSummary.open article {
-  transform: translateY(calc(var(--pc-h) * var(--spread, 0)));
-}
-
-@media (hover: hover) {
-  .roundSummary:hover article {
-    transform: translateY(calc(var(--pc-h) * var(--spread, 0)));
-  }
-
-  .roundSummary:hover article:hover {
-    transform: translateY(calc(var(--pc-h) * var(--spread, 0))) scale(1.05);
+/* short cells (phone landscape): two columns of two */
+@container (max-height: 120px) {
+  .roundSummary > article {
+    --row-h: min(100cqh / 2.3, 100cqw / 3.2);
+    width: 50%;
   }
 }

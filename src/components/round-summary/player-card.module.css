@@ -1,67 +1,83 @@
+/* one row of the turn order: position, avatar, points */
 .playerCard {
+  --pc-color: var(--base-grey);
+
+  counter-increment: turn;
+
   display: flex;
-  flex-direction: row;
-  isolation: isolate;
+  align-items: center;
+  gap: calc(var(--row-h) * 0.25);
 
-  width: calc(var(--pc-h) * 2.5);
-  height: var(--pc-h);
-  padding: calc(var(--pc-h) * 0.125);
-  background: var(--white);
+  width: 100%;
+  height: var(--row-h);
+  margin: calc(var(--row-h) * 0.05) 0;
+  padding: 0 calc(var(--row-h) * 0.3);
 
-  border: 2px solid var(--light-grey);
-  box-shadow: 0 0 4px var(--shadow-grey);
-  border-radius: 6px;
-
-  cursor: crosshair; /* + */
+  border-radius: var(--radius-s);
+  color: var(--ink-muted);
 }
 
+/* the position in the turn order */
+.playerCard::before {
+  content: counter(turn);
+  min-width: 1ch;
+  font-size: calc(var(--row-h) * 0.36);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--dark-grey);
+}
+
+.player {
+  --pc-color: var(--player-primary);
+}
+
+.enemy1 {
+  --pc-color: var(--enemy1-primary);
+}
+
+.enemy2 {
+  --pc-color: var(--enemy2-primary);
+}
+
+.enemy3 {
+  --pc-color: var(--enemy3-primary);
+}
+
+/* whose turn it is: a raised row with an edge in their colour */
 .playerCard.active {
-  z-index: 5 !important; /* FIXME */
+  color: var(--ink);
+  background: var(--white);
+  box-shadow: inset calc(var(--row-h) * 0.1) 0 0 var(--pc-color),
+    var(--elevation-1);
 
-  transform: translateX(calc(var(--pc-h) * 0.25));
-
-  &.player {
-    border: 2px solid var(--player-primary);
-    box-shadow: 0 0 4px var(--player-secondary);
-  }
-
-  &.enemy1 {
-    border: 2px solid var(--enemy1-primary);
-    box-shadow: 0 0 4px var(--enemy1-secondary);
-  }
-
-  &.enemy2 {
-    border: 2px solid var(--enemy2-primary);
-    box-shadow: 0 0 4px var(--enemy2-secondary);
-  }
-
-  &.enemy3 {
-    border: 2px solid var(--enemy3-primary);
-    box-shadow: 0 0 4px var(--enemy3-secondary);
+  &::before {
+    color: var(--ink);
   }
 }
 
+/* diplomacy: the active player picks who goes first */
 .playerCard.clickable {
   cursor: pointer;
-}
+  outline: 1.5px dashed var(--dark-grey);
+  outline-offset: -1.5px;
 
-.playerPoints {
-  flex: 2;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
+  @media (hover: hover) {
+    &:hover {
+      background: var(--white);
+    }
+  }
 }
 
 .points {
-  font-size: calc(var(--pc-h) * 0.33);
-  font-weight: bold;
-  color: var(--darkest-grey);
-}
+  margin-left: auto;
+  font-size: calc(var(--row-h) * 0.42);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 
-.extraPoints {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  background: var(--lightest-grey);
+  & small {
+    margin-left: 0.15em;
+    font-size: 0.6em;
+    font-weight: 500;
+    color: var(--ink-muted);
+  }
 }
