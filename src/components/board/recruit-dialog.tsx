@@ -17,7 +17,7 @@ export function RecruitDialog({
   close,
 }: Props) {
   return (
-    <Dialog size="small" title="Choose Which Unit to Recruit" onClose={close}>
+    <Dialog size="small" title="Choose which troop to recruit" onClose={close}>
       <>
         <CardSilhouette
           card="recruit-soldier"
@@ -31,9 +31,7 @@ export function RecruitDialog({
             disabled={!recruitKnight}
             onClick={recruitKnight}
           />
-          {!recruitKnight && (
-            <span>Knights could be recruited if the tower is upgraded</span>
-          )}
+          {!recruitKnight && <span>Knights need a town or a city</span>}
         </div>
       </>
     </Dialog>

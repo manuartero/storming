@@ -46,7 +46,7 @@ exports[`<CurrentPhase /> render: section role - action 1`] = `
           class="text paragraph"
         >
           <p>
-            Move up to two different Units
+            Move up to two different troops
           </p>
         </div>
         <div
@@ -177,7 +177,7 @@ exports[`<CurrentPhase /> render: section role - planification with cards 1`] = 
           class="text paragraph"
         >
           <p>
-            Move up to two different Units
+            Move up to two different troops
           </p>
         </div>
         <div
@@ -210,7 +210,7 @@ exports[`<CurrentPhase /> render: section role - planification with cards 1`] = 
           class="text paragraph"
         >
           <p>
-            Recruit units at up to two different Settlements
+            Recruit troops on up to two different settlements
           </p>
         </div>
         <div

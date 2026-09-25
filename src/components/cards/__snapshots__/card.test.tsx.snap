@@ -29,13 +29,13 @@ exports[`<Card /> render: article role 1`] = `
         Choose one:
       </p>
       <p>
-        Found a new Settlement
+        Found a new village
       </p>
       <p>
-        Improve a City
+        Upgrade a village or a town
       </p>
       <p>
-        Build Walls on a Settlement
+        Build walls on a settlement
       </p>
     </div>
     <div
