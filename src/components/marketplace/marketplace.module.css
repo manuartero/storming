@@ -15,3 +15,10 @@
   font-size: 1.2rem;
   color: var(--base-grey);
 }
+
+/* placeholder: no room for it in the portrait layout yet */
+@media (orientation: portrait) {
+  .marketplace {
+    display: none;
+  }
+}
