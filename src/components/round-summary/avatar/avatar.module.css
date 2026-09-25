@@ -6,8 +6,8 @@
   background-repeat: no-repeat;
   background-size: contain;
 
-  width: 6vh;
-  height: 6vh;
+  width: calc(var(--pc-h) * 0.75);
+  height: calc(var(--pc-h) * 0.75);
 
   pointer-events: none;
 }

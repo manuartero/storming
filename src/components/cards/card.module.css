@@ -1,18 +1,30 @@
+/*
+  The width comes from the area that holds the card (--card-w, set with
+  container query units on that area). The card is a container too, so
+  everything inside is in cqw of the card and scales as one piece.
+  2:3 like a real card.
+
+  On .card itself cqw would still point at the area, hence --w.
+*/
 .card {
+  --w: var(--card-w, clamp(100px, 20vmin, 200px));
+
   /* anchor */
   position: relative;
+  container: card / inline-size;
 
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  flex-shrink: 0;
 
-  width: 22vh;
-  height: 33vh;
-  padding: 2vh;
+  width: var(--w);
+  aspect-ratio: 2 / 3;
+  padding: calc(var(--w) * 0.09);
   background: var(--white);
-  margin: 1vh;
-  box-shadow: 0vh 0vh 0.5vh var(--shadow-grey);
-  border-radius: 16px;
+  margin: calc(var(--w) * 0.045);
+  box-shadow: 0 0 4px var(--shadow-grey);
+  border-radius: clamp(6px, calc(var(--w) * 0.06), 12px);
 }
 
 .card.played {
@@ -20,7 +32,7 @@
     /* to every children */
     opacity: 0.3;
   }
-  box-shadow: 0vh 0vh 0.4vh var(--light-grey);
+  box-shadow: 0 0 3px var(--light-grey);
 }
 
 .card.selected {
@@ -52,6 +64,8 @@
 
   & .content {
     flex: 3;
+    /* the tile inside a silhouette (recruit / build dialogs) */
+    --tile-w: 45cqw;
   }
 }
 
@@ -68,24 +82,41 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 1vh;
+  margin-top: 4.5cqw;
 }
 
 .icon {
-  width: 10vh;
-  height: 7.5vh;
+  width: 45cqw;
+  height: 34cqw;
 
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
 }
 
-.title {
+.card .title {
   text-transform: uppercase;
+  font-size: 12cqw;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 
-.text {
+.card .text {
   z-index: 1;
+  font-size: 6cqw;
+  line-height: 1.2;
+}
+
+/* too small to read: drop the rules text, show a bigger icon instead */
+@container card (max-width: 120px) {
+  .text {
+    display: none;
+  }
+
+  .icon {
+    width: 80cqw;
+    height: 60cqw;
+  }
 }
 
 .waterMark {
