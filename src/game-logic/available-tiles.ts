@@ -26,7 +26,6 @@ function hasBuilderOrBuildingFromSameOwner({
     (tile.building?.owner === card.owner && canBuildOn(tile.building));
 }
 
-// a settlement takes an upgrade until it is a city, and walls once
 function canBuildOn(building: Building) {
   return building.type !== "citadel" || !building.hasWalls;
 }
