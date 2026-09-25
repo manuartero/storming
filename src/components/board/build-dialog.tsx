@@ -17,11 +17,7 @@ export function BuildDialog({
   close,
 }: Props) {
   return (
-    <Dialog
-      size="small"
-      title="Choose How to Improve your Building"
-      onClose={close}
-    >
+    <Dialog size="small" title="Choose what to build" onClose={close}>
       <>
         <div className={styles.column}>
           <CardSilhouette
@@ -39,7 +35,7 @@ export function BuildDialog({
             disabled={!upgradeBuilding}
             onClick={upgradeBuilding}
           />
-          {!upgradeBuilding && <span>Building is already upgraded</span>}
+          {!upgradeBuilding && <span>A city is fully upgraded</span>}
         </div>
       </>
     </Dialog>

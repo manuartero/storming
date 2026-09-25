@@ -1,18 +1,17 @@
 {
   "build": [
     "Choose one:",
-    "Found a new Settlement",
-    "Improve a City",
-    "Build Walls on a Settlement"
+    "Found a new village",
+    "Upgrade a village or a town",
+    "Build walls on a settlement"
   ],
-  "move": ["Move up to two different Units"],
-  "recruit": ["Recruit units at up to two different Settlements"],
-  "diplo": ["Take the Initial Player token"],
-  "next": ["Drag here the card you wish to use next round"],
-  "future": ["Drag here the card you wish to use in two rounds"],
-  "build-walls": ["Surround settlement with defensive walls"],
-  "upgrade-settlement": "Improve this settlement to next level",
-  "recruit-soldier": "Recruit a solider on this settlement",
+  "move": ["Move up to two different troops"],
+  "recruit": ["Recruit troops on up to two different settlements"],
+  "diplo": ["Take the first-player marker"],
+  "next": ["Pick the card you want to play next round"],
+  "future": ["Pick the card you want to play in two rounds"],
+  "build-walls": ["Surround this settlement with walls"],
+  "upgrade-settlement": "Upgrade this settlement to the next level",
+  "recruit-soldier": "Recruit a soldier on this settlement",
   "recruit-knight": "Recruit a knight on this settlement"
 }
-  

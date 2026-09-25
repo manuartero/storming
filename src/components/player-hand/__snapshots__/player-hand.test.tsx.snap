@@ -31,7 +31,7 @@ exports[`<PlayerHand /> render: region role 1`] = `
         class="text paragraph"
       >
         <p>
-          Move up to two different Units
+          Move up to two different troops
         </p>
       </div>
       <div
@@ -64,7 +64,7 @@ exports[`<PlayerHand /> render: region role 1`] = `
         class="text paragraph"
       >
         <p>
-          Move up to two different Units
+          Move up to two different troops
         </p>
       </div>
       <div
@@ -100,13 +100,13 @@ exports[`<PlayerHand /> render: region role 1`] = `
           Choose one:
         </p>
         <p>
-          Found a new Settlement
+          Found a new village
         </p>
         <p>
-          Improve a City
+          Upgrade a village or a town
         </p>
         <p>
-          Build Walls on a Settlement
+          Build walls on a settlement
         </p>
       </div>
       <div
