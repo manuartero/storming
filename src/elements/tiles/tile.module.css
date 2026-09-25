@@ -6,7 +6,7 @@
 */
 .tile {
   --w: var(--tile-w, calc(12vh * 0.866));
-  --tile-stroke: max(2px, calc(var(--w) * 0.04));
+  --tile-stroke: max(1.5px, calc(var(--w) * 0.03));
   --tile-border-color: var(--light-grey);
   --tile-bg: var(--white);
 
@@ -27,20 +27,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: crosshair; /* + */
-
-  @media (hover: hover) {
-    &:hover {
-      transform: translateY(-2px);
-    }
-  }
+  cursor: default;
+  transition: transform 0.15s ease-out;
 
   /* the clip-path hides any outline: recolour the stroke instead */
   &:focus-visible {
     outline: none;
 
     & .strokeLayer {
-      background: var(--darkest-grey);
+      background: var(--ink);
     }
   }
 }
@@ -50,7 +45,7 @@
   clip-path: inherit;
   inset: 0;
   /* hexagon border-color */
-  background: var(--light-grey);
+  background: var(--tile-border-color);
 }
 
 /* Inner content hex shape */
@@ -77,29 +72,46 @@
   z-index: 1;
 }
 
+/* a tile the active player can pick: a thick ring in their colour */
 .tile.available {
+  --tile-stroke: max(2px, calc(var(--w) * 0.05));
   cursor: pointer;
   pointer-events: auto;
 
-  & .strokeLayer {
-    background: var(--tile-border-color);
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(calc(var(--w) * -0.04));
+    }
   }
+}
+
+.tile.controlled .innerLayer {
+  background: var(--tile-bg);
 }
 
 .tile.selected {
+  --tile-stroke: max(2px, calc(var(--w) * 0.05));
+  transform: translateY(calc(var(--w) * -0.04));
+
   & .strokeLayer {
-    background: var(--tile-border-color);
+    background: var(--ink);
   }
 }
 
-.tile.controlled {
-  & .innerLayer {
-    background: var(--tile-bg);
-  }
+.tile.lake .innerLayer {
+  background: var(--lake);
+}
+
+.tile.forest .innerLayer {
+  background: var(--forest);
+}
+
+.tile.mountain .innerLayer {
+  background: var(--mountain);
 }
 
 .tile.forbidden {
-  opacity: 0.5;
+  opacity: 0.45;
   --tile-border-color: var(--forbidden-tile);
 }
 

@@ -49,6 +49,7 @@ export function Tile({
         status && styles[status],
         owner && styles[owner],
         owner && styles.controlled,
+        terrain && styles[terrain],
         status === "available" && activePlayer && styles[activePlayer]
       )}
       aria-label={`tile ${id}`}

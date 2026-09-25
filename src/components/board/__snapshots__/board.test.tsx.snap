@@ -238,7 +238,7 @@ exports[`<Board /> render: match snapshot 1`] = `
       <button
         aria-disabled="false"
         aria-label="tile -1,-1"
-        class="tile available"
+        class="tile available lake"
         type="button"
       >
         <div
@@ -544,7 +544,7 @@ exports[`<Board /> render: match snapshot 1`] = `
       <button
         aria-disabled="false"
         aria-label="tile 1,1"
-        class="tile available"
+        class="tile available lake"
         type="button"
       >
         <div

@@ -1,32 +1,3 @@
-/* one face per weight in use, so the browser never fakes bold or light */
-@font-face {
-  font-family: "Roboto";
-  font-weight: 100;
-  font-display: swap;
-  src: url(./fonts/Roboto/Roboto-Thin.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Roboto";
-  font-weight: 400;
-  font-display: swap;
-  src: url(./fonts/Roboto/Roboto-Regular.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Roboto";
-  font-weight: 500;
-  font-display: swap;
-  src: url(./fonts/Roboto/Roboto-Medium.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Roboto";
-  font-weight: 700;
-  font-display: swap;
-  src: url(./fonts/Roboto/Roboto-Bold.ttf) format("truetype");
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -34,7 +5,10 @@
 }
 
 body {
-  font-family: "Roboto";
+  font-family: "Figtree Variable", system-ui, sans-serif;
+  font-size: 16px;
+  color: var(--ink);
+  background: var(--canvas);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -45,7 +19,7 @@ code {
 }
 
 #root {
-  background-color: var(--white);
+  background-color: var(--canvas);
 }
 
 @media (prefers-reduced-motion: reduce) {
