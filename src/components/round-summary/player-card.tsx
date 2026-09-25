@@ -24,11 +24,11 @@ export function PlayerCard({ player, active, clickable, onClick }: Props) {
       aria-roledescription="player summary"
       onClick={() => clickable && onClick(player)}
     >
-      <div className={styles.playerPoints}>
-        <Avatar player={player.player} />
-        <span className={styles.points}>{player.points}p</span>
-      </div>
-      <div className={styles.extraPoints}></div>
+      <Avatar player={player.player} />
+      <span className={styles.points}>
+        {player.points}
+        <small>pts</small>
+      </span>
     </article>
   );
 }
