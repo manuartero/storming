@@ -6,3 +6,10 @@
   padding: 20px;
   border-radius: 8px;
 }
+
+/* placeholder: no room for it in the portrait layout yet */
+@media (orientation: portrait) {
+  .playerInventory {
+    display: none;
+  }
+}

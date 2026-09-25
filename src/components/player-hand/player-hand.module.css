@@ -24,3 +24,12 @@
     margin-left: 0;
   }
 }
+
+/* portrait: the hand is wider than the screen, so it scrolls sideways */
+@media (orientation: portrait) {
+  .playerHand {
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+}

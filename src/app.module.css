@@ -5,21 +5,34 @@
   gap: 0px 0px;
 
   grid-template-areas:
-    "current-phase timeline timeline"
+    "current-phase timeline menu"
     "current-phase board marketplace"
     "round-summary player-hand player-inventory";
 
-  height: 100vh;
+  /* dvh: iOS Safari's address bar would cut the bottom row with vh */
+  height: 100dvh;
+}
+
+@media (orientation: portrait) {
+  .app {
+    grid-template-columns: 1fr 1fr 48px;
+    grid-template-rows: 1fr 6fr 2fr 3fr; /** 12 rows */
+
+    grid-template-areas:
+      "timeline timeline menu"
+      "board board board"
+      "player-hand player-hand player-hand"
+      "current-phase round-summary round-summary";
+  }
 }
 
 /*
-  css fix: the first row (timeline) was collapsing to 0px height
-  when the content was not enough to fill the space.
-  This is a workaround to ensure that the first row has a minimum height.
-
-  default value:
-    min-height: auto
+  Grid items default to min-width / min-height: auto, so their content
+  can grow a track beyond its fr share (the timeline row collapsed to 0px,
+  and in portrait the side columns pushed the grid wider than the screen).
+  0 keeps every cell at the size the grid gives it.
 */
 .app > * {
+  min-width: 0;
   min-height: 0;
 }
