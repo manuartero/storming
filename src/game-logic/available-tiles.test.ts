@@ -22,6 +22,8 @@ const recruitScenarios: { activeCard: ActionCard; expectedTiles: TileID[] }[] =
     },
   ];
 
+const soldier: Piece = { owner: "player", type: "soldier" };
+
 describe("getAvailableTilesForActionCard()", () => {
   beforeEach(_resetCardId);
 
@@ -70,6 +72,58 @@ describe("getAvailableTilesForActionCard()", () => {
     }
   );
 
-  test.todo("returns building spots for 'building' action");
+  test.each<{ name: string; board: Partial<Board>; available: boolean }>([
+    {
+      name: "an empty tile",
+      board: { "0,0": { piece: soldier } },
+      available: true,
+    },
+    {
+      name: "a tile two regions from a settlement",
+      board: {
+        "0,0": { piece: soldier },
+        "2,0": { building: { owner: "enemy1", type: "tower" } },
+      },
+      available: true,
+    },
+    {
+      name: "a tile next to an enemy settlement",
+      board: {
+        "0,0": { piece: soldier },
+        "1,0": { building: { owner: "enemy1", type: "tower" } },
+      },
+      available: false,
+    },
+    {
+      name: "a tile next to its own settlement",
+      board: {
+        "0,0": { piece: soldier },
+        "0,1": {
+          building: { owner: "player", type: "citadel", hasWalls: true },
+        },
+      },
+      available: false,
+    },
+    {
+      name: "a forest",
+      board: { "0,0": { piece: soldier, terrain: "forest" } },
+      available: false,
+    },
+    {
+      name: "a mountain",
+      board: { "0,0": { piece: soldier, terrain: "mountain" } },
+      available: false,
+    },
+  ])(
+    "'build' action with a soldier on $name: available is $available",
+    ({ board, available }) => {
+      const got = getAvailableTilesForActionCard({
+        activeCard: NewCard({ type: "build", player: "player" }),
+        board: board as Board,
+      });
+      expect(got).toEqual(available ? ["0,0"] : []);
+    }
+  );
+
   test.todo("returns tiles in range for 'move' action");
 });
