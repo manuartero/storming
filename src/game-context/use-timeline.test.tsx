@@ -136,6 +136,27 @@ describe("useTimeline()", () => {
     ]);
   });
 
+  test("endGame()", () => {
+    const { result } = renderHook(() => useTimeline());
+
+    const nextActionCard = NewCard({ type: "recruit", player: "player" });
+    const futureActionCard = NewCard({ type: "move", player: "player" });
+
+    act(() => {
+      result.current.planAction({ nextActionCard, futureActionCard });
+      result.current.submitPlanification();
+      result.current.startActionPhase();
+    });
+
+    act(() => {
+      result.current.endGame("enemy2");
+    });
+
+    expect(result.current.phase).toBe("ended");
+    expect(result.current.winner).toBe("enemy2");
+    expect(result.current.activeCard).toBe(undefined);
+  });
+
   test("submitPlanification() + startActionPhase() in the same event keep the commit", () => {
     const { result } = renderHook(() => useTimeline());
 

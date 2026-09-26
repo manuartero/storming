@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`<GameOver /> render: names the winner 1`] = `
+<div
+  aria-labelledby="dialog-title-«r0»"
+  aria-modal="true"
+  class="dialogScreen"
+  role="dialog"
+  tabindex="-1"
+>
+  <div
+    class="dialog small"
+  >
+    <div
+      class="header"
+    >
+      <h2
+        class="title"
+        id="dialog-title-«r0»"
+      >
+        Game over
+      </h2>
+    </div>
+    <div
+      class="content"
+    >
+      <div
+        class="column"
+      >
+        <p
+          class="winner"
+        >
+          Red wins
+        </p>
+        <button
+          class="button enemy1"
+        >
+          New game
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

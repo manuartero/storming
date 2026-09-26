@@ -7,13 +7,13 @@ import { mustSkip } from "./must-skip";
 export function CurrentPhaseController() {
   const gameContext = useGameContext();
 
+  if (gameContext.phase === "setup" || gameContext.phase === "ended") {
+    return <div className="current-phase" />;
+  }
+
   if (!gameContext.activePlayer) {
     warnInconsistentState("<CurrentPhase />: no active player");
     return <>ERROR</>;
-  }
-
-  if (gameContext.phase === "setup") {
-    return <div className="current-phase" />;
   }
 
   return (

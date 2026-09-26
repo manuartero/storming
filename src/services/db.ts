@@ -12,11 +12,12 @@ import { warnInconsistentState } from "lib/console";
 const KEY_PREFIX = "storming:v1:";
 
 export function savegame(gameContext: GameContext) {
-  const { phase, activeCard, next, future, board, players } = gameContext;
+  const { phase, winner, activeCard, next, future, board, players } =
+    gameContext;
   const item: Savegame = {
     createdAt: Date.now().toString(),
     playerEmpireSize: empireSize(board).player,
-    state: { phase, activeCard, next, future, board, players },
+    state: { phase, winner, activeCard, next, future, board, players },
   };
   try {
     window.localStorage.setItem(

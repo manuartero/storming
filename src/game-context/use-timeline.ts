@@ -2,6 +2,7 @@ import { useReducer } from "react";
 
 type TimelineState = {
   phase: PhaseType;
+  winner: PlayerType | undefined;
   activeCard: Card | undefined;
   next: TimelineCard[];
   future: TimelineCard[];
@@ -11,12 +12,14 @@ type TimelineAction =
   | { type: "startPlanningPhase" }
   | { type: "startActionPhase" }
   | { type: "nextActiveCard" }
+  | { type: "endGame"; winner: PlayerType }
   | { type: "planAction"; actions: Actions }
   | { type: "submitPlanification" }
   | { type: "override"; state: TimelineState };
 
 export const initialTimeline: TimelineState = {
   phase: "planification", // TODO: setup
+  winner: undefined,
   activeCard: undefined,
   next: [],
   future: [],
@@ -56,6 +59,7 @@ function timelineReducer(
   switch (action.type) {
     case "startPlanningPhase":
       return {
+        ...state,
         phase: "planification" as const,
         activeCard: undefined,
         next: state.next.concat(state.future),
@@ -71,6 +75,13 @@ function timelineReducer(
         ...state,
         activeCard: state.next[0]?.card,
         next: state.next.slice(1),
+      };
+    case "endGame":
+      return {
+        ...state,
+        phase: "ended",
+        winner: action.winner,
+        activeCard: undefined,
       };
     case "planAction":
       return {
@@ -110,6 +121,7 @@ export function useTimeline() {
     startPlanningPhase: () => dispatch({ type: "startPlanningPhase" }),
     startActionPhase: () => dispatch({ type: "startActionPhase" }),
     nextActiveCard: () => dispatch({ type: "nextActiveCard" }),
+    endGame: (winner: PlayerType) => dispatch({ type: "endGame", winner }),
     planAction: (actions: Actions) => dispatch({ type: "planAction", actions }),
     submitPlanification: () => dispatch({ type: "submitPlanification" }),
     _overrideTimeline: (state: TimelineState) =>

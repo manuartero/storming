@@ -90,7 +90,7 @@ type EventCard = {
 // TIMELINE
 // --------------
 
-type PhaseType = "setup" | "planification" | "action";
+type PhaseType = "setup" | "planification" | "action" | "ended";
 
 type TimelineCard = {
   card: Card;
@@ -114,6 +114,7 @@ type PlayerStatus = {
 
 type GameContext = {
   phase: PhaseType;
+  winner: PlayerType | undefined; // set when phase is "ended"
   activeCard: Card | undefined;
   activePlayer: PlayerType | undefined;
   next: TimelineCard[];
@@ -134,6 +135,7 @@ type GameContext = {
   firstPlayer(player: PlayerType): void;
 
   // other
+  newGame(): void;
   loadSavegame(state: GameState): void;
 };
 
@@ -142,7 +144,7 @@ type GameContext = {
 /* the part of GameContext that is data (what a savegame stores) */
 type GameState = Pick<
   GameContext,
-  "phase" | "activeCard" | "next" | "future" | "board" | "players"
+  "phase" | "winner" | "activeCard" | "next" | "future" | "board" | "players"
 >;
 
 type Savegame = {
