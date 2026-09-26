@@ -1,0 +1,14 @@
+name: storming
+services:
+  e2e:
+    build:
+      context: ..
+      dockerfile: e2e/Dockerfile
+      args:
+        PW_VERSION: "1.63.0"
+    ipc: host # Chromium shares memory via /dev/shm; without this it OOMs
+    environment:
+      CI: "1"
+    volumes:
+      - ../test-results:/work/test-results
+      - ../playwright-report:/work/playwright-report

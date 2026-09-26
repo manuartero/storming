@@ -32,6 +32,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "test": "jest",
+    "test:e2e": "docker compose -f e2e/docker-compose.yml run --rm --build e2e",
+    "test:e2e:local": "playwright test --config e2e/playwright.config.ts",
     "serve": "vite preview",
     "release": "semantic-release",
     "blue-ball": "npm run test && npm run build"
@@ -44,6 +46,7 @@
     "react-dom": "19.1.0"
   },
   "devDependencies": {
+    "@playwright/test": "1.63.0",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "13.0.1",
     "@semantic-release/git": "10.0.1",
