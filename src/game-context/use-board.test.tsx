@@ -1,4 +1,10 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  renderHook,
+  screen,
+} from "@testing-library/react";
 import { useBoard } from "./use-board";
 
 function TestingComponent() {
@@ -81,5 +87,23 @@ describe("useBoard()", () => {
     render(<TestingComponent />);
     fireEvent.click(screen.getByTestId("recruit-on-tile-03"));
     expect(getTileInfo("tile-0,3")).toEqual("tower (enemy3)soldier (enemy3)");
+  });
+
+  it("destroyWalls() removes the walls and keeps the building", () => {
+    const { result } = renderHook(() => useBoard());
+    act(() =>
+      result.current.buildOnTile({
+        tile: "1,2",
+        building: { owner: "enemy3", type: "tower", hasWalls: true },
+      })
+    );
+
+    act(() => result.current.destroyWalls("1,2"));
+
+    expect(result.current.board["1,2"].building).toEqual({
+      owner: "enemy3",
+      type: "tower",
+      hasWalls: false,
+    });
   });
 });

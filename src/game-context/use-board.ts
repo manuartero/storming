@@ -61,6 +61,22 @@ export function useBoard() {
     });
   };
 
+  const destroyWalls = (tile: TileID) => {
+    setBoard((currentBoard) => {
+      const building = currentBoard[tile].building;
+      if (!building) {
+        return currentBoard;
+      }
+      return {
+        ...currentBoard,
+        [tile]: {
+          ...currentBoard[tile],
+          building: { ...building, hasWalls: false },
+        },
+      };
+    });
+  };
+
   const recruitOnTile = ({ tile, piece }: { tile: TileID; piece: Piece }) => {
     setBoard((currentBoard) => {
       const newTile: Tile = {
@@ -78,6 +94,7 @@ export function useBoard() {
     board,
     buildOnTile,
     movePiece,
+    destroyWalls,
     recruitOnTile,
     _overrideBoard: setBoard,
   };
