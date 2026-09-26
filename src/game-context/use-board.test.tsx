@@ -89,7 +89,7 @@ describe("useBoard()", () => {
     expect(getTileInfo("tile-0,3")).toEqual("tower (enemy3)soldier (enemy3)");
   });
 
-  it("returns destroyWalls()", () => {
+  it("destroyWalls() removes the walls and keeps the building", () => {
     const { result } = renderHook(() => useBoard());
     act(() =>
       result.current.buildOnTile({
