@@ -94,7 +94,13 @@ function getInRangeMovements({ tileId, board }: _TileInBoard) {
   });
 }
 
-// TODO: a village can't be built next to another settlement, nor on terrain
-function isBuildingPlot(_: _TileInBoard) {
-  return true;
+/** a village can't be built on terrain, nor on or next to another settlement */
+function isBuildingPlot({ tileId, board }: _TileInBoard) {
+  const tile = board[tileId];
+  if (tile.terrain || tile.building) {
+    return false;
+  }
+  return tilesInRange({ tileId, range: 1 }).every(
+    (neighbour) => !board[neighbour]?.building
+  );
 }
