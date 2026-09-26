@@ -24,23 +24,26 @@ export function CardSilhouette({
   onClick,
 }: Props) {
   const title = card.replace(/-/g, " ");
+  // an option you can pick is a button; an empty plan slot is a plain article
+  const Element = onClick ? "button" : "article";
 
   return (
-    <article
+    <Element
       className={c(
         styles.card,
         styles.silhouette,
         disabled && styles.disabled,
         onClick && styles.clickable
       )}
-      aria-disabled={!onClick}
-      aria-label={`card silhouette ${card}`}
-      onClick={onClick}
+      aria-label={
+        card === "next" || card === "future" ? `empty ${card} slot` : title
+      }
+      {...(onClick && { type: "button" as const, onClick, disabled })}
     >
-      <div className={styles.heading}>
-        <h3 className={c(styles.title, fontStyles.title)}>{title}</h3>
-      </div>
-      <div className={styles.content}>
+      <span className={styles.heading}>
+        <span className={c(styles.title, fontStyles.title)}>{title}</span>
+      </span>
+      <span className={styles.content}>
         {card === "recruit-soldier" && (
           <Tile id={null} disableChildrenOffset>
             <Piece owner={player} type="soldier" />
@@ -64,7 +67,7 @@ export function CardSilhouette({
             owner={player}
           ></Tile>
         )}
-      </div>
-    </article>
+      </span>
+    </Element>
   );
 }

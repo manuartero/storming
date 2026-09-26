@@ -22,6 +22,10 @@
 
   width: var(--card-self-w);
   aspect-ratio: 2 / 3;
+  /* a playable card is a <button>: drop the browser's button look */
+  font: inherit;
+  text-align: inherit;
+  border: none;
   padding: calc(var(--card-self-w) * 0.09);
   margin: calc(var(--card-self-w) * 0.045);
   overflow: hidden;
@@ -75,10 +79,6 @@
   background: transparent;
   box-shadow: none;
   color: var(--ink-muted);
-
-  & button {
-    pointer-events: none;
-  }
 
   & .heading {
     flex: 2;
@@ -163,7 +163,11 @@
   line-height: 1.3;
   color: var(--ink-muted);
 
-  & p + p {
+  & .paragraph {
+    display: block;
+  }
+
+  & .paragraph + .paragraph {
     margin-top: 1.5cqw;
   }
 }

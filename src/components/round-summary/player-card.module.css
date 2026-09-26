@@ -15,6 +15,12 @@
 
   border-radius: var(--radius-s);
   color: var(--ink-muted);
+
+  /* while it's a <button> (Diplomacy): drop the browser's button look */
+  font: inherit;
+  text-align: inherit;
+  border: none;
+  background: none;
 }
 
 /* the position in the turn order */

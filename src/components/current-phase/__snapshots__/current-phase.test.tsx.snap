@@ -19,43 +19,43 @@ exports[`<CurrentPhase /> render: section role - action 1`] = `
     </h1>
   </div>
   <div
-    class="content"
+    class="content single"
   >
     <article
-      aria-disabled="true"
-      aria-label="card player_move_1"
-      aria-pressed="false"
+      aria-label="player Move card"
       class="card active actionCard player"
     >
-      <div
+      <span
         class="heading"
       >
-        <div
+        <span
           class="icon"
         />
-        <div
+        <span
           class="title title"
         >
           Move
-        </div>
-      </div>
-      <div
+        </span>
+      </span>
+      <span
         class="content"
       >
-        <div
+        <span
           class="text paragraph"
         >
-          <p>
+          <span
+            class="paragraph"
+          >
             Move up to two different troops
-          </p>
-        </div>
-        <div
+          </span>
+        </span>
+        <span
           class="waterMark"
         />
-      </div>
+      </span>
     </article>
     <button
-      class="button disabled"
+      class="button phaseButton disabled"
       disabled=""
     >
       Skip
@@ -86,43 +86,41 @@ exports[`<CurrentPhase /> render: section role - planification 1`] = `
     class="content"
   >
     <article
-      aria-disabled="true"
-      aria-label="card silhouette next"
+      aria-label="empty next slot"
       class="card silhouette"
     >
-      <div
+      <span
         class="heading"
       >
-        <h3
+        <span
           class="title title"
         >
           next
-        </h3>
-      </div>
-      <div
+        </span>
+      </span>
+      <span
         class="content"
       />
     </article>
     <article
-      aria-disabled="true"
-      aria-label="card silhouette future"
+      aria-label="empty future slot"
       class="card silhouette"
     >
-      <div
+      <span
         class="heading"
       >
-        <h3
+        <span
           class="title title"
         >
           future
-        </h3>
-      </div>
-      <div
+        </span>
+      </span>
+      <span
         class="content"
       />
     </article>
     <button
-      class="button disabled player"
+      class="button phaseButton disabled player"
       disabled=""
     >
       Confirm plan
@@ -152,74 +150,80 @@ exports[`<CurrentPhase /> render: section role - planification with cards 1`] = 
   <div
     class="content"
   >
-    <article
+    <button
       aria-disabled="false"
-      aria-label="card player_move_2"
+      aria-label="player Move card"
       aria-pressed="false"
       class="card available actionCard player"
+      type="button"
     >
-      <div
+      <span
         class="heading"
       >
-        <div
+        <span
           class="icon"
         />
-        <div
+        <span
           class="title title"
         >
           Move
-        </div>
-      </div>
-      <div
+        </span>
+      </span>
+      <span
         class="content"
       >
-        <div
+        <span
           class="text paragraph"
         >
-          <p>
+          <span
+            class="paragraph"
+          >
             Move up to two different troops
-          </p>
-        </div>
-        <div
+          </span>
+        </span>
+        <span
           class="waterMark"
         />
-      </div>
-    </article>
-    <article
+      </span>
+    </button>
+    <button
       aria-disabled="false"
-      aria-label="card player_recruit_1"
+      aria-label="player Recruit card"
       aria-pressed="false"
       class="card available actionCard player"
+      type="button"
     >
-      <div
+      <span
         class="heading"
       >
-        <div
+        <span
           class="icon"
         />
-        <div
+        <span
           class="title title"
         >
           Recruit
-        </div>
-      </div>
-      <div
+        </span>
+      </span>
+      <span
         class="content"
       >
-        <div
+        <span
           class="text paragraph"
         >
-          <p>
+          <span
+            class="paragraph"
+          >
             Recruit troops on up to two different settlements
-          </p>
-        </div>
-        <div
+          </span>
+        </span>
+        <span
           class="waterMark"
         />
-      </div>
-    </article>
+      </span>
+    </button>
     <button
-      class="button player"
+      class="button phaseButton player"
     >
       Confirm plan
     </button>

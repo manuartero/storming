@@ -42,7 +42,9 @@ export function CurrentPhase(props: ActionPhaseProps | PlanningPhaseProps) {
         />
         <h1>{PHASE_TITLE[props.phase]}</h1>
       </div>
-      <div className={styles.content}>
+      <div
+        className={c(styles.content, props.phase === "action" && styles.single)}
+      >
         {props.phase === "action" && <ActionPhase {...props} />}
         {props.phase === "planification" && <PlanningPhase {...props} />}
       </div>
@@ -58,7 +60,11 @@ function ActionPhase({ activeCard, mustSkip, onSkip }: ActionPhaseProps) {
   return (
     <>
       <Card card={activeCard} status="active" />
-      <Button disabled={!mustSkip} onClick={onSkip}>
+      <Button
+        className={styles.phaseButton}
+        disabled={!mustSkip}
+        onClick={onSkip}
+      >
         Skip
       </Button>
     </>
@@ -103,6 +109,7 @@ function PlanningPhase({
         <CardSilhouette card="future" />
       )}
       <Button
+        className={styles.phaseButton}
         player={activePlayer}
         disabled={buttonDisabled}
         onClick={onSubmitPlan}

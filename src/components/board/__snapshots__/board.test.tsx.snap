@@ -5,12 +5,9 @@ exports[`<Board /> render: match snapshot 1`] = `
   <section
     aria-label="game board"
     class="board"
-    role="board"
   >
     <div
-      aria-label="board row -3"
       class="row"
-      role="row"
     >
       <button
         aria-disabled="false"
@@ -95,9 +92,7 @@ exports[`<Board /> render: match snapshot 1`] = `
       </button>
     </div>
     <div
-      aria-label="board row -2"
       class="row"
-      role="row"
     >
       <button
         aria-disabled="false"
@@ -201,9 +196,7 @@ exports[`<Board /> render: match snapshot 1`] = `
       </button>
     </div>
     <div
-      aria-label="board row -1"
       class="row"
-      role="row"
     >
       <button
         aria-disabled="false"
@@ -319,9 +312,7 @@ exports[`<Board /> render: match snapshot 1`] = `
       </button>
     </div>
     <div
-      aria-label="board row 0"
       class="row"
-      role="row"
     >
       <button
         aria-disabled="false"
@@ -477,9 +468,7 @@ exports[`<Board /> render: match snapshot 1`] = `
       </button>
     </div>
     <div
-      aria-label="board row 1"
       class="row"
-      role="row"
     >
       <button
         aria-disabled="false"
@@ -595,9 +584,7 @@ exports[`<Board /> render: match snapshot 1`] = `
       </button>
     </div>
     <div
-      aria-label="board row 2"
       class="row"
-      role="row"
     >
       <button
         aria-disabled="false"
@@ -701,9 +688,7 @@ exports[`<Board /> render: match snapshot 1`] = `
       </button>
     </div>
     <div
-      aria-label="board row 3"
       class="row"
-      role="row"
     >
       <button
         aria-disabled="false"

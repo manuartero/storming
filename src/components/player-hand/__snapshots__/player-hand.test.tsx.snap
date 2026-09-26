@@ -6,113 +6,128 @@ exports[`<PlayerHand /> render: region role 1`] = `
   class="playerHand"
   role="region"
 >
-  <article
+  <button
     aria-disabled="false"
-    aria-label="card player_move_1"
+    aria-label="player Move card"
     aria-pressed="false"
     class="card available actionCard player"
+    type="button"
   >
-    <div
+    <span
       class="heading"
     >
-      <div
+      <span
         class="icon"
       />
-      <div
+      <span
         class="title title"
       >
         Move
-      </div>
-    </div>
-    <div
+      </span>
+    </span>
+    <span
       class="content"
     >
-      <div
+      <span
         class="text paragraph"
       >
-        <p>
+        <span
+          class="paragraph"
+        >
           Move up to two different troops
-        </p>
-      </div>
-      <div
+        </span>
+      </span>
+      <span
         class="waterMark"
       />
-    </div>
-  </article>
-  <article
+    </span>
+  </button>
+  <button
     aria-disabled="false"
-    aria-label="card player_move_2"
+    aria-label="player Move card"
     aria-pressed="false"
     class="card available actionCard player"
+    type="button"
   >
-    <div
+    <span
       class="heading"
     >
-      <div
+      <span
         class="icon"
       />
-      <div
+      <span
         class="title title"
       >
         Move
-      </div>
-    </div>
-    <div
+      </span>
+    </span>
+    <span
       class="content"
     >
-      <div
+      <span
         class="text paragraph"
       >
-        <p>
+        <span
+          class="paragraph"
+        >
           Move up to two different troops
-        </p>
-      </div>
-      <div
+        </span>
+      </span>
+      <span
         class="waterMark"
       />
-    </div>
-  </article>
-  <article
+    </span>
+  </button>
+  <button
     aria-disabled="false"
-    aria-label="card player_build_1"
+    aria-label="player Build card"
     aria-pressed="false"
     class="card available actionCard player"
+    type="button"
   >
-    <div
+    <span
       class="heading"
     >
-      <div
+      <span
         class="icon"
       />
-      <div
+      <span
         class="title title"
       >
         Build
-      </div>
-    </div>
-    <div
+      </span>
+    </span>
+    <span
       class="content"
     >
-      <div
+      <span
         class="text paragraph"
       >
-        <p>
+        <span
+          class="paragraph"
+        >
           Choose one:
-        </p>
-        <p>
+        </span>
+        <span
+          class="paragraph"
+        >
           Found a new village
-        </p>
-        <p>
+        </span>
+        <span
+          class="paragraph"
+        >
           Upgrade a village or a town
-        </p>
-        <p>
+        </span>
+        <span
+          class="paragraph"
+        >
           Build walls on a settlement
-        </p>
-      </div>
-      <div
+        </span>
+      </span>
+      <span
         class="waterMark"
       />
-    </div>
-  </article>
+    </span>
+  </button>
 </section>
 `;

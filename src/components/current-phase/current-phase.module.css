@@ -78,13 +78,13 @@
     place-content: center;
     place-items: center;
 
-    & > button {
+    & > .phaseButton {
       grid-column: 1 / -1;
     }
   }
 
   /* action phase: a single card */
-  .content:not(:has(> article + article)) {
+  .content.single {
     grid-template-columns: auto;
   }
 }

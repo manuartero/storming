@@ -12,13 +12,18 @@ exports[`<Timeline /> render: match snapshot 1`] = `
     >
       <span
         class="sectionName"
+        id="«r0»-next"
       >
         NEXT
       </span>
       <div
+        aria-labelledby="«r0»-next"
         class="line"
+        role="list"
       >
         <div
+          aria-label="enemy1 card"
+          role="listitem"
           style="opacity: 0; transform: scale(0);"
         >
           <div
@@ -30,6 +35,8 @@ exports[`<Timeline /> render: match snapshot 1`] = `
           </div>
         </div>
         <div
+          aria-label="enemy2 card"
+          role="listitem"
           style="opacity: 0; transform: scale(0);"
         >
           <div
@@ -41,6 +48,8 @@ exports[`<Timeline /> render: match snapshot 1`] = `
           </div>
         </div>
         <div
+          aria-label="enemy3 card"
+          role="listitem"
           style="opacity: 0; transform: scale(0);"
         >
           <div
@@ -58,11 +67,14 @@ exports[`<Timeline /> render: match snapshot 1`] = `
     >
       <span
         class="sectionName"
+        id="«r0»-future"
       >
         FUTURE
       </span>
       <div
+        aria-labelledby="«r0»-future"
         class="line"
+        role="list"
       />
     </div>
   </section>

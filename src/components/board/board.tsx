@@ -33,14 +33,9 @@ export function Board({ state, activePlayer, onTileClick }: Props) {
     });
 
   return (
-    <section className={styles.board} role="board" aria-label="game board">
+    <section className={styles.board} aria-label="game board">
       {ROWS.map(({ y, tileIds }) => (
-        <div
-          key={y}
-          className={styles.row}
-          role="row"
-          aria-label={`board row ${y}`}
-        >
+        <div key={y} className={styles.row}>
           {renderRow(tileIds)}
         </div>
       ))}

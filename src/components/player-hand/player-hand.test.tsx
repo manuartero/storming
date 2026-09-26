@@ -28,8 +28,8 @@ describe("<PlayerHand />", () => {
   const mockHover = (canHover: boolean) => {
     window.matchMedia = jest.fn().mockReturnValue({ matches: canHover });
   };
-  const firstCard = () =>
-    screen.getByRole("article", { name: `card ${cards[0].card.cardId}` });
+  const buildCard = () =>
+    screen.getByRole("button", { name: "player Build card" });
 
   afterEach(() => {
     // @ts-expect-error jsdom has no matchMedia
@@ -43,9 +43,9 @@ describe("<PlayerHand />", () => {
       <PlayerHand cards={cards} player="player" isActive onClick={onClick} />
     );
 
-    fireEvent.click(firstCard());
+    fireEvent.click(buildCard());
 
-    expect(onClick).toHaveBeenCalledWith(cards[0].card.cardId);
+    expect(onClick).toHaveBeenCalledWith(cards[2].card.cardId);
   });
 
   test("click on touch: the first tap lifts the card, the second plays it", () => {
@@ -55,12 +55,12 @@ describe("<PlayerHand />", () => {
       <PlayerHand cards={cards} player="player" isActive onClick={onClick} />
     );
 
-    fireEvent.click(firstCard());
+    fireEvent.click(buildCard());
     expect(onClick).not.toHaveBeenCalled();
-    expect(firstCard()).toHaveClass("inspected");
+    expect(buildCard()).toHaveClass("inspected");
 
-    fireEvent.click(firstCard());
-    expect(onClick).toHaveBeenCalledWith(cards[0].card.cardId);
-    expect(firstCard()).not.toHaveClass("inspected");
+    fireEvent.click(buildCard());
+    expect(onClick).toHaveBeenCalledWith(cards[2].card.cardId);
+    expect(buildCard()).not.toHaveClass("inspected");
   });
 });

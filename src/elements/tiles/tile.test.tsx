@@ -35,9 +35,9 @@ describe("<Tile />", () => {
   });
 
   test("fake Tile with no id", () => {
-    render(<Tile id={null} />);
+    const { container } = render(<Tile id={null} />);
 
-    const tile = screen.getByRole("button", { name: "tile null" });
-    expect(tile).toMatchSnapshot();
+    expect(screen.queryByRole("button")).not.toBeInTheDocument();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });
