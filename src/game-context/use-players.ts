@@ -15,18 +15,10 @@ const initialPlayerStatus: PlayerStatus[] = [
 export function usePlayers() {
   const [players, setPlayers] = useState(initialPlayerStatus);
 
-  /**
-   * ```
-   * [ {p} {e1} {e2} {e3} ]
-   *    |----------------^
-   * [   {e1} {e2} {e3} {p} ]
-   * ```
-   */
-  const nextFirstPlayer = () => {
-    setPlayers((currentPlayers) => [
-      ...currentPlayers.slice(1),
-      currentPlayers[0],
-    ]);
+  const reorderPlayers = (
+    reorder: (currentPlayers: PlayerStatus[]) => PlayerStatus[]
+  ) => {
+    setPlayers(reorder);
   };
 
   const scorePoint = (player: PlayerType) => {
@@ -49,7 +41,7 @@ export function usePlayers() {
 
   return {
     players,
-    nextFirstPlayer,
+    reorderPlayers,
     scorePoint,
     declareGreatestEmpire,
     _overridePlayers: setPlayers,

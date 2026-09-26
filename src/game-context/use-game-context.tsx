@@ -1,4 +1,5 @@
 import { empireSize } from "game-logic/empire-size";
+import { rotateToFirst } from "game-logic/player-order";
 import { isConquering, isCreatingGreatestEmpire } from "game-logic/score-check";
 import { createContext, useContext } from "react";
 import type { ReactNode } from "react";
@@ -44,7 +45,7 @@ export function GameContextProvider({ children }: Props) {
 
   const {
     players,
-    nextFirstPlayer,
+    reorderPlayers,
     scorePoint,
     declareGreatestEmpire,
     _overridePlayers,
@@ -126,8 +127,17 @@ export function GameContextProvider({ children }: Props) {
     _resolveActionCard();
   };
 
-  const firstPlayer = () => {
-    nextFirstPlayer();
+  const firstPlayer = (player: PlayerType) => {
+    if (timeline.phase !== "action") {
+      return warnInconsistentState(
+        `trying to take the first player but not in "action" phase`,
+        { phase: timeline.phase, player }
+      );
+    }
+    console.info("firstPlayer()", player);
+    reorderPlayers((currentPlayers) =>
+      rotateToFirst({ players: currentPlayers, first: player })
+    );
     _resolveActionCard();
   };
 
