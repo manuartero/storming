@@ -131,7 +131,7 @@ type GameContext = {
   recruit(action: { tile: TileID; piece: Piece }): void;
   skip(): void;
 
-  firstPlayer(player: PlayerType): void; // deprecated?
+  firstPlayer(player: PlayerType): void;
 
   // other
   loadSavegame(state: GameState): void;

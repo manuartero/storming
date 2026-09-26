@@ -4,7 +4,7 @@ import { usePlayers } from "./use-players";
 // TODO change to renderHook(() => usePlayers());
 
 function TestingComponent() {
-  const { players, nextFirstPlayer, scorePoint, declareGreatestEmpire } =
+  const { players, reorderPlayers, scorePoint, declareGreatestEmpire } =
     usePlayers();
   return (
     <>
@@ -20,8 +20,8 @@ function TestingComponent() {
         onClick={() => scorePoint("enemy1")}
       />
       <button
-        data-testid="next-first-player"
-        onClick={() => nextFirstPlayer()}
+        data-testid="reverse-players"
+        onClick={() => reorderPlayers((current) => [...current].reverse())}
       />
       <button
         data-testid="enemy3-greatest-empire"
@@ -68,13 +68,13 @@ describe("usePlayers()", () => {
     ]);
   });
 
-  test("returns nextFirstPlayer()", () => {
+  test("returns reorderPlayers()", () => {
     render(<TestingComponent />);
-    fireEvent.click(screen.getByTestId("next-first-player"));
+    fireEvent.click(screen.getByTestId("reverse-players"));
     expect(getPlayerList()).toEqual([
-      "enemy1 - 0 points",
-      "enemy2 - 0 points",
       "enemy3 - 0 points",
+      "enemy2 - 0 points",
+      "enemy1 - 0 points",
       "player - 0 points",
     ]);
   });
