@@ -1,0 +1,8 @@
+**/node_modules
+build
+coverage
+test-results
+playwright-report
+.git
+.claude
+.playwright-mcp
