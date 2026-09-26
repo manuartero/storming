@@ -2,9 +2,7 @@
 
 exports[`<PlayerCard /> render: article role 1`] = `
 <article
-  aria-disabled="true"
   aria-label="player summary"
-  aria-roledescription="player summary"
   class="playerCard player"
 >
   <div

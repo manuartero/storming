@@ -1,11 +1,13 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`<Card /> render: article role 1`] = `
+exports[`<Card /> render: button role when clickable 1`] = `
 <article
   aria-disabled="false"
-  aria-label="card player_build_1"
+  aria-label="player Build card"
   aria-pressed="false"
   class="card available actionCard player"
+  role="button"
+  tabindex="0"
 >
   <div
     class="heading"

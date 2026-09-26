@@ -8,9 +8,11 @@ exports[`<PlayerHand /> render: region role 1`] = `
 >
   <article
     aria-disabled="false"
-    aria-label="card player_move_1"
+    aria-label="player Move card"
     aria-pressed="false"
     class="card available actionCard player"
+    role="button"
+    tabindex="0"
   >
     <div
       class="heading"
@@ -41,9 +43,11 @@ exports[`<PlayerHand /> render: region role 1`] = `
   </article>
   <article
     aria-disabled="false"
-    aria-label="card player_move_2"
+    aria-label="player Move card"
     aria-pressed="false"
     class="card available actionCard player"
+    role="button"
+    tabindex="0"
   >
     <div
       class="heading"
@@ -74,9 +78,11 @@ exports[`<PlayerHand /> render: region role 1`] = `
   </article>
   <article
     aria-disabled="false"
-    aria-label="card player_build_1"
+    aria-label="player Build card"
     aria-pressed="false"
     class="card available actionCard player"
+    role="button"
+    tabindex="0"
   >
     <div
       class="heading"

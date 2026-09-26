@@ -1,4 +1,5 @@
 import c from "classnames";
+import { asButton } from "lib/a11y";
 import { Piece, Tile } from "elements";
 
 import fontStyles from "styles/fonts.module.css";
@@ -33,9 +34,11 @@ export function CardSilhouette({
         disabled && styles.disabled,
         onClick && styles.clickable
       )}
-      aria-disabled={!onClick}
-      aria-label={`card silhouette ${card}`}
-      onClick={onClick}
+      aria-label={
+        card === "next" || card === "future" ? `empty ${card} slot` : title
+      }
+      {...asButton(disabled ? undefined : onClick)}
+      aria-disabled={onClick ? disabled : undefined}
     >
       <div className={styles.heading}>
         <h3 className={c(styles.title, fontStyles.title)}>{title}</h3>

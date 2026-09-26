@@ -25,11 +25,9 @@ exports[`<Tile /> building 1`] = `
 `;
 
 exports[`<Tile /> fake Tile with no id 1`] = `
-<button
-  aria-disabled="false"
-  aria-label="tile null"
+<div
+  aria-hidden="true"
   class="tile"
-  type="button"
 >
   <div
     aria-hidden="true"
@@ -39,7 +37,7 @@ exports[`<Tile /> fake Tile with no id 1`] = `
     aria-hidden="true"
     class="innerLayer"
   />
-</button>
+</div>
 `;
 
 exports[`<Tile /> render: button role 1`] = `

@@ -6,6 +6,13 @@
   justify-content: flex-end;
   align-items: flex-start;
 
+  button {
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+
   img {
     /* 32px icon, 44px tap target */
     width: 44px;

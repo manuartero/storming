@@ -22,9 +22,7 @@ exports[`<CurrentPhase /> render: section role - action 1`] = `
     class="content"
   >
     <article
-      aria-disabled="true"
-      aria-label="card player_move_1"
-      aria-pressed="false"
+      aria-label="player Move card"
       class="card active actionCard player"
     >
       <div
@@ -86,8 +84,7 @@ exports[`<CurrentPhase /> render: section role - planification 1`] = `
     class="content"
   >
     <article
-      aria-disabled="true"
-      aria-label="card silhouette next"
+      aria-label="empty next slot"
       class="card silhouette"
     >
       <div
@@ -104,8 +101,7 @@ exports[`<CurrentPhase /> render: section role - planification 1`] = `
       />
     </article>
     <article
-      aria-disabled="true"
-      aria-label="card silhouette future"
+      aria-label="empty future slot"
       class="card silhouette"
     >
       <div
@@ -154,9 +150,11 @@ exports[`<CurrentPhase /> render: section role - planification with cards 1`] = 
   >
     <article
       aria-disabled="false"
-      aria-label="card player_move_2"
+      aria-label="player Move card"
       aria-pressed="false"
       class="card available actionCard player"
+      role="button"
+      tabindex="0"
     >
       <div
         class="heading"
@@ -187,9 +185,11 @@ exports[`<CurrentPhase /> render: section role - planification with cards 1`] = 
     </article>
     <article
       aria-disabled="false"
-      aria-label="card player_recruit_1"
+      aria-label="player Recruit card"
       aria-pressed="false"
       class="card available actionCard player"
+      role="button"
+      tabindex="0"
     >
       <div
         class="heading"

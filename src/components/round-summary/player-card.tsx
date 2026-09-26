@@ -1,4 +1,5 @@
 import c from "classnames";
+import { asButton } from "lib/a11y";
 import { Avatar } from "./avatar/avatar";
 
 import styles from "./player-card.module.css";
@@ -20,9 +21,8 @@ export function PlayerCard({ player, active, clickable, onClick }: Props) {
         active && styles.active
       )}
       aria-label={`${player.player} summary`}
-      aria-disabled={!clickable}
-      aria-roledescription="player summary"
-      onClick={() => clickable && onClick(player)}
+      aria-current={active || undefined}
+      {...asButton(clickable ? () => onClick(player) : undefined)}
     >
       <Avatar player={player.player} />
       <span className={styles.points}>

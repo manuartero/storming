@@ -39,9 +39,11 @@ export function Tile({
   onClick,
 }: Props) {
   const pieceStyle = usePieceOffset({ children, disableChildrenOffset });
+  // a fake tile only illustrates (a card silhouette): not a control
+  const Element = id ? "button" : "div";
 
   return (
-    <button
+    <Element
       className={c(
         styles.tile,
         status && styles[status],
@@ -50,10 +52,14 @@ export function Tile({
         terrain && styles[terrain],
         status === "available" && activePlayer && styles[activePlayer]
       )}
-      aria-label={`tile ${id}`}
-      aria-disabled={status === "forbidden"}
-      type="button"
-      onClick={id ? () => onClick(coordinates(id)) : undefined}
+      {...(id
+        ? {
+            "aria-label": `tile ${id}`,
+            "aria-disabled": status === "forbidden",
+            type: "button" as const,
+            onClick: () => onClick(coordinates(id)),
+          }
+        : { "aria-hidden": true })}
     >
       <div className={styles.strokeLayer} aria-hidden="true" />
 
@@ -67,7 +73,7 @@ export function Tile({
           {children}
         </div>
       )}
-    </button>
+    </Element>
   );
 }
 

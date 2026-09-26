@@ -1,4 +1,5 @@
 import c from "classnames";
+import { asButton } from "lib/a11y";
 import { isActionCard, isEventCard } from "models/new-card";
 import CARD_TEXT from "./card-text.json";
 import { actionCardAssets } from "./assets";
@@ -36,15 +37,21 @@ export function Card({
         isActionCard(card) && styles[card.owner],
         isEventCard(card) && styles.eventCard
       )}
-      aria-label={`card ${card.cardId}`}
-      aria-pressed={status === "selected"}
-      aria-disabled={!onClick}
-      onClick={onClick}
+      aria-label={cardLabel(card)}
+      {...asButton(onClick)}
+      aria-pressed={onClick ? status === "selected" : undefined}
+      aria-disabled={onClick ? status !== "available" : undefined}
     >
       {card.cardType === "actionCard" && <ActionCardContents card={card} />}
       {card.cardType === "eventCard" && <EventCardContents card={card} />}
     </article>
   );
+}
+
+function cardLabel(card: Card) {
+  return isActionCard(card)
+    ? `${card.owner} ${CARD_TITLE[card.action]} card`
+    : `${card.event} event card`;
 }
 
 function ActionCardContents({ card: actionCard }: { card: ActionCard }) {

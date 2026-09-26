@@ -28,7 +28,9 @@ export function Menu() {
   return (
     <>
       <div className={styles.menu}>
-        <img src={MenuIcon} alt="Menu Icon" onClick={openMenuDialog} />
+        <button type="button" aria-label="open menu" onClick={openMenuDialog}>
+          <img src={MenuIcon} alt="" />
+        </button>
       </div>
 
       {showMenuDialog && (
