@@ -1,5 +1,4 @@
 import c from "classnames";
-import { asButton } from "lib/a11y";
 import { Piece, Tile } from "elements";
 
 import fontStyles from "styles/fonts.module.css";
@@ -25,9 +24,11 @@ export function CardSilhouette({
   onClick,
 }: Props) {
   const title = card.replace(/-/g, " ");
+  // an option you can pick is a button; an empty plan slot is a plain article
+  const Element = onClick ? "button" : "article";
 
   return (
-    <article
+    <Element
       className={c(
         styles.card,
         styles.silhouette,
@@ -37,13 +38,12 @@ export function CardSilhouette({
       aria-label={
         card === "next" || card === "future" ? `empty ${card} slot` : title
       }
-      {...asButton(disabled ? undefined : onClick)}
-      aria-disabled={onClick ? disabled : undefined}
+      {...(onClick && { type: "button" as const, onClick, disabled })}
     >
-      <div className={styles.heading}>
-        <h3 className={c(styles.title, fontStyles.title)}>{title}</h3>
-      </div>
-      <div className={styles.content}>
+      <span className={styles.heading}>
+        <span className={c(styles.title, fontStyles.title)}>{title}</span>
+      </span>
+      <span className={styles.content}>
         {card === "recruit-soldier" && (
           <Tile id={null} disableChildrenOffset>
             <Piece owner={player} type="soldier" />
@@ -67,7 +67,7 @@ export function CardSilhouette({
             owner={player}
           ></Tile>
         )}
-      </div>
-    </article>
+      </span>
+    </Element>
   );
 }

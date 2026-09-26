@@ -1,5 +1,4 @@
 import c from "classnames";
-import { asButton } from "lib/a11y";
 import { Avatar } from "./avatar/avatar";
 
 import styles from "./player-card.module.css";
@@ -12,8 +11,11 @@ type Props = {
 };
 
 export function PlayerCard({ player, active, clickable, onClick }: Props) {
+  // a button only while Diplomacy lets the active player pick who goes first
+  const Element = clickable ? "button" : "article";
+
   return (
-    <article
+    <Element
       className={c(
         styles.playerCard,
         styles[player.player],
@@ -22,13 +24,16 @@ export function PlayerCard({ player, active, clickable, onClick }: Props) {
       )}
       aria-label={`${player.player} summary`}
       aria-current={active || undefined}
-      {...asButton(clickable ? () => onClick(player) : undefined)}
+      {...(clickable && {
+        type: "button" as const,
+        onClick: () => onClick(player),
+      })}
     >
       <Avatar player={player.player} />
       <span className={styles.points}>
         {player.points}
         <small>pts</small>
       </span>
-    </article>
+    </Element>
   );
 }

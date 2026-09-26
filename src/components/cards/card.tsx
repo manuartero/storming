@@ -1,5 +1,4 @@
 import c from "classnames";
-import { asButton } from "lib/a11y";
 import { isActionCard, isEventCard } from "models/new-card";
 import CARD_TEXT from "./card-text.json";
 import { actionCardAssets } from "./assets";
@@ -27,8 +26,11 @@ export function Card({
   className,
   onClick,
 }: Props) {
+  // a card you can play is a button; the rest is a plain article
+  const Element = onClick ? "button" : "article";
+
   return (
-    <article
+    <Element
       className={c(
         className,
         styles.card,
@@ -38,13 +40,16 @@ export function Card({
         isEventCard(card) && styles.eventCard
       )}
       aria-label={cardLabel(card)}
-      {...asButton(onClick)}
-      aria-pressed={onClick ? status === "selected" : undefined}
-      aria-disabled={onClick ? status !== "available" : undefined}
+      {...(onClick && {
+        type: "button" as const,
+        onClick,
+        "aria-pressed": status === "selected",
+        "aria-disabled": status !== "available",
+      })}
     >
       {card.cardType === "actionCard" && <ActionCardContents card={card} />}
       {card.cardType === "eventCard" && <EventCardContents card={card} />}
-    </article>
+    </Element>
   );
 }
 
@@ -59,33 +64,36 @@ function ActionCardContents({ card: actionCard }: { card: ActionCard }) {
   const cardIcon = actionCardAssets[action][owner];
   const backgroundWaterMark = actionCardAssets[action].bgWaterMark;
 
+  // spans, not divs or <p>: a <button> may only hold phrasing content
   return (
     <>
-      <div className={styles.heading}>
-        <div
+      <span className={styles.heading}>
+        <span
           className={styles.icon}
           style={{ backgroundImage: `url(${cardIcon})` }}
-        ></div>
-        <div className={c(styles.title, fontStyles.title)}>
+        ></span>
+        <span className={c(styles.title, fontStyles.title)}>
           {CARD_TITLE[action]}
-        </div>
-      </div>
-      <div className={styles.content}>
-        <div className={c(styles.text, fontStyles.paragraph)}>
+        </span>
+      </span>
+      <span className={styles.content}>
+        <span className={c(styles.text, fontStyles.paragraph)}>
           {CARD_TEXT[action].map((p, idx) => (
-            <p key={idx}>{p}</p>
+            <span key={idx} className={styles.paragraph}>
+              {p}
+            </span>
           ))}
-        </div>
-        <div
+        </span>
+        <span
           className={styles.waterMark}
           style={{ backgroundImage: `url(${backgroundWaterMark})` }}
-        ></div>
-      </div>
+        ></span>
+      </span>
     </>
   );
 }
 
 function EventCardContents(_: { card: EventCard }) {
   // TODO: Alpha
-  return <div></div>;
+  return <span></span>;
 }

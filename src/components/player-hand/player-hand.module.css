@@ -16,7 +16,8 @@
 }
 
 .playerHand.expansible {
-  & article {
+  /* the cards: <button>s while planning */
+  & > * {
     /* XXX card overlap: is it possible to use some flex magic instead? */
     margin-left: calc(var(--card-w) * -0.27);
 
@@ -25,19 +26,19 @@
   }
 
   /* touch: the first tap lifts a card (.inspected), the second plays it */
-  & article.inspected {
+  & > .inspected {
     transform: translateY(-60%) scale(1.05);
     z-index: 2;
     box-shadow: var(--elevation-2);
   }
 
-  & article:first-child {
+  & > :first-child {
     margin-left: 0;
   }
 }
 
 @media (hover: hover) {
-  .playerHand.expansible article:hover {
+  .playerHand.expansible > :hover {
     transform: translateY(-60%) scale(1.05);
     z-index: 2;
     box-shadow: var(--elevation-2);
@@ -58,8 +59,8 @@
 
 /* portrait: the strip clips vertically, so a lifted card just comes to the front */
 @media (orientation: portrait) {
-  .playerHand.expansible article.inspected,
-  .playerHand.expansible article:hover {
+  .playerHand.expansible > .inspected,
+  .playerHand.expansible > :hover {
     transform: none;
     z-index: 2;
   }

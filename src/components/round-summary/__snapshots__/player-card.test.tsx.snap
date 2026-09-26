@@ -5,7 +5,7 @@ exports[`<PlayerCard /> render: article role 1`] = `
   aria-label="player summary"
   class="playerCard player"
 >
-  <div
+  <span
     aria-label="player avatar"
     aria-roledescription="game avatar"
     class="avatar player"

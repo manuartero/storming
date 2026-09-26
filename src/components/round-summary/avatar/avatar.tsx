@@ -11,7 +11,7 @@ export function Avatar({ player = "player" }: Props) {
   const icon = avatarAssets[player];
 
   return (
-    <div
+    <span
       role="img"
       className={c(styles.avatar, styles[player])}
       aria-roledescription="game avatar"

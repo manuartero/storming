@@ -20,7 +20,7 @@
 
 /* short cells (phone landscape): two columns of two */
 @container (max-height: 120px) {
-  .roundSummary > article {
+  .roundSummary > * {
     --row-h: min(100cqh / 2.3, 100cqw / 3.2);
     width: 50%;
   }
