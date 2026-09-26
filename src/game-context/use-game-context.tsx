@@ -1,6 +1,7 @@
 import { empireSize } from "game-logic/empire-size";
 import { rotateToFirst } from "game-logic/player-order";
 import { isConquering, isCreatingGreatestEmpire } from "game-logic/score-check";
+import { isAttackingWalls } from "game-logic/walls";
 import { createContext, useContext } from "react";
 import type { ReactNode } from "react";
 import { logRender, warnInconsistentState } from "lib/console";
@@ -38,8 +39,14 @@ type Props = { children: ReactNode };
 export function GameContextProvider({ children }: Props) {
   logRender("GameContextProvider");
 
-  const { board, buildOnTile, movePiece, recruitOnTile, _overrideBoard } =
-    useBoard();
+  const {
+    board,
+    buildOnTile,
+    movePiece,
+    destroyWalls,
+    recruitOnTile,
+    _overrideBoard,
+  } = useBoard();
 
   const timeline = useTimeline();
 
@@ -106,8 +113,14 @@ export function GameContextProvider({ children }: Props) {
         action,
       });
     }
-    console.info("movePiece()", action);
     const player = action.piece.owner;
+    if (isAttackingWalls({ player, targetTile: board[action.to] })) {
+      console.info("destroyWalls()", action);
+      destroyWalls(action.to);
+      _resolveActionCard();
+      return;
+    }
+    console.info("movePiece()", action);
     if (isConquering({ player, targetTile: board[action.to] })) {
       scorePoint(player);
     }
