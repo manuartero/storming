@@ -24,3 +24,7 @@ yarn-error.log*
 
 # playwright mcp screenshots
 .playwright-mcp/
+
+# claude code
+.claude/worktrees/
+.claude/settings.local.json
