@@ -1,5 +1,6 @@
 export { BoardController as Board } from "./board/board-controller";
 export { CurrentPhaseController as CurrentPhase } from "./current-phase/current-phase-controller";
+export { GameOverController as GameOver } from "./game-over/game-over-controller";
 export { Marketplace } from "./marketplace/marketplace";
 export { Menu } from "./menu/menu";
 export { PlayerHandController as PlayerHand } from "./player-hand/player-hand-controller";

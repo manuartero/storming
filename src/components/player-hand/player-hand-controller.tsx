@@ -7,6 +7,10 @@ import { PlayerHand } from "./player-hand";
 export function PlayerHandController() {
   const gameContext = useGameContext();
 
+  if (gameContext.phase === "ended") {
+    return null;
+  }
+
   if (!gameContext.activePlayer) {
     warnInconsistentState(
       "trying to render <PlayerHand /> while no activePlayer",

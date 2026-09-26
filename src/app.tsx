@@ -1,6 +1,7 @@
 import {
   Board,
   CurrentPhase,
+  GameOver,
   Marketplace,
   Menu,
   PlayerHand,
@@ -24,6 +25,7 @@ export function App() {
         <RoundSummary />
         <PlayerHand />
         <PlayerInventory />
+        <GameOver />
       </GameContextProvider>
     </main>
   );

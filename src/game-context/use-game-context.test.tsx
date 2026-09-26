@@ -1,6 +1,9 @@
 import { act, renderHook } from "@testing-library/react";
+import { NewCard } from "models/new-card";
 import { emptyBoard } from "./empty-board";
+import { initialBoard } from "./initial-board";
 import { GameContextProvider, useGameContext } from "./use-game-context";
+import { initialPlayerStatus } from "./use-players";
 
 describe("useGameContext()", () => {
   test("outside the provider, the phase matches the provider's initial phase", () => {
@@ -37,6 +40,7 @@ describe("<GameContextProvider /> move()", () => {
     act(() =>
       result.current.loadSavegame({
         phase: "action",
+        winner: undefined,
         activeCard: moveCard("player_move_1"),
         next: [{ card: moveCard("player_move_2"), commited: true }],
         future: [],
@@ -87,5 +91,142 @@ describe("<GameContextProvider /> move()", () => {
       building: { owner: "player", type: "tower", hasWalls: false },
     });
     expect(points(result)).toEqual(pointsBefore + 1);
+  });
+});
+
+describe("<GameContextProvider /> game over", () => {
+  const knight: Piece = { type: "knight", owner: "player" };
+
+  /* the player's knight at "0,-2" is about to move with the active card */
+  const loadActionPhase = ({
+    board,
+    players = initialPlayerStatus,
+  }: {
+    board: Board;
+    players?: PlayerStatus[];
+  }) => {
+    const { result } = renderHook(() => useGameContext(), {
+      wrapper: GameContextProvider,
+    });
+    act(() => {
+      result.current.loadSavegame({
+        phase: "action",
+        winner: undefined,
+        activeCard: NewCard({ type: "move", player: "player" }),
+        next: [
+          {
+            card: NewCard({ type: "recruit", player: "enemy1" }),
+            commited: true,
+          },
+        ],
+        future: [],
+        board: {
+          ...board,
+          "0,-2": { piece: knight },
+        },
+        players,
+      });
+    });
+    return result;
+  };
+
+  test("conquering an opponent's last settlement ends the game", () => {
+    const result = loadActionPhase({
+      board: {
+        ...emptyBoard,
+        "0,-3": { building: { owner: "enemy1", type: "tower" } },
+        "2,-3": { building: { owner: "player", type: "tower" } },
+      },
+    });
+
+    act(() => {
+      result.current.move({ piece: knight, from: "0,-2", to: "0,-3" });
+    });
+
+    expect(result.current.phase).toBe("ended");
+    expect(result.current.winner).toBe("player");
+    expect(result.current.activeCard).toBe(undefined);
+  });
+
+  test("reaching 7 victory points ends the game", () => {
+    const result = loadActionPhase({
+      board: {
+        ...emptyBoard,
+        "0,-3": { building: { owner: "enemy1", type: "tower" } },
+        "2,-3": { building: { owner: "enemy1", type: "tower" } },
+      },
+      players: initialPlayerStatus.map((status) =>
+        status.player === "player" ? { ...status, points: 6 } : status
+      ),
+    });
+
+    act(() => {
+      result.current.move({ piece: knight, from: "0,-2", to: "0,-3" });
+    });
+
+    expect(result.current.phase).toBe("ended");
+    expect(result.current.winner).toBe("player");
+  });
+
+  test("a conquest below 7 points goes on to the next card", () => {
+    const result = loadActionPhase({
+      board: {
+        ...emptyBoard,
+        "0,-3": { building: { owner: "enemy1", type: "tower" } },
+        "2,-3": { building: { owner: "enemy1", type: "tower" } },
+      },
+    });
+
+    act(() => {
+      result.current.move({ piece: knight, from: "0,-2", to: "0,-3" });
+    });
+
+    expect(result.current.phase).toBe("action");
+    expect(result.current.winner).toBe(undefined);
+    expect(result.current.activeCard).toMatchObject({ owner: "enemy1" });
+  });
+
+  test("once ended, no more actions can be taken", () => {
+    const result = loadActionPhase({
+      board: {
+        ...emptyBoard,
+        "0,-3": { building: { owner: "enemy1", type: "tower" } },
+      },
+    });
+    act(() => {
+      result.current.move({ piece: knight, from: "0,-2", to: "0,-3" });
+    });
+    const boardAtTheEnd = result.current.board;
+
+    act(() => {
+      result.current.recruit({
+        tile: "2,-3",
+        piece: { type: "soldier", owner: "enemy1" },
+      });
+    });
+
+    expect(result.current.phase).toBe("ended");
+    expect(result.current.board).toBe(boardAtTheEnd);
+  });
+
+  test("newGame() starts over from the initial state", () => {
+    const result = loadActionPhase({
+      board: {
+        ...emptyBoard,
+        "0,-3": { building: { owner: "enemy1", type: "tower" } },
+      },
+    });
+    act(() => {
+      result.current.move({ piece: knight, from: "0,-2", to: "0,-3" });
+    });
+
+    act(() => {
+      result.current.newGame();
+    });
+
+    expect(result.current.phase).toBe("planification");
+    expect(result.current.winner).toBe(undefined);
+    expect(result.current.board).toEqual(initialBoard);
+    expect(result.current.players).toEqual(initialPlayerStatus);
   });
 });

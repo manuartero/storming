@@ -25,4 +25,10 @@ describe("<Dialog />", () => {
 
     expect(onClose).toHaveBeenCalledTimes(1);
   });
+
+  test("has no exit button without onClose()", () => {
+    render(<Dialog title="Test Dialog" />);
+
+    expect(screen.queryByLabelText("close dialog")).toBeNull();
+  });
 });

@@ -1,4 +1,5 @@
 import { empireSize } from "game-logic/empire-size";
+import { findWinner, isConqueringLastSettlement } from "game-logic/game-over";
 import { rotateToFirst } from "game-logic/player-order";
 import { isConquering, isCreatingGreatestEmpire } from "game-logic/score-check";
 import { isAttackingWalls } from "game-logic/walls";
@@ -6,8 +7,14 @@ import { createContext, useContext } from "react";
 import type { ReactNode } from "react";
 import { logRender, warnInconsistentState } from "lib/console";
 import { emptyBoard } from "./empty-board";
+import { initialBoard } from "./initial-board";
 import { useBoard } from "./use-board";
-import { usePlayers } from "./use-players";
+import {
+  initialPlayerStatus,
+  usePlayers,
+  withGreatestEmpire,
+  withPoint,
+} from "./use-players";
 import { initialTimeline, useTimeline } from "./use-timeline";
 
 const GameContext = createContext<GameContext>({
@@ -22,6 +29,7 @@ const GameContext = createContext<GameContext>({
   plan: () => {},
   submitPlanification: () => {},
   firstPlayer: () => {},
+  newGame: () => {},
   loadSavegame: () => {},
 });
 
@@ -70,6 +78,7 @@ export function GameContextProvider({ children }: Props) {
 
   const loadSavegame = ({
     phase,
+    winner,
     activeCard,
     next,
     future,
@@ -77,12 +86,30 @@ export function GameContextProvider({ children }: Props) {
     players,
   }: GameState) => {
     _overrideBoard(board);
-    timeline._overrideTimeline({ phase, activeCard, next, future });
+    timeline._overrideTimeline({ phase, winner, activeCard, next, future });
     _overridePlayers(players);
   };
 
-  const _resolveActionCard = () => {
-    if (timeline.next.length === 0) {
+  const newGame = () => {
+    console.info("newGame()");
+    _overrideBoard(initialBoard);
+    timeline._overrideTimeline(initialTimeline);
+    _overridePlayers(initialPlayerStatus);
+  };
+
+  /* `players`: the statuses once this action's points are scored */
+  const _resolveActionCard = ({
+    players,
+    conqueror,
+  }: {
+    players: PlayerStatus[];
+    conqueror?: PlayerType;
+  }) => {
+    const winner = findWinner({ players, conqueror });
+    if (winner) {
+      console.info(`resolveActionCard(): ${winner} wins, game over`);
+      timeline.endGame(winner);
+    } else if (timeline.next.length === 0) {
       console.info("resolveActionCard(): no more cards, changing phase");
       timeline.startPlanningPhase();
     } else {
@@ -99,11 +126,20 @@ export function GameContextProvider({ children }: Props) {
       );
     }
     console.info("buildOnTile()", action);
-    if (isCreatingGreatestEmpire({ ...action, empires: empireSize(board) })) {
-      declareGreatestEmpire(action.building.owner);
+    const player = action.building.owner;
+    const createsGreatestEmpire = isCreatingGreatestEmpire({
+      ...action,
+      empires: empireSize(board),
+    });
+    if (createsGreatestEmpire) {
+      declareGreatestEmpire(player);
     }
     buildOnTile(action);
-    _resolveActionCard();
+    _resolveActionCard({
+      players: createsGreatestEmpire
+        ? withGreatestEmpire({ players, player })
+        : players,
+    });
   };
 
   const move = (action: { piece: Piece; from: TileID; to: TileID }) => {
@@ -114,18 +150,28 @@ export function GameContextProvider({ children }: Props) {
       });
     }
     const player = action.piece.owner;
-    if (isAttackingWalls({ player, targetTile: board[action.to] })) {
+    const targetTile = board[action.to];
+    if (isAttackingWalls({ player, targetTile })) {
       console.info("destroyWalls()", action);
       destroyWalls(action.to);
-      _resolveActionCard();
+      _resolveActionCard({ players });
       return;
     }
     console.info("movePiece()", action);
-    if (isConquering({ player, targetTile: board[action.to] })) {
+    const conquers = isConquering({ player, targetTile });
+    if (conquers) {
       scorePoint(player);
     }
+    const conquersLastSettlement = isConqueringLastSettlement({
+      player,
+      targetTile,
+      empires: empireSize(board),
+    });
     movePiece(action);
-    _resolveActionCard();
+    _resolveActionCard({
+      players: conquers ? withPoint({ players, player }) : players,
+      conqueror: conquersLastSettlement ? player : undefined,
+    });
   };
 
   const recruit = (action: { tile: TileID; piece: Piece }) => {
@@ -137,7 +183,7 @@ export function GameContextProvider({ children }: Props) {
     }
     console.info("recruitOnTile()", action);
     recruitOnTile(action);
-    _resolveActionCard();
+    _resolveActionCard({ players });
   };
 
   const firstPlayer = (player: PlayerType) => {
@@ -151,7 +197,7 @@ export function GameContextProvider({ children }: Props) {
     reorderPlayers((currentPlayers) =>
       rotateToFirst({ players: currentPlayers, first: player })
     );
-    _resolveActionCard();
+    _resolveActionCard({ players });
   };
 
   const plan = (actions: Actions) => {
@@ -209,13 +255,14 @@ export function GameContextProvider({ children }: Props) {
         { phase, activeCard }
       );
     }
-    _resolveActionCard();
+    _resolveActionCard({ players });
   };
 
   return (
     <GameContext.Provider
       value={{
         phase: timeline.phase,
+        winner: timeline.winner,
         activeCard: timeline.activeCard,
         activePlayer,
         next: timeline.next,
@@ -229,6 +276,7 @@ export function GameContextProvider({ children }: Props) {
         firstPlayer,
         plan,
         submitPlanification,
+        newGame,
         loadSavegame,
       }}
     >
