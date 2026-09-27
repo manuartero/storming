@@ -8,7 +8,14 @@ describe("<Avatar />", () => {
     screen.getByRole("img", { name: "player avatar" });
   });
 
-  (["player", "enemy1", "enemy2", "enemy3"] as const).forEach((player) => {
+  (
+    [
+      { player: "player" },
+      { player: "enemy1" },
+      { player: "enemy2" },
+      { player: "enemy3" },
+    ] as const
+  ).forEach(({ player }) => {
     test(`shows the ${player} avatar`, () => {
       render(<Avatar player={player} />);
 

@@ -71,12 +71,9 @@ describe("<CurrentPhase />", () => {
     });
 
     describe("a full plan", () => {
-      const onSubmitPlan = jest.fn();
-      const onCleanActionCard = jest.fn();
-
-      beforeEach(() => {
-        onSubmitPlan.mockClear();
-        onCleanActionCard.mockClear();
+      const renderFullPlan = () => {
+        const onSubmitPlan = jest.fn();
+        const onCleanActionCard = jest.fn();
         render(
           <CurrentPhase
             phase="planification"
@@ -87,9 +84,11 @@ describe("<CurrentPhase />", () => {
             onCleanActionCard={onCleanActionCard}
           />
         );
-      });
+        return { onSubmitPlan, onCleanActionCard };
+      };
 
       test("shows both cards and Confirm plan calls onSubmitPlan", () => {
+        const { onSubmitPlan } = renderFullPlan();
         screen.getByRole("button", { name: "player Move card" });
         screen.getByRole("button", { name: "player Recruit card" });
 
@@ -113,6 +112,7 @@ describe("<CurrentPhase />", () => {
         },
       ].forEach(({ slot, name, actions }) => {
         test(`clicking the ${slot} card takes it back`, () => {
+          const { onCleanActionCard } = renderFullPlan();
           fireEvent.click(screen.getByRole("button", { name }));
 
           expect(onCleanActionCard).toHaveBeenCalledWith(actions);

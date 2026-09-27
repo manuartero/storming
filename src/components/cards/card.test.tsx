@@ -16,7 +16,7 @@ describe("<Card />", () => {
     expect(buildCard()).toHaveTextContent("Build walls on a settlement");
   });
 
-  test("render: article role when not clickable", () => {
+  test("without onClick, it is an article", () => {
     render(<Card card={actionCard} />);
 
     screen.getByRole("article", { name: "player Build card" });

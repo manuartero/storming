@@ -10,7 +10,6 @@ const status = (player: PlayerType): PlayerStatus => ({
 const fourPlayers = (["player", "enemy1", "enemy2", "enemy3"] as const).map(
   status
 );
-const threePlayers = fourPlayers.slice(0, 3);
 const playersOf = (count: number) => fourPlayers.slice(0, count);
 
 const card = (commited: boolean): TimelineCard => ({
@@ -63,12 +62,12 @@ describe("activePlayer()", () => {
           phase: "planification",
           activeCard: undefined,
           next: cards({ committed: 1, pending: 1 }),
-          players: threePlayers,
+          players: playersOf(3),
         })
       ).toBe("enemy1");
     });
 
-    test("counts the FUTURE cards carried over from the previous round", () => {
+    test("wraps around after a full round", () => {
       expect(
         activePlayer({
           phase: "planification",
@@ -102,7 +101,7 @@ describe("activePlayer()", () => {
     ).toBeUndefined();
   });
 
-  (["setup", "ended"] as const).forEach((phase) => {
+  ([{ phase: "setup" }, { phase: "ended" }] as const).forEach(({ phase }) => {
     test(`${phase} has no active player`, () => {
       expect(
         activePlayer({

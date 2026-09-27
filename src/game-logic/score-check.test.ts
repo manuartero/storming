@@ -43,6 +43,7 @@ describe("isCreatingGreatestEmpire()", () => {
     });
   });
 
+  // #94 will revisit ties: this tests today's behaviour
   test("a tie is not the greatest empire", () => {
     expect(
       isCreatingGreatestEmpire({

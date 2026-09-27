@@ -41,9 +41,10 @@ describe("<Board />", () => {
     expect(within(tile("0,0")).queryByRole("img")).toBeNull();
   });
 
-  test("a forbidden tile is aria-disabled", () => {
+  test("each tile shows its status", () => {
     render(<Board state={visualBoard} onTileClick={jest.fn()} />);
 
+    expect(tile("-1,-2")).toHaveClass("selected");
     expect(tile("-1,-1")).toHaveAttribute("aria-disabled", "true");
     expect(tile("0,-3")).toHaveAttribute("aria-disabled", "false");
   });
