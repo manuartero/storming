@@ -2,6 +2,7 @@ import { empireSize } from "game-logic/empire-size";
 import { findWinner, isConqueringLastSettlement } from "game-logic/game-over";
 import { rotateToFirst } from "game-logic/player-order";
 import { isConquering, isCreatingGreatestEmpire } from "game-logic/score-check";
+import { withGreatestEmpire, withPoint } from "game-logic/players.transitions";
 import { isAttackingWalls } from "game-logic/walls";
 import { createContext, useContext } from "react";
 import type { ReactNode } from "react";
@@ -9,12 +10,7 @@ import { logRender, warnInconsistentState } from "lib/console";
 import { emptyBoard } from "./empty-board";
 import { initialBoard } from "./initial-board";
 import { useBoard } from "./use-board";
-import {
-  initialPlayerStatus,
-  usePlayers,
-  withGreatestEmpire,
-  withPoint,
-} from "./use-players";
+import { initialPlayerStatus, usePlayers } from "./use-players";
 import { initialTimeline, useTimeline } from "./use-timeline";
 
 const GameContext = createContext<GameContext>({
