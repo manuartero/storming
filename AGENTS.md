@@ -48,7 +48,7 @@ src/
   });
   ```
 
-- Snapshot tests exist for the views.
+- **Snapshot tests are only for `src/elements/`.** Component tests assert behaviour: find elements by role and accessible name.
 - **e2e:** Playwright in `e2e/`, run in Docker with `npm run test:e2e` (`npm run test:e2e:local` without Docker). Blue Ball runs it in CI; the local `blue-ball` script does not. Specs are `e2e/app/<page>.<feature>.spec.ts`, and they find elements by role and accessible name, through the page object in `e2e/integration/`.
 
 ## Workflow
