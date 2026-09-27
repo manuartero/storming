@@ -14,5 +14,6 @@ jobs:
         with:
           node-version: 20.19
       - run: npm ci --ignore-scripts
+      - run: npx biome ci .
       - run: npm test
       - run: npm run build

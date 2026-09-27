@@ -36,7 +36,9 @@
     "test:e2e:local": "playwright test --config e2e/playwright.config.ts",
     "serve": "vite preview",
     "release": "semantic-release",
-    "blue-ball": "npm run test && npm run build"
+    "blue-ball": "biome ci . && npm run test && npm run build",
+    "lint": "biome check .",
+    "format": "biome format --write ."
   },
   "dependencies": {
     "@fontsource-variable/figtree": "5.3.0",
@@ -46,6 +48,7 @@
     "react-dom": "19.1.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.5.14",
     "@playwright/test": "1.63.0",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "13.0.1",
@@ -60,7 +63,6 @@
     "@types/react": "19.1.8",
     "@types/react-dom": "19.1.6",
     "@vitejs/plugin-react-swc": "3.10.2",
-    "eslint-plugin-html": "8.1.3",
     "identity-obj-proxy": "3.0.0",
     "jest": "30.0.4",
     "jest-environment-jsdom": "30.0.4",

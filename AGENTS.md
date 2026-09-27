@@ -30,6 +30,7 @@ src/
 - **Filenames are kebab-case,** with the module first: `<module>.<role>.ts(x)` for new files (`foo.test.ts`).
 - **No new `utils/`, `types/`, `helpers/` or `common/` folders.** Name folders by domain. Accepted non-domain folders: `lib/`, `data/`, `services/`, `styles/`.
 - **Styling:** CSS modules (`*.module.css`) next to the component.
+- **Lint and format:** Biome (`biome.json`). `npm run lint` checks, `npm run format` rewrites; CI runs `biome ci .`.
 
 ## Tests
 
