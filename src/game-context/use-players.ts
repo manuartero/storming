@@ -1,4 +1,7 @@
-import { withGreatestEmpire, withPoint } from "game-logic/players.transitions";
+import {
+  playersAfterGreatestEmpire,
+  playersAfterScore,
+} from "game-logic/players.transitions";
 import { useState } from "react";
 
 export const initialPlayerStatus: PlayerStatus[] = [
@@ -24,13 +27,13 @@ export function usePlayers() {
 
   const scorePoint = (player: PlayerType) => {
     setPlayers((currentPlayers) =>
-      withPoint({ players: currentPlayers, player })
+      playersAfterScore({ players: currentPlayers, player })
     );
   };
 
   const declareGreatestEmpire = (player: PlayerType) => {
     setPlayers((currentPlayers) =>
-      withGreatestEmpire({ players: currentPlayers, player })
+      playersAfterGreatestEmpire({ players: currentPlayers, player })
     );
   };
 

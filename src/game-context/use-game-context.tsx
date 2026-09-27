@@ -2,7 +2,10 @@ import { empireSize } from "game-logic/empire-size";
 import { findWinner, isConqueringLastSettlement } from "game-logic/game-over";
 import { rotateToFirst } from "game-logic/player-order";
 import { isConquering, isCreatingGreatestEmpire } from "game-logic/score-check";
-import { withGreatestEmpire, withPoint } from "game-logic/players.transitions";
+import {
+  playersAfterGreatestEmpire,
+  playersAfterScore,
+} from "game-logic/players.transitions";
 import { isAttackingWalls } from "game-logic/walls";
 import { createContext, useContext } from "react";
 import type { ReactNode } from "react";
@@ -133,7 +136,7 @@ export function GameContextProvider({ children }: Props) {
     buildOnTile(action);
     _resolveActionCard({
       players: createsGreatestEmpire
-        ? withGreatestEmpire({ players, player })
+        ? playersAfterGreatestEmpire({ players, player })
         : players,
     });
   };
@@ -165,7 +168,7 @@ export function GameContextProvider({ children }: Props) {
     });
     movePiece(action);
     _resolveActionCard({
-      players: conquers ? withPoint({ players, player }) : players,
+      players: conquers ? playersAfterScore({ players, player }) : players,
       conqueror: conquersLastSettlement ? player : undefined,
     });
   };

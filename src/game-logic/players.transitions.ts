@@ -1,6 +1,6 @@
 /* plain players → players updates: no validity check, no game logic */
 
-export const withPoint = ({
+export const playersAfterScore = ({
   players,
   player,
 }: {
@@ -11,7 +11,7 @@ export const withPoint = ({
     p.player === player ? { ...p, points: p.points + 1 } : p
   );
 
-export const withGreatestEmpire = ({
+export const playersAfterGreatestEmpire = ({
   players,
   player,
 }: {

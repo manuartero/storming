@@ -16,7 +16,7 @@ src/
 ```
 
 - **Rules live in `game-logic/`:** if a bot or a headless test could need it, it goes there. Only UI state (a selected tile, an open dialog) and visual status (`infer-*.ts`) stay in `components/`. `game-logic/` doesn't log; the bridge does.
-- **The hooks are plain state:** named setters built on `game-logic/` transitions (`with*`), no game logic, no validation. No reducers. The provider calls the rules before it updates state.
+- **The hooks are plain state:** named setters built on `game-logic/` transitions (`<slice>After<Event>`, e.g. `boardAfterMove`), no game logic, no validation. No reducers. The provider calls the rules before it updates state.
 - **Controller / view split:** a controller reads `useGameContext()`, derives visual state (`infer-*.ts`) and passes props to a pure view. Views don't read the context.
 - **Phases:** `planification` (each player puts a card on NEXT and on FUTURE, in player order) → `action` (resolve NEXT one card at a time) → back to `planification`.
 - **Board:** a hex grid of offset coordinates keyed `"x,y"` (`TileID`).

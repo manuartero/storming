@@ -29,7 +29,7 @@ const replacePending = ({
 
 /* plain timeline → timeline updates: no validity check, no game logic */
 
-export function withPlanningPhase(timeline: TimelineState) {
+export function timelineAfterPlanningStart(timeline: TimelineState) {
   return {
     ...timeline,
     phase: "planification" as const,
@@ -39,7 +39,7 @@ export function withPlanningPhase(timeline: TimelineState) {
   };
 }
 
-export function withNextActiveCard(timeline: TimelineState) {
+export function timelineAfterNextCard(timeline: TimelineState) {
   return {
     ...timeline,
     activeCard: timeline.next[0]?.card,
@@ -47,11 +47,11 @@ export function withNextActiveCard(timeline: TimelineState) {
   };
 }
 
-export function withActionPhase(timeline: TimelineState) {
-  return withNextActiveCard({ ...timeline, phase: "action" });
+export function timelineAfterActionStart(timeline: TimelineState) {
+  return timelineAfterNextCard({ ...timeline, phase: "action" });
 }
 
-export function withWinner({
+export function timelineAfterGameOver({
   timeline,
   winner,
 }: {
@@ -66,7 +66,7 @@ export function withWinner({
   };
 }
 
-export function withPlan({
+export function timelineAfterPlan({
   timeline,
   actions,
 }: {
@@ -86,7 +86,7 @@ export function withPlan({
   };
 }
 
-export function withCommittedPlan(timeline: TimelineState) {
+export function timelineAfterSubmit(timeline: TimelineState) {
   return {
     ...timeline,
     next: commit(timeline.next),

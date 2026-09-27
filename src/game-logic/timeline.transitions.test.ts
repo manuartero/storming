@@ -1,12 +1,12 @@
 import { NewCard } from "models/new-card";
 import type { TimelineState } from "./timeline.transitions";
 import {
-  withActionPhase,
-  withCommittedPlan,
-  withNextActiveCard,
-  withPlan,
-  withPlanningPhase,
-  withWinner,
+  timelineAfterActionStart,
+  timelineAfterSubmit,
+  timelineAfterNextCard,
+  timelineAfterPlan,
+  timelineAfterPlanningStart,
+  timelineAfterGameOver,
 } from "./timeline.transitions";
 
 const build = NewCard({ type: "build", player: "player" });
@@ -20,14 +20,14 @@ const planning: TimelineState = {
   future: [],
 };
 
-describe("withPlan()", () => {
+describe("timelineAfterPlan()", () => {
   test("replaces the pending cards", () => {
-    const planned = withPlan({
+    const planned = timelineAfterPlan({
       timeline: planning,
       actions: { nextActionCard: build, futureActionCard: move },
     });
 
-    const replanned = withPlan({
+    const replanned = timelineAfterPlan({
       timeline: planned,
       actions: { nextActionCard: move, futureActionCard: null },
     });
@@ -37,7 +37,7 @@ describe("withPlan()", () => {
   });
 
   test("keeps a pending card when its action is undefined", () => {
-    const planned = withPlan({
+    const planned = timelineAfterPlan({
       timeline: planning,
       actions: { nextActionCard: build, futureActionCard: undefined },
     });
@@ -47,21 +47,21 @@ describe("withPlan()", () => {
   });
 });
 
-describe("withCommittedPlan()", () => {
+describe("timelineAfterSubmit()", () => {
   test("commits the pending cards", () => {
-    const planned = withPlan({
+    const planned = timelineAfterPlan({
       timeline: planning,
       actions: { nextActionCard: build, futureActionCard: move },
     });
 
-    const submitted = withCommittedPlan(planned);
+    const submitted = timelineAfterSubmit(planned);
 
     expect(submitted.next).toEqual([{ card: build, commited: true }]);
     expect(submitted.future).toEqual([{ card: move, commited: true }]);
   });
 });
 
-describe("withNextActiveCard()", () => {
+describe("timelineAfterNextCard()", () => {
   test("reveals the first NEXT card", () => {
     const timeline = {
       ...planning,
@@ -72,18 +72,18 @@ describe("withNextActiveCard()", () => {
       ],
     };
 
-    const next = withNextActiveCard(timeline);
+    const next = timelineAfterNextCard(timeline);
 
     expect(next.activeCard).toEqual(build);
     expect(next.next).toEqual([{ card: move, commited: true }]);
   });
 });
 
-describe("withActionPhase()", () => {
+describe("timelineAfterActionStart()", () => {
   test("changes the phase and reveals the first NEXT card", () => {
     const timeline = { ...planning, next: [{ card: build, commited: true }] };
 
-    const action = withActionPhase(timeline);
+    const action = timelineAfterActionStart(timeline);
 
     expect(action.phase).toBe("action");
     expect(action.activeCard).toEqual(build);
@@ -91,7 +91,7 @@ describe("withActionPhase()", () => {
   });
 });
 
-describe("withPlanningPhase()", () => {
+describe("timelineAfterPlanningStart()", () => {
   test("moves FUTURE onto NEXT", () => {
     const timeline: TimelineState = {
       ...planning,
@@ -100,7 +100,7 @@ describe("withPlanningPhase()", () => {
       future: [{ card: move, commited: true }],
     };
 
-    const next = withPlanningPhase(timeline);
+    const next = timelineAfterPlanningStart(timeline);
 
     expect(next.phase).toBe("planification");
     expect(next.activeCard).toBeUndefined();
@@ -109,7 +109,7 @@ describe("withPlanningPhase()", () => {
   });
 });
 
-describe("withWinner()", () => {
+describe("timelineAfterGameOver()", () => {
   test("ends the game with that winner", () => {
     const timeline = {
       ...planning,
@@ -117,7 +117,7 @@ describe("withWinner()", () => {
       activeCard: build,
     };
 
-    expect(withWinner({ timeline, winner: "enemy1" })).toEqual({
+    expect(timelineAfterGameOver({ timeline, winner: "enemy1" })).toEqual({
       ...timeline,
       phase: "ended",
       winner: "enemy1",

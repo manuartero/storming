@@ -1,6 +1,6 @@
 /* plain board → board updates: no validity check, no game logic */
 
-export function withBuilding({
+export function boardAfterBuild({
   board,
   tile,
   building,
@@ -16,7 +16,7 @@ export function withBuilding({
 }
 
 /* a piece moving onto a building takes it over */
-export function withMove({
+export function boardAfterMove({
   board,
   piece,
   from,
@@ -38,7 +38,13 @@ export function withMove({
   };
 }
 
-export function withoutWalls({ board, tile }: { board: Board; tile: TileID }) {
+export function boardAfterWallsDestroyed({
+  board,
+  tile,
+}: {
+  board: Board;
+  tile: TileID;
+}) {
   const building = board[tile].building;
   if (!building) {
     return board;
@@ -49,7 +55,7 @@ export function withoutWalls({ board, tile }: { board: Board; tile: TileID }) {
   };
 }
 
-export function withRecruit({
+export function boardAfterRecruit({
   board,
   tile,
   piece,

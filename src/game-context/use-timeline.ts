@@ -1,11 +1,11 @@
 import type { TimelineState } from "game-logic/timeline.transitions";
 import {
-  withActionPhase,
-  withCommittedPlan,
-  withNextActiveCard,
-  withPlan,
-  withPlanningPhase,
-  withWinner,
+  timelineAfterActionStart,
+  timelineAfterSubmit,
+  timelineAfterNextCard,
+  timelineAfterPlan,
+  timelineAfterPlanningStart,
+  timelineAfterGameOver,
 } from "game-logic/timeline.transitions";
 import { useState } from "react";
 
@@ -33,14 +33,14 @@ export function useTimeline() {
 
   return {
     ...timeline,
-    startPlanningPhase: () => setTimeline(withPlanningPhase),
-    startActionPhase: () => setTimeline(withActionPhase),
-    nextActiveCard: () => setTimeline(withNextActiveCard),
+    startPlanningPhase: () => setTimeline(timelineAfterPlanningStart),
+    startActionPhase: () => setTimeline(timelineAfterActionStart),
+    nextActiveCard: () => setTimeline(timelineAfterNextCard),
     endGame: (winner: PlayerType) =>
-      setTimeline((timeline) => withWinner({ timeline, winner })),
+      setTimeline((timeline) => timelineAfterGameOver({ timeline, winner })),
     planAction: (actions: Actions) =>
-      setTimeline((timeline) => withPlan({ timeline, actions })),
-    submitPlanification: () => setTimeline(withCommittedPlan),
+      setTimeline((timeline) => timelineAfterPlan({ timeline, actions })),
+    submitPlanification: () => setTimeline(timelineAfterSubmit),
     _overrideTimeline: setTimeline,
   };
 }

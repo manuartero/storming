@@ -1,8 +1,8 @@
 import {
-  withBuilding,
-  withMove,
-  withoutWalls,
-  withRecruit,
+  boardAfterBuild,
+  boardAfterMove,
+  boardAfterWallsDestroyed,
+  boardAfterRecruit,
 } from "game-logic/board.transitions";
 import { useState } from "react";
 import { initialBoard } from "./initial-board";
@@ -20,20 +20,26 @@ export function useBoard() {
 
   const buildOnTile = (action: { tile: TileID; building: Building }) => {
     setBoard((currentBoard) =>
-      withBuilding({ board: currentBoard, ...action })
+      boardAfterBuild({ board: currentBoard, ...action })
     );
   };
 
   const movePiece = (action: { piece: Piece; from: TileID; to: TileID }) => {
-    setBoard((currentBoard) => withMove({ board: currentBoard, ...action }));
+    setBoard((currentBoard) =>
+      boardAfterMove({ board: currentBoard, ...action })
+    );
   };
 
   const destroyWalls = (tile: TileID) => {
-    setBoard((currentBoard) => withoutWalls({ board: currentBoard, tile }));
+    setBoard((currentBoard) =>
+      boardAfterWallsDestroyed({ board: currentBoard, tile })
+    );
   };
 
   const recruitOnTile = (action: { tile: TileID; piece: Piece }) => {
-    setBoard((currentBoard) => withRecruit({ board: currentBoard, ...action }));
+    setBoard((currentBoard) =>
+      boardAfterRecruit({ board: currentBoard, ...action })
+    );
   };
 
   return {
