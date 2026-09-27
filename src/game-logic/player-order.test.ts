@@ -11,17 +11,18 @@ const players = (["player", "enemy1", "enemy2", "enemy3"] as const).map(status);
 const order = (list: PlayerStatus[]) => list.map(({ player }) => player);
 
 describe("rotateToFirst()", () => {
-  test.each([
-    ["player", ["player", "enemy1", "enemy2", "enemy3"]],
-    ["enemy1", ["enemy1", "enemy2", "enemy3", "player"]],
-    ["enemy2", ["enemy2", "enemy3", "player", "enemy1"]],
-    ["enemy3", ["enemy3", "player", "enemy1", "enemy2"]],
-  ] as const)(
-    "puts %s first, keeping the clockwise order",
-    (first, expected) => {
+  (
+    [
+      { first: "player", expected: ["player", "enemy1", "enemy2", "enemy3"] },
+      { first: "enemy1", expected: ["enemy1", "enemy2", "enemy3", "player"] },
+      { first: "enemy2", expected: ["enemy2", "enemy3", "player", "enemy1"] },
+      { first: "enemy3", expected: ["enemy3", "player", "enemy1", "enemy2"] },
+    ] as const
+  ).forEach(({ first, expected }) => {
+    test(`puts ${first} first, keeping the clockwise order`, () => {
       expect(order(rotateToFirst({ players, first }))).toEqual(expected);
-    }
-  );
+    });
+  });
 
   test("keeps each player's status", () => {
     const withPoints = players.map((p) =>

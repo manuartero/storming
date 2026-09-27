@@ -3,13 +3,13 @@ import { GameContextProvider } from "game-context";
 import { CurrentPhaseController } from "./current-phase-controller";
 
 describe("<CurrentPhaseController />", () => {
-  test("reads GameContext.phase", async () => {
+  test("shows Planning when a game starts", () => {
     render(
       <GameContextProvider>
         <CurrentPhaseController />
       </GameContextProvider>
     );
-    const currentPhase = await screen.findByRole("heading", { level: 1 });
+    const currentPhase = screen.getByRole("heading", { level: 1 });
     expect(currentPhase.textContent).toBe("Planning");
   });
 });

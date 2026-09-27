@@ -39,11 +39,16 @@ describe("timelineAfterPlan()", () => {
   test("keeps a pending card when its action is undefined", () => {
     const planned = timelineAfterPlan({
       timeline: planning,
-      actions: { nextActionCard: build, futureActionCard: undefined },
+      actions: { nextActionCard: build, futureActionCard: move },
     });
 
-    expect(planned.next).toEqual([{ card: build, commited: false }]);
-    expect(planned.future).toBe(planning.future);
+    const replanned = timelineAfterPlan({
+      timeline: planned,
+      actions: { nextActionCard: move, futureActionCard: undefined },
+    });
+
+    expect(replanned.next).toEqual([{ card: move, commited: false }]);
+    expect(replanned.future).toEqual([{ card: move, commited: false }]);
   });
 });
 

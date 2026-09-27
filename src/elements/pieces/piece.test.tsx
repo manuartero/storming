@@ -10,7 +10,6 @@ describe("<Piece />", () => {
 
   test('render: "knight" piece', () => {
     render(<Piece type="knight" />);
-    const playerKnight = screen.getByRole("img", { name: "player knight" });
-    expect(playerKnight).toBeInTheDocument();
+    screen.getByRole("img", { name: "player knight" });
   });
 });

@@ -1,158 +1,59 @@
-import { render } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
+import { emptyBoard } from "game-context/empty-board";
+import { TILES } from "models/tiles";
 import { Board } from "./board";
 
 jest.mock("elements/tiles/use-piece-offset");
 
-describe("<Board />", () => {
-  test("render: match snapshot", () => {
-    const { asFragment } = render(
-      <Board state={visualBoard} onTileClick={jest.fn()} />
-    );
-    expect(asFragment()).toMatchSnapshot();
-  });
-});
-
 const visualBoard: VisualBoard = {
-  "-2,-3": {
-    status: "available",
-  },
-  "-1,-3": {
-    status: "available",
-  },
+  ...emptyBoard,
   "0,-3": {
     building: { owner: "enemy1", type: "castle" },
     status: "available",
   },
-  "1,-3": {
-    status: "available",
-  },
-  "2,-3": {
-    status: "available",
-  },
-  "-3,-2": {
-    status: "available",
-  },
-  "-2,-2": {
-    status: "available",
-  },
   "-1,-2": {
     piece: { owner: "enemy1", type: "soldier" },
-    status: "available",
+    status: "selected",
   },
-  "0,-2": {
-    status: "available",
-  },
-  "1,-2": {
-    status: "available",
-  },
-  "2,-2": {
-    status: "available",
-  },
-  "-3,-1": {
-    status: "available",
-  },
-  "-2,-1": {
-    status: "available",
-  },
-  "-1,-1": {
-    terrain: "lake",
-    status: "available",
-  },
-  "0,-1": {
-    status: "available",
-  },
-  "1,-1": {
-    status: "available",
-  },
-  "2,-1": {
-    status: "available",
-  },
-  "3,-1": {
-    status: "available",
-  },
-  "-4,0": {
-    building: { owner: "player", type: "castle" },
-    status: "available",
-  },
-  "-3,0": {
-    piece: { owner: "player", type: "soldier" },
-    status: "available",
-  },
-  "-2,0": {
-    status: "available",
-  },
-  "-1,0": {
-    status: "available",
-  },
-  "0,0": {
-    status: "available",
-  },
-  "1,0": {
-    status: "available",
-  },
-  "2,0": {
-    piece: { owner: "enemy2", type: "soldier" },
-    status: "available",
-  },
-  "3,0": {
-    building: { owner: "enemy2", type: "castle" },
-    status: "available",
-  },
-  "-3,1": {
-    status: "available",
-  },
-  "-2,1": {
-    status: "available",
-  },
-  "-1,1": {
-    status: "available",
-  },
-  "0,1": {
-    status: "available",
-  },
-  "1,1": {
-    terrain: "lake",
-    status: "available",
-  },
-  "2,1": {
-    status: "available",
-  },
-  "3,1": {
-    status: "available",
-  },
-  "-3,2": {
-    status: "available",
-  },
-  "-2,2": {
-    status: "available",
-  },
-  "-1,2": {
-    status: "available",
-  },
-  "0,2": {
-    piece: { owner: "enemy3", type: "soldier" },
-    status: "available",
-  },
-  "1,2": {
-    status: "available",
-  },
-  "2,2": {
-    status: "available",
-  },
-  "-2,3": {
-    status: "available",
-  },
-  "-1,3": {
-    status: "available",
-  },
-  "0,3": {
-    building: { owner: "enemy3", type: "castle" },
-    status: "available",
-  },
-  "1,3": {
-    status: "available",
-  },
-  "2,3": {
-    status: "available",
-  },
+  "-1,-1": { terrain: "lake", status: "forbidden" },
 };
+
+const tile = (id: TileID) => screen.getByRole("button", { name: `tile ${id}` });
+
+describe("<Board />", () => {
+  test("shows one tile button per tile inside the game board", () => {
+    render(<Board state={visualBoard} onTileClick={jest.fn()} />);
+
+    const board = screen.getByRole("region", { name: "game board" });
+    expect(within(board).getAllByRole("button")).toHaveLength(TILES.length);
+  });
+
+  test("shows each building, piece and terrain in its tile", () => {
+    render(<Board state={visualBoard} onTileClick={jest.fn()} />);
+
+    within(tile("0,-3")).getByRole("img", { name: "enemy1 castle" });
+    within(tile("-1,-2")).getByRole("img", { name: "enemy1 soldier" });
+    // the terrain sits in an aria-hidden layer
+    within(tile("-1,-1")).getByRole("img", {
+      name: "terrain lake",
+      hidden: true,
+    });
+    expect(within(tile("0,0")).queryByRole("img")).toBeNull();
+  });
+
+  test("a forbidden tile is aria-disabled", () => {
+    render(<Board state={visualBoard} onTileClick={jest.fn()} />);
+
+    expect(tile("-1,-1")).toHaveAttribute("aria-disabled", "true");
+    expect(tile("0,-3")).toHaveAttribute("aria-disabled", "false");
+  });
+
+  test("clicking a tile calls onTileClick with its coordinates", () => {
+    const onTileClick = jest.fn();
+    render(<Board state={visualBoard} onTileClick={onTileClick} />);
+
+    fireEvent.click(tile("-1,-2"));
+
+    expect(onTileClick).toHaveBeenCalledWith({ x: -1, y: -2, str: "-1,-2" });
+  });
+});

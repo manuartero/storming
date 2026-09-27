@@ -1,50 +1,123 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { NewCard } from "models/new-card";
 import { CurrentPhase } from "./current-phase";
 
+const currentPhase = () =>
+  screen.getByRole("region", { name: "current phase" });
+
 describe("<CurrentPhase />", () => {
-  test("render: section role - action", () => {
-    render(
-      <CurrentPhase
-        phase="action"
-        activePlayer="player"
-        activeCard={NewCard({ type: "move", player: "player" })}
-        mustSkip={false}
-        onSkip={jest.fn()}
-      />
-    );
+  describe("action phase", () => {
+    const renderAction = ({
+      mustSkip,
+      onSkip = jest.fn(),
+    }: {
+      mustSkip: boolean;
+      onSkip?: () => void;
+    }) =>
+      render(
+        <CurrentPhase
+          phase="action"
+          activePlayer="player"
+          activeCard={NewCard({ type: "move", player: "player" })}
+          mustSkip={mustSkip}
+          onSkip={onSkip}
+        />
+      );
 
-    const currentPhase = screen.getByRole("region", { name: "current phase" });
-    expect(currentPhase).toMatchSnapshot();
+    test("shows the Action heading, the active player and the active card", () => {
+      renderAction({ mustSkip: false });
+
+      within(currentPhase()).getByRole("heading", { name: "Action" });
+      within(currentPhase()).getByRole("img", { name: "player's turn" });
+      within(currentPhase()).getByRole("article", { name: "player Move card" });
+    });
+
+    test("Skip is disabled while there is something to do", () => {
+      renderAction({ mustSkip: false });
+
+      expect(screen.getByRole("button", { name: "Skip" })).toBeDisabled();
+    });
+
+    test("Skip is enabled and calls onSkip when the player must skip", () => {
+      const onSkip = jest.fn();
+      renderAction({ mustSkip: true, onSkip });
+
+      const skip = screen.getByRole("button", { name: "Skip" });
+      expect(skip).toBeEnabled();
+      fireEvent.click(skip);
+
+      expect(onSkip).toHaveBeenCalledTimes(1);
+    });
   });
 
-  test("render: section role - planification", () => {
-    render(
-      <CurrentPhase
-        phase="planification"
-        activePlayer="player"
-        onSubmitPlan={jest.fn()}
-        onCleanActionCard={jest.fn()}
-      />
-    );
+  describe("planning phase", () => {
+    test("an empty plan shows the empty slots and Confirm plan disabled", () => {
+      render(
+        <CurrentPhase
+          phase="planification"
+          activePlayer="player"
+          onSubmitPlan={jest.fn()}
+          onCleanActionCard={jest.fn()}
+        />
+      );
 
-    const currentPhase = screen.getByRole("region", { name: "current phase" });
-    expect(currentPhase).toMatchSnapshot();
-  });
+      within(currentPhase()).getByRole("heading", { name: "Planning" });
+      within(currentPhase()).getByRole("img", { name: "player's turn" });
+      screen.getByRole("article", { name: "empty next slot" });
+      screen.getByRole("article", { name: "empty future slot" });
+      expect(
+        screen.getByRole("button", { name: "Confirm plan" })
+      ).toBeDisabled();
+    });
 
-  test("render: section role - planification with cards", () => {
-    render(
-      <CurrentPhase
-        phase="planification"
-        activePlayer="player"
-        nextActionCard={NewCard({ type: "move", player: "player" })}
-        futureActionCard={NewCard({ type: "recruit", player: "player" })}
-        onSubmitPlan={jest.fn()}
-        onCleanActionCard={jest.fn()}
-      />
-    );
+    describe("a full plan", () => {
+      const onSubmitPlan = jest.fn();
+      const onCleanActionCard = jest.fn();
 
-    const currentPhase = screen.getByRole("region", { name: "current phase" });
-    expect(currentPhase).toMatchSnapshot();
+      beforeEach(() => {
+        onSubmitPlan.mockClear();
+        onCleanActionCard.mockClear();
+        render(
+          <CurrentPhase
+            phase="planification"
+            activePlayer="player"
+            nextActionCard={NewCard({ type: "move", player: "player" })}
+            futureActionCard={NewCard({ type: "recruit", player: "player" })}
+            onSubmitPlan={onSubmitPlan}
+            onCleanActionCard={onCleanActionCard}
+          />
+        );
+      });
+
+      test("shows both cards and Confirm plan calls onSubmitPlan", () => {
+        screen.getByRole("button", { name: "player Move card" });
+        screen.getByRole("button", { name: "player Recruit card" });
+
+        const confirm = screen.getByRole("button", { name: "Confirm plan" });
+        expect(confirm).toBeEnabled();
+        fireEvent.click(confirm);
+
+        expect(onSubmitPlan).toHaveBeenCalledTimes(1);
+      });
+
+      [
+        {
+          slot: "NEXT",
+          name: "player Move card",
+          actions: { nextActionCard: null, futureActionCard: undefined },
+        },
+        {
+          slot: "FUTURE",
+          name: "player Recruit card",
+          actions: { nextActionCard: undefined, futureActionCard: null },
+        },
+      ].forEach(({ slot, name, actions }) => {
+        test(`clicking the ${slot} card takes it back`, () => {
+          fireEvent.click(screen.getByRole("button", { name }));
+
+          expect(onCleanActionCard).toHaveBeenCalledWith(actions);
+        });
+      });
+    });
   });
 });
