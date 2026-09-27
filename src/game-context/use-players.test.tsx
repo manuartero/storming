@@ -1,103 +1,27 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import { usePlayers } from "./use-players";
-
-// TODO change to renderHook(() => usePlayers());
-
-function TestingComponent() {
-  const { players, reorderPlayers, scorePoint, declareGreatestEmpire } =
-    usePlayers();
-  return (
-    <>
-      <ul>
-        {players.map((player) => (
-          <li key={player.player}>{`${player.player} - ${
-            player.points
-          } points${player.greatestEmpirePoint ? "*" : ""}`}</li>
-        ))}
-      </ul>
-      <button
-        type="button"
-        data-testid="enemy1-scores-point"
-        onClick={() => scorePoint("enemy1")}
-      />
-      <button
-        type="button"
-        data-testid="reverse-players"
-        onClick={() => reorderPlayers((current) => [...current].reverse())}
-      />
-      <button
-        type="button"
-        data-testid="enemy3-greatest-empire"
-        onClick={() => declareGreatestEmpire("enemy3")}
-      />
-      <button
-        type="button"
-        data-testid="player-greatest-empire"
-        onClick={() => declareGreatestEmpire("player")}
-      />
-    </>
-  );
-}
-
-const getPlayerList = () =>
-  Array.from(screen.getByRole("list").children).map((li) => li.textContent);
+import { act, renderHook } from "@testing-library/react";
+import { initialPlayerStatus, usePlayers } from "./use-players";
 
 describe("usePlayers()", () => {
-  it("returns players[]", () => {
-    render(<TestingComponent />);
-    expect(getPlayerList()).toEqual([
-      "player - 0 points",
-      "enemy1 - 0 points",
-      "enemy2 - 0 points",
-      "enemy3 - 0 points",
-    ]);
+  test("starts with every player at 0 points", () => {
+    const { result } = renderHook(() => usePlayers());
+
+    expect(result.current.players).toBe(initialPlayerStatus);
   });
 
-  test("returns scorePoint()", () => {
-    render(<TestingComponent />);
-    fireEvent.click(screen.getByTestId("enemy1-scores-point"));
-    expect(getPlayerList()).toEqual([
-      "player - 0 points",
-      "enemy1 - 1 points",
-      "enemy2 - 0 points",
-      "enemy3 - 0 points",
-    ]);
-    fireEvent.click(screen.getByTestId("enemy1-scores-point"));
-    fireEvent.click(screen.getByTestId("enemy1-scores-point"));
-    expect(getPlayerList()).toEqual([
-      "player - 0 points",
-      "enemy1 - 3 points",
-      "enemy2 - 0 points",
-      "enemy3 - 0 points",
-    ]);
-  });
+  test("setters in the same event all apply", () => {
+    const { result } = renderHook(() => usePlayers());
 
-  test("returns reorderPlayers()", () => {
-    render(<TestingComponent />);
-    fireEvent.click(screen.getByTestId("reverse-players"));
-    expect(getPlayerList()).toEqual([
-      "enemy3 - 0 points",
-      "enemy2 - 0 points",
-      "enemy1 - 0 points",
-      "player - 0 points",
-    ]);
-  });
+    act(() => {
+      result.current.scorePoint("enemy1");
+      result.current.reorderPlayers((current) => [...current].reverse());
+      result.current.declareGreatestEmpire("enemy3");
+    });
 
-  test("returns declareGreatestEmpire()", () => {
-    render(<TestingComponent />);
-    fireEvent.click(screen.getByTestId("enemy3-greatest-empire"));
-    expect(getPlayerList()).toEqual([
-      "player - 0 points",
-      "enemy1 - 0 points",
-      "enemy2 - 0 points",
-      "enemy3 - 0 points*",
-    ]);
-    fireEvent.click(screen.getByTestId("player-greatest-empire"));
-    expect(getPlayerList()).toEqual([
-      "player - 0 points*",
-      "enemy1 - 0 points",
-      "enemy2 - 0 points",
-      "enemy3 - 0 points",
+    expect(result.current.players).toEqual([
+      { player: "enemy3", points: 0, greatestEmpirePoint: true },
+      { player: "enemy2", points: 0, greatestEmpirePoint: false },
+      { player: "enemy1", points: 1, greatestEmpirePoint: false },
+      { player: "player", points: 0, greatestEmpirePoint: false },
     ]);
   });
 });
