@@ -1,6 +1,6 @@
 Storming is a browser version of an original board game.
 
-**Rules live in [`rules/`](rules/README.md):** the rulebook, every card, a glossary and open questions, all with stable IDs (`build.village.2`, `pact.blockade`). Cite those IDs in issues, commits, code comments and test titles.
+**Rules live in [`rule-book/`](rule-book/README.md):** the rulebook, every card, a glossary and open questions, all with stable IDs (`build.village.2`, `pact.blockade`). Cite those IDs in issues, commits, code comments and test titles.
 
 ## Architecture
 

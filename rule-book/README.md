@@ -1,4 +1,4 @@
-# Rules reference
+# Rule book
 
 The full rules of Storming!, transcribed into English from the designers' Spanish PDFs. This folder is the source of truth; the PDFs are no longer in the repo.
 
@@ -32,7 +32,7 @@ Every rule and card has a stable ID. Grep for it; cite it everywhere.
 
 ## Turning rules into work
 
-1. **Find the rule.** Grep the ID or the Spanish/English term (`rg "pact.blockade|Bloqueo" rules/`).
+1. **Find the rule.** Grep the ID or the Spanish/English term (`rg "pact.blockade|Bloqueo" rule-book/`).
 2. **Check the code.** Rules belong in `src/game-logic/` ([AGENTS.md](../AGENTS.md#architecture)). Search it for the ID and the code name from [`glossary.md`](glossary.md).
 3. **Open the issue.** One rule or one card per issue. Put the IDs in the title and quote the rule text in the body:
 
