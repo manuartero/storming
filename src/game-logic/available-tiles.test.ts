@@ -37,11 +37,11 @@ describe("getAvailableTilesForActionCard()", () => {
   });
 
   test("'recruit' action leaves out a settlement that already has a piece", () => {
-    const board = {
+    const board: Board = {
       ...emptyBoard,
       "0,0": { building: { owner: "player", type: "tower" }, piece: soldier },
       "2,0": { building: { owner: "player", type: "tower" } },
-    } as Board;
+    };
     const got = getAvailableTilesForActionCard({
       activeCard: NewCard({ type: "recruit", player: "player" }),
       board,
@@ -174,7 +174,7 @@ describe("getAvailableTilesForActionCard()", () => {
     }) =>
       getAvailableTilesForActionCard({
         activeCard: move,
-        board: { ...emptyBoard, ...board } as Board,
+        board: { ...emptyBoard, ...board },
         selectedTile: from,
       }).sort();
 

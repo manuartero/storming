@@ -44,4 +44,30 @@ describe("useTimeline()", () => {
     expect(result.current.activeCard).toEqual(firstNext);
     expect(result.current.next).toEqual([{ card: secondNext, commited: true }]);
   });
+
+  test("nextActiveCard() + startPlanningPhase() in the same event move FUTURE onto NEXT", () => {
+    const { result } = renderHook(() => useTimeline());
+    const next = NewCard({ type: "recruit", player: "player" });
+    const future = NewCard({ type: "move", player: "player" });
+
+    act(() => {
+      result.current.planAction({
+        nextActionCard: next,
+        futureActionCard: future,
+      });
+      result.current.submitPlanification();
+      result.current.startActionPhase();
+    });
+
+    // what the provider does when the last NEXT card is resolved
+    act(() => {
+      result.current.nextActiveCard();
+      result.current.startPlanningPhase();
+    });
+
+    expect(result.current.phase).toBe("planification");
+    expect(result.current.activeCard).toBeUndefined();
+    expect(result.current.next).toEqual([{ card: future, commited: true }]);
+    expect(result.current.future).toEqual([]);
+  });
 });

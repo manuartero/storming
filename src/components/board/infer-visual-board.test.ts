@@ -29,6 +29,7 @@ describe("inferVisualBoardFromGameContext()", () => {
     });
 
     expect(board["-3,0"].status).toBe("selected");
+    expect(board["-2,0"].status).toBe("available");
   });
 
   test("with no active card, the board comes back unchanged", () => {
