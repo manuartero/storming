@@ -29,11 +29,7 @@ const PHASE_TITLE = {
 
 export function CurrentPhase(props: ActionPhaseProps | PlanningPhaseProps) {
   return (
-    <section
-      className={styles.currentPhase}
-      role="region"
-      aria-label="current phase"
-    >
+    <section className={styles.currentPhase} aria-label="current phase">
       <div className={styles.heading}>
         <span
           className={c(styles.turn, styles[props.activePlayer])}

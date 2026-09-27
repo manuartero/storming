@@ -90,7 +90,7 @@ export function coordinates(str: TileID) {
 }
 
 export function asTileID({ x, y }: { x: number; y: number }) {
-  const tileId = x + "," + y;
+  const tileId = `${x},${y}`;
   if (TILES.includes(tileId as TileID)) {
     return tileId as TileID;
   }

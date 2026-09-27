@@ -32,7 +32,6 @@ export function PlayerHand({
 
   return (
     <section
-      role="region"
       className={c(styles.playerHand, isActive && styles.expansible)}
       aria-label="player hand"
     >

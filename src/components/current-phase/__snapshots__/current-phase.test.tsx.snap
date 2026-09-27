@@ -4,7 +4,6 @@ exports[`<CurrentPhase /> render: section role - action 1`] = `
 <section
   aria-label="current phase"
   class="currentPhase"
-  role="region"
 >
   <div
     class="heading"
@@ -68,7 +67,6 @@ exports[`<CurrentPhase /> render: section role - planification 1`] = `
 <section
   aria-label="current phase"
   class="currentPhase"
-  role="region"
 >
   <div
     class="heading"
@@ -133,7 +131,6 @@ exports[`<CurrentPhase /> render: section role - planification with cards 1`] = 
 <section
   aria-label="current phase"
   class="currentPhase"
-  role="region"
 >
   <div
     class="heading"

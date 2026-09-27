@@ -38,6 +38,7 @@ export function Dialog({
       >
         {onClose && (
           <button
+            type="button"
             className={styles.exitButton}
             aria-label="close dialog"
             onClick={onClose}

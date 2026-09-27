@@ -13,6 +13,7 @@ exports[`<Dialog /> render: dialog role [no title] 1`] = `
     <button
       aria-label="close dialog"
       class="exitButton"
+      type="button"
     >
       X
     </button>
@@ -40,6 +41,7 @@ exports[`<Dialog /> render: dialog role [with title] 1`] = `
     <button
       aria-label="close dialog"
       class="exitButton"
+      type="button"
     >
       X
     </button>

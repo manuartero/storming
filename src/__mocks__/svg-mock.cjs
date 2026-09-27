@@ -1,5 +1,4 @@
 // @see https://github.com/gregberge/svgr/issues/83
-// eslint-disable-next-line no-undef
 
 const React = require("react");
 

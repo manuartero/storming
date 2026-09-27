@@ -21,11 +21,7 @@ export function RoundSummary() {
   };
 
   return (
-    <section
-      className={styles.roundSummary}
-      aria-label="round summary"
-      role="region"
-    >
+    <section className={styles.roundSummary} aria-label="round summary">
       {gameContext.players.map((playerStatus) => (
         <PlayerCard
           key={`player-summary-${playerStatus.player}`}

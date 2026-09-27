@@ -30,29 +30,30 @@ export function Timeline({ next, future }: Props) {
   const id = useId();
   const renderLineItems = (section: TimelineCard[]) => {
     return section.map(({ card, commited }) => {
-      if (card.cardType === "actionCard")
-        return (
-          <motion.div
-            key={card.cardId}
-            role="listitem"
-            aria-label={`${card.owner} card${commited ? "" : ", pending"}`}
-            layout
-            {...LINE_ITEM_MOTION}
-          >
-            <ActionLineItem card={card} commited={commited} />
-          </motion.div>
-        );
+      if (card.cardType !== "actionCard") return null;
+      return (
+        <motion.div
+          key={card.cardId}
+          role="listitem"
+          aria-label={`${card.owner} card${commited ? "" : ", pending"}`}
+          layout
+          {...LINE_ITEM_MOTION}
+        >
+          <ActionLineItem card={card} commited={commited} />
+        </motion.div>
+      );
     });
   };
 
   return (
     // reducedMotion="user": no bounce with prefers-reduced-motion: reduce
     <MotionConfig reducedMotion="user">
-      <section role="region" className={styles.timeline} aria-label="timeline">
+      <section className={styles.timeline} aria-label="timeline">
         <div className={c(styles.next, styles.section)}>
           <span className={styles.sectionName} id={`${id}-next`}>
             NEXT
           </span>
+          {/* biome-ignore lint/a11y/useSemanticElements: the items are motion.div; a ul would need motion.li and a list-style reset */}
           <div
             className={styles.line}
             role="list"
@@ -67,6 +68,7 @@ export function Timeline({ next, future }: Props) {
           <span className={styles.sectionName} id={`${id}-future`}>
             FUTURE
           </span>
+          {/* biome-ignore lint/a11y/useSemanticElements: the items are motion.div; a ul would need motion.li and a list-style reset */}
           <div
             className={styles.line}
             role="list"

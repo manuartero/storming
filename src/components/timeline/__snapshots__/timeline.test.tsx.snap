@@ -5,7 +5,6 @@ exports[`<Timeline /> render: match snapshot 1`] = `
   <section
     aria-label="timeline"
     class="timeline"
-    role="region"
   >
     <div
       class="next section"

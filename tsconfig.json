@@ -12,11 +12,7 @@
     "target": "ESNext",
     "jsx": "react-jsx",
     "allowJs": true,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     /* other */
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -25,9 +21,7 @@
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
     /* output */
-    "noEmit": true,
+    "noEmit": true
   },
-  "include": [
-    "src",
-  ]
+  "include": ["src"]
 }

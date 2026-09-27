@@ -29,6 +29,7 @@ function TestingComponent() {
       <TestingTile tileId={"0,3"} />
 
       <button
+        type="button"
         data-testid="move-piece-from-02-to12"
         onClick={() =>
           movePiece({
@@ -39,6 +40,7 @@ function TestingComponent() {
         }
       />
       <button
+        type="button"
         data-testid="build-on-tile-12"
         onClick={() =>
           buildOnTile({
@@ -48,6 +50,7 @@ function TestingComponent() {
         }
       />
       <button
+        type="button"
         data-testid="recruit-on-tile-03"
         onClick={() =>
           recruitOnTile({

@@ -62,9 +62,7 @@ describe("<GameContextProvider /> move()", () => {
     const result = renderWalledAttack();
     const pointsBefore = points(result);
 
-    act(() =>
-      result.current.move({ piece: soldier, from: "0,0", to: "1,0" })
-    );
+    act(() => result.current.move({ piece: soldier, from: "0,0", to: "1,0" }));
 
     expect(result.current.board["0,0"].piece).toEqual(soldier);
     expect(result.current.board["1,0"]).toEqual({
@@ -78,12 +76,8 @@ describe("<GameContextProvider /> move()", () => {
     const result = renderWalledAttack();
     const pointsBefore = points(result) ?? 0;
 
-    act(() =>
-      result.current.move({ piece: soldier, from: "0,0", to: "1,0" })
-    );
-    act(() =>
-      result.current.move({ piece: soldier, from: "0,0", to: "1,0" })
-    );
+    act(() => result.current.move({ piece: soldier, from: "0,0", to: "1,0" }));
+    act(() => result.current.move({ piece: soldier, from: "0,0", to: "1,0" }));
 
     expect(result.current.board["0,0"].piece).toBeUndefined();
     expect(result.current.board["1,0"]).toEqual({

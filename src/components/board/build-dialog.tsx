@@ -18,26 +18,24 @@ export function BuildDialog({
 }: Props) {
   return (
     <Dialog size="small" title="Choose what to build" onClose={close}>
-      <>
-        <div className={styles.column}>
-          <CardSilhouette
-            card="build-walls"
-            player={player}
-            disabled={!buildWalls}
-            onClick={buildWalls}
-          />
-          {!buildWalls && <span>Walls are already built</span>}
-        </div>
-        <div className={styles.column}>
-          <CardSilhouette
-            card="upgrade-settlement"
-            player={player}
-            disabled={!upgradeBuilding}
-            onClick={upgradeBuilding}
-          />
-          {!upgradeBuilding && <span>A city is fully upgraded</span>}
-        </div>
-      </>
+      <div className={styles.column}>
+        <CardSilhouette
+          card="build-walls"
+          player={player}
+          disabled={!buildWalls}
+          onClick={buildWalls}
+        />
+        {!buildWalls && <span>Walls are already built</span>}
+      </div>
+      <div className={styles.column}>
+        <CardSilhouette
+          card="upgrade-settlement"
+          player={player}
+          disabled={!upgradeBuilding}
+          onClick={upgradeBuilding}
+        />
+        {!upgradeBuilding && <span>A city is fully upgraded</span>}
+      </div>
     </Dialog>
   );
 }

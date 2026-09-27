@@ -15,8 +15,10 @@
 .board {
   --gap-ratio: 0.06; /* gap between tiles, relative to the tile width */
   --tile-w: min(
-    100cqw / (8 + 7 * var(--gap-ratio)),
-    100cqh / (1 / 0.866 + 6 * 0.866 * (1 + var(--gap-ratio)))
+    100cqw /
+    (8 + 7 * var(--gap-ratio)),
+    100cqh /
+    (1 / 0.866 + 6 * 0.866 * (1 + var(--gap-ratio)))
   );
   --tile-gap: calc(var(--tile-w) * var(--gap-ratio));
   --row-step: calc((var(--tile-w) + var(--tile-gap)) * 0.866);

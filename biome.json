@@ -1,0 +1,57 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "includes": ["**", "!build", "!coverage", "!**/*.snap", "!**/*.svg"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 80
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "semicolons": "always",
+      "trailingCommas": "es5"
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended",
+      "style": {
+        "useImportType": "error"
+      },
+      "correctness": {
+        "noUnusedVariables": "warn"
+      }
+    }
+  },
+  "css": {
+    "linter": { "enabled": true }
+  },
+  "overrides": [
+    {
+      "includes": ["**/*.module.css"],
+      "linter": {
+        "rules": { "style": { "noDescendingSpecificity": "off" } }
+      }
+    },
+    {
+      "includes": ["**/*.test.ts", "**/*.test.tsx", "e2e/**"],
+      "linter": {
+        "rules": { "style": { "noNonNullAssertion": "off" } }
+      }
+    }
+  ],
+  "assist": {
+    "enabled": true,
+    "actions": { "source": { "organizeImports": "off" } }
+  }
+}

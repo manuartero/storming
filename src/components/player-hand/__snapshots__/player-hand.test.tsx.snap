@@ -4,7 +4,6 @@ exports[`<PlayerHand /> render: region role 1`] = `
 <section
   aria-label="player hand"
   class="playerHand"
-  role="region"
 >
   <button
     aria-disabled="false"

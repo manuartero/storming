@@ -14,8 +14,8 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 #root {
@@ -26,7 +26,9 @@ code {
   *,
   *::before,
   *::after {
+    /* biome-ignore lint/complexity/noImportantStyles: reduced motion must win over every component style */
     transition-duration: 0s !important;
+    /* biome-ignore lint/complexity/noImportantStyles: same as above */
     animation-duration: 0s !important;
   }
 }

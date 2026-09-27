@@ -6,9 +6,7 @@ const status = (player: PlayerType): PlayerStatus => ({
   greatestEmpirePoint: false,
 });
 
-const players = (["player", "enemy1", "enemy2", "enemy3"] as const).map(
-  status
-);
+const players = (["player", "enemy1", "enemy2", "enemy3"] as const).map(status);
 
 const order = (list: PlayerStatus[]) => list.map(({ player }) => player);
 
@@ -18,9 +16,12 @@ describe("rotateToFirst()", () => {
     ["enemy1", ["enemy1", "enemy2", "enemy3", "player"]],
     ["enemy2", ["enemy2", "enemy3", "player", "enemy1"]],
     ["enemy3", ["enemy3", "player", "enemy1", "enemy2"]],
-  ] as const)("puts %s first, keeping the clockwise order", (first, expected) => {
-    expect(order(rotateToFirst({ players, first }))).toEqual(expected);
-  });
+  ] as const)(
+    "puts %s first, keeping the clockwise order",
+    (first, expected) => {
+      expect(order(rotateToFirst({ players, first }))).toEqual(expected);
+    }
+  );
 
   test("keeps each player's status", () => {
     const withPoints = players.map((p) =>
