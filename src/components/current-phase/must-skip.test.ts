@@ -20,25 +20,23 @@ describe("mustSkip()", () => {
     expect(mustSkip(gameContext)).toBe(false);
   });
 
-  test("returns true if no piece can move", () => {
-    const lake: Tile = { terrain: "lake" };
-    const ownSoldier: Tile = { piece: { owner: "player", type: "soldier" } };
+  test("a diplo card never skips", () => {
     const gameContext = {
-      activeCard: NewCard({ type: "move", player: "player" }),
-      board: {
-        ...emptyBoard,
-        "0,0": ownSoldier,
-        "0,-1": lake,
-        "1,-1": lake,
-        "-1,0": lake,
-        "1,0": ownSoldier,
-        "0,1": lake,
-        "1,1": lake,
-        "2,0": lake,
-        "2,-1": lake,
-        "2,1": lake,
-      },
+      activeCard: NewCard({ type: "diplo", player: "player" }),
+      board: emptyBoard,
     };
-    expect(mustSkip(gameContext)).toBe(true);
+    expect(mustSkip(gameContext)).toBe(false);
+  });
+
+  [
+    {
+      name: "an event card",
+      activeCard: NewCard({ type: "event1", player: "player" }),
+    },
+    { name: "no card", activeCard: undefined },
+  ].forEach(({ name, activeCard }) => {
+    test(`returns false with ${name}`, () => {
+      expect(mustSkip({ activeCard, board: emptyBoard })).toBe(false);
+    });
   });
 });

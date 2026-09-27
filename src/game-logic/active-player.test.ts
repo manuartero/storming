@@ -38,7 +38,6 @@ describe("activePlayer()", () => {
       [3, 0, "player"],
       [3, 2, "enemy2"],
       [3, 3, "player"],
-      [3, 4, "enemy1"],
       [4, 0, "player"],
       [4, 3, "enemy3"],
       [4, 4, "player"],
@@ -73,8 +72,8 @@ describe("activePlayer()", () => {
         activePlayer({
           phase: "planification",
           activeCard: undefined,
-          next: cards({ committed: 3 + 1 }),
-          players: threePlayers,
+          next: cards({ committed: 4 + 1 }),
+          players: fourPlayers,
         })
       ).toBe("enemy1");
     });

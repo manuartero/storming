@@ -145,5 +145,80 @@ describe("getAvailableTilesForActionCard()", () => {
     expect(got).toEqual(["1,0"]);
   });
 
-  test.todo("returns tiles in range for 'move' action");
+  describe("'move' action with a selected piece", () => {
+    const move = NewCard({ type: "move", player: "player" });
+    const knight: Piece = { owner: "player", type: "knight" };
+    const enemy: Piece = { owner: "enemy1", type: "soldier" };
+    const movesFrom = ({
+      board,
+      from,
+    }: {
+      board: Partial<Board>;
+      from: TileID;
+    }) =>
+      getAvailableTilesForActionCard({
+        activeCard: move,
+        board: { ...emptyBoard, ...board } as Board,
+        selectedTile: from,
+      }).sort();
+
+    test("a soldier moves to the adjacent tiles", () => {
+      expect(
+        movesFrom({ board: { "0,0": { piece: soldier } }, from: "0,0" })
+      ).toEqual(["0,-1", "1,-1", "-1,0", "1,0", "0,1", "1,1"].sort());
+    });
+
+    test("a knight moves up to two tiles away", () => {
+      const got = movesFrom({
+        board: { "0,0": { piece: knight } },
+        from: "0,0",
+      });
+      expect(got).toHaveLength(18);
+      expect(got).toContain("2,0");
+      expect(got).not.toContain("3,0");
+    });
+
+    (
+      [
+        { terrain: "forest", piece: soldier, available: true },
+        { terrain: "mountain", piece: soldier, available: true },
+        { terrain: "lake", piece: soldier, available: false },
+        { terrain: "forest", piece: knight, available: false },
+        { terrain: "mountain", piece: knight, available: false },
+        { terrain: "lake", piece: knight, available: false },
+      ] as const
+    ).forEach(({ terrain, piece, available }) => {
+      test(`a ${piece.type} can enter a ${terrain}: ${available}`, () => {
+        const got = movesFrom({
+          board: {
+            "0,0": { piece },
+            "1,0": { terrain },
+          },
+          from: "0,0",
+        });
+        expect(got.includes("1,0")).toBe(available);
+      });
+    });
+
+    test("its own pieces block a tile, an enemy piece does not", () => {
+      const got = movesFrom({
+        board: {
+          "0,0": { piece: soldier },
+          "1,0": { piece: soldier },
+          "-1,0": { piece: enemy },
+        },
+        from: "0,0",
+      });
+      expect(got).not.toContain("1,0");
+      expect(got).toContain("-1,0");
+    });
+
+    test("with an enemy piece selected, it lists the own movable pieces", () => {
+      const got = movesFrom({
+        board: { "0,0": { piece: soldier }, "3,0": { piece: enemy } },
+        from: "3,0",
+      });
+      expect(got).toEqual(["0,0"]);
+    });
+  });
 });
