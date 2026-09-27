@@ -4,6 +4,8 @@ Gaps and ambiguities in the source PDFs. Each one blocks, or should shape, an is
 
 Format: the question, what the source says, and a working assumption the code may use until it is answered.
 
+**Ask first:** [`q.event-4p-set`](#qevent-4p-set), [`q.conspiracy-vp`](#qconspiracy-vp), [`q.action-deck`](#qaction-deck), [`q.setup-cards`](#qsetup-cards). They flip who a card rewards or leave cards undefined. The rest have a safe default.
+
 ### q.action-deck
 
 Which 5 action cards does each colour get, and which of them allow two actions?
