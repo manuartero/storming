@@ -37,7 +37,7 @@ src/
 - Tests sit next to the code as `*.test.ts(x)`.
 - **The `describe` label shows what is under test:** `describe("foo()")` for a function, `describe("<Foo />")` for a component, `describe("foo{}")` for an object or module.
 - Snapshot tests exist for the views.
-- **e2e:** Playwright in `e2e/`, run in Docker with `npm run test:e2e` (`npm run test:e2e:local` without Docker). Specs are `e2e/app/<page>.<feature>.spec.ts`, and they find elements by role and accessible name, through the page object in `e2e/integration/`.
+- **e2e:** Playwright in `e2e/`, run in Docker with `npm run test:e2e` (`npm run test:e2e:local` without Docker). Blue Ball runs it in CI; the local `blue-ball` script does not. Specs are `e2e/app/<page>.<feature>.spec.ts`, and they find elements by role and accessible name, through the page object in `e2e/integration/`.
 
 ## Workflow
 
