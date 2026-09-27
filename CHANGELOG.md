@@ -1,3 +1,48 @@
+# [0.9.0](https://github.com/manuartero/storming/compare/v0.8.0...v0.9.0) (2026-09-27)
+
+### Features
+
+* **game:** end the game at 7 victory points or on the last settlement's conquest ([#37](https://github.com/manuartero/storming/issues/37)) ([#78](https://github.com/manuartero/storming/issues/78)) ([6d06075](https://github.com/manuartero/storming/commit/6d06075fbf44da978d7d632bbfc0ed6a90677b4a))
+* **game:** walls block enemy troops, attacking destroys the wall ([#38](https://github.com/manuartero/storming/issues/38)) ([#57](https://github.com/manuartero/storming/issues/57)) ([365d684](https://github.com/manuartero/storming/commit/365d68463354b4936b00d93e61242559f84cfbc8))
+* **ui:** flat turn-order list instead of the fanned stack ([#24](https://github.com/manuartero/storming/issues/24)) ([1d50850](https://github.com/manuartero/storming/commit/1d508508a8a34982772c6c88bdf3808ccdf0aa46))
+* **ui:** cards, hand, plan slots and buttons ([#23](https://github.com/manuartero/storming/issues/23)) ([2b69178](https://github.com/manuartero/storming/commit/2b6917800d7cbd856ad4b2a8088afaf95444175b))
+* **ui:** design foundation and board look ([#22](https://github.com/manuartero/storming/issues/22)) ([4cf0ec4](https://github.com/manuartero/storming/commit/4cf0ec4d740da59ebf9e7e886d42afd914ab58a8))
+* **ui:** touch-friendly interactions ([#19](https://github.com/manuartero/storming/issues/19)) ([1f6d49f](https://github.com/manuartero/storming/commit/1f6d49f84f2deabfec0cf14b2c3a90ea4b76f1a9))
+* **ui:** component sizes that fit their grid cell ([#18](https://github.com/manuartero/storming/issues/18)) ([05590d5](https://github.com/manuartero/storming/commit/05590d51f2eddadd5ad3007f49db891e3bbd99cd))
+* **layout:** responsive app shell ([#17](https://github.com/manuartero/storming/issues/17)) ([530e461](https://github.com/manuartero/storming/commit/530e461744eb486b28429d52e30e6fd2d20d3b37))
+* **board:** regular hexagons that fit their container ([#16](https://github.com/manuartero/storming/issues/16)) ([d8e22ee](https://github.com/manuartero/storming/commit/d8e22eec1c43a592f6b6e335f072bcfaeb6e0d8a))
+
+### Fixes
+
+* **ci:** make the release workflow parse, on Node 24 ([#84](https://github.com/manuartero/storming/issues/84)) ([8898119](https://github.com/manuartero/storming/commit/889811945428a07ad381d7c3968ba3a600f26acc))
+* **rules:** enforce village placement rule ([#33](https://github.com/manuartero/storming/issues/33)) ([#77](https://github.com/manuartero/storming/issues/77)) ([3320439](https://github.com/manuartero/storming/commit/33204396c293585e91fe34ba51dda4ab0b141b57))
+* **a11y:** roles and names for the game controls ([#59](https://github.com/manuartero/storming/issues/59)) ([d2ed688](https://github.com/manuartero/storming/commit/d2ed688c6e15c5c029a81d51e6660c90158884ed))
+* **game:** diplomacy makes the player who plays it the first player ([#56](https://github.com/manuartero/storming/issues/56)) ([a868005](https://github.com/manuartero/storming/commit/a86800517d102ffd608aa36ad69eb1c4e5d9fbc2))
+* **game:** default context starts in the same phase as the provider ([#55](https://github.com/manuartero/storming/issues/55)) ([becf557](https://github.com/manuartero/storming/commit/becf55708ed0e9887edf8cc90e768c1bf9b22318))
+* **ui:** card and dialog text typos and wording ([#54](https://github.com/manuartero/storming/issues/54)) ([990624c](https://github.com/manuartero/storming/commit/990624c127f3a5d8116dd9edc1eab4598a03042c))
+* **game:** towns can be upgraded or walled, walled cities are not buildable ([#53](https://github.com/manuartero/storming/issues/53)) ([c01da80](https://github.com/manuartero/storming/commit/c01da80d15d846a31a5d093aeaa2d96a20ce5445))
+* **game:** React correctness bugs ([#25](https://github.com/manuartero/storming/issues/25)) ([1aaf518](https://github.com/manuartero/storming/commit/1aaf5187cba60572d7de144d933d5c3f3f9a0b97))
+
+### Visual
+
+* typography, colour tokens and dead-CSS cleanup ([#20](https://github.com/manuartero/storming/issues/20)) ([9b46186](https://github.com/manuartero/storming/commit/9b46186ec02c1d820feef1f4e52152b84c8e63c0))
+
+### Internal
+
+* move to Node 24 LTS ([#83](https://github.com/manuartero/storming/issues/83)) ([fbf9667](https://github.com/manuartero/storming/commit/fbf9667bd97d7733a270587c7eb45da33148b267))
+* **ci:** replace semantic-release with an on-demand release workflow ([#82](https://github.com/manuartero/storming/issues/82)) ([5763b60](https://github.com/manuartero/storming/commit/5763b60e072a0e0d48b7e6fe36267fddba32f6dd))
+* **ci:** run the Playwright e2e suite in Blue Ball ([#81](https://github.com/manuartero/storming/issues/81)) ([46e1c54](https://github.com/manuartero/storming/commit/46e1c54a9a7165646ae4e0eca626f07fea50ecf5))
+* **tooling:** replace ESLint with Biome and run it in CI ([#80](https://github.com/manuartero/storming/issues/80)) ([ba0ed79](https://github.com/manuartero/storming/commit/ba0ed79dab0761bd2e92b48d51f224da1d16d458))
+* **e2e:** Playwright suite with a planning and a full-round happy path ([#75](https://github.com/manuartero/storming/issues/75)) ([00613d1](https://github.com/manuartero/storming/commit/00613d147fbb3d089edb61b3737ed525294a2d67))
+* ignore Claude Code worktrees and local settings ([#76](https://github.com/manuartero/storming/issues/76)) ([feb5822](https://github.com/manuartero/storming/commit/feb5822b608c814ab744fb6bfdb1b0ba71dbceec))
+* perf nits from the React best-practices scan ([#27](https://github.com/manuartero/storming/issues/27)) ([5ad1574](https://github.com/manuartero/storming/commit/5ad157401896967f0a18fa0d2384b7fa4fc45169))
+* TS conventions ([#26](https://github.com/manuartero/storming/issues/26)) ([2f33660](https://github.com/manuartero/storming/commit/2f336606aaf75de69c5067c9d88ca832927f6132))
+* **ci:** run Blue Ball on epic branches ([2e70b32](https://github.com/manuartero/storming/commit/2e70b320b2d46df798246c413849b181f3f52d45))
+* add AGENTS.md and English rules.md ([#13](https://github.com/manuartero/storming/issues/13)) ([fa80515](https://github.com/manuartero/storming/commit/fa805152ff68ce3e3c942f486c16a6188470a16c))
+* **AGENTS:** fix intro, drop State bullet ([4cfa252](https://github.com/manuartero/storming/commit/4cfa252bd6445c06bc62e1f3880323486f3579cb))
+* **AGENTS:** trim to essentials ([9e396c1](https://github.com/manuartero/storming/commit/9e396c12681c52fc0ff7b8d7c56730f7b60fe9da))
+* add AGENTS.md and English rules.md, drop Spanish rulebook PDF ([18b0fa2](https://github.com/manuartero/storming/commit/18b0fa2306b11465d0e3e9bd9e2ef84784e71c46))
+
 # [0.8.0](https://github.com/manuartero/storming/compare/v0.7.0...v0.8.0) (2025-07-24)
 
 
