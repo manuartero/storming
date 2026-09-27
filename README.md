@@ -1,57 +1,21 @@
-# Storming
+# Storming!
 
-## `useGameContext()`
+A browser version of _Storming!_, an original strategy board game for 3–4 players by Alfonso Ricardo Felipe López and Pablo Salinas. Plan your actions in secret, then build, recruit and march across a hex map: first to seven victory points, or to take a rival's last settlement, wins.
 
-```js
-gameContext {
-  phase: 'action',
-  board: {
-    "-2,-3": {
-      terrain: 'field',
-      piece: { type: 'soldier', owner: 'player' }
-      building: { type: 'town', owner: 'player' }
-    },
-    "-1,-3": { ... },
-    "0,-3": { ... },
-    ...
-  },
-  timeline {
-    current: {
-      cardType: 'actionCard',
-      action: 'move',
-      owner: 'enemy1',
-      cardId: 'enemy1_move_A'
-    },
-    next: [
-      { ... }
-    ],
-    future: [
-      { ... }
-    ]
-  },
-  players: [
-    {
-      player: 'enemy1',
-      points: 3,
-      gretestEmpirePoint: false,
-    },
-    { ... }
-  ],
-  activePlayer: 'enemy1',
-  activeCard: { // timeline.current
-      cardType: 'actionCard',
-      action: 'move',
-      owner: 'enemy1',
-      cardId: 'enemy1_move_A'
-  },
+**[Play it](https://storming-coral.vercel.app)** · [Rules](rule-book/README.md) · [Changelog](CHANGELOG.md)
 
-  build(buildAction){ },
-  move(moveAction) { },
-  recruit(recruitAction) { },
-  plan(planAction) { },
-  firstPlayer(player) { },
-  skip() { },
-  loadSavegame(gameContext) { },
-}
+![The board at the start of a game](docs/screenshot.png)
 
+## Quick start
+
+Node 24 (see `.nvmrc`):
+
+```sh
+nvm use
+npm install
+npm run dev
 ```
+
+## License
+
+[GPL-3.0](LICENSE)
