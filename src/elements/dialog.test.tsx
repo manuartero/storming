@@ -12,7 +12,7 @@ describe("<Dialog />", () => {
   test("render: dialog role [with title]", () => {
     render(<Dialog title="Test Dialog" onClose={jest.fn()} />);
 
-    const dialog = screen.getByRole("dialog");
+    const dialog = screen.getByRole("dialog", { name: "Test Dialog" });
     expect(dialog).toMatchSnapshot();
   });
 

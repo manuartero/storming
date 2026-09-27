@@ -7,7 +7,7 @@ describe("tilesInRange()", () => {
    * [ ] [ ] [X] [X] [ ]
    *
    */
-  it("returns tilesID[] in range 1 from origin tile", () => {
+  test("returns tilesID[] in range 1 from origin tile", () => {
     const got = tilesInRange({ tileId: "1,-2", range: 1 });
     const expected = ["1,-3", "2,-3", "0,-2", "2,-2", "1,-1", "2,-1"];
     expect(got.sort()).toEqual(expected.sort());
@@ -23,7 +23,7 @@ describe("tilesInRange()", () => {
    *       [ ] [ ] [ ] [ ] [ ]
    *
    */
-  it("returns tilesID[] in range 2 from origin tile", () => {
+  test("returns tilesID[] in range 2 from origin tile", () => {
     const got = tilesInRange({ tileId: "1,-1", range: 2 });
     const expected = [
       "0,-3",

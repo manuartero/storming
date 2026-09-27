@@ -18,7 +18,7 @@ describe("victoryPoints()", () => {
 });
 
 describe("isConqueringLastSettlement()", () => {
-  const empires = { player: 2, enemy1: 1, enemy2: 2, enemy3: 0 };
+  const empires = { player: 2, enemy1: 1, enemy2: 2 };
 
   test("is true when the target is an opponent's only settlement", () => {
     const targetTile: Tile = { building: { owner: "enemy1", type: "tower" } };
@@ -36,7 +36,7 @@ describe("isConqueringLastSettlement()", () => {
     ).toBe(false);
   });
 
-  test("is false for the player's own settlement or an empty tile", () => {
+  test("is false for the player's own last settlement", () => {
     const ownTile: Tile = { building: { owner: "enemy1", type: "tower" } };
 
     expect(
@@ -46,6 +46,9 @@ describe("isConqueringLastSettlement()", () => {
         empires,
       })
     ).toBe(false);
+  });
+
+  test("is false for an empty tile", () => {
     expect(
       isConqueringLastSettlement({ targetTile: {}, player: "player", empires })
     ).toBe(false);

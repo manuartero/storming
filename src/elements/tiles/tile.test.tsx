@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { Tile } from "./tile";
 
 jest.mock("./use-piece-offset");
@@ -31,6 +31,7 @@ describe("<Tile />", () => {
     );
 
     const tile = screen.getByRole("button", { name: "tile -1,0" });
+    within(tile).getByRole("img", { name: "player tower" });
     expect(tile).toMatchSnapshot();
   });
 

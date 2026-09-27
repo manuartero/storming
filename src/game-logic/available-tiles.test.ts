@@ -1,6 +1,6 @@
 import { emptyBoard } from "game-context/empty-board";
 import { initialBoard } from "game-context/initial-board";
-import { NewCard, _resetCardId } from "models/new-card";
+import { NewCard } from "models/new-card";
 import { getAvailableTilesForActionCard } from "./available-tiles";
 
 const recruitScenarios: { activeCard: ActionCard; expectedTiles: TileID[] }[] =
@@ -26,18 +26,15 @@ const recruitScenarios: { activeCard: ActionCard; expectedTiles: TileID[] }[] =
 const soldier: Piece = { owner: "player", type: "soldier" };
 
 describe("getAvailableTilesForActionCard()", () => {
-  beforeEach(_resetCardId);
-
-  test.each(recruitScenarios)(
-    "returns empty villages for 'recruit' action ($activeCard.owner)",
-    ({ activeCard, expectedTiles }) => {
+  recruitScenarios.forEach(({ activeCard, expectedTiles }) => {
+    test(`returns empty villages for 'recruit' action (${activeCard.owner})`, () => {
       const got = getAvailableTilesForActionCard({
         activeCard,
         board: initialBoard,
       });
       expect(got).toEqual(expectedTiles);
-    }
-  );
+    });
+  });
 
   test("'recruit' action leaves out a settlement that already has a piece", () => {
     const board = {
@@ -52,28 +49,29 @@ describe("getAvailableTilesForActionCard()", () => {
     expect(got).toEqual(["2,0"]);
   });
 
-  test.each([
-    { name: "a village", building: { type: "tower" }, available: true },
-    {
-      name: "a walled village",
-      building: { type: "tower", hasWalls: true },
-      available: true,
-    },
-    { name: "a town", building: { type: "castle" }, available: true },
-    {
-      name: "a walled town",
-      building: { type: "castle", hasWalls: true },
-      available: true,
-    },
-    { name: "a city", building: { type: "citadel" }, available: true },
-    {
-      name: "a walled city",
-      building: { type: "citadel", hasWalls: true },
-      available: false,
-    },
-  ] as const)(
-    "'build' action on $name: available is $available",
-    ({ building, available }) => {
+  (
+    [
+      { name: "a village", building: { type: "tower" }, available: true },
+      {
+        name: "a walled village",
+        building: { type: "tower", hasWalls: true },
+        available: true,
+      },
+      { name: "a town", building: { type: "castle" }, available: true },
+      {
+        name: "a walled town",
+        building: { type: "castle", hasWalls: true },
+        available: true,
+      },
+      { name: "a city", building: { type: "citadel" }, available: true },
+      {
+        name: "a walled city",
+        building: { type: "citadel", hasWalls: true },
+        available: false,
+      },
+    ] as const
+  ).forEach(({ name, building, available }) => {
+    test(`'build' action on ${name}: available is ${available}`, () => {
       const board = {
         "0,0": { building: { owner: "player", ...building } },
         "1,0": { building: { owner: "enemy1", type: "tower" } },
@@ -83,10 +81,14 @@ describe("getAvailableTilesForActionCard()", () => {
         board,
       });
       expect(got).toEqual(available ? ["0,0"] : []);
-    }
-  );
+    });
+  });
 
-  test.each<{ name: string; board: Partial<Board>; available: boolean }>([
+  const buildWithSoldierScenarios: {
+    name: string;
+    board: Partial<Board>;
+    available: boolean;
+  }[] = [
     {
       name: "an empty tile",
       board: { "0,0": { piece: soldier } },
@@ -109,6 +111,7 @@ describe("getAvailableTilesForActionCard()", () => {
       available: false,
     },
     {
+      // a walled citadel can't be built on, so only the plot is in play
       name: "a tile next to its own settlement",
       board: {
         "0,0": { piece: soldier },
@@ -128,16 +131,16 @@ describe("getAvailableTilesForActionCard()", () => {
       board: { "0,0": { piece: soldier, terrain: "mountain" } },
       available: false,
     },
-  ])(
-    "'build' action with a soldier on $name: available is $available",
-    ({ board, available }) => {
+  ];
+  buildWithSoldierScenarios.forEach(({ name, board, available }) => {
+    test(`'build' action with a soldier on ${name}: available is ${available}`, () => {
       const got = getAvailableTilesForActionCard({
         activeCard: NewCard({ type: "build", player: "player" }),
         board: board as Board,
       });
       expect(got).toEqual(available ? ["0,0"] : []);
-    }
-  );
+    });
+  });
 
   test("'move' action leaves out pieces that have nowhere to go", () => {
     const lake: Tile = { terrain: "lake" };

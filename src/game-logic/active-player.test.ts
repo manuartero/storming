@@ -31,20 +31,21 @@ const cards = ({
 
 describe("activePlayer()", () => {
   describe("planification", () => {
-    test.each([
-      [2, 0, "player"],
-      [2, 1, "enemy1"],
-      [2, 2, "player"],
-      [3, 0, "player"],
-      [3, 2, "enemy2"],
-      [3, 3, "player"],
-      [4, 0, "player"],
-      [4, 3, "enemy3"],
-      [4, 4, "player"],
-      [4, 6, "enemy2"],
-    ] as const)(
-      "with %i players and %i committed cards, it's %s's turn",
-      (count, committed, expected) => {
+    (
+      [
+        { count: 2, committed: 0, expected: "player" },
+        { count: 2, committed: 1, expected: "enemy1" },
+        { count: 2, committed: 2, expected: "player" },
+        { count: 3, committed: 0, expected: "player" },
+        { count: 3, committed: 2, expected: "enemy2" },
+        { count: 3, committed: 3, expected: "player" },
+        { count: 4, committed: 0, expected: "player" },
+        { count: 4, committed: 3, expected: "enemy3" },
+        { count: 4, committed: 4, expected: "player" },
+        { count: 4, committed: 6, expected: "enemy2" },
+      ] as const
+    ).forEach(({ count, committed, expected }) => {
+      test(`with ${count} players and ${committed} committed cards, it's ${expected}'s turn`, () => {
         expect(
           activePlayer({
             phase: "planification",
@@ -53,8 +54,8 @@ describe("activePlayer()", () => {
             players: playersOf(count),
           })
         ).toBe(expected);
-      }
-    );
+      });
+    });
 
     test("ignores the card being planned", () => {
       expect(
@@ -101,40 +102,41 @@ describe("activePlayer()", () => {
     ).toBeUndefined();
   });
 
-  test.each(["setup", "ended"] as const)("%s has no active player", (phase) => {
-    expect(
-      activePlayer({
-        phase,
-        activeCard: NewCard({ type: "move", player: "enemy2" }),
-        next: cards({ committed: 1 }),
-        players: fourPlayers,
-      })
-    ).toBeUndefined();
+  (["setup", "ended"] as const).forEach((phase) => {
+    test(`${phase} has no active player`, () => {
+      expect(
+        activePlayer({
+          phase,
+          activeCard: NewCard({ type: "move", player: "enemy2" }),
+          next: cards({ committed: 1 }),
+          players: fourPlayers,
+        })
+      ).toBeUndefined();
+    });
   });
 });
 
 describe("isPlanningComplete()", () => {
-  test.each([
-    [2, 2, true],
-    [2, 3, false],
-    [3, 2, false],
-    [3, 3, true],
-    [3, 6, true],
-    [4, 3, false],
-    [4, 4, true],
-    [4, 7, false],
-    [4, 8, true],
-  ] as const)(
-    "with %i players and %i cards on NEXT: %s",
-    (count, length, expected) => {
+  [
+    { count: 2, length: 2, expected: true },
+    { count: 2, length: 3, expected: false },
+    { count: 3, length: 2, expected: false },
+    { count: 3, length: 3, expected: true },
+    { count: 3, length: 6, expected: true },
+    { count: 4, length: 3, expected: false },
+    { count: 4, length: 4, expected: true },
+    { count: 4, length: 7, expected: false },
+    { count: 4, length: 8, expected: true },
+  ].forEach(({ count, length, expected }) => {
+    test(`with ${count} players and ${length} cards on NEXT: ${expected}`, () => {
       expect(
         isPlanningComplete({
           next: cards({ committed: length - 1, pending: 1 }),
           players: playersOf(count),
         })
       ).toBe(expected);
-    }
-  );
+    });
+  });
 
   test("an empty NEXT is not complete", () => {
     expect(isPlanningComplete({ next: [], players: fourPlayers })).toBe(false);
