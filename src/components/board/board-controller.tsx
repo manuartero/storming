@@ -1,6 +1,5 @@
 import { useGameContext } from "game-context";
 import { buildOptions, recruitOptions } from "game-logic/build-options";
-import type { BuildOption } from "game-logic/build-options";
 import { useState } from "react";
 import { warnInconsistentState } from "lib/console";
 import { Board } from "./board";
@@ -128,29 +127,19 @@ export function BoardController() {
     setSelectedTile({ tile, mode: "selected" });
   };
 
-  const buildHandler = (kind: BuildOption["kind"]) => {
-    if (selectedTile?.mode !== "building") {
-      return undefined;
-    }
-    const { tile } = selectedTile;
-    const option = buildOptions({ board: gameContext.board, tile }).find(
-      (candidate) => candidate.kind === kind
-    );
-    return option && (() => buildOnTile({ tile, building: option.building }));
-  };
+  const buildChoices =
+    selectedTile?.mode === "building"
+      ? buildOptions({ board: gameContext.board, tile: selectedTile.tile })
+      : [];
+  const walls = buildChoices.find((option) => option.kind === "walls");
+  const upgrade = buildChoices.find((option) => option.kind === "upgrade");
 
-  const recruitHandler = (type: PieceType) => {
-    if (selectedTile?.mode !== "recruiting") {
-      return undefined;
-    }
-    const { tile } = selectedTile;
-    const piece = recruitOptions({ board: gameContext.board, tile }).find(
-      (candidate) => candidate.type === type
-    );
-    return piece && (() => recruitOnTile({ tile, piece }));
-  };
-
-  const recruitSoldier = recruitHandler("soldier");
+  const recruitChoices =
+    selectedTile?.mode === "recruiting"
+      ? recruitOptions({ board: gameContext.board, tile: selectedTile.tile })
+      : [];
+  const soldier = recruitChoices.find((piece) => piece.type === "soldier");
+  const knight = recruitChoices.find((piece) => piece.type === "knight");
 
   return (
     <>
@@ -163,17 +152,36 @@ export function BoardController() {
       {selectedTile?.mode === "building" && (
         <BuildDialog
           player={gameContext.activePlayer}
-          buildWalls={buildHandler("walls")}
-          upgradeBuilding={buildHandler("upgrade")}
+          buildWalls={
+            walls &&
+            (() =>
+              buildOnTile({
+                tile: selectedTile.tile,
+                building: walls.building,
+              }))
+          }
+          upgradeBuilding={
+            upgrade &&
+            (() =>
+              buildOnTile({
+                tile: selectedTile.tile,
+                building: upgrade.building,
+              }))
+          }
           close={discardOptionDialog}
         />
       )}
 
-      {recruitSoldier && (
+      {selectedTile?.mode === "recruiting" && soldier && (
         <RecruitDialog
           player={gameContext.activePlayer}
-          recruitSoldier={recruitSoldier}
-          recruitKnight={recruitHandler("knight")}
+          recruitSoldier={() =>
+            recruitOnTile({ tile: selectedTile.tile, piece: soldier })
+          }
+          recruitKnight={
+            knight &&
+            (() => recruitOnTile({ tile: selectedTile.tile, piece: knight }))
+          }
           close={discardOptionDialog}
         />
       )}
