@@ -4,7 +4,7 @@
   "description": "Storming BoardGame - An original board game in React",
   "type": "module",
   "engines": {
-    "node": ">=20.19"
+    "node": ">=24"
   },
   "engineStrict": true,
   "private": false,
