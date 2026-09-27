@@ -1,6 +1,6 @@
 Storming is a browser version of an original board game.
 
-**rules live in [`rules.md`](rules.md).**
+**Rules live in [`rules/`](rules/README.md):** the rulebook, every card, a glossary and open questions, all with stable IDs (`build.village.2`, `pact.blockade`). Cite those IDs in issues, commits, code comments and test titles.
 
 ## Architecture
 
@@ -15,7 +15,7 @@ src/
   services/              services (no UI)
 ```
 
-- **Rules live in `game-logic/`:** if a bot or a headless test could need it, it goes there. Only UI state (a selected tile, an open dialog) and visual status (`infer-*.ts`) stay in `components/`. `game-logic/` doesn't log; the bridge does.
+- **Rule code lives in `game-logic/`:** if a bot or a headless test could need it, it goes there. Only UI state (a selected tile, an open dialog) and visual status (`infer-*.ts`) stay in `components/`. `game-logic/` doesn't log; the bridge does.
 - **The hooks are plain state:** named setters built on `game-logic/` transitions (`<slice>After<Event>`, e.g. `boardAfterMove`), no game logic, no validation. No reducers. The provider calls the rules before it updates state.
 - **Controller / view split:** a controller reads `useGameContext()`, derives visual state (`infer-*.ts`) and passes props to a pure view. Views don't read the context.
 - **Phases:** `planification` (each player puts a card on NEXT and on FUTURE, in player order) → `action` (resolve NEXT one card at a time) → back to `planification`.
