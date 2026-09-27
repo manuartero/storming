@@ -1,5 +1,6 @@
 import { useGameContext } from "game-context";
-import { NewBuilding, upgradeBuilding } from "models/new-building";
+import { buildOptions, recruitOptions } from "game-logic/build-options";
+import type { BuildOption } from "game-logic/build-options";
 import { useState } from "react";
 import { warnInconsistentState } from "lib/console";
 import { Board } from "./board";
@@ -38,46 +39,15 @@ export function BoardController() {
       selectedTile?.mode === "selected" ? selectedTile.tile : undefined,
   });
 
-  const settleOnTile = (tile: TileID) => {
-    const piece = board[tile].piece;
-    if (!piece) {
-      warnInconsistentState(
-        `trying to settle on ${tile} but no soldier found`,
-        { tile: board[tile] }
-      );
-      return;
-    }
-
+  const buildOnTile = ({
+    tile,
+    building,
+  }: {
+    tile: TileID;
+    building: Building;
+  }) => {
     setSelectedTile(undefined);
-    gameContext.build({ tile, building: NewBuilding({ owner: piece.owner }) });
-  };
-
-  const upgradeBuildingOnTile = (tile: TileID) => {
-    const building = board[tile].building;
-    if (!building) {
-      warnInconsistentState(
-        `trying to upgrade building on ${tile} but no building found`,
-        { tile: board[tile] }
-      );
-      return;
-    }
-
-    setSelectedTile(undefined);
-    gameContext.build({ tile, building: upgradeBuilding(building) });
-  };
-
-  const buildWallsOnTile = (tile: TileID) => {
-    const building = board[tile].building;
-    if (!building) {
-      warnInconsistentState(
-        `trying to build walls on ${tile} but no building found`,
-        { tile: board[tile] }
-      );
-      return;
-    }
-
-    setSelectedTile(undefined);
-    gameContext.build({ tile, building: { ...building, hasWalls: true } });
+    gameContext.build({ tile, building });
   };
 
   const discardOptionDialog = () => {
@@ -103,71 +73,32 @@ export function BoardController() {
     setSelectedTile({ tile, mode: "selected" });
   };
 
-  const recruitOnTile = ({
-    tile,
-    piece,
-  }: {
-    tile: TileID;
-    piece: PieceType;
-  }) => {
-    const building = board[tile].building;
-    if (!building) {
-      warnInconsistentState(
-        `trying to recruit ${piece} on ${tile} but no building found`,
-        { tile: board[tile] }
-      );
-      return;
-    }
-
+  const recruitOnTile = ({ tile, piece }: { tile: TileID; piece: Piece }) => {
     setSelectedTile(undefined);
-    return gameContext.recruit({
-      tile,
-      piece: { type: piece, owner: building.owner },
-    });
+    gameContext.recruit({ tile, piece });
   };
 
   const resolveRecruitOnTile = (tile: TileID) => {
-    if (board[tile].piece) {
-      warnInconsistentState(
-        `trying to recruit on ${tile} but piece already found`,
-        { tile: board[tile] }
-      );
+    if (recruitOptions({ board: gameContext.board, tile }).length === 0) {
+      warnInconsistentState(`trying to recruit on ${tile} but can't`, {
+        tile: board[tile],
+      });
       return;
     }
-
-    const building = board[tile].building;
-    if (!building) {
-      warnInconsistentState(
-        `trying to recruit on ${tile} but no building found`,
-        { tile: board[tile] }
-      );
-      return;
-    }
-
     setSelectedTile({ tile, mode: "recruiting" });
   };
 
-  const knightsUnlocked =
-    selectedTile?.mode === "recruiting" &&
-    board[selectedTile.tile]?.building?.type !== "tower";
-
-  const wallsAvailable =
-    selectedTile?.mode === "building" &&
-    !board[selectedTile.tile]?.building?.hasWalls;
-
-  const upgradeBuildingAvailable =
-    selectedTile?.mode === "building" &&
-    board[selectedTile.tile]?.building?.type !== "citadel";
-
   const resolveBuildOnTile = (tile: TileID) => {
-    if (!board[tile].building && board[tile].piece?.type === "soldier") {
-      return settleOnTile(tile);
+    const options = buildOptions({ board: gameContext.board, tile });
+    if (options.length === 0) {
+      warnInconsistentState(`trying to build on ${tile} but can't`, {
+        tile: board[tile],
+      });
+      return;
     }
-
-    if (board[tile].building?.hasWalls) {
-      return upgradeBuildingOnTile(tile);
+    if (options.length === 1) {
+      return buildOnTile({ tile, building: options[0].building });
     }
-
     setSelectedTile({ tile, mode: "building" });
   };
 
@@ -197,6 +128,30 @@ export function BoardController() {
     setSelectedTile({ tile, mode: "selected" });
   };
 
+  const buildHandler = (kind: BuildOption["kind"]) => {
+    if (selectedTile?.mode !== "building") {
+      return undefined;
+    }
+    const { tile } = selectedTile;
+    const option = buildOptions({ board: gameContext.board, tile }).find(
+      (candidate) => candidate.kind === kind
+    );
+    return option && (() => buildOnTile({ tile, building: option.building }));
+  };
+
+  const recruitHandler = (type: PieceType) => {
+    if (selectedTile?.mode !== "recruiting") {
+      return undefined;
+    }
+    const { tile } = selectedTile;
+    const piece = recruitOptions({ board: gameContext.board, tile }).find(
+      (candidate) => candidate.type === type
+    );
+    return piece && (() => recruitOnTile({ tile, piece }));
+  };
+
+  const recruitSoldier = recruitHandler("soldier");
+
   return (
     <>
       <Board
@@ -208,37 +163,17 @@ export function BoardController() {
       {selectedTile?.mode === "building" && (
         <BuildDialog
           player={gameContext.activePlayer}
-          buildWalls={
-            wallsAvailable
-              ? () => {
-                  buildWallsOnTile(selectedTile.tile);
-                }
-              : undefined
-          }
-          upgradeBuilding={
-            upgradeBuildingAvailable
-              ? () => {
-                  upgradeBuildingOnTile(selectedTile.tile);
-                }
-              : undefined
-          }
+          buildWalls={buildHandler("walls")}
+          upgradeBuilding={buildHandler("upgrade")}
           close={discardOptionDialog}
         />
       )}
 
-      {selectedTile?.mode === "recruiting" && (
+      {recruitSoldier && (
         <RecruitDialog
           player={gameContext.activePlayer}
-          recruitSoldier={() => {
-            recruitOnTile({ tile: selectedTile.tile, piece: "soldier" });
-          }}
-          recruitKnight={
-            knightsUnlocked
-              ? () => {
-                  recruitOnTile({ tile: selectedTile.tile, piece: "knight" });
-                }
-              : undefined
-          }
+          recruitSoldier={recruitSoldier}
+          recruitKnight={recruitHandler("knight")}
           close={discardOptionDialog}
         />
       )}
