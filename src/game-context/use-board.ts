@@ -1,3 +1,9 @@
+import {
+  boardAfterBuild,
+  boardAfterMove,
+  boardAfterWallsDestroyed,
+  boardAfterRecruit,
+} from "game-logic/board.transitions";
 import { useState } from "react";
 import { initialBoard } from "./initial-board";
 
@@ -12,82 +18,28 @@ import { initialBoard } from "./initial-board";
 export function useBoard() {
   const [board, setBoard] = useState(initialBoard);
 
-  const buildOnTile = ({
-    tile,
-    building,
-  }: {
-    tile: TileID;
-    building: Building;
-  }) => {
-    setBoard((currentBoard) => {
-      return {
-        ...currentBoard,
-        [tile]: {
-          ...currentBoard[tile],
-          building,
-        },
-      };
-    });
+  const buildOnTile = (action: { tile: TileID; building: Building }) => {
+    setBoard((currentBoard) =>
+      boardAfterBuild({ board: currentBoard, ...action })
+    );
   };
 
-  const movePiece = ({
-    piece,
-    from,
-    to,
-  }: {
-    piece: Piece;
-    from: TileID;
-    to: TileID;
-  }) => {
-    setBoard((currentBoard) => {
-      const targetTile: Tile = {
-        ...currentBoard[to],
-        piece,
-      };
-      if (targetTile.building) {
-        targetTile.building = {
-          ...targetTile.building,
-          owner: piece.owner,
-        };
-      }
-      return {
-        ...currentBoard,
-        [from]: {
-          ...currentBoard[from],
-          piece: undefined,
-        },
-        [to]: targetTile,
-      };
-    });
+  const movePiece = (action: { piece: Piece; from: TileID; to: TileID }) => {
+    setBoard((currentBoard) =>
+      boardAfterMove({ board: currentBoard, ...action })
+    );
   };
 
   const destroyWalls = (tile: TileID) => {
-    setBoard((currentBoard) => {
-      const building = currentBoard[tile].building;
-      if (!building) {
-        return currentBoard;
-      }
-      return {
-        ...currentBoard,
-        [tile]: {
-          ...currentBoard[tile],
-          building: { ...building, hasWalls: false },
-        },
-      };
-    });
+    setBoard((currentBoard) =>
+      boardAfterWallsDestroyed({ board: currentBoard, tile })
+    );
   };
 
-  const recruitOnTile = ({ tile, piece }: { tile: TileID; piece: Piece }) => {
-    setBoard((currentBoard) => {
-      const newTile: Tile = {
-        ...currentBoard[tile],
-        piece,
-      };
-      return {
-        ...currentBoard,
-        [tile]: newTile,
-      };
-    });
+  const recruitOnTile = (action: { tile: TileID; piece: Piece }) => {
+    setBoard((currentBoard) =>
+      boardAfterRecruit({ board: currentBoard, ...action })
+    );
   };
 
   return {
