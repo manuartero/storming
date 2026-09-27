@@ -41,17 +41,13 @@ export function Menu() {
               <Button onClick={loadHandler}>LOAD GAME</Button>
             </>
           )}
-          {savegames.length > 0 && (
-            <>
-              {savegames.map((savegame) => (
-                <SavegameLoadItem
-                  key={savegame.createdAt}
-                  savegame={savegame}
-                  onLoad={gameContext.loadSavegame}
-                />
-              ))}
-            </>
-          )}
+          {savegames.map((savegame) => (
+            <SavegameLoadItem
+              key={savegame.createdAt}
+              savegame={savegame}
+              onLoad={gameContext.loadSavegame}
+            />
+          ))}
         </Dialog>
       )}
     </>
@@ -66,7 +62,7 @@ function SavegameLoadItem({
   onLoad: (state: GameState) => void;
 }) {
   const name = () =>
-    new Date(parseInt(savegame.createdAt)).toLocaleDateString();
+    new Date(parseInt(savegame.createdAt, 10)).toLocaleDateString();
 
   return (
     <Button

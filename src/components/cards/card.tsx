@@ -78,8 +78,8 @@ function ActionCardContents({ card: actionCard }: { card: ActionCard }) {
       </span>
       <span className={styles.content}>
         <span className={c(styles.text, fontStyles.paragraph)}>
-          {CARD_TEXT[action].map((p, idx) => (
-            <span key={idx} className={styles.paragraph}>
+          {CARD_TEXT[action].map((p) => (
+            <span key={p} className={styles.paragraph}>
               {p}
             </span>
           ))}

@@ -18,22 +18,20 @@ export function RecruitDialog({
 }: Props) {
   return (
     <Dialog size="small" title="Choose which troop to recruit" onClose={close}>
-      <>
+      <CardSilhouette
+        card="recruit-soldier"
+        player={player}
+        onClick={recruitSoldier}
+      />
+      <div className={styles.column}>
         <CardSilhouette
-          card="recruit-soldier"
+          card="recruit-knight"
           player={player}
-          onClick={recruitSoldier}
+          disabled={!recruitKnight}
+          onClick={recruitKnight}
         />
-        <div className={styles.column}>
-          <CardSilhouette
-            card="recruit-knight"
-            player={player}
-            disabled={!recruitKnight}
-            onClick={recruitKnight}
-          />
-          {!recruitKnight && <span>Knights need a town or a city</span>}
-        </div>
-      </>
+        {!recruitKnight && <span>Knights need a town or a city</span>}
+      </div>
     </Dialog>
   );
 }

@@ -9,25 +9,29 @@ function TestingComponent() {
   return (
     <>
       <ul>
-        {players.map((player, i) => (
-          <li key={`player-#${i}`}>{`${player.player} - ${
+        {players.map((player) => (
+          <li key={player.player}>{`${player.player} - ${
             player.points
           } points${player.greatestEmpirePoint ? "*" : ""}`}</li>
         ))}
       </ul>
       <button
+        type="button"
         data-testid="enemy1-scores-point"
         onClick={() => scorePoint("enemy1")}
       />
       <button
+        type="button"
         data-testid="reverse-players"
         onClick={() => reorderPlayers((current) => [...current].reverse())}
       />
       <button
+        type="button"
         data-testid="enemy3-greatest-empire"
         onClick={() => declareGreatestEmpire("enemy3")}
       />
       <button
+        type="button"
         data-testid="player-greatest-empire"
         onClick={() => declareGreatestEmpire("player")}
       />
