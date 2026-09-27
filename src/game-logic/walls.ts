@@ -1,6 +1,6 @@
 /**
- * rules.md › Walls: they stop enemy troops from entering.
- * rules.md › Attack: attacking a walled settlement destroys the wall;
+ * rules: build.wall.2 — walls stop enemy troops from entering.
+ * rules: attack.5 — attacking a walled settlement destroys the wall;
  * the troop stays in the region it attacked from.
  */
 export function isAttackingWalls({
