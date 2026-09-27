@@ -23,15 +23,19 @@ describe("buildOptions()", () => {
     expect(buildOptions({ board: boardWith({}), tile })).toEqual([]);
   });
 
-  test.each([
-    ["tower", "castle"],
-    ["castle", "citadel"],
-  ] as const)("a %s without walls: walls or upgrade to a %s", (type, next) => {
-    const board = boardWith({ building: { type, owner: "player" } });
-    expect(buildOptions({ board, tile })).toEqual([
-      { kind: "walls", building: { type, owner: "player", hasWalls: true } },
-      { kind: "upgrade", building: { type: next, owner: "player" } },
-    ]);
+  (
+    [
+      { type: "tower", upgraded: "castle" },
+      { type: "castle", upgraded: "citadel" },
+    ] as const
+  ).forEach(({ type, upgraded }) => {
+    test(`a ${type} without walls: walls or upgrade to a ${upgraded}`, () => {
+      const board = boardWith({ building: { type, owner: "player" } });
+      expect(buildOptions({ board, tile })).toEqual([
+        { kind: "walls", building: { type, owner: "player", hasWalls: true } },
+        { kind: "upgrade", building: { type: upgraded, owner: "player" } },
+      ]);
+    });
   });
 
   test("a walled building can only be upgraded, and keeps its walls", () => {
@@ -72,16 +76,15 @@ describe("recruitOptions()", () => {
     ]);
   });
 
-  test.each(["castle", "citadel"] as const)(
-    "a %s recruits soldiers and knights",
-    (type) => {
+  (["castle", "citadel"] as const).forEach((type) => {
+    test(`a ${type} recruits soldiers and knights`, () => {
       const board = boardWith({ building: { type, owner: "enemy2" } });
       expect(recruitOptions({ board, tile })).toEqual([
         { type: "soldier", owner: "enemy2" },
         { type: "knight", owner: "enemy2" },
       ]);
-    }
-  );
+    });
+  });
 
   test("no options on an occupied building", () => {
     const board = boardWith({
