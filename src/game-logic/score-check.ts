@@ -17,15 +17,15 @@ export function isCreatingGreatestEmpire({
   empires,
 }: {
   building: Building;
-  empires: Record<PlayerType, number>;
+  empires: Partial<Record<PlayerType, number>>;
 }) {
   const player = building.owner;
-  const newEmpireSize = empires[player] + 1;
+  const newEmpireSize = (empires[player] ?? 0) + 1;
   if (newEmpireSize < 3) {
     return false;
   }
   const isGreatestEmpire = Object.values(empires).every(
-    (size) => size < newEmpireSize
+    (size = 0) => size < newEmpireSize
   );
   if (isGreatestEmpire) {
     console.info(`Score: ${player} is creating the greatest empire`);

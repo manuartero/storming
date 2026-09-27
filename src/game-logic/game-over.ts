@@ -12,7 +12,7 @@ export function isConqueringLastSettlement({
 }: {
   targetTile: Tile;
   player: PlayerType;
-  empires: Record<PlayerType, number>;
+  empires: Partial<Record<PlayerType, number>>;
 }) {
   const owner = targetTile.building?.owner;
   if (owner && owner !== player && empires[owner] === 1) {

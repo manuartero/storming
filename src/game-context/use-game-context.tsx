@@ -1,3 +1,7 @@
+import {
+  activePlayer as findActivePlayer,
+  isPlanningComplete,
+} from "game-logic/active-player";
 import { empireSize } from "game-logic/empire-size";
 import { findWinner, isConqueringLastSettlement } from "game-logic/game-over";
 import { rotateToFirst } from "game-logic/player-order";
@@ -66,7 +70,7 @@ export function GameContextProvider({ children }: Props) {
   } = usePlayers();
 
   /* derived state */
-  const activePlayer = defineActivePlayer({
+  const activePlayer = findActivePlayer({
     activeCard: timeline.activeCard,
     phase: timeline.phase,
     next: timeline.next,
@@ -128,7 +132,7 @@ export function GameContextProvider({ children }: Props) {
     const player = action.building.owner;
     const createsGreatestEmpire = isCreatingGreatestEmpire({
       ...action,
-      empires: empireSize(board),
+      empires: empireSize({ board, players }),
     });
     if (createsGreatestEmpire) {
       declareGreatestEmpire(player);
@@ -164,7 +168,7 @@ export function GameContextProvider({ children }: Props) {
     const conquersLastSettlement = isConqueringLastSettlement({
       player,
       targetTile,
-      empires: empireSize(board),
+      empires: empireSize({ board, players }),
     });
     movePiece(action);
     _resolveActionCard({
@@ -238,7 +242,7 @@ export function GameContextProvider({ children }: Props) {
     }
 
     timeline.submitPlanification();
-    if (next[0] && next.length % 4 === 0) {
+    if (isPlanningComplete({ next, players })) {
       timeline.startActionPhase();
     }
   };
@@ -286,33 +290,4 @@ export function GameContextProvider({ children }: Props) {
 
 export function useGameContext() {
   return useContext(GameContext);
-}
-
-// TODO move to state
-function defineActivePlayer({
-  activeCard,
-  phase,
-  next,
-  players,
-}: {
-  activeCard: Card | undefined;
-  phase: PhaseType;
-  next: TimelineCard[];
-  players: PlayerStatus[];
-}) {
-  if (phase === "planification") {
-    // [ . . . . ]  playerOrder[0]    0, 4
-    // [ . ]        playerOrder[1]    1, 5
-    // [ . . ]      playerOrder[2]    2, 6
-    const committedActions = next.filter(
-      (timelineCard) => timelineCard.commited
-    );
-    return players[committedActions.length % 4].player;
-  }
-  if (phase === "action") {
-    if (activeCard && activeCard.cardType === "actionCard") {
-      return activeCard.owner;
-    }
-  }
-  return undefined;
 }

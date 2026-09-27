@@ -16,7 +16,7 @@ export function savegame(gameContext: GameContext) {
     gameContext;
   const item: Savegame = {
     createdAt: Date.now().toString(),
-    playerEmpireSize: empireSize(board).player,
+    playerEmpireSize: empireSize({ board, players }).player ?? 0,
     state: { phase, winner, activeCard, next, future, board, players },
   };
   try {
