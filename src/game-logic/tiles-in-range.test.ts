@@ -47,4 +47,9 @@ describe("tilesInRange()", () => {
     ];
     expect(got.sort()).toEqual(expected.sort());
   });
+
+  test("leaves out the tiles off the board", () => {
+    const got = tilesInRange({ tileId: "-4,0", range: 1 });
+    expect(got.sort()).toEqual(["-3,-1", "-3,0", "-3,1"].sort());
+  });
 });

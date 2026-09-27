@@ -23,26 +23,21 @@ describe("NewCard()", () => {
     });
   });
 
-  [
-    {
-      card: NewCard({ type: "move", player: "enemy1" }),
-      expectedId: "enemy1_move_1",
-    },
-    {
-      card: NewCard({ type: "move", player: "enemy1" }),
-      expectedId: "enemy1_move_2",
-    },
-    {
-      card: NewCard({ type: "move", player: "enemy2" }),
-      expectedId: "enemy2_move_1",
-    },
-    {
-      card: NewCard({ type: "move", player: "enemy2" }),
-      expectedId: "enemy2_move_2",
-    },
-  ].forEach(({ card, expectedId }) => {
-    test(`every Card{ } has a unique "cardId" (${expectedId})`, () => {
-      expect(card.cardId).toEqual(expectedId);
-    });
+  test("numbers the cardId per player and type", () => {
+    const ids = [
+      NewCard({ type: "move", player: "enemy1" }),
+      NewCard({ type: "move", player: "enemy1" }),
+      NewCard({ type: "move", player: "enemy2" }),
+      NewCard({ type: "build", player: "enemy1" }),
+      NewCard({ type: "move", player: "enemy2" }),
+    ].map(({ cardId }) => cardId);
+
+    expect(ids).toEqual([
+      "enemy1_move_1",
+      "enemy1_move_2",
+      "enemy2_move_1",
+      "enemy1_build_1",
+      "enemy2_move_2",
+    ]);
   });
 });

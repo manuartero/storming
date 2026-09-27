@@ -1,61 +1,54 @@
 import { isConquering, isCreatingGreatestEmpire } from "./score-check";
 
 describe("isConquering()", () => {
-  test("is true when the player moves onto an opponent settlement", () => {
-    const targetTile: Tile = {
-      building: { owner: "enemy1", type: "tower" },
-      piece: undefined,
-    };
-
-    expect(isConquering({ targetTile, player: "player" })).toEqual(true);
-    expect(isConquering({ targetTile, player: "enemy1" })).toEqual(false);
+  (
+    [
+      {
+        name: "an opponent settlement",
+        targetTile: { building: { owner: "enemy1", type: "tower" } },
+        expected: true,
+      },
+      {
+        name: "its own settlement",
+        targetTile: { building: { owner: "player", type: "tower" } },
+        expected: false,
+      },
+      { name: "an empty tile", targetTile: {}, expected: false },
+    ] as const
+  ).forEach(({ name, targetTile, expected }) => {
+    test(`moving onto ${name}: ${expected}`, () => {
+      expect(isConquering({ targetTile, player: "player" })).toBe(expected);
+    });
   });
 });
 
 describe("isCreatingGreatestEmpire()", () => {
-  test("is true when a new settlement gives the player more than anybody else (3 or more)", () => {
-    const empires = {
-      player: 2,
-      enemy1: 0,
-      enemy2: 1,
-      enemy3: 2,
-    };
+  const empires = { player: 2, enemy1: 0, enemy2: 1, enemy3: 2 };
 
+  (
+    [
+      { owner: "player", expected: true, why: "reaches 3, more than anybody" },
+      { owner: "enemy3", expected: true, why: "reaches 3, more than anybody" },
+      { owner: "enemy2", expected: false, why: "only reaches 2" },
+      { owner: "enemy1", expected: false, why: "only reaches 1" },
+    ] as const
+  ).forEach(({ owner, expected, why }) => {
+    test(`a new settlement for ${owner}: ${expected} (${why})`, () => {
+      expect(
+        isCreatingGreatestEmpire({
+          empires,
+          building: { owner, type: "tower" },
+        })
+      ).toBe(expected);
+    });
+  });
+
+  test("a tie is not the greatest empire", () => {
     expect(
       isCreatingGreatestEmpire({
-        empires,
-        building: {
-          owner: "player",
-          type: "tower",
-        },
+        empires: { player: 2, enemy1: 3 },
+        building: { owner: "player", type: "tower" },
       })
-    ).toEqual(true);
-    expect(
-      isCreatingGreatestEmpire({
-        empires,
-        building: {
-          owner: "enemy1",
-          type: "tower",
-        },
-      })
-    ).toEqual(false);
-    expect(
-      isCreatingGreatestEmpire({
-        empires,
-        building: {
-          owner: "enemy2",
-          type: "tower",
-        },
-      })
-    ).toEqual(false);
-    expect(
-      isCreatingGreatestEmpire({
-        empires,
-        building: {
-          owner: "enemy3",
-          type: "tower",
-        },
-      })
-    ).toEqual(true);
+    ).toBe(false);
   });
 });

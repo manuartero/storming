@@ -39,6 +39,19 @@ describe("getAvailableTilesForActionCard()", () => {
     }
   );
 
+  test("'recruit' action leaves out a settlement that already has a piece", () => {
+    const board = {
+      ...emptyBoard,
+      "0,0": { building: { owner: "player", type: "tower" }, piece: soldier },
+      "2,0": { building: { owner: "player", type: "tower" } },
+    } as Board;
+    const got = getAvailableTilesForActionCard({
+      activeCard: NewCard({ type: "recruit", player: "player" }),
+      board,
+    });
+    expect(got).toEqual(["2,0"]);
+  });
+
   test.each([
     { name: "a village", building: { type: "tower" }, available: true },
     {

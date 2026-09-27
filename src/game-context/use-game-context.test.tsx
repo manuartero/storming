@@ -224,3 +224,54 @@ describe("<GameContextProvider /> game over", () => {
     expect(result.current.players).toEqual(initialPlayerStatus);
   });
 });
+
+describe("<GameContextProvider /> build()", () => {
+  // #94 will revisit the greatest-empire rule: this tests today's behaviour
+  test("a third settlement, more than anybody else, gives the greatest empire", () => {
+    const { result } = renderHook(() => useGameContext(), {
+      wrapper: GameContextProvider,
+    });
+    act(() => {
+      result.current.loadSavegame({
+        phase: "action",
+        winner: undefined,
+        activeCard: NewCard({ type: "build", player: "player" }),
+        next: [
+          {
+            card: NewCard({ type: "recruit", player: "enemy1" }),
+            commited: true,
+          },
+        ],
+        future: [],
+        board: {
+          ...emptyBoard,
+          "-4,0": { building: { owner: "player", type: "tower" } },
+          "-2,-2": { building: { owner: "player", type: "tower" } },
+          "0,-3": { building: { owner: "enemy1", type: "tower" } },
+          "0,0": { piece: { owner: "player", type: "soldier" } },
+        },
+        players: initialPlayerStatus,
+      });
+    });
+
+    act(() => {
+      result.current.build({
+        tile: "0,0",
+        building: { owner: "player", type: "tower" },
+      });
+    });
+
+    expect(
+      result.current.players.map(({ player, greatestEmpirePoint }) => [
+        player,
+        greatestEmpirePoint,
+      ])
+    ).toEqual([
+      ["player", true],
+      ["enemy1", false],
+      ["enemy2", false],
+      ["enemy3", false],
+    ]);
+    expect(result.current.activeCard).toMatchObject({ owner: "enemy1" });
+  });
+});
