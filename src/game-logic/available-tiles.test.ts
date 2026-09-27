@@ -1,3 +1,4 @@
+import { emptyBoard } from "game-context/empty-board";
 import { initialBoard } from "game-context/initial-board";
 import { NewCard, _resetCardId } from "models/new-card";
 import { getAvailableTilesForActionCard } from "./available-tiles";
@@ -124,6 +125,25 @@ describe("getAvailableTilesForActionCard()", () => {
       expect(got).toEqual(available ? ["0,0"] : []);
     }
   );
+
+  test("'move' action leaves out pieces that have nowhere to go", () => {
+    const lake: Tile = { terrain: "lake" };
+    const board = {
+      ...emptyBoard,
+      "0,0": { piece: soldier },
+      "0,-1": lake,
+      "1,-1": lake,
+      "-1,0": lake,
+      "1,0": { piece: soldier },
+      "0,1": lake,
+      "1,1": lake,
+    } as Board;
+    const got = getAvailableTilesForActionCard({
+      activeCard: NewCard({ type: "move", player: "player" }),
+      board,
+    });
+    expect(got).toEqual(["1,0"]);
+  });
 
   test.todo("returns tiles in range for 'move' action");
 });

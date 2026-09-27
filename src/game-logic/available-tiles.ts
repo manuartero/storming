@@ -49,7 +49,8 @@ export function getAvailableTilesForActionCard({
     }
     return Object.entries(board)
       .filter(hasPieceFromSameOwner(activeCard))
-      .map(entryTileId);
+      .map(entryTileId)
+      .filter((tileId) => getInRangeMovements({ tileId, board }).length > 0);
   }
 
   if (activeCard.action === "build") {
