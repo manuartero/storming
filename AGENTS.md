@@ -42,7 +42,6 @@ src/
 ## Workflow
 
 - Aim for small PRs: one rule or one UI change each, with tests. Branch from `main`.
-- **Commits follow Conventional Commits,** and semantic-release versions `main` from them:
-  - `feat` → minor
-  - `fix`, `chore` and `style` → patch
-  - `docs`, `test` and `refactor` → no release
+- **Commits follow Conventional Commits.** The changelog groups them: `feat` → Features, `fix` → Fixes, `style` → Visual, the rest → Internal.
+- **Deploy:** every merge to `main` deploys to Vercel (Production); every PR gets a Preview. No version, no tag.
+- **Release:** on demand. `gh workflow run release -f version=X.Y.Z` opens a `chore(release): vX.Y.Z` PR that bumps `package.json` and prepends the CHANGELOG section (edit it in the PR if needed). Merging it tags `vX.Y.Z` and publishes the GitHub release.

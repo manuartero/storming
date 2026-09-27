@@ -1,26 +1,71 @@
 name: Release
 
+# On demand: run it with a version and it opens a `chore(release): vX.Y.Z` PR
+# (package.json bump + CHANGELOG section, editable before merging).
+# Merging that PR tags the merge commit and publishes the GitHub release.
 on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to release, e.g. 0.9.0"
+        required: true
   push:
     branches: [main]
 
 jobs:
-  release:
+  prepare:
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      issues: write
       pull-requests: write
+    env:
+      VERSION: ${{ inputs.version }}
+      GH_TOKEN: ${{ github.token }}
 
     steps:
       - uses: actions/checkout@v4
         with:
-          persist-credentials: false
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 20.19
 
-      - run: npm ci --ignore-scripts
-      - run: npm run release
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Check the version
+        run: |
+          VERSION="${VERSION#v}"
+          [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "::error::'$VERSION' is not X.Y.Z"; exit 1; }
+          ! git rev-parse -q --verify "refs/tags/v$VERSION" || { echo "::error::v$VERSION already exists"; exit 1; }
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+
+      - name: Bump package.json and write the changelog
+        run: |
+          npm version "$VERSION" --no-git-tag-version
+          node .github/scripts/changelog.mjs "$VERSION" > notes.md
+          cat notes.md CHANGELOG.md > CHANGELOG.next && mv CHANGELOG.next CHANGELOG.md
+
+      - name: Open the release PR
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "release/v$VERSION"
+          git commit -am "chore(release): v$VERSION"
+          git push -u origin "release/v$VERSION"
+          gh pr create --base main --title "chore(release): v$VERSION" --body-file notes.md
+
+  publish:
+    if: github.event_name == 'push' && startsWith(github.event.head_commit.message, 'chore(release): v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Tag and publish the GitHub release
+        run: |
+          VERSION=$(node -p 'require("./package.json").version')
+          awk -v head="# [$VERSION]" 'index($0, head) == 1 { on = 1; next } on && /^# \[/ { exit } on' CHANGELOG.md > notes.md
+          gh release create "v$VERSION" --target "$GITHUB_SHA" --title "v$VERSION" --notes-file notes.md
