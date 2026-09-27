@@ -2,15 +2,19 @@ import { render, screen } from "@testing-library/react";
 import { Avatar } from "./avatar";
 
 describe("<Avatar />", () => {
-  test('render: "player" avatar', () => {
+  test('the player defaults to "player"', () => {
     render(<Avatar />);
-    const playerAvatar = screen.getByRole("img", { name: "player avatar" });
-    expect(playerAvatar).toMatchSnapshot();
+
+    screen.getByRole("img", { name: "player avatar" });
   });
 
-  test('render: "enemy1" avatar', () => {
-    render(<Avatar player="enemy1" />);
-    const enemy1Avatar = screen.getByRole("img", { name: "enemy1 avatar" });
-    expect(enemy1Avatar).toBeInTheDocument();
+  (["player", "enemy1", "enemy2", "enemy3"] as const).forEach((player) => {
+    test(`shows the ${player} avatar`, () => {
+      render(<Avatar player={player} />);
+
+      expect(
+        screen.getByRole("img", { name: `${player} avatar` })
+      ).toHaveAttribute("aria-roledescription", "game avatar");
+    });
   });
 });

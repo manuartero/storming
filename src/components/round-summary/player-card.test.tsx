@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { PlayerCard } from "./player-card";
 
 describe("<PlayerCard />", () => {
@@ -8,18 +8,29 @@ describe("<PlayerCard />", () => {
     greatestEmpirePoint: false,
   };
 
-  it("render: article role", () => {
+  test("shows the avatar and the points", () => {
     render(<PlayerCard player={playerStatus} onClick={() => {}} />);
 
     const playerCard = screen.getByRole("article", { name: "player summary" });
-    expect(playerCard).toMatchSnapshot();
+    within(playerCard).getByRole("img", { name: "player avatar" });
+    expect(playerCard).toHaveTextContent("3pts");
+    expect(playerCard).not.toHaveAttribute("aria-current");
   });
 
-  it("render: button role while clickable", () => {
-    render(<PlayerCard player={playerStatus} clickable onClick={() => {}} />);
+  test("an active player card is aria-current", () => {
+    render(<PlayerCard player={playerStatus} active onClick={() => {}} />);
 
     expect(
-      screen.getByRole("button", { name: "player summary" })
-    ).toBeInTheDocument();
+      screen.getByRole("article", { name: "player summary" })
+    ).toHaveAttribute("aria-current", "true");
+  });
+
+  test("while clickable, clicking it calls onClick with the player", () => {
+    const onClick = jest.fn();
+    render(<PlayerCard player={playerStatus} clickable onClick={onClick} />);
+
+    fireEvent.click(screen.getByRole("button", { name: "player summary" }));
+
+    expect(onClick).toHaveBeenCalledWith(playerStatus);
   });
 });

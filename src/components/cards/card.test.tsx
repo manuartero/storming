@@ -4,28 +4,44 @@ import { NewCard } from "models/new-card";
 import { Card } from "./card";
 
 const actionCard = NewCard({ type: "build", player: "player" });
+const buildCard = () =>
+  screen.getByRole("button", { name: "player Build card" });
 
 describe("<Card />", () => {
-  it("render: button role when clickable", () => {
+  test("shows the title and the text of the card", () => {
     render(<Card card={actionCard} onClick={jest.fn()} />);
 
-    const card = screen.getByRole("button", { name: "player Build card" });
-    expect(card).toMatchSnapshot();
+    expect(buildCard()).toHaveTextContent("Build");
+    expect(buildCard()).toHaveTextContent("Found a new village");
+    expect(buildCard()).toHaveTextContent("Build walls on a settlement");
   });
 
-  it("render: article role when not clickable", () => {
+  test("render: article role when not clickable", () => {
     render(<Card card={actionCard} />);
 
-    expect(
-      screen.getByRole("article", { name: "player Build card" })
-    ).toBeInTheDocument();
+    screen.getByRole("article", { name: "player Build card" });
   });
 
-  it("Enter and Space click it", async () => {
+  (
+    [
+      { status: "available", pressed: "false", disabled: "false" },
+      { status: "selected", pressed: "true", disabled: "true" },
+      { status: "played", pressed: "false", disabled: "true" },
+    ] as const
+  ).forEach(({ status, pressed, disabled }) => {
+    test(`a ${status} card: aria-pressed ${pressed}, aria-disabled ${disabled}`, () => {
+      render(<Card card={actionCard} status={status} onClick={jest.fn()} />);
+
+      expect(buildCard()).toHaveAttribute("aria-pressed", pressed);
+      expect(buildCard()).toHaveAttribute("aria-disabled", disabled);
+    });
+  });
+
+  test("Enter and Space click it", async () => {
     const onClick = jest.fn();
     render(<Card card={actionCard} onClick={onClick} />);
 
-    screen.getByRole("button", { name: "player Build card" }).focus();
+    buildCard().focus();
     await userEvent.keyboard("{Enter}");
     await userEvent.keyboard(" ");
 
