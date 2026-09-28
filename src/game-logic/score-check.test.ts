@@ -1,4 +1,4 @@
-import { isConquering, isCreatingGreatestEmpire } from "./score-check";
+import { greatestEmpireHolder, isConquering } from "./score-check";
 
 describe("isConquering()", () => {
   (
@@ -22,34 +22,49 @@ describe("isConquering()", () => {
   });
 });
 
-describe("isCreatingGreatestEmpire()", () => {
-  const empires = { player: 2, enemy1: 0, enemy2: 1, enemy3: 2 };
-
+describe("greatestEmpireHolder()", () => {
   (
     [
-      { owner: "player", expected: true, why: "reaches 3, more than anybody" },
-      { owner: "enemy3", expected: true, why: "reaches 3, more than anybody" },
-      { owner: "enemy2", expected: false, why: "only reaches 2" },
-      { owner: "enemy1", expected: false, why: "only reaches 1" },
+      {
+        name: "strictly the most settlements takes the point",
+        empires: { player: 3, enemy1: 2, enemy2: 1 },
+        current: undefined,
+        expected: "player",
+      },
+      {
+        name: "there is no minimum size",
+        empires: { player: 1, enemy1: 0 },
+        current: undefined,
+        expected: "player",
+      },
+      {
+        name: "the point moves to a new strict leader",
+        empires: { player: 3, enemy1: 1 },
+        current: "enemy1",
+        expected: "player",
+      },
+      {
+        name: "a tie leaves the point with its holder",
+        empires: { player: 2, enemy1: 2 },
+        current: "enemy1",
+        expected: "enemy1",
+      },
+      {
+        name: "a tie gives the point to nobody",
+        empires: { player: 2, enemy1: 2, enemy2: 1 },
+        current: undefined,
+        expected: undefined,
+      },
+      {
+        name: "a tie between others leaves the point with its holder",
+        empires: { player: 3, enemy1: 3, enemy2: 2 },
+        current: "enemy2",
+        expected: "enemy2",
+      },
     ] as const
-  ).forEach(({ owner, expected, why }) => {
-    test(`a new settlement for ${owner}: ${expected} (${why})`, () => {
-      expect(
-        isCreatingGreatestEmpire({
-          empires,
-          building: { owner, type: "tower" },
-        })
-      ).toBe(expected);
+  ).forEach(({ name, empires, current, expected }) => {
+    test(`vp.rotating: ${name}`, () => {
+      expect(greatestEmpireHolder({ empires, current })).toBe(expected);
     });
-  });
-
-  // #94 will revisit ties: this tests today's behaviour
-  test("a tie is not the greatest empire", () => {
-    expect(
-      isCreatingGreatestEmpire({
-        empires: { player: 2, enemy1: 3 },
-        building: { owner: "player", type: "tower" },
-      })
-    ).toBe(false);
   });
 });

@@ -2,10 +2,11 @@ import {
   activePlayer as findActivePlayer,
   isPlanningComplete,
 } from "game-logic/active-player";
+import { boardAfterBuild, boardAfterMove } from "game-logic/board.transitions";
 import { empireSize } from "game-logic/empire-size";
 import { findWinner, isConqueringLastSettlement } from "game-logic/game-over";
 import { rotateToFirst } from "game-logic/player-order";
-import { isConquering, isCreatingGreatestEmpire } from "game-logic/score-check";
+import { greatestEmpireHolder, isConquering } from "game-logic/score-check";
 import {
   playersAfterGreatestEmpire,
   playersAfterScore,
@@ -121,6 +122,29 @@ export function GameContextProvider({ children }: Props) {
     }
   };
 
+  /* vp.rotating: re-checked after every change to who owns which settlement */
+  const _moveGreatestEmpire = ({
+    board,
+    players,
+  }: {
+    board: Board;
+    players: PlayerStatus[];
+  }) => {
+    const current = players.find(
+      ({ greatestEmpirePoint }) => greatestEmpirePoint
+    )?.player;
+    const holder = greatestEmpireHolder({
+      empires: empireSize({ board, players }),
+      current,
+    });
+    if (!holder || holder === current) {
+      return players;
+    }
+    console.info(`Score: ${holder} takes the rotating victory point`);
+    declareGreatestEmpire(holder);
+    return playersAfterGreatestEmpire({ players, player: holder });
+  };
+
   const build = (action: { tile: TileID; building: Building }) => {
     if (timeline.phase !== "action") {
       return warnInconsistentState(
@@ -129,19 +153,12 @@ export function GameContextProvider({ children }: Props) {
       );
     }
     console.info("buildOnTile()", action);
-    const player = action.building.owner;
-    const createsGreatestEmpire = isCreatingGreatestEmpire({
-      ...action,
-      empires: empireSize({ board, players }),
-    });
-    if (createsGreatestEmpire) {
-      declareGreatestEmpire(player);
-    }
     buildOnTile(action);
     _resolveActionCard({
-      players: createsGreatestEmpire
-        ? playersAfterGreatestEmpire({ players, player })
-        : players,
+      players: _moveGreatestEmpire({
+        board: boardAfterBuild({ board, ...action }),
+        players,
+      }),
     });
   };
 
@@ -172,7 +189,10 @@ export function GameContextProvider({ children }: Props) {
     });
     movePiece(action);
     _resolveActionCard({
-      players: conquers ? playersAfterScore({ players, player }) : players,
+      players: _moveGreatestEmpire({
+        board: boardAfterMove({ board, ...action }),
+        players: conquers ? playersAfterScore({ players, player }) : players,
+      }),
       conqueror: conquersLastSettlement ? player : undefined,
     });
   };
