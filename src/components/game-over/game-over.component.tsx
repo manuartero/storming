@@ -10,7 +10,7 @@ type Props = {
 const WINNER_TEXT: Record<PlayerType, string> = {
   player: "You win!",
   enemy1: "Red wins",
-  enemy2: "Blue wins",
+  enemy2: "Purple wins",
   enemy3: "Green wins",
 };
 

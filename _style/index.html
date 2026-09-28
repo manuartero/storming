@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en" data-font="alfa" data-player="player">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- unlisted, not secret: anyone with the URL can open it -->
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Storming style tile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Archivo:wdth,wght@62..125,400..900&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&display=swap"
+    />
+    <link rel="stylesheet" href="./style-tile.css" />
+    <script type="module" src="./style-tile.ts"></script>
+  </head>
+  <body>
+    <header class="intro">
+      <h1 class="wordmark">Storming</h1>
+      <p>
+        The style tile for the UI revamp (#98). The palette below is the
+        proposal for one unified palette. The chosen display font and frame
+        strength are marked; the alternatives stay for reference.
+        The rules behind it are in
+        <a href="https://github.com/manuartero/storming/blob/main/docs/art-direction.md">docs/art-direction.md</a>.
+      </p>
+    </header>
+
+    <section aria-labelledby="palette-title">
+      <h2 id="palette-title">Palette</h2>
+      <p class="lede">
+        The commissioned art already uses one neutral ramp (Bootstrap's grey
+        scale). It becomes the only grey scale, for the art and the UI alike,
+        with one ink for text and borders.
+      </p>
+
+      <ul class="ramp" aria-label="stone ramp">
+        <li class="swatch" style="--c: #f8f9fa">
+          <b>paper</b><code>#F8F9FA</code>
+        </li>
+        <li class="swatch" style="--c: #e9ecef">
+          <b>canvas</b><code>#E9ECEF</code>
+        </li>
+        <li class="swatch in-art" style="--c: #ced4da">
+          <b>stone light</b><code>#CED4DA</code>
+        </li>
+        <li class="swatch in-art" style="--c: #adb5bd">
+          <b>stone</b><code>#ADB5BD</code>
+        </li>
+        <li class="swatch in-art dark" style="--c: #6c757d">
+          <b>stone dark</b><code>#6C757D</code>
+        </li>
+        <li class="swatch in-art dark" style="--c: #212529">
+          <b>ink</b><code>#212529</code>
+        </li>
+      </ul>
+      <p class="note">
+        <span class="dot" aria-hidden="true"></span> used in the commissioned
+        art. Four greys between paper and ink: #DEE2E6 folded into canvas, and
+        the castle doorway (#495057) into ink. Stone dark is for text on white
+        only; on canvas, text is ink. Faces in the art keep their own two skin
+        tones.
+      </p>
+
+      <h3>Players: tint, main, shade</h3>
+      <div class="players">
+        <div class="player-ramp">
+          <b>Yellow</b>
+          <span class="chip" style="--c: #fff4d6">#FFF4D6</span>
+          <span class="chip" style="--c: #ffca3a">#FFCA3A</span>
+          <span class="chip dark" style="--c: #e0a500">#E0A500</span>
+        </div>
+        <div class="player-ramp">
+          <b>Red</b>
+          <span class="chip" style="--c: #ffe5e6">#FFE5E6</span>
+          <span class="chip" style="--c: #ff595e">#FF595E</span>
+          <span class="chip dark" style="--c: #e00007">#E00007</span>
+        </div>
+        <div class="player-ramp">
+          <b>Purple</b>
+          <span class="chip" style="--c: #ebe5f3">#EBE5F3</span>
+          <span class="chip dark" style="--c: #6a4c93">#6A4C93</span>
+          <span class="chip dark" style="--c: #44315e">#44315E</span>
+        </div>
+        <div class="player-ramp">
+          <b>Green</b>
+          <span class="chip" style="--c: #ebf6da">#EBF6DA</span>
+          <span class="chip" style="--c: #8ac926">#8AC926</span>
+          <span class="chip dark" style="--c: #76ab21">#76AB21</span>
+        </div>
+      </div>
+      <p class="note">
+        The shades come from the commissioned knights and avatars. The game
+        calls the purple seat "Blue" today; it becomes "Purple".
+      </p>
+
+      <details>
+        <summary>Retired: today's UI greys (slate, slightly blue) and the two folded greys</summary>
+        <div class="ramp retired">
+          <div class="swatch" style="--c: #f3f5f8"><code>#F3F5F8</code></div>
+          <div class="swatch" style="--c: #e2e7ed"><code>#E2E7ED</code></div>
+          <div class="swatch" style="--c: #c9d1da"><code>#C9D1DA</code></div>
+          <div class="swatch" style="--c: #8e9aa8"><code>#8E9AA8</code></div>
+          <div class="swatch dark" style="--c: #5b6878">
+            <code>#5B6878</code>
+          </div>
+          <div class="swatch dark" style="--c: #33404d">
+            <code>#33404D</code>
+          </div>
+          <div class="swatch dark" style="--c: #1d2833">
+            <code>#1D2833</code>
+          </div>
+          <div class="swatch" style="--c: #dee2e6"><code>#DEE2E6</code></div>
+          <div class="swatch dark" style="--c: #495057">
+            <code>#495057</code>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section aria-labelledby="type-title">
+      <h2 id="type-title">Display font</h2>
+      <p class="lede">
+        One heavy face for the wordmark, phase titles, card names and points.
+        Figtree stays for everything you read.
+      </p>
+
+      <fieldset class="switch">
+        <legend>Display font</legend>
+        <label>
+          <input type="radio" name="font" value="archivo" />
+          <span style="font-family: Archivo, sans-serif; font-stretch: 125%; font-weight: 900">
+            Archivo Expanded
+          </span>
+        </label>
+        <label>
+          <input type="radio" name="font" value="alfa" checked />
+          <span style="font-family: 'Alfa Slab One', serif">Alfa Slab One</span>
+          <span class="chosen">Chosen</span>
+        </label>
+        <label>
+          <input type="radio" name="font" value="bricolage" />
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800">
+            Bricolage Grotesque
+          </span>
+        </label>
+      </fieldset>
+
+      <div class="specimen">
+        <p class="display display-xl">Storming</p>
+        <p class="display display-l">Planning</p>
+        <p class="display display-m">Recruit a knight</p>
+        <p class="body-text">
+          Choose one: found a new village, upgrade a village or a town, or
+          build walls on a settlement. Plan in secret, then build, recruit and
+          march across a hex map.
+        </p>
+        <p class="display display-points">3 <small>pts</small></p>
+      </div>
+    </section>
+
+    <section aria-labelledby="frame-title">
+      <h2 id="frame-title">Frame strength</h2>
+      <p class="lede">
+        The art stays flat, with no outlines. The weight lives in the frame:
+        borders, hard shadows and radii. The same pieces in three strengths.
+      </p>
+
+      <fieldset class="switch">
+        <legend>Player colour</legend>
+        <label>
+          <input type="radio" name="player" value="player" checked />
+          <span class="seat" style="--c: #ffca3a"></span> Yellow
+        </label>
+        <label>
+          <input type="radio" name="player" value="enemy1" />
+          <span class="seat" style="--c: #ff595e"></span> Red
+        </label>
+        <label>
+          <input type="radio" name="player" value="enemy2" />
+          <span class="seat" style="--c: #6a4c93"></span> Purple
+        </label>
+        <label>
+          <input type="radio" name="player" value="enemy3" />
+          <span class="seat" style="--c: #8ac926"></span> Green
+        </label>
+      </fieldset>
+
+      <div class="strengths">
+        <div class="strength soft" data-strength="Soft (today)"></div>
+        <div class="strength firm" data-strength="Firm" data-chosen></div>
+        <div class="strength heavy" data-strength="Heavy"></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="terrain-title">
+      <h2 id="terrain-title">Terrain</h2>
+      <p class="lede">
+        Terrain is stone, like an unpainted miniature: forest and mountain use
+        only the greys, so the player colours stay the only strong colours on
+        the board. Water is the one exception, with a single blue. Every
+        terrain tile has a canvas face, set apart from the white of open
+        ground; the icon says which terrain it is.
+      </p>
+
+      <ul class="ramp terrain-ramp" aria-label="terrain colours">
+        <li class="swatch" style="--c: #e9ecef">
+          <b>terrain face (canvas)</b><code>#E9ECEF</code>
+        </li>
+        <li class="swatch" style="--c: #9ec9ea">
+          <b>water</b><code>#9EC9EA</code>
+        </li>
+      </ul>
+      <p class="note">
+        This retires the three terrain tints (#DEEDF8, #E2EFE0, #EBE8E4). The
+        Green seat stays green: a grey forest can't be mistaken for it, while a
+        blue seat would sit next to the water.
+      </p>
+
+      <h3>Terrain stands out of its tile</h3>
+      <p class="lede">
+        Terrain art is drawn like a miniature standing on the tile: its base
+        sits low in the hex, and it may rise a little above the top edge and
+        reach past the side corners. It never drops below the bottom edge.
+        Buildings and pieces stay inside their hex.
+      </p>
+      <div class="firm terrain-compare">
+        <div>
+          <p class="compare-title">Inside the hex</p>
+          <div class="terrain-hexes">
+        <figure>
+          <div class="hex terrain">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"><img data-asset="forest" alt="forest" class="terrain" /></span>
+          </div>
+          <figcaption>forest</figcaption>
+        </figure>
+        <figure>
+          <div class="hex terrain">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"><img data-asset="mountain" alt="mountain" class="terrain" /></span>
+          </div>
+          <figcaption>mountain</figcaption>
+        </figure>
+        <figure>
+          <div class="hex terrain">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"><img data-asset="lake" alt="lake" class="terrain" /></span>
+          </div>
+          <figcaption>lake</figcaption>
+        </figure>
+          </div>
+        </div>
+        <div>
+          <p class="compare-title">Standing out</p>
+          <div class="terrain-hexes">
+        <figure>
+          <div class="hex terrain stand forest">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+            <img data-asset="forest" alt="forest" class="terrain-art" />
+          </div>
+          <figcaption>forest</figcaption>
+        </figure>
+        <figure>
+          <div class="hex terrain stand mountain">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+            <img data-asset="mountain" alt="mountain" class="terrain-art" />
+          </div>
+          <figcaption>mountain</figcaption>
+        </figure>
+        <figure>
+          <div class="hex terrain stand lake">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+            <img data-asset="lake" alt="lake" class="terrain-art" />
+          </div>
+          <figcaption>lake</figcaption>
+        </figure>
+          </div>
+        </div>
+      </div>
+
+      <h3>On a board</h3>
+      <div class="firm mini-board">
+        <div class="mini-row">
+          <div class="hex">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+          </div>
+          <div class="hex terrain stand forest">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+            <img data-asset="forest" alt="forest" class="terrain-art" />
+          </div>
+          <div class="hex">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+          </div>
+          <div class="hex">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+          </div>
+          <div class="hex">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+          </div>
+        </div>
+        <div class="mini-row">
+          <div class="hex">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+          </div>
+          <div class="hex owned">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"><img data-asset="knight" alt="knight" class="piece" /></span>
+          </div>
+          <div class="hex terrain stand mountain">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+            <img data-asset="mountain" alt="mountain" class="terrain-art" />
+          </div>
+          <div class="hex">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+          </div>
+          <div class="hex terrain stand lake">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+            <img data-asset="lake" alt="lake" class="terrain-art" />
+          </div>
+        </div>
+        <div class="mini-row">
+          <div class="hex">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+          </div>
+          <div class="hex owned">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"><img data-asset="tower" alt="tower" class="building" /></span>
+          </div>
+          <div class="hex terrain stand forest">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+            <img data-asset="forest" alt="forest" class="terrain-art" />
+          </div>
+          <div class="hex">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+          </div>
+          <div class="hex">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+          </div>
+        </div>
+      </div>
+      <p class="note">
+        All three are generated from the prompts below, traced to SVG and
+        snapped to the palette. Each SVG is cropped to the art, so CSS sets
+        where it stands and how far it reaches.
+      </p>
+
+      <h3>Generate the terrain</h3>
+      <p class="lede">
+        In ChatGPT, attach the three reference images to every prompt, then
+        paste one prompt. Make 3 or 4 versions and keep the one that sits best
+        next to the tower. Then trace it to SVG, snapped to the palette, and save it as <code>src/elements/tiles/assets/&lt;name&gt;.svg</code>.
+      </p>
+      <div class="refs">
+        <a href="./refs/ref-tower.png" download>
+          <img src="./refs/ref-tower.png" alt="tower reference" class="ref-image" />
+          <span>ref-tower.png</span>
+        </a>
+        <a href="./refs/ref-castle.png" download>
+          <img src="./refs/ref-castle.png" alt="castle reference" class="ref-image" />
+          <span>ref-castle.png</span>
+        </a>
+        <a href="./refs/ref-knight.png" download>
+          <img src="./refs/ref-knight.png" alt="knight reference" class="ref-image" />
+          <span>ref-knight.png</span>
+        </a>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head">
+          <b>Forest</b>
+          <button type="button" class="copy">Copy prompt</button>
+        </div>
+        <pre>A small forest for a hex board-game tile: three rounded broadleaf trees and one tall pointed conifer, overlapping, on a short flat strip of ground. Match the attached reference images exactly: the same flat vector style, chunky friendly geometric shapes, front view, flat fills only. No outlines, no gradients, no textures, no shadows, no text, no background scene. Use ONLY these colours: #CED4DA and #ADB5BD for the tree crowns (light and shaded sides), #6C757D for trunks and the ground strip, and #212529 for at most one or two tiny dark details. No green, no brown, no other colours: the trees are grey stone, like an unpainted miniature. Centered on a fully transparent background, 1024x1024 PNG, the subject fills about 80% of the canvas and stays readable at 32 px.</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head">
+          <b>Mountain</b>
+          <button type="button" class="copy">Copy prompt</button>
+        </div>
+        <pre>Mountains for a hex board-game tile: two overlapping rocky peaks, the taller one in front with a snow cap, built from a few large faceted rock planes. Match the attached reference images exactly: the same flat vector style, chunky friendly geometric shapes, front view, flat fills only. No outlines, no gradients, no textures, no shadows, no text, no background scene. Use ONLY these colours: #ADB5BD for the lit rock faces, #6C757D for the shaded faces, #CED4DA for the back peak, #F8F9FA for the snow cap, and #212529 for at most one or two tiny dark details. No other colours. Centered on a fully transparent background, 1024x1024 PNG, the subject fills about 80% of the canvas and stays readable at 32 px.</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head">
+          <b>Lake</b>
+          <button type="button" class="copy">Copy prompt</button>
+        </div>
+        <pre>A lake for a hex board-game tile: a small rounded pond seen from slightly above, with a stone rim of a few rounded rocks on the near bank, two short wave lines on the water and a tiny reed tuft on one side. Match the attached reference images exactly: the same flat vector style, chunky friendly geometric shapes, flat fills only. No outlines, no gradients, no textures, no shadows, no text, no background scene. Use ONLY these colours: #9EC9EA for the water, #F8F9FA for the wave lines, #ADB5BD and #6C757D for the rocks and the reeds. The water is the only blue; no other colours. Centered on a fully transparent background, 1024x1024 PNG, the subject fills about 80% of the canvas and stays readable at 32 px.</pre>
+      </div>
+    </section>
+
+
+    <template id="frame-sample">
+      <h3 class="strength-title">Frame</h3>
+      <div class="hexes">
+        <div class="hex owned">
+          <span class="hex-shadow"></span><span class="hex-stroke"></span>
+          <span class="hex-face">
+            <img data-asset="castle" alt="castle" class="building" />
+          </span>
+        </div>
+        <div class="hex owned">
+          <span class="hex-shadow"></span><span class="hex-stroke"></span>
+          <span class="hex-face">
+            <img data-asset="tower" alt="tower" class="building" />
+          </span>
+        </div>
+        <div class="hex owned">
+          <span class="hex-shadow"></span><span class="hex-stroke"></span>
+          <span class="hex-face">
+            <img data-asset="knight" alt="knight" class="piece" />
+          </span>
+        </div>
+        <div class="hex available">
+          <span class="hex-shadow"></span><span class="hex-stroke"></span>
+          <span class="hex-face"></span>
+        </div>
+        <div class="hex lake">
+          <span class="hex-shadow"></span><span class="hex-stroke"></span>
+          <span class="hex-face">
+            <img data-asset="lake" alt="lake" class="terrain" />
+          </span>
+        </div>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <div class="card-title">
+            <span class="card-icon" data-bg="build-icn"></span>
+            <span class="display">Build</span>
+          </div>
+          <div class="card-text">
+            <span>Choose one:</span>
+            <span>Found a new village</span>
+            <span>Upgrade a village or a town</span>
+            <span>Build walls on a settlement</span>
+          </div>
+          <span class="card-mark" data-bg="build-bg"></span>
+        </article>
+        <article class="card">
+          <div class="card-title">
+            <span class="card-icon" data-bg="move-icn"></span>
+            <span class="display">Move</span>
+          </div>
+          <div class="card-text">
+            <span>Move up to two different troops</span>
+          </div>
+          <span class="card-mark" data-bg="move-bg"></span>
+        </article>
+      </div>
+
+      <div class="controls">
+        <button type="button" class="button primary">Confirm plan</button>
+        <button type="button" class="button">Skip</button>
+      </div>
+
+      <div class="summary">
+        <span class="avatar" data-bg="avatar"></span>
+        <span class="display points">3 <small>pts</small></span>
+      </div>
+    </template>
+  </body>
+</html>
