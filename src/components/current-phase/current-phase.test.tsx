@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { NewCard } from "models/new-card";
-import { CurrentPhase } from "./current-phase";
+import { CurrentPhase } from "./current-phase.component";
 
 const currentPhase = () =>
   screen.getByRole("region", { name: "current phase" });

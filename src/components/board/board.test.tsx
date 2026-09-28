@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { emptyBoard } from "game-context/empty-board";
 import { TILES } from "models/tiles";
-import { Board } from "./board";
+import { Board } from "./board.component";
 
 jest.mock("elements/tiles/use-piece-offset");
 

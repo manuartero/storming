@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
-import { PlayerCard } from "./player-card";
+import { PlayerCard } from "./player-card.component";
 
 describe("<PlayerCard />", () => {
   const playerStatus = {

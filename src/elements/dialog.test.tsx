@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { Dialog } from "./dialog";
+import { Dialog } from "./dialog.component";
 
 describe("<Dialog />", () => {
   test("render: dialog role [no title]", () => {

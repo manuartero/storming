@@ -1,0 +1,93 @@
+import c from "classnames";
+import {
+  AnimatePresence,
+  LayoutGroup,
+  LazyMotion,
+  MotionConfig,
+  m,
+} from "framer-motion";
+import { useId } from "react";
+import { ActionLineItem } from "./line-item.component";
+
+import styles from "./timeline.module.css";
+
+type Props = {
+  next: TimelineCard[];
+  future: TimelineCard[];
+};
+
+/* the animation engine is a separate chunk: the timeline starts empty, so the
+   first paint doesn't wait for it (`layout` needs domMax, not domAnimation) */
+const loadMotionFeatures = () =>
+  import("./timeline.motion").then((mod) => mod.default);
+
+/* a new card pops in with a bounce, a resolved one shrinks away */
+const LINE_ITEM_MOTION = {
+  initial: { opacity: 0, scale: 0 },
+  animate: {
+    opacity: [0, 0.9, 0.9, 1, 1, 1, 1],
+    scale: [0, 1.3, 0.8, 1.2, 0.9, 1.1, 1],
+  },
+  exit: { opacity: 0, scale: 0 },
+  transition: { duration: 0.3 },
+};
+
+export function Timeline({ next, future }: Props) {
+  const id = useId();
+  const renderLineItems = (section: TimelineCard[]) => {
+    return section.map(({ card, commited }) => {
+      if (card.cardType !== "actionCard") return null;
+      return (
+        <m.div
+          key={card.cardId}
+          role="listitem"
+          aria-label={`${card.owner} card${commited ? "" : ", pending"}`}
+          layout
+          {...LINE_ITEM_MOTION}
+        >
+          <ActionLineItem card={card} commited={commited} />
+        </m.div>
+      );
+    });
+  };
+
+  return (
+    // reducedMotion="user": no bounce with prefers-reduced-motion: reduce
+    <LazyMotion features={loadMotionFeatures} strict>
+      <MotionConfig reducedMotion="user">
+        <section className={styles.timeline} aria-label="timeline">
+          <div className={c(styles.next, styles.section)}>
+            <span className={styles.sectionName} id={`${id}-next`}>
+              NEXT
+            </span>
+            {/* biome-ignore lint/a11y/useSemanticElements: the items are m.div; a ul would need m.li and a list-style reset */}
+            <div
+              className={styles.line}
+              role="list"
+              aria-labelledby={`${id}-next`}
+            >
+              <LayoutGroup id="next-timeline">
+                <AnimatePresence>{renderLineItems(next)}</AnimatePresence>
+              </LayoutGroup>
+            </div>
+          </div>
+          <div className={c(styles.future, styles.section)}>
+            <span className={styles.sectionName} id={`${id}-future`}>
+              FUTURE
+            </span>
+            {/* biome-ignore lint/a11y/useSemanticElements: the items are m.div; a ul would need m.li and a list-style reset */}
+            <div
+              className={styles.line}
+              role="list"
+              aria-labelledby={`${id}-future`}
+            >
+              <LayoutGroup id="future-timeline">
+                <AnimatePresence>{renderLineItems(future)}</AnimatePresence>
+              </LayoutGroup>
+            </div>
+          </div>
+        </section>
+      </MotionConfig>
+    </LazyMotion>
+  );
+}

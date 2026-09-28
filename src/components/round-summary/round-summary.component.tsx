@@ -1,5 +1,5 @@
 import { useGameContext } from "game-context";
-import { PlayerCard } from "./player-card";
+import { PlayerCard } from "./player-card.component";
 
 import styles from "./round-summary.module.css";
 

@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { Avatar } from "./avatar";
+import { Avatar } from "./avatar.component";
 
 describe("<Avatar />", () => {
   test('the player defaults to "player"', () => {

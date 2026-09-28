@@ -1,6 +1,6 @@
 import { render, screen, within } from "@testing-library/react";
 import { NewCard } from "models/new-card";
-import { Timeline } from "./timeline";
+import { Timeline } from "./timeline.component";
 
 const next: TimelineCard[] = [
   { card: NewCard({ type: "move", player: "enemy1" }), commited: true },

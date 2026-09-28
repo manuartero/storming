@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { GameOver } from "./game-over";
+import { GameOver } from "./game-over.component";
 
 describe("<GameOver />", () => {
   test("names the winner", () => {

@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { Piece } from "./piece";
+import { Piece } from "./piece.component";
 
 describe("<Piece />", () => {
   test('render: "soldier" piece', () => {

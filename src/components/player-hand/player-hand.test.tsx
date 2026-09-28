@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { NewCard } from "models/new-card";
-import { PlayerHand } from "./player-hand";
+import { PlayerHand } from "./player-hand.component";
 
 const cards: PlayerHand = [
   {
