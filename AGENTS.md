@@ -31,7 +31,7 @@ src/
 - **Filenames are kebab-case,** with the module first: `<module>.<role>.ts(x)` for new files (`foo.test.ts`).
 - **No new `utils/`, `types/`, `helpers/` or `common/` folders.** Name folders by domain. Accepted non-domain folders: `lib/`, `data/`, `services/`, `styles/`.
 - **Styling:** CSS modules (`*.module.css`) next to the component.
-- **Art and visual style:** [`docs/art-direction.md`](docs/art-direction.md), with the style tile at `/_style/` (`_style/index.html`). New art is AI-generated and traced with `cmd/trace-art.py`.
+- **Art and visual style:** [`docs/art-direction.md`](docs/art-direction.md), with the style tile at `/_style/` (`_style/index.html`). New art is AI-generated and traced to SVG.
 - **Lint and format:** Biome (`biome.json`). `npm run lint` checks, `npm run format` rewrites; CI runs `biome ci .`.
 
 ## Tests

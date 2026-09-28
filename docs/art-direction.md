@@ -48,7 +48,7 @@ The visual reference is the style tile at **`/_style/`** (`_style/index.html`; `
 ## Making new art
 
 1. **Generate** in the ChatGPT project. Its instructions are [`art-direction.chatgpt.txt`](art-direction.chatgpt.txt); attach `_style/refs/ref-{tower,castle,knight}.png`. Per-asset prompts live on the style tile. Make 3–4 versions and keep the one that sits best next to the tower.
-2. **Trace** with `cmd/trace-art.py`: it snaps every pixel to the palette you pass, crops tight to the art, traces with vtracer and snaps the SVG fills again.
+2. **Trace** it to SVG (for example vectorizer.ai): snap every pixel to the palette first, keep hard edges, crop the SVG tight to the art, then snap every fill to the exact hex values.
 3. **Recolour** player art: draw it in Yellow, then swap its tint, main and shade for each player (table above).
 4. **Save** it next to its component, named like the rest (`<name>--<player>.svg`). Aim for about 15 kB per SVG; the commissioned pieces are 20–28 kB, and that's fine.
 5. **Never let the generator draw text.** Lettering is set in a font.
