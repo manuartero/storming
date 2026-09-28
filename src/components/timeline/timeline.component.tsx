@@ -2,8 +2,9 @@ import c from "classnames";
 import {
   AnimatePresence,
   LayoutGroup,
+  LazyMotion,
   MotionConfig,
-  motion,
+  m,
 } from "framer-motion";
 import { useId } from "react";
 import { ActionLineItem } from "./line-item.component";
@@ -14,6 +15,11 @@ type Props = {
   next: TimelineCard[];
   future: TimelineCard[];
 };
+
+/* the animation engine is a separate chunk: the timeline starts empty, so the
+   first paint doesn't wait for it (`layout` needs domMax, not domAnimation) */
+const loadMotionFeatures = () =>
+  import("./timeline.motion").then((mod) => mod.default);
 
 /* a new card pops in with a bounce, a resolved one shrinks away */
 const LINE_ITEM_MOTION = {
@@ -32,7 +38,7 @@ export function Timeline({ next, future }: Props) {
     return section.map(({ card, commited }) => {
       if (card.cardType !== "actionCard") return null;
       return (
-        <motion.div
+        <m.div
           key={card.cardId}
           role="listitem"
           aria-label={`${card.owner} card${commited ? "" : ", pending"}`}
@@ -40,46 +46,48 @@ export function Timeline({ next, future }: Props) {
           {...LINE_ITEM_MOTION}
         >
           <ActionLineItem card={card} commited={commited} />
-        </motion.div>
+        </m.div>
       );
     });
   };
 
   return (
     // reducedMotion="user": no bounce with prefers-reduced-motion: reduce
-    <MotionConfig reducedMotion="user">
-      <section className={styles.timeline} aria-label="timeline">
-        <div className={c(styles.next, styles.section)}>
-          <span className={styles.sectionName} id={`${id}-next`}>
-            NEXT
-          </span>
-          {/* biome-ignore lint/a11y/useSemanticElements: the items are motion.div; a ul would need motion.li and a list-style reset */}
-          <div
-            className={styles.line}
-            role="list"
-            aria-labelledby={`${id}-next`}
-          >
-            <LayoutGroup id="next-timeline">
-              <AnimatePresence>{renderLineItems(next)}</AnimatePresence>
-            </LayoutGroup>
+    <LazyMotion features={loadMotionFeatures} strict>
+      <MotionConfig reducedMotion="user">
+        <section className={styles.timeline} aria-label="timeline">
+          <div className={c(styles.next, styles.section)}>
+            <span className={styles.sectionName} id={`${id}-next`}>
+              NEXT
+            </span>
+            {/* biome-ignore lint/a11y/useSemanticElements: the items are m.div; a ul would need m.li and a list-style reset */}
+            <div
+              className={styles.line}
+              role="list"
+              aria-labelledby={`${id}-next`}
+            >
+              <LayoutGroup id="next-timeline">
+                <AnimatePresence>{renderLineItems(next)}</AnimatePresence>
+              </LayoutGroup>
+            </div>
           </div>
-        </div>
-        <div className={c(styles.future, styles.section)}>
-          <span className={styles.sectionName} id={`${id}-future`}>
-            FUTURE
-          </span>
-          {/* biome-ignore lint/a11y/useSemanticElements: the items are motion.div; a ul would need motion.li and a list-style reset */}
-          <div
-            className={styles.line}
-            role="list"
-            aria-labelledby={`${id}-future`}
-          >
-            <LayoutGroup id="future-timeline">
-              <AnimatePresence>{renderLineItems(future)}</AnimatePresence>
-            </LayoutGroup>
+          <div className={c(styles.future, styles.section)}>
+            <span className={styles.sectionName} id={`${id}-future`}>
+              FUTURE
+            </span>
+            {/* biome-ignore lint/a11y/useSemanticElements: the items are m.div; a ul would need m.li and a list-style reset */}
+            <div
+              className={styles.line}
+              role="list"
+              aria-labelledby={`${id}-future`}
+            >
+              <LayoutGroup id="future-timeline">
+                <AnimatePresence>{renderLineItems(future)}</AnimatePresence>
+              </LayoutGroup>
+            </div>
           </div>
-        </div>
-      </section>
-    </MotionConfig>
+        </section>
+      </MotionConfig>
+    </LazyMotion>
   );
 }
