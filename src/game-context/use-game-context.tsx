@@ -6,7 +6,7 @@ import { boardAfterBuild, boardAfterMove } from "game-logic/board.transitions";
 import { empireSize } from "game-logic/empire-size";
 import { findWinner, isConqueringLastSettlement } from "game-logic/game-over";
 import { rotateToFirst } from "game-logic/player-order";
-import { greatestEmpireHolder, isConquering } from "game-logic/score-check";
+import { greatestEmpireTaker, isConquering } from "game-logic/score-check";
 import {
   playersAfterGreatestEmpire,
   playersAfterScore,
@@ -130,19 +130,13 @@ export function GameContextProvider({ children }: Props) {
     board: Board;
     players: PlayerStatus[];
   }) => {
-    const current = players.find(
-      ({ greatestEmpirePoint }) => greatestEmpirePoint
-    )?.player;
-    const holder = greatestEmpireHolder({
-      empires: empireSize({ board, players }),
-      current,
-    });
-    if (!holder || holder === current) {
+    const taker = greatestEmpireTaker({ board, players });
+    if (!taker) {
       return players;
     }
-    console.info(`Score: ${holder} takes the rotating victory point`);
-    declareGreatestEmpire(holder);
-    return playersAfterGreatestEmpire({ players, player: holder });
+    console.info(`Score: ${taker} takes the rotating victory point`);
+    declareGreatestEmpire(taker);
+    return playersAfterGreatestEmpire({ players, player: taker });
   };
 
   const build = (action: { tile: TileID; building: Building }) => {

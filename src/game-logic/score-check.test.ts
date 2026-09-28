@@ -1,4 +1,8 @@
-import { greatestEmpireHolder, isConquering } from "./score-check";
+import {
+  greatestEmpireHolder,
+  greatestEmpireTaker,
+  isConquering,
+} from "./score-check";
 
 describe("isConquering()", () => {
   (
@@ -65,6 +69,33 @@ describe("greatestEmpireHolder()", () => {
   ).forEach(({ name, empires, current, expected }) => {
     test(name, () => {
       expect(greatestEmpireHolder({ empires, current })).toBe(expected);
+    });
+  });
+});
+
+describe("greatestEmpireTaker()", () => {
+  const board = {
+    "-4,0": { building: { owner: "player", type: "tower" } },
+    "0,-3": { building: { owner: "player", type: "castle" } },
+    "1,0": { building: { owner: "enemy1", type: "tower" } },
+  } as Board;
+  const holding = (holder: PlayerType) =>
+    (["player", "enemy1"] as const).map((player) => ({
+      player,
+      points: 0,
+      greatestEmpirePoint: player === holder,
+    }));
+
+  (
+    [
+      { holder: "enemy1", expected: "player", why: "the point moves" },
+      { holder: "player", expected: undefined, why: "the holder keeps it" },
+    ] as const
+  ).forEach(({ holder, expected, why }) => {
+    test(`${holder} holds the point, 2 settlements to 1: ${why}`, () => {
+      expect(greatestEmpireTaker({ board, players: holding(holder) })).toBe(
+        expected
+      );
     });
   });
 });

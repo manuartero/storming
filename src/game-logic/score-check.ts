@@ -1,3 +1,5 @@
+import { empireSize } from "./empire-size";
+
 export function isConquering({
   targetTile,
   player,
@@ -24,4 +26,22 @@ export function greatestEmpireHolder({
   const most = Math.max(...sizes.map(([, size]) => size));
   const leaders = sizes.filter(([, size]) => size === most);
   return leaders.length === 1 ? leaders[0][0] : current;
+}
+
+/* whoever takes the point from its holder on this board, if anybody */
+export function greatestEmpireTaker({
+  board,
+  players,
+}: {
+  board: Board;
+  players: PlayerStatus[];
+}) {
+  const current = players.find(
+    ({ greatestEmpirePoint }) => greatestEmpirePoint
+  )?.player;
+  const holder = greatestEmpireHolder({
+    empires: empireSize({ board, players }),
+    current,
+  });
+  return holder === current ? undefined : holder;
 }
