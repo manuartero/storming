@@ -357,16 +357,21 @@
         </div>
       </div>
       <p class="note">
-        All three are generated from the prompts below, traced to SVG and
-        snapped to the palette. Each SVG is cropped to the art, so CSS sets
+        All three are generated from the prompts in Generate art, traced to
+        SVG and snapped to the palette. Each SVG is cropped to the art, so CSS sets
         where it stands and how far it reaches.
       </p>
+    </section>
 
-      <h3>Generate the terrain</h3>
+    <section aria-labelledby="art-title">
+      <h2 id="art-title">Generate art</h2>
       <p class="lede">
         In ChatGPT, attach the three reference images to every prompt, then
         paste one prompt. Make 3 or 4 versions and keep the one that sits best
-        next to the tower. Then trace it to SVG, snapped to the palette, and save it as <code>src/elements/tiles/assets/&lt;name&gt;.svg</code>.
+        next to the tower. Then trace it to SVG, snapped to the palette, and
+        save it next to its component (terrain and buildings in
+        <code>src/elements/tiles/assets/</code>). Player art is drawn in Yellow,
+        then recoloured for each seat.
       </p>
       <div class="refs">
         <a href="./refs/ref-tower.png" download>
@@ -406,12 +411,26 @@
         </div>
         <pre>A lake for a hex board-game tile: a small rounded pond seen from slightly above, with a stone rim of a few rounded rocks on the near bank, two short wave lines on the water and a tiny reed tuft on one side. Match the attached reference images exactly: the same flat vector style, chunky friendly geometric shapes, flat fills only. No outlines, no gradients, no textures, no shadows, no text, no background scene. Use ONLY these colours: #9EC9EA for the water, #F8F9FA for the wave lines, #ADB5BD and #6C757D for the rocks and the reeds. The water is the only blue; no other colours. Centered on a fully transparent background, 1024x1024 PNG, the subject fills about 80% of the canvas and stays readable at 32 px.</pre>
       </div>
+
+      <div class="prompt">
+        <div class="prompt-head">
+          <b>City</b>
+          <button type="button" class="copy">Copy prompt</button>
+        </div>
+        <pre>A city for a hex board-game tile, one step grander than the attached castle: a tall central keep with crenellations, flanked by two shorter tapered towers like the attached tower, all joined by a low crenellated wall with a closed gate in the middle, and one small square banner on a short pole on top of the keep. About as wide as the castle and a little taller. Match the attached reference images exactly: the same flat vector style, chunky friendly geometric shapes, front view, flat fills only. No outlines, no gradients, no textures, no shadows, no text, no letters, no emblems, no background scene. Use ONLY these colours: #CED4DA for the crenellations, #ADB5BD for the tower and wall faces, #6C757D for the windows and doorways, #212529 for the gate and the banner pole only, #FFCA3A for one flat band under the battlements of each tower and the keep (as in the references), and #E0A500 for the banner. The yellow is the only colour; no other colours. Centered on a fully transparent background, 1024x1024 PNG, the subject fills about 80% of the canvas and stays readable at 32 px.</pre>
+      </div>
     </section>
 
 
     <template id="frame-sample">
       <h3 class="strength-title">Frame</h3>
       <div class="hexes">
+        <div class="hex owned">
+          <span class="hex-shadow"></span><span class="hex-stroke"></span>
+          <span class="hex-face">
+            <img data-asset="citadel" alt="city" class="building" />
+          </span>
+        </div>
         <div class="hex owned">
           <span class="hex-shadow"></span><span class="hex-stroke"></span>
           <span class="hex-face">

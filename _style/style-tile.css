@@ -416,6 +416,11 @@ details summary {
   }
 }
 
+/* the lake is wide and flat: it needs more width to weigh the same */
+.hex .hex-face img.terrain[data-asset="lake"] {
+  width: 96%;
+}
+
 .hex.owned {
   --hex-stroke: var(--main);
 
@@ -762,7 +767,8 @@ ul.ramp {
   --art-w: 116%;
 }
 .hex.lake.stand {
-  --art-w: 128%;
+  --art-w: 175%;
+  bottom: 10%;
 }
 
 .mini-board {
