@@ -731,3 +731,59 @@ ul.ramp {
     outline-offset: 2px;
   }
 }
+
+/* terrain that stands out of its tile */
+
+.terrain-compare {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px 48px;
+}
+
+.compare-title {
+  margin: 0 0 12px;
+  font-weight: 600;
+}
+
+/* the art sits above the face, outside the clipped layers */
+.hex .terrain-art {
+  position: absolute;
+  left: 50%;
+  bottom: 16%;
+  z-index: 2;
+  width: var(--art-w);
+  translate: -50% 0;
+  pointer-events: none;
+}
+.hex.forest {
+  --art-w: 108%;
+}
+.hex.mountain {
+  --art-w: 116%;
+}
+.hex.lake.stand {
+  --art-w: 128%;
+}
+
+.mini-board {
+  --w: 72px;
+  --h: calc(var(--w) / 0.866);
+  padding: 24px 0 8px;
+
+  & .hex {
+    margin: 0;
+  }
+}
+
+.mini-row {
+  display: flex;
+  gap: 6px;
+
+  & + .mini-row {
+    margin-top: calc(var(--h) * -0.25 + 6px);
+  }
+
+  &:nth-child(even) {
+    margin-left: calc(var(--w) / 2 + 3px);
+  }
+}

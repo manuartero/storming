@@ -216,46 +216,148 @@
         blue seat would sit next to the water.
       </p>
 
-      <h3>The terrain art, on the new faces</h3>
-      <div class="firm terrain-hexes">
-        <figure>
-          <div class="hex">
-            <span class="hex-shadow"></span><span class="hex-stroke"></span>
-            <span class="hex-face"></span>
-          </div>
-          <figcaption>open ground</figcaption>
-        </figure>
+      <h3>Terrain stands out of its tile</h3>
+      <p class="lede">
+        Terrain art is drawn like a miniature standing on the tile: its base
+        sits low in the hex, and it may rise a little above the top edge and
+        reach past the side corners. It never drops below the bottom edge.
+        Buildings and pieces stay inside their hex.
+      </p>
+      <div class="firm terrain-compare">
+        <div>
+          <p class="compare-title">Inside the hex</p>
+          <div class="terrain-hexes">
         <figure>
           <div class="hex terrain">
             <span class="hex-shadow"></span><span class="hex-stroke"></span>
-            <span class="hex-face">
-              <img data-asset="forest" alt="forest" class="terrain" />
-            </span>
+            <span class="hex-face"><img data-asset="forest" alt="forest" class="terrain" /></span>
           </div>
           <figcaption>forest</figcaption>
         </figure>
         <figure>
           <div class="hex terrain">
             <span class="hex-shadow"></span><span class="hex-stroke"></span>
-            <span class="hex-face">
-              <img data-asset="mountain" alt="mountain" class="terrain" />
-            </span>
+            <span class="hex-face"><img data-asset="mountain" alt="mountain" class="terrain" /></span>
           </div>
           <figcaption>mountain</figcaption>
         </figure>
         <figure>
           <div class="hex terrain">
             <span class="hex-shadow"></span><span class="hex-stroke"></span>
-            <span class="hex-face">
-              <img data-asset="lake" alt="lake" class="terrain" />
-            </span>
+            <span class="hex-face"><img data-asset="lake" alt="lake" class="terrain" /></span>
           </div>
           <figcaption>lake</figcaption>
         </figure>
+          </div>
+        </div>
+        <div>
+          <p class="compare-title">Standing out</p>
+          <div class="terrain-hexes">
+        <figure>
+          <div class="hex terrain stand forest">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+            <img data-asset="forest" alt="forest" class="terrain-art" />
+          </div>
+          <figcaption>forest</figcaption>
+        </figure>
+        <figure>
+          <div class="hex terrain stand mountain">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+            <img data-asset="mountain" alt="mountain" class="terrain-art" />
+          </div>
+          <figcaption>mountain</figcaption>
+        </figure>
+        <figure>
+          <div class="hex terrain stand lake">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+            <img data-asset="lake" alt="lake" class="terrain-art" />
+          </div>
+          <figcaption>lake</figcaption>
+        </figure>
+          </div>
+        </div>
+      </div>
+
+      <h3>On a board</h3>
+      <div class="firm mini-board">
+        <div class="mini-row">
+          <div class="hex">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+          </div>
+          <div class="hex terrain stand forest">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+            <img data-asset="forest" alt="forest" class="terrain-art" />
+          </div>
+          <div class="hex">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+          </div>
+          <div class="hex">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+          </div>
+          <div class="hex">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+          </div>
+        </div>
+        <div class="mini-row">
+          <div class="hex">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+          </div>
+          <div class="hex owned">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"><img data-asset="knight" alt="knight" class="piece" /></span>
+          </div>
+          <div class="hex terrain stand mountain">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+            <img data-asset="mountain" alt="mountain" class="terrain-art" />
+          </div>
+          <div class="hex">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+          </div>
+          <div class="hex terrain stand lake">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+            <img data-asset="lake" alt="lake" class="terrain-art" />
+          </div>
+        </div>
+        <div class="mini-row">
+          <div class="hex">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+          </div>
+          <div class="hex owned">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"><img data-asset="tower" alt="tower" class="building" /></span>
+          </div>
+          <div class="hex terrain stand forest">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+            <img data-asset="forest" alt="forest" class="terrain-art" />
+          </div>
+          <div class="hex">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+          </div>
+          <div class="hex">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+          </div>
+        </div>
       </div>
       <p class="note">
         All three are generated from the prompts below, traced to SVG and
-        snapped to the palette.
+        snapped to the palette. Each SVG is cropped to the art, so CSS sets
+        where it stands and how far it reaches.
       </p>
 
       <h3>Generate the terrain</h3>
