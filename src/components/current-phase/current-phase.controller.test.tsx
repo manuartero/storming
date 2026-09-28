@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { GameContextProvider } from "game-context";
-import { CurrentPhaseController } from "./current-phase-controller";
+import { CurrentPhaseController } from "./current-phase.controller";
 
 describe("<CurrentPhaseController />", () => {
   test("shows Planning when a game starts", () => {

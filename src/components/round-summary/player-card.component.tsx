@@ -1,5 +1,5 @@
 import c from "classnames";
-import { Avatar } from "./avatar/avatar";
+import { Avatar } from "./avatar/avatar.component";
 
 import styles from "./player-card.module.css";
 

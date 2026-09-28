@@ -1,7 +1,7 @@
 import { useGameContext } from "game-context";
 import { isActionCard } from "models/new-card";
 import { warnInconsistentState } from "lib/console";
-import { CurrentPhase } from "./current-phase";
+import { CurrentPhase } from "./current-phase.component";
 import { mustSkip } from "./must-skip";
 
 export function CurrentPhaseController() {

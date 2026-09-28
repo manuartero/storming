@@ -2,10 +2,10 @@ import { useGameContext } from "game-context";
 import { buildOptions, recruitOptions } from "game-logic/build-options";
 import { useState } from "react";
 import { warnInconsistentState } from "lib/console";
-import { Board } from "./board";
-import { BuildDialog } from "./build-dialog";
+import { Board } from "./board.component";
+import { BuildDialog } from "./build-dialog.component";
 import { inferVisualBoardFromGameContext } from "./infer-visual-board";
-import { RecruitDialog } from "./recruit-dialog";
+import { RecruitDialog } from "./recruit-dialog.component";
 
 type SelectedTile = {
   tile: TileID;

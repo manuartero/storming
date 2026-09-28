@@ -10,14 +10,14 @@ src/
   game-context/          the bridge to React: one provider, three plain-state hooks
   game-logic/            the rules engine: pure TS, no React
   models/                factories and static data (NewCard, NewBuilding, PLAYER_CARDS, tiles)
-  components/            features: <name>-controller.tsx + <name>.tsx view
+  components/            features: <name>.controller.tsx + <name>.component.tsx view
   elements/              reusable UI primitives (Button, Dialog, Tile, Piece)
   services/              services (no UI)
 ```
 
 - **Rule code lives in `game-logic/`:** if a bot or a headless test could need it, it goes there. Only UI state (a selected tile, an open dialog) and visual status (`infer-*.ts`) stay in `components/`. `game-logic/` doesn't log; the bridge does.
 - **The hooks are plain state:** named setters built on `game-logic/` transitions (`<slice>After<Event>`, e.g. `boardAfterMove`), no game logic, no validation. No reducers. The provider calls the rules before it updates state.
-- **Controller / view split:** a controller reads `useGameContext()`, derives visual state (`infer-*.ts`) and passes props to a pure view. Views don't read the context.
+- **Controller / view split:** a controller (`<name>.controller.tsx`) reads `useGameContext()`, derives visual state (`infer-*.ts`) and passes props to a pure view (`<name>.component.tsx`). Views don't read the context.
 - **Phases:** `planification` (each player puts a card on NEXT and on FUTURE, in player order) → `action` (resolve NEXT one card at a time) → back to `planification`.
 - **Board:** a hex grid of offset coordinates keyed `"x,y"` (`TileID`).
 

@@ -1,5 +1,5 @@
 import c from "classnames";
-import { Card } from "components/cards/card";
+import { Card } from "components/cards/card.component";
 import { useState } from "react";
 
 import styles from "./player-hand.module.css";

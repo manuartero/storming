@@ -1,2 +1,2 @@
-export { Card } from "./card";
-export { CardSilhouette } from "./card.silhouette";
+export { Card } from "./card.component";
+export { CardSilhouette } from "./card-silhouette.component";

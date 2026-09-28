@@ -2,7 +2,7 @@ import { useGameContext } from "game-context";
 import { isActionCard } from "models/new-card";
 import { warnInconsistentState } from "lib/console";
 import { inferPlayerHandsFromGameContext } from "./infer-player-hands";
-import { PlayerHand } from "./player-hand";
+import { PlayerHand } from "./player-hand.component";
 
 export function PlayerHandController() {
   const gameContext = useGameContext();

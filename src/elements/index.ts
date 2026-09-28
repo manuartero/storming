@@ -1,4 +1,4 @@
-export { Button } from "./button";
-export { Dialog } from "./dialog";
-export { Piece } from "./pieces/piece";
-export { Tile } from "./tiles/tile";
+export { Button } from "./button.component";
+export { Dialog } from "./dialog.component";
+export { Piece } from "./pieces/piece.component";
+export { Tile } from "./tiles/tile.component";

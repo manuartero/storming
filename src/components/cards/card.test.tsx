@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { NewCard } from "models/new-card";
-import { Card } from "./card";
+import { Card } from "./card.component";
 
 const actionCard = NewCard({ type: "build", player: "player" });
 const buildCard = () =>

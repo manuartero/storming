@@ -1,5 +1,5 @@
 import { useGameContext } from "game-context";
-import { GameOver } from "./game-over";
+import { GameOver } from "./game-over.component";
 
 export function GameOverController() {
   const gameContext = useGameContext();

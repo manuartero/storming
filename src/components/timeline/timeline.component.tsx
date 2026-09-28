@@ -6,7 +6,7 @@ import {
   motion,
 } from "framer-motion";
 import { useId } from "react";
-import { ActionLineItem } from "./line-item";
+import { ActionLineItem } from "./line-item.component";
 
 import styles from "./timeline.module.css";
 

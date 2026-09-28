@@ -1,5 +1,5 @@
 import { render, screen, within } from "@testing-library/react";
-import { Tile } from "./tile";
+import { Tile } from "./tile.component";
 
 jest.mock("./use-piece-offset");
 
