@@ -23,6 +23,7 @@ export function Board({ state, activePlayer, onTileClick }: Props) {
           status={s.status}
           terrain={s.terrain}
           building={s.building?.type}
+          hasWalls={s.building?.hasWalls}
           owner={s.building?.owner || s.piece?.owner}
           activePlayer={activePlayer}
           onClick={onTileClick}

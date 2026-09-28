@@ -10,6 +10,10 @@ import towerEnemy1 from "./tower--enemy1.svg";
 import towerEnemy2 from "./tower--enemy2.svg";
 import towerEnemy3 from "./tower--enemy3.svg";
 import towerPlayer from "./tower--player.svg";
+import wallsEnemy1 from "./walls--enemy1.svg";
+import wallsEnemy2 from "./walls--enemy2.svg";
+import wallsEnemy3 from "./walls--enemy3.svg";
+import wallsPlayer from "./walls--player.svg";
 
 import forest from "./forest.svg";
 import lake from "./lake.svg";
@@ -40,5 +44,11 @@ export const tileAssets = {
       enemy2: citadelEnemy2,
       enemy3: citadelEnemy3,
     },
+  },
+  walls: {
+    player: wallsPlayer,
+    enemy1: wallsEnemy1,
+    enemy2: wallsEnemy2,
+    enemy3: wallsEnemy3,
   },
 };

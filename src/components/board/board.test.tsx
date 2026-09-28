@@ -16,6 +16,9 @@ const visualBoard: VisualBoard = {
     status: "selected",
   },
   "-1,-1": { terrain: "lake", status: "forbidden" },
+  "1,-3": {
+    building: { owner: "player", type: "tower", hasWalls: true },
+  },
 };
 
 const tile = (id: TileID) => screen.getByRole("button", { name: `tile ${id}` });
@@ -39,6 +42,15 @@ describe("<Board />", () => {
       hidden: true,
     });
     expect(within(tile("0,0")).queryByRole("img")).toBeNull();
+  });
+
+  test("a walled settlement shows its walls (build.wall.1)", () => {
+    render(<Board state={visualBoard} onTileClick={jest.fn()} />);
+
+    within(tile("1,-3")).getByRole("img", { name: "player walls" });
+    expect(
+      within(tile("0,-3")).queryByRole("img", { name: "enemy1 walls" })
+    ).toBeNull();
   });
 
   test("each tile shows its status", () => {

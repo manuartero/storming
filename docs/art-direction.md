@@ -43,7 +43,7 @@ The visual reference is the style tile at **`/_style/`** (`_style/index.html`; `
 
 - Forest and mountain use only the greys; the lake uses the water blue. Every terrain tile has a canvas face; open ground stays white.
 - **Terrain stands out of its tile.** Its base sits low in the hex (about 16% up), and it may rise a little above the top edge and reach past the side corners. It never drops below the bottom edge. Buildings and pieces stay inside their hex.
-- In the app, `.tile` clips everything with `clip-path`, and a clip-path also makes a stacking context. The art must sit outside the clipped layers: move the hexagon clip from `.tile` to its stroke and face layers, keep the hit area on the clipped layer, and give the art `pointer-events: none` and a z-index above the next tile.
+- In the app, `.tile` doesn't clip: the hexagon `clip-path` is on its stroke and inner layers, and the clipped stroke layer is the hit area. Art that stands out sits outside those layers with `pointer-events: none` (the walls do; the terrain still sits in the inner layer, so it is still clipped).
 
 ## Making new art
 
@@ -53,11 +53,18 @@ The visual reference is the style tile at **`/_style/`** (`_style/index.html`; `
 4. **Save** it next to its component, named like the rest (`<name>--<player>.svg`). Aim for about 15 kB per SVG; the commissioned pieces are 20–28 kB, and that's fine.
 5. **Never let the generator draw text.** Lettering is set in a font.
 
+**Geometric art is built by hand.** When the art is pure geometry (the walls: a hexagon ring, towers, merlons), the generated image is only the design. The SVG is written by hand from it, on the exact tile hexagon, in the same palette.
+
+## Walls
+
+- The walls are the edge of the tile, not art in the middle. The ring follows the tile hexagon, and the towers and merlons stand out a little past it, into the gap between tiles.
+- The status stroke moves inside the walls: owner colour, thicker when available, ink when selected.
+- `walls--<player>.svg` is the 86.6 × 100 hexagon plus 5 units on every side. It sits outside the clipped layers, like terrain.
+
 ## Placeholders
 
 | What | Where | Ticket |
 |---|---|---|
-| No walls art | tile, build-walls silhouette | #52, #39 |
 | No first-player marker, victory point token or rotating victory point | turn order | #52, #34, #35 |
 | Vite favicon, no wordmark | `public/`, menu, game over | #52, #104 |
 | White box card frame, no card back | `cards/` | #101 |
@@ -67,3 +74,4 @@ The visual reference is the style tile at **`/_style/`** (`_style/index.html`; `
 | MARKETPLACE and Player Inventory panels, NEXT / FUTURE shown twice | `app.module.css` | #103 |
 | ~~Line-art forest, lake and invisible mountain~~ | `tiles/assets/` | #52, done |
 | ~~City reuses the castle art~~ | `tiles/assets/` | #52, done |
+| ~~No walls art~~ | tile, build-walls silhouette | #52, #39, done |

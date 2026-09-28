@@ -10,6 +10,7 @@ type _BaseProps = PropsWithChildren<{
   status?: TileStatus;
   terrain?: TerrainType;
   building?: BuildingType;
+  hasWalls?: boolean;
   owner?: PlayerType;
   activePlayer?: PlayerType;
   disableChildrenOffset?: boolean;
@@ -31,6 +32,7 @@ export function Tile({
   id,
   terrain,
   building,
+  hasWalls = false,
   owner,
   activePlayer,
   status,
@@ -49,6 +51,7 @@ export function Tile({
         status && styles[status],
         owner && styles[owner],
         owner && styles.controlled,
+        hasWalls && owner && styles.walled,
         terrain && styles[terrain],
         status === "available" && activePlayer && styles[activePlayer]
       )}
@@ -67,6 +70,7 @@ export function Tile({
         {terrain && <Terrain variant={terrain} />}
       </div>
 
+      {hasWalls && owner && <Walls owner={owner} />}
       {building && owner && <Building variant={building} owner={owner} />}
       {children && (
         <div className={c(styles.piece)} style={pieceStyle}>
@@ -87,6 +91,18 @@ function Terrain({ variant }: { variant: TerrainType }) {
       aria-roledescription="game terrain"
       aria-label={`terrain ${variant}`}
       style={{ backgroundImage: `url(${icon})` }}
+    />
+  );
+}
+
+function Walls({ owner }: { owner: PlayerType }) {
+  return (
+    <div
+      role="img"
+      className={c(styles.walls)}
+      aria-roledescription="game building"
+      aria-label={`${owner} walls`}
+      style={{ backgroundImage: `url(${tileAssets.walls[owner]})` }}
     />
   );
 }
