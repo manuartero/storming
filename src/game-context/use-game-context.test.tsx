@@ -232,9 +232,28 @@ describe("<GameContextProvider />", () => {
     });
   });
 
-  describe("build()", () => {
-    // #94 will revisit the greatest-empire rule: this tests today's behaviour
-    test("a third settlement, more than anybody else, gives the greatest empire", () => {
+  describe("the rotating victory point", () => {
+    const tower = (owner: PlayerType): Building => ({ owner, type: "tower" });
+    const holding = (holder: PlayerType | undefined) =>
+      initialPlayerStatus.map((status) => ({
+        ...status,
+        greatestEmpirePoint: status.player === holder,
+      }));
+    const holder = (result: { current: GameContext }) =>
+      result.current.players.find(
+        ({ greatestEmpirePoint }) => greatestEmpirePoint
+      )?.player;
+
+    /* the player's active card resolves first, then enemy1's recruit */
+    const loadActionPhase = ({
+      action,
+      board,
+      players,
+    }: {
+      action: "build" | "move";
+      board: Partial<Board>;
+      players: PlayerStatus[];
+    }) => {
       const { result } = renderHook(() => useGameContext(), {
         wrapper: GameContextProvider,
       });
@@ -242,7 +261,7 @@ describe("<GameContextProvider />", () => {
         result.current.loadSavegame({
           phase: "action",
           winner: undefined,
-          activeCard: NewCard({ type: "build", player: "player" }),
+          activeCard: NewCard({ type: action, player: "player" }),
           next: [
             {
               card: NewCard({ type: "recruit", player: "enemy1" }),
@@ -250,36 +269,81 @@ describe("<GameContextProvider />", () => {
             },
           ],
           future: [],
-          board: {
-            ...emptyBoard,
-            "-4,0": { building: { owner: "player", type: "tower" } },
-            "-2,-2": { building: { owner: "player", type: "tower" } },
-            "0,-3": { building: { owner: "enemy1", type: "tower" } },
-            "0,0": { piece: { owner: "player", type: "soldier" } },
-          },
-          players: initialPlayerStatus,
+          board: { ...emptyBoard, ...board },
+          players,
         });
+      });
+      return result;
+    };
+
+    test("a new settlement that makes the biggest empire takes the point", () => {
+      const result = loadActionPhase({
+        action: "build",
+        board: {
+          "-4,0": { building: tower("player") },
+          "0,-3": { building: tower("enemy1") },
+          "0,0": { piece: { owner: "player", type: "soldier" } },
+        },
+        players: holding(undefined),
       });
 
       act(() => {
-        result.current.build({
-          tile: "0,0",
-          building: { owner: "player", type: "tower" },
-        });
+        result.current.build({ tile: "0,0", building: tower("player") });
       });
 
-      expect(
-        result.current.players.map(({ player, greatestEmpirePoint }) => [
-          player,
-          greatestEmpirePoint,
-        ])
-      ).toEqual([
-        ["player", true],
-        ["enemy1", false],
-        ["enemy2", false],
-        ["enemy3", false],
-      ]);
+      expect(holder(result)).toBe("player");
       expect(result.current.activeCard).toMatchObject({ owner: "enemy1" });
+    });
+
+    (
+      [
+        { name: "an upgrade", building: { owner: "player", type: "castle" } },
+        {
+          name: "walls",
+          building: { owner: "player", type: "tower", hasWalls: true },
+        },
+      ] as const
+    ).forEach(({ name, building }) => {
+      test(`#87: building ${name} doesn't take the point in a tie`, () => {
+        const result = loadActionPhase({
+          action: "build",
+          board: {
+            "-4,0": { building: tower("player") },
+            "-2,-2": { building: tower("player") },
+            "-3,0": { building: tower("player") },
+            "0,-3": { building: tower("enemy1") },
+            "2,-3": { building: tower("enemy1") },
+            "3,0": { building: tower("enemy1") },
+          },
+          players: holding(undefined),
+        });
+
+        act(() => {
+          result.current.build({ tile: "-4,0", building });
+        });
+
+        expect(holder(result)).toBeUndefined();
+      });
+    });
+
+    test("a conquest moves the point to the new biggest empire", () => {
+      const soldier: Piece = { owner: "player", type: "soldier" };
+      const result = loadActionPhase({
+        action: "move",
+        board: {
+          "-4,0": { building: tower("player") },
+          "0,-3": { building: tower("enemy1") },
+          "1,0": { building: tower("enemy1") },
+          "0,0": { piece: soldier },
+        },
+        players: holding("enemy1"),
+      });
+
+      act(() => {
+        result.current.move({ piece: soldier, from: "0,0", to: "1,0" });
+      });
+
+      expect(holder(result)).toBe("player");
     });
   });
 });

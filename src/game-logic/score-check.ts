@@ -1,3 +1,5 @@
+import { empireSize } from "./empire-size";
+
 export function isConquering({
   targetTile,
   player,
@@ -12,24 +14,34 @@ export function isConquering({
   return false;
 }
 
-export function isCreatingGreatestEmpire({
-  building,
+/* strictly the most settlements takes the point; a tie leaves it where it is */
+export function greatestEmpireHolder({
   empires,
+  current,
 }: {
-  building: Building;
   empires: Partial<Record<PlayerType, number>>;
+  current: PlayerType | undefined;
 }) {
-  const player = building.owner;
-  const newEmpireSize = (empires[player] ?? 0) + 1;
-  if (newEmpireSize < 3) {
-    return false;
-  }
-  const isGreatestEmpire = Object.values(empires).every(
-    (size = 0) => size < newEmpireSize
-  );
-  if (isGreatestEmpire) {
-    console.info(`Score: ${player} is creating the greatest empire`);
-    return true;
-  }
-  return false;
+  const sizes = Object.entries(empires) as [PlayerType, number][];
+  const most = Math.max(...sizes.map(([, size]) => size));
+  const leaders = sizes.filter(([, size]) => size === most);
+  return leaders.length === 1 ? leaders[0][0] : current;
+}
+
+/* whoever takes the point from its holder on this board, if anybody */
+export function greatestEmpireTaker({
+  board,
+  players,
+}: {
+  board: Board;
+  players: PlayerStatus[];
+}) {
+  const current = players.find(
+    ({ greatestEmpirePoint }) => greatestEmpirePoint
+  )?.player;
+  const holder = greatestEmpireHolder({
+    empires: empireSize({ board, players }),
+    current,
+  });
+  return holder === current ? undefined : holder;
 }
