@@ -46,7 +46,15 @@ for (const column of document.querySelectorAll<HTMLElement>(".strength")) {
   if (!sample) break;
   const content = sample.content.cloneNode(true) as DocumentFragment;
   const title = content.querySelector(".strength-title");
-  if (title) title.textContent = column.dataset.strength ?? "";
+  if (title) {
+    title.textContent = column.dataset.strength ?? "";
+    if (column.dataset.chosen !== undefined) {
+      title.insertAdjacentHTML(
+        "beforeend",
+        '<span class="chosen">Chosen</span>'
+      );
+    }
+  }
   column.append(content);
 }
 

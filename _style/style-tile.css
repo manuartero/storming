@@ -5,11 +5,9 @@
 :root {
   --paper: #f8f9fa;
   --canvas: #e9ecef;
-  --stone-200: #dee2e6;
-  --stone-300: #ced4da;
-  --stone-400: #adb5bd;
-  --stone-600: #6c757d;
-  --stone-700: #495057;
+  --stone-light: #ced4da;
+  --stone: #adb5bd;
+  --stone-dark: #6c757d;
   --ink: #212529;
   --white: #ffffff;
   --lake: #dbeaf5;
@@ -27,10 +25,11 @@
   --enemy3-main: #8ac926;
   --enemy3-shade: #76ab21;
 
-  --display: "Archivo", system-ui, sans-serif;
-  --display-stretch: 125%;
-  --display-weight: 900;
-  --display-tracking: -0.02em;
+  /* chosen: Alfa Slab One */
+  --display: "Alfa Slab One", Georgia, serif;
+  --display-stretch: 100%;
+  --display-weight: 400;
+  --display-tracking: 0;
 
   color-scheme: light;
 }
@@ -62,11 +61,11 @@
   --on-main: var(--ink);
 }
 
-[data-font="alfa"] {
-  --display: "Alfa Slab One", Georgia, serif;
-  --display-stretch: 100%;
-  --display-weight: 400;
-  --display-tracking: 0;
+[data-font="archivo"] {
+  --display: "Archivo", system-ui, sans-serif;
+  --display-stretch: 125%;
+  --display-weight: 900;
+  --display-tracking: -0.02em;
 }
 [data-font="bricolage"] {
   --display: "Bricolage Grotesque", system-ui, sans-serif;
@@ -136,7 +135,6 @@ h3 {
 .note {
   max-width: 68ch;
   margin: 0 0 20px;
-  color: var(--stone-700);
 }
 
 .note {
@@ -197,7 +195,7 @@ code {
   margin-top: 12px;
   border-style: dashed;
   border-width: 2px;
-  border-color: var(--stone-600);
+  border-color: var(--stone-dark);
 
   & .swatch {
     min-height: 64px;
@@ -207,7 +205,7 @@ code {
 details summary {
   margin-top: 24px;
   cursor: pointer;
-  color: var(--stone-700);
+  color: var(--ink);
 }
 
 .players {
@@ -331,7 +329,7 @@ details summary {
 .soft {
   --bw: 0px;
   --hex-bw: 2px;
-  --hex-stroke: var(--stone-200);
+  --hex-stroke: var(--stone-light);
   --off: 0px;
   --radius: 14px;
   --shadow: 0 1px 2px #2125291f, 0 1px 1px #21252914;
@@ -365,7 +363,7 @@ details summary {
 .strength {
   padding: 20px 20px 28px;
   background: var(--canvas);
-  border: 2px dashed var(--stone-400);
+  border: 2px dashed var(--stone);
 }
 
 .strength-title {
@@ -533,7 +531,7 @@ details summary {
   font-weight: 600;
   color: var(--ink);
   background: var(--white);
-  border: 1.5px solid var(--stone-300);
+  border: 1.5px solid var(--stone-light);
   border-radius: 8px;
   box-shadow: var(--shadow);
   cursor: pointer;
@@ -618,4 +616,23 @@ ul.ramp {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.chosen {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border: 2px solid var(--ink);
+  background: var(--player-main);
+  color: var(--ink);
+  font-family: "Figtree Variable", system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+  vertical-align: middle;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.switch label:has(:checked) .chosen {
+  border-color: var(--white);
+  box-shadow: none;
 }

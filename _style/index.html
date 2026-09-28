@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-font="archivo" data-player="player">
+<html lang="en" data-font="alfa" data-player="player">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,8 +20,8 @@
       <h1 class="wordmark">Storming</h1>
       <p>
         The style tile for the UI revamp (#98). The palette below is the
-        proposal for one unified palette. Pick a display font and a frame
-        strength; the art direction doc records the choices.
+        proposal for one unified palette. The chosen display font and frame
+        strength are marked; the alternatives stay for reference.
       </p>
     </header>
 
@@ -40,28 +40,25 @@
         <li class="swatch" style="--c: #e9ecef">
           <b>canvas</b><code>#E9ECEF</code>
         </li>
-        <li class="swatch" style="--c: #dee2e6">
-          <b>stone 200</b><code>#DEE2E6</code>
-        </li>
         <li class="swatch in-art" style="--c: #ced4da">
-          <b>stone 300</b><code>#CED4DA</code>
+          <b>stone light</b><code>#CED4DA</code>
         </li>
         <li class="swatch in-art" style="--c: #adb5bd">
-          <b>stone 400</b><code>#ADB5BD</code>
+          <b>stone</b><code>#ADB5BD</code>
         </li>
         <li class="swatch in-art dark" style="--c: #6c757d">
-          <b>stone 600</b><code>#6C757D</code>
+          <b>stone dark</b><code>#6C757D</code>
         </li>
-        <li class="swatch in-art dark" style="--c: #495057">
-          <b>stone 700</b><code>#495057</code>
-        </li>
-        <li class="swatch dark" style="--c: #212529">
+        <li class="swatch in-art dark" style="--c: #212529">
           <b>ink</b><code>#212529</code>
         </li>
       </ul>
       <p class="note">
         <span class="dot" aria-hidden="true"></span> used in the commissioned
-        art today. Faces in the art keep their own two skin tones.
+        art. Four greys between paper and ink: #DEE2E6 folded into canvas, and
+        the castle doorway (#495057) into ink. Stone dark is for text on white
+        only; on canvas, text is ink. Faces in the art keep their own two skin
+        tones.
       </p>
 
       <h3>Players: tint, main, shade</h3>
@@ -97,7 +94,7 @@
       </p>
 
       <details>
-        <summary>Retired: today's UI greys (slate, slightly blue)</summary>
+        <summary>Retired: today's UI greys (slate, slightly blue) and the two folded greys</summary>
         <div class="ramp retired">
           <div class="swatch" style="--c: #f3f5f8"><code>#F3F5F8</code></div>
           <div class="swatch" style="--c: #e2e7ed"><code>#E2E7ED</code></div>
@@ -111,6 +108,10 @@
           </div>
           <div class="swatch dark" style="--c: #1d2833">
             <code>#1D2833</code>
+          </div>
+          <div class="swatch" style="--c: #dee2e6"><code>#DEE2E6</code></div>
+          <div class="swatch dark" style="--c: #495057">
+            <code>#495057</code>
           </div>
         </div>
       </details>
@@ -126,14 +127,15 @@
       <fieldset class="switch">
         <legend>Display font</legend>
         <label>
-          <input type="radio" name="font" value="archivo" checked />
+          <input type="radio" name="font" value="archivo" />
           <span style="font-family: Archivo, sans-serif; font-stretch: 125%; font-weight: 900">
             Archivo Expanded
           </span>
         </label>
         <label>
-          <input type="radio" name="font" value="alfa" />
+          <input type="radio" name="font" value="alfa" checked />
           <span style="font-family: 'Alfa Slab One', serif">Alfa Slab One</span>
+          <span class="chosen">Chosen</span>
         </label>
         <label>
           <input type="radio" name="font" value="bricolage" />
@@ -185,7 +187,7 @@
 
       <div class="strengths">
         <div class="strength soft" data-strength="Soft (today)"></div>
-        <div class="strength firm" data-strength="Firm"></div>
+        <div class="strength firm" data-strength="Firm" data-chosen></div>
         <div class="strength heavy" data-strength="Heavy"></div>
       </div>
     </section>
@@ -193,9 +195,11 @@
     <template id="frame-sample">
       <h3 class="strength-title">Frame</h3>
       <div class="hexes">
-        <div class="hex">
+        <div class="hex owned">
           <span class="hex-shadow"></span><span class="hex-stroke"></span>
-          <span class="hex-face"></span>
+          <span class="hex-face">
+            <img data-asset="castle" alt="castle" class="building" />
+          </span>
         </div>
         <div class="hex owned">
           <span class="hex-shadow"></span><span class="hex-stroke"></span>
