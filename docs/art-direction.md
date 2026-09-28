@@ -57,7 +57,6 @@ The visual reference is the style tile at **`/_style/`** (`_style/index.html`; `
 
 | What | Where | Ticket |
 |---|---|---|
-| City reuses the castle art | `tiles/assets/index.ts` | #52 |
 | No walls art | tile, build-walls silhouette | #52, #39 |
 | No first-player marker, victory point token or rotating victory point | turn order | #52, #34, #35 |
 | Vite favicon, no wordmark | `public/`, menu, game over | #52, #104 |
@@ -67,3 +66,4 @@ The visual reference is the style tile at **`/_style/`** (`_style/index.html`; `
 | App still on the slate greys and soft frames | `styles/`, every component | #99 |
 | MARKETPLACE and Player Inventory panels, NEXT / FUTURE shown twice | `app.module.css` | #103 |
 | ~~Line-art forest, lake and invisible mountain~~ | `tiles/assets/` | #52, done |
+| ~~City reuses the castle art~~ | `tiles/assets/` | #52, done |
