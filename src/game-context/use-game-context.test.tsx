@@ -232,7 +232,7 @@ describe("<GameContextProvider />", () => {
     });
   });
 
-  describe("the rotating victory point (vp.rotating)", () => {
+  describe("the rotating victory point", () => {
     const tower = (owner: PlayerType): Building => ({ owner, type: "tower" });
     const holding = (holder: PlayerType | undefined) =>
       initialPlayerStatus.map((status) => ({

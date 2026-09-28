@@ -12,7 +12,7 @@ export function isConquering({
   return false;
 }
 
-/* vp.rotating + q.rotating-vp-tie: strictly the most settlements takes the point; a tie leaves it where it is */
+/* strictly the most settlements takes the point; a tie leaves it where it is */
 export function greatestEmpireHolder({
   empires,
   current,

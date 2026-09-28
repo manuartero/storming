@@ -63,7 +63,7 @@ describe("greatestEmpireHolder()", () => {
       },
     ] as const
   ).forEach(({ name, empires, current, expected }) => {
-    test(`vp.rotating: ${name}`, () => {
+    test(name, () => {
       expect(greatestEmpireHolder({ empires, current })).toBe(expected);
     });
   });

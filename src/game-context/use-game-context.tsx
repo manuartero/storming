@@ -122,7 +122,7 @@ export function GameContextProvider({ children }: Props) {
     }
   };
 
-  /* vp.rotating: re-checked after every change to who owns which settlement */
+  /* re-checked after every change to who owns which settlement */
   const _moveGreatestEmpire = ({
     board,
     players,
