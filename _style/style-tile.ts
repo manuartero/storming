@@ -68,4 +68,15 @@ document.addEventListener("change", (event) => {
   }
 });
 
+document.addEventListener("click", async (event) => {
+  const button = (event.target as HTMLElement).closest("button.copy");
+  const text = button?.closest(".prompt")?.querySelector("pre")?.textContent;
+  if (!button || !text) return;
+  await navigator.clipboard.writeText(text);
+  button.textContent = "Copied";
+  setTimeout(() => {
+    button.textContent = "Copy prompt";
+  }, 1500);
+});
+
 paint("player");

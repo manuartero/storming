@@ -10,7 +10,7 @@
   --stone-dark: #6c757d;
   --ink: #212529;
   --white: #ffffff;
-  --lake: #dbeaf5;
+  --water: #9ec9ea;
 
   --player-tint: #fff4d6;
   --player-main: #ffca3a;
@@ -435,8 +435,9 @@ details summary {
   inset: calc(var(--hex-bw) * 1.8);
 }
 
-.hex.lake .hex-face {
-  background: var(--lake);
+.hex.lake .hex-face,
+.hex.terrain .hex-face {
+  background: var(--canvas);
 }
 
 /* brutal frames keep the ink edge and move the owner colour inside it */
@@ -635,4 +636,98 @@ ul.ramp {
 .switch label:has(:checked) .chosen {
   border-color: var(--white);
   box-shadow: none;
+}
+
+.terrain-ramp {
+  max-width: 360px;
+}
+
+.terrain-hexes {
+  --w: 88px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 8px;
+
+  & figure {
+    margin: 0;
+  }
+
+  & figcaption {
+    margin-top: 6px;
+    font-size: 14px;
+  }
+}
+
+.refs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+
+  & a {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 128px;
+    color: var(--ink);
+    font-size: 13px;
+  }
+
+  & .ref-image {
+    width: 128px;
+    height: 128px;
+    background: var(--white);
+    border: 2.5px solid var(--ink);
+    border-radius: 6px;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+}
+
+.prompt {
+  margin-bottom: 20px;
+  background: var(--white);
+  border: 2.5px solid var(--ink);
+  border-radius: 6px;
+  box-shadow: 4px 4px 0 var(--ink);
+
+  & pre {
+    margin: 0;
+    padding: 14px 16px;
+    white-space: pre-wrap;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}
+
+.prompt-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 8px 8px 16px;
+  border-bottom: 2.5px solid var(--ink);
+  background: var(--player-tint);
+  font-family: var(--display);
+  font-size: 18px;
+}
+
+.copy {
+  min-height: 36px;
+  padding: 0 12px;
+  font: inherit;
+  font-family: "Figtree Variable", system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--player-main);
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 2px;
+  }
 }

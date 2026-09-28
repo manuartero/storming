@@ -192,6 +192,120 @@
       </div>
     </section>
 
+    <section aria-labelledby="terrain-title">
+      <h2 id="terrain-title">Terrain</h2>
+      <p class="lede">
+        Terrain is stone, like an unpainted miniature: forest and mountain use
+        only the greys, so the player colours stay the only strong colours on
+        the board. Water is the one exception, with a single blue. Every
+        terrain tile has a canvas face, set apart from the white of open
+        ground; the icon says which terrain it is.
+      </p>
+
+      <ul class="ramp terrain-ramp" aria-label="terrain colours">
+        <li class="swatch" style="--c: #e9ecef">
+          <b>terrain face (canvas)</b><code>#E9ECEF</code>
+        </li>
+        <li class="swatch" style="--c: #9ec9ea">
+          <b>water</b><code>#9EC9EA</code>
+        </li>
+      </ul>
+      <p class="note">
+        This retires the three terrain tints (#DEEDF8, #E2EFE0, #EBE8E4). The
+        Green seat stays green: a grey forest can't be mistaken for it, while a
+        blue seat would sit next to the water.
+      </p>
+
+      <h3>Today's art, on the new faces</h3>
+      <div class="firm terrain-hexes">
+        <figure>
+          <div class="hex">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face"></span>
+          </div>
+          <figcaption>open ground</figcaption>
+        </figure>
+        <figure>
+          <div class="hex terrain">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face">
+              <img data-asset="forest" alt="forest" class="terrain" />
+            </span>
+          </div>
+          <figcaption>forest</figcaption>
+        </figure>
+        <figure>
+          <div class="hex terrain">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face">
+              <img data-asset="mountain" alt="mountain" class="terrain" />
+            </span>
+          </div>
+          <figcaption>mountain</figcaption>
+        </figure>
+        <figure>
+          <div class="hex terrain">
+            <span class="hex-shadow"></span><span class="hex-stroke"></span>
+            <span class="hex-face">
+              <img data-asset="lake" alt="lake" class="terrain" />
+            </span>
+          </div>
+          <figcaption>lake</figcaption>
+        </figure>
+      </div>
+      <p class="note">
+        All three icons are borrowed line art. The mountain is invisible: its
+        lines have no stroke colour. New art comes from the prompts below.
+      </p>
+
+      <h3>Generate the terrain</h3>
+      <p class="lede">
+        In ChatGPT, attach the three reference images to every prompt, then
+        paste one prompt. Make 3 or 4 versions and keep the one that sits best
+        next to the tower. Then vectorize it, snap every fill to the exact hex
+        values, and save it as <code>src/elements/tiles/assets/&lt;name&gt;.svg</code>.
+      </p>
+      <div class="refs">
+        <a href="./refs/ref-tower.png" download>
+          <img src="./refs/ref-tower.png" alt="tower reference" class="ref-image" />
+          <span>ref-tower.png</span>
+        </a>
+        <a href="./refs/ref-castle.png" download>
+          <img src="./refs/ref-castle.png" alt="castle reference" class="ref-image" />
+          <span>ref-castle.png</span>
+        </a>
+        <a href="./refs/ref-knight.png" download>
+          <img src="./refs/ref-knight.png" alt="knight reference" class="ref-image" />
+          <span>ref-knight.png</span>
+        </a>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head">
+          <b>Forest</b>
+          <button type="button" class="copy">Copy prompt</button>
+        </div>
+        <pre>A small forest for a hex board-game tile: three rounded broadleaf trees and one tall pointed conifer, overlapping, on a short flat strip of ground. Match the attached reference images exactly: the same flat vector style, chunky friendly geometric shapes, front view, flat fills only. No outlines, no gradients, no textures, no shadows, no text, no background scene. Use ONLY these colours: #CED4DA and #ADB5BD for the tree crowns (light and shaded sides), #6C757D for trunks and the ground strip, and #212529 for at most one or two tiny dark details. No green, no brown, no other colours: the trees are grey stone, like an unpainted miniature. Centered on a fully transparent background, 1024x1024 PNG, the subject fills about 80% of the canvas and stays readable at 32 px.</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head">
+          <b>Mountain</b>
+          <button type="button" class="copy">Copy prompt</button>
+        </div>
+        <pre>Mountains for a hex board-game tile: two overlapping rocky peaks, the taller one in front with a snow cap, built from a few large faceted rock planes. Match the attached reference images exactly: the same flat vector style, chunky friendly geometric shapes, front view, flat fills only. No outlines, no gradients, no textures, no shadows, no text, no background scene. Use ONLY these colours: #ADB5BD for the lit rock faces, #6C757D for the shaded faces, #CED4DA for the back peak, #F8F9FA for the snow cap, and #212529 for at most one or two tiny dark details. No other colours. Centered on a fully transparent background, 1024x1024 PNG, the subject fills about 80% of the canvas and stays readable at 32 px.</pre>
+      </div>
+
+      <div class="prompt">
+        <div class="prompt-head">
+          <b>Lake</b>
+          <button type="button" class="copy">Copy prompt</button>
+        </div>
+        <pre>A lake for a hex board-game tile: a small rounded pond seen from slightly above, with a stone rim of a few rounded rocks on the near bank, two short wave lines on the water and a tiny reed tuft on one side. Match the attached reference images exactly: the same flat vector style, chunky friendly geometric shapes, flat fills only. No outlines, no gradients, no textures, no shadows, no text, no background scene. Use ONLY these colours: #9EC9EA for the water, #F8F9FA for the wave lines, #ADB5BD and #6C757D for the rocks and the reeds. The water is the only blue; no other colours. Centered on a fully transparent background, 1024x1024 PNG, the subject fills about 80% of the canvas and stays readable at 32 px.</pre>
+      </div>
+    </section>
+
+
     <template id="frame-sample">
       <h3 class="strength-title">Frame</h3>
       <div class="hexes">
