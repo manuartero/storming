@@ -53,6 +53,15 @@ describe("isConqueringLastSettlement()", () => {
       isConqueringLastSettlement({ targetTile: {}, player: "player", empires })
     ).toBe(false);
   });
+
+  test("#93: doesn't log", () => {
+    jest.mocked(console.info).mockClear();
+    const targetTile: Tile = { building: { owner: "enemy1", type: "tower" } };
+
+    isConqueringLastSettlement({ targetTile, player: "player", empires });
+
+    expect(console.info).not.toHaveBeenCalled();
+  });
 });
 
 describe("findWinner()", () => {

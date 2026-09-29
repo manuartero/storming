@@ -7,11 +7,7 @@ export function isConquering({
   targetTile: Tile;
   player: PlayerType;
 }) {
-  if (targetTile.building && targetTile.building.owner !== player) {
-    console.info(`Score: ${player} is conquering a settlement`);
-    return true;
-  }
-  return false;
+  return !!targetTile.building && targetTile.building.owner !== player;
 }
 
 /* strictly the most settlements takes the point; a tie leaves it where it is */

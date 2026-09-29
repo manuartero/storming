@@ -174,6 +174,7 @@ export function GameContextProvider({ children }: Props) {
     console.info("movePiece()", action);
     const conquers = isConquering({ player, targetTile });
     if (conquers) {
+      console.info(`Score: ${player} is conquering a settlement`);
       scorePoint(player);
     }
     const conquersLastSettlement = isConqueringLastSettlement({
@@ -181,6 +182,11 @@ export function GameContextProvider({ children }: Props) {
       targetTile,
       empires: empireSize({ board, players }),
     });
+    if (conquersLastSettlement) {
+      console.info(
+        `Game over: ${player} is conquering ${targetTile.building?.owner}'s last settlement`
+      );
+    }
     movePiece(action);
     _resolveActionCard({
       players: _moveGreatestEmpire({
