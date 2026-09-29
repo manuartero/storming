@@ -79,7 +79,7 @@ function PlanningPhase({
       {/* the timeline shows everyone's cards; these are only the active player's two slots */}
       <fieldset className={styles.slots}>
         <legend className={styles.caption}>Your plan</legend>
-        {nextActionCard ? (
+        {nextActionCard && (
           <Card
             card={nextActionCard}
             onClick={() => {
@@ -89,10 +89,9 @@ function PlanningPhase({
               });
             }}
           />
-        ) : (
-          <CardSilhouette card="next" />
         )}
-        {futureActionCard ? (
+        {!nextActionCard && <CardSilhouette card="next" />}
+        {futureActionCard && (
           <Card
             card={futureActionCard}
             onClick={() => {
@@ -102,9 +101,8 @@ function PlanningPhase({
               });
             }}
           />
-        ) : (
-          <CardSilhouette card="future" />
         )}
+        {!futureActionCard && <CardSilhouette card="future" />}
       </fieldset>
       <Button
         className={styles.phaseButton}
