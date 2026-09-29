@@ -120,7 +120,7 @@ function isAllowedTerrain({ tile, piece }: { tile: Tile; piece: Piece }) {
   );
 }
 
-/* move.3 a knight passes through empty regions or its own troops and settlements, never forests, mountains or lakes */
+/* A knight passes through empty regions or its own troops and settlements, never forests, mountains or lakes */
 function canPassThrough({ tile, piece }: { tile: Tile; piece: Piece }) {
   return (
     isAllowedTerrain({ tile, piece }) &&
