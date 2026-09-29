@@ -1,0 +1,16 @@
+/* reserved for the player's civilians, improvements and pacts (BETA): the cell is kept so the layout doesn't shift when they land */
+.playerInventory {
+  /** main grid layout */
+  grid-area: player-inventory;
+
+  background-color: var(--lightest-grey);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* no room for it in the portrait layout yet */
+@media (orientation: portrait) {
+  .playerInventory {
+    display: none;
+  }
+}

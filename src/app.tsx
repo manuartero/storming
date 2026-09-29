@@ -7,6 +7,7 @@ import {
   PlayerHand,
   RoundSummary,
   TimeLine,
+  PlayerInventory,
 } from "components";
 import { GameContextProvider } from "game-context";
 
@@ -23,6 +24,7 @@ export function App() {
         <Marketplace />
         <RoundSummary />
         <PlayerHand />
+        <PlayerInventory />
         <GameOver />
       </GameContextProvider>
     </main>

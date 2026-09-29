@@ -7,7 +7,7 @@
   grid-template-areas:
     "current-phase timeline menu"
     "current-phase board marketplace"
-    "round-summary player-hand marketplace";
+    "round-summary player-hand player-inventory";
 
   /* dvh: iOS Safari's address bar would cut the bottom row with vh */
   height: 100dvh;
