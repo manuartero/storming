@@ -30,6 +30,7 @@ describe("<CurrentPhase />", () => {
       within(currentPhase()).getByRole("heading", { name: "Action" });
       within(currentPhase()).getByRole("img", { name: "player's turn" });
       within(currentPhase()).getByRole("article", { name: "player Move card" });
+      within(currentPhase()).getByText("Resolving");
     });
 
     test("Skip is disabled while there is something to do", () => {
@@ -63,8 +64,9 @@ describe("<CurrentPhase />", () => {
 
       within(currentPhase()).getByRole("heading", { name: "Planning" });
       within(currentPhase()).getByRole("img", { name: "player's turn" });
-      screen.getByRole("article", { name: "empty next slot" });
-      screen.getByRole("article", { name: "empty future slot" });
+      const plan = screen.getByRole("group", { name: "Your plan" });
+      within(plan).getByRole("article", { name: "empty next slot" });
+      within(plan).getByRole("article", { name: "empty future slot" });
       expect(
         screen.getByRole("button", { name: "Confirm plan" })
       ).toBeDisabled();
