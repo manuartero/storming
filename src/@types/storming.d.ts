@@ -147,6 +147,23 @@ type GameState = Pick<
   "phase" | "winner" | "activeCard" | "next" | "future" | "board" | "players"
 >;
 
+/* a face-down card as another player sees it: no action, no cardId (it names the action) */
+type HiddenCard = {
+  cardType: "hidden";
+  owner?: PlayerType; // absent on a face-down event: round.6 shuffles them
+};
+
+type PublicTimelineCard = {
+  card: Card | HiddenCard;
+  commited: boolean;
+};
+
+/* GameState as one player sees it */
+type PublicGameState = Omit<GameState, "next" | "future"> & {
+  next: PublicTimelineCard[];
+  future: PublicTimelineCard[];
+};
+
 type Savegame = {
   createdAt: string; // ms from Epoch
   playerEmpireSize: number;
