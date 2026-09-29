@@ -15,13 +15,7 @@ export function isConqueringLastSettlement({
   empires: Partial<Record<PlayerType, number>>;
 }) {
   const owner = targetTile.building?.owner;
-  if (owner && owner !== player && empires[owner] === 1) {
-    console.info(
-      `Game over: ${player} is conquering ${owner}'s last settlement`
-    );
-    return true;
-  }
-  return false;
+  return !!owner && owner !== player && empires[owner] === 1;
 }
 
 /**

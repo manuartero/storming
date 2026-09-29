@@ -187,6 +187,36 @@ describe("<GameContextProvider />", () => {
       expect(result.current.activeCard).toMatchObject({ owner: "enemy1" });
     });
 
+    [
+      {
+        name: "a conquest",
+        owner: "enemy1",
+        log: "Score: player is conquering a settlement",
+      },
+      {
+        name: "a conquest of the last settlement",
+        owner: "player",
+        log: "Game over: player is conquering enemy1's last settlement",
+      },
+    ].forEach(({ name, owner, log }) => {
+      test(`#93: the provider logs ${name}`, () => {
+        const result = loadActionPhase({
+          board: {
+            ...emptyBoard,
+            "0,-3": { building: { owner: "enemy1", type: "tower" } },
+            "2,-3": { building: { owner: owner as PlayerType, type: "tower" } },
+          },
+        });
+        jest.mocked(console.info).mockClear();
+
+        act(() => {
+          result.current.move({ piece: knight, from: "0,-2", to: "0,-3" });
+        });
+
+        expect(console.info).toHaveBeenCalledWith(log);
+      });
+    });
+
     test("once ended, no more actions can be taken", () => {
       const result = loadActionPhase({
         board: {

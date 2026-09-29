@@ -24,6 +24,17 @@ describe("isConquering()", () => {
       expect(isConquering({ targetTile, player: "player" })).toBe(expected);
     });
   });
+
+  test("#93: doesn't log", () => {
+    jest.mocked(console.info).mockClear();
+
+    isConquering({
+      targetTile: { building: { owner: "enemy1", type: "tower" } },
+      player: "player",
+    });
+
+    expect(console.info).not.toHaveBeenCalled();
+  });
 });
 
 describe("greatestEmpireHolder()", () => {
