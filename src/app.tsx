@@ -2,6 +2,7 @@ import {
   Board,
   CurrentPhase,
   GameOver,
+  Marketplace,
   Menu,
   PlayerHand,
   RoundSummary,
@@ -19,6 +20,7 @@ export function App() {
         <TimeLine />
         <Menu />
         <Board />
+        <Marketplace />
         <RoundSummary />
         <PlayerHand />
         <GameOver />
