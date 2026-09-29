@@ -10,12 +10,16 @@
   */
   --card-w: min(140cqh / 1.5, 100cqw / 4);
 
+  /* grouped in the middle: the row spans the board's full width */
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: var(--space-4);
   align-items: flex-start;
 }
 
 .playerHand.expansible {
+  gap: 0;
+
   /* the cards: <button>s while planning */
   & > * {
     /* XXX card overlap: is it possible to use some flex magic instead? */

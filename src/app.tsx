@@ -2,12 +2,10 @@ import {
   Board,
   CurrentPhase,
   GameOver,
-  Marketplace,
   Menu,
   PlayerHand,
   RoundSummary,
   TimeLine,
-  PlayerInventory,
 } from "components";
 import { GameContextProvider } from "game-context";
 
@@ -21,10 +19,8 @@ export function App() {
         <TimeLine />
         <Menu />
         <Board />
-        <Marketplace />
         <RoundSummary />
         <PlayerHand />
-        <PlayerInventory />
         <GameOver />
       </GameContextProvider>
     </main>
