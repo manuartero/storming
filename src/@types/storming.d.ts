@@ -64,7 +64,9 @@ type TileWithStatus = Tile & {
 // CARDS
 // --------------
 
-type CardId = `${PlayerType}_${ActionCardType | EventCardType}_${number}`;
+type CardId =
+  | `${PlayerType}_${ActionCardType}_${number}`
+  | `event_${EventCardType}_${number}`;
 
 type ActionCardType = "build" | "diplo" | "move" | "recruit";
 
@@ -77,12 +79,15 @@ type ActionCard = {
   cardId: CardId;
 };
 
-type EventCardType = "event1" | "event2" | "event3";
+type GeneralEventType = import("models/event-cards")._GeneralEventType;
+type ColourAimedEventType = import("models/event-cards")._ColourAimedEventType;
+type EventCardType = GeneralEventType | ColourAimedEventType;
 
 type EventCard = {
   cardType: "eventCard";
   event: EventCardType;
-  playedBy: PlayerType;
+  target?: PlayerType; // the colour a colour-aimed event names: event.2
+  playedBy?: PlayerType; // absent while in the deck or a hand
   cardId: CardId;
 };
 

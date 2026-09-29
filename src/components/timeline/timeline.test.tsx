@@ -47,7 +47,7 @@ describe("<Timeline />", () => {
         next={[
           ...next,
           {
-            card: NewCard({ type: "event1", player: "player" }),
+            card: NewCard({ type: "full-moon", player: "player" }),
             commited: true,
           },
         ]}

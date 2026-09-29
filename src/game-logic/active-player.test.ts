@@ -94,7 +94,7 @@ describe("activePlayer()", () => {
     expect(
       activePlayer({
         phase: "action",
-        activeCard: NewCard({ type: "event1", player: "enemy2" }),
+        activeCard: NewCard({ type: "full-moon", player: "enemy2" }),
         next: [],
         players: fourPlayers,
       })
