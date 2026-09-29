@@ -216,6 +216,55 @@ describe("getAvailableTilesForActionCard()", () => {
       });
     });
 
+    // "1,0" is the only tile between "0,0" and "2,0"
+    const knightPassScenarios: {
+      name: string;
+      between: Tile;
+      passes: boolean;
+    }[] = [
+      { name: "an empty tile", between: {}, passes: true },
+      { name: "its own troop", between: { piece: soldier }, passes: true },
+      {
+        name: "its own settlement",
+        between: { building: { owner: "player", type: "tower" } },
+        passes: true,
+      },
+      { name: "a lake", between: { terrain: "lake" }, passes: false },
+      { name: "a forest", between: { terrain: "forest" }, passes: false },
+      { name: "a mountain", between: { terrain: "mountain" }, passes: false },
+      { name: "an enemy troop", between: { piece: enemy }, passes: false },
+      {
+        name: "an enemy settlement",
+        between: { building: { owner: "enemy1", type: "tower" } },
+        passes: false,
+      },
+    ];
+    knightPassScenarios.forEach(({ name, between, passes }) => {
+      test(`move.3 a knight can pass through ${name}: ${passes}`, () => {
+        const got = movesFrom({
+          board: { "0,0": { piece: knight }, "1,0": between },
+          from: "0,0",
+        });
+        expect(got.includes("2,0")).toBe(passes);
+      });
+    });
+
+    test("move.3 a knight goes around a blocked tile", () => {
+      const got = movesFrom({
+        board: { "0,0": { piece: knight }, "0,-1": { terrain: "lake" } },
+        from: "0,0",
+      });
+      expect(got).toContain("0,-2");
+    });
+
+    test("move.3 a knight can still attack the enemy it can't pass", () => {
+      const got = movesFrom({
+        board: { "0,0": { piece: knight }, "1,0": { piece: enemy } },
+        from: "0,0",
+      });
+      expect(got).toContain("1,0");
+    });
+
     test("its own pieces block a tile, an enemy piece does not", () => {
       const got = movesFrom({
         board: {

@@ -156,7 +156,7 @@ The four action cards and what each allows: [`cards/actions.md`](cards/actions.m
 
 - `move.1` Two troops can never share a region.
 - `move.2` Soldiers and artillery can only move to adjacent regions.
-- `move.3` Knights can move up to two regions away, and can pass through regions occupied by their own troops or settlements.
+- `move.3` Knights can move up to two regions away, and can pass through regions occupied by their own troops or settlements, but never through an enemy troop or settlement, a forest, a mountain or a lake.
 - `move.4` Only soldiers can enter regions with forests or mountains.
 - `move.5` No troop can move onto a lake.
 
