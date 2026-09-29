@@ -445,6 +445,24 @@ details summary {
   background: var(--canvas);
 }
 
+/* the walls are the edge: the stroke and the face move inside them.
+   The SVG is the 86.6 x 100 hexagon plus 5 units on every side. */
+.hex.walled .hex-face {
+  inset: calc(var(--w) * 8 / 86.6 + var(--hex-bw));
+
+  & img {
+    width: calc(var(--w) * 0.72);
+  }
+}
+.hex .walls {
+  position: absolute;
+  top: -5%;
+  left: calc(-5% * 100 / 86.6);
+  width: calc(100% * 96.6 / 86.6);
+  height: 110%;
+  pointer-events: none;
+}
+
 /* brutal frames keep the ink edge and move the owner colour inside it */
 .firm .hex.owned .hex-face,
 .heavy .hex.owned .hex-face {

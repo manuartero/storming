@@ -16,8 +16,12 @@
   width: var(--w);
   aspect-ratio: 0.866;
 
-  /* hexagon path */
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  /* hexagon path: on the layers, not here, so walls can reach past the edge */
+  --hex: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  --tile-wall: 0px;
+
+  /* the clipped stroke layer is the hit area */
+  pointer-events: none;
 
   border: none;
   padding: 0;
@@ -30,7 +34,7 @@
   cursor: default;
   transition: transform 0.15s ease-out;
 
-  /* the clip-path hides any outline: recolour the stroke instead */
+  /* no outline around a hexagon: recolour the stroke instead */
   &:focus-visible {
     outline: none;
 
@@ -42,7 +46,8 @@
 
 .strokeLayer {
   position: absolute;
-  clip-path: inherit;
+  clip-path: var(--hex);
+  pointer-events: auto;
   inset: 0;
   /* hexagon border-color */
   background: var(--tile-border-color);
@@ -51,10 +56,10 @@
 /* Inner content hex shape */
 .innerLayer {
   position: absolute;
-  clip-path: inherit;
+  clip-path: var(--hex);
 
-  /* border-width */
-  inset: var(--tile-stroke);
+  /* border-width; on a walled tile the stroke sits inside the walls */
+  inset: calc(var(--tile-wall) + var(--tile-stroke));
 
   /* background color */
   background: var(--white);
@@ -69,7 +74,6 @@
 .tile.available {
   --tile-stroke: max(2px, calc(var(--w) * 0.05));
   cursor: pointer;
-  pointer-events: auto;
 
   @media (hover: hover) {
     &:hover {
@@ -80,6 +84,10 @@
 
 .tile.controlled .innerLayer {
   background: var(--tile-bg);
+}
+
+.tile.walled {
+  --tile-wall: calc(var(--w) * 8 / 86.6);
 }
 
 .tile.selected {
@@ -158,6 +166,18 @@
 
   position: absolute;
   bottom: 33%;
+
+  pointer-events: none;
+}
+
+/* the walls are the tile's edge: the SVG is the 86.6 x 100 hexagon plus
+   5 units on every side, where the towers and merlons stand out */
+.walls {
+  position: absolute;
+  inset: -5% calc(-5% * 100 / 86.6);
+
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 
   pointer-events: none;
 }

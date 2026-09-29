@@ -55,9 +55,7 @@ export function CardSilhouette({
           </Tile>
         )}
         {card === "build-walls" && (
-          <Tile id={null} disableChildrenOffset>
-            {/* TODO: include Walls assets */}
-          </Tile>
+          <Tile id={null} disableChildrenOffset owner={player} hasWalls />
         )}
         {card === "upgrade-settlement" && (
           <Tile

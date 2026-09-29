@@ -35,6 +35,23 @@ describe("<Tile />", () => {
     expect(tile).toMatchSnapshot();
   });
 
+  test("walls", () => {
+    render(
+      <Tile
+        id="-1,0"
+        building="tower"
+        hasWalls
+        owner="player"
+        onClick={jest.fn()}
+      />
+    );
+
+    const tile = screen.getByRole("button", { name: "tile -1,0" });
+    within(tile).getByRole("img", { name: "player walls" });
+    expect(tile).toHaveClass("walled");
+    expect(tile).toMatchSnapshot();
+  });
+
   test("fake Tile with no id", () => {
     const { container } = render(<Tile id={null} />);
 
