@@ -31,7 +31,7 @@ describe("mustSkip()", () => {
   [
     {
       name: "an event card",
-      activeCard: NewCard({ type: "event1", player: "player" }),
+      activeCard: NewCard({ type: "full-moon", player: "player" }),
     },
     { name: "no card", activeCard: undefined },
   ].forEach(({ name, activeCard }) => {

@@ -13,13 +13,32 @@ describe("NewCard()", () => {
     });
   });
 
-  test("creates an EventCard{}", () => {
-    const card = NewCard({ type: "event3", player: "enemy1" });
+  test("creates an EventCard{} nobody has played yet", () => {
+    const card = NewCard({ type: "full-moon" });
     expect(card).toEqual({
       cardType: "eventCard",
-      event: "event3",
+      event: "full-moon",
+      cardId: "event_full-moon_1",
+    });
+  });
+
+  test("creates a played EventCard{}", () => {
+    const card = NewCard({ type: "full-moon", player: "enemy1" });
+    expect(card).toEqual({
+      cardType: "eventCard",
+      event: "full-moon",
       playedBy: "enemy1",
-      cardId: "enemy1_event3_1",
+      cardId: "event_full-moon_1",
+    });
+  });
+
+  test("event.2 creates a colour-aimed EventCard{} with its target", () => {
+    const card = NewCard({ type: "assassination", target: "enemy2" });
+    expect(card).toEqual({
+      cardType: "eventCard",
+      event: "assassination",
+      target: "enemy2",
+      cardId: "event_assassination_1",
     });
   });
 

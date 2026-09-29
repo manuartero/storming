@@ -5,7 +5,7 @@ const playerBuild = NewCard({ type: "build", player: "player" });
 const playerMove = NewCard({ type: "move", player: "player" });
 const redRecruit = NewCard({ type: "recruit", player: "enemy1" });
 const blueDiplo = NewCard({ type: "diplo", player: "enemy2" });
-const playerEvent = NewCard({ type: "event1", player: "player" });
+const playerEvent = NewCard({ type: "full-moon", player: "player" });
 
 const board = {
   "0,3": { building: { owner: "enemy1", type: "tower" } },

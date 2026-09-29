@@ -23,17 +23,10 @@ function isActionCardType(
   );
 }
 
-function getCardId({
-  type,
-  player,
-}: {
-  type: ActionCardType | EventCardType;
-  player: PlayerType;
-}) {
-  const baseCardId = `${player}_${type}` as const;
-  const count = cardIdCount.get(baseCardId) || 1;
-  cardIdCount.set(baseCardId, count + 1);
-  return `${baseCardId}_${count}` as const;
+function nextCardId<Base extends string>(base: Base) {
+  const count = cardIdCount.get(base) || 1;
+  cardIdCount.set(base, count + 1);
+  return `${base}_${count}` as const;
 }
 
 export function NewCard(args: {
@@ -41,31 +34,38 @@ export function NewCard(args: {
   player: PlayerType;
 }): ActionCard;
 
+// `player` is who played it (none while in the deck or a hand); `target` is
+// the colour a colour-aimed event names.
 export function NewCard(args: {
   type: EventCardType;
-  player: PlayerType;
+  player?: PlayerType;
+  target?: PlayerType;
 }): EventCard;
 
 export function NewCard({
   type,
   player,
+  target,
 }: {
   type: ActionCardType | EventCardType;
-  player: PlayerType;
-}) {
-  const cardId = getCardId({ type, player });
-
-  return isActionCardType(type)
-    ? {
-        cardType: "actionCard" as const,
-        action: type,
-        owner: player,
-        cardId,
-      }
-    : {
-        cardType: "eventCard" as const,
-        event: type,
-        playedBy: player,
-        cardId,
-      };
+  player?: PlayerType;
+  target?: PlayerType;
+}): Card {
+  if (isActionCardType(type)) {
+    // the ActionCard overload requires a player
+    const owner = player as PlayerType;
+    return {
+      cardType: "actionCard",
+      action: type,
+      owner,
+      cardId: nextCardId(`${owner}_${type}`),
+    };
+  }
+  return {
+    cardType: "eventCard",
+    event: type,
+    ...(target && { target }),
+    ...(player && { playedBy: player }),
+    cardId: nextCardId(`event_${type}`),
+  };
 }
