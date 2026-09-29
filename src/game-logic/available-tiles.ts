@@ -74,20 +74,59 @@ function getInRangeMovements({ tileId, board }: _TileInBoard) {
     return [];
   }
 
-  const { range, specialTerrain } = pieces[piece.type];
-  const tiles = tilesInRange({ tileId, range });
+  const { range } = pieces[piece.type];
+  const tiles = reachableTiles({ from: tileId, board, piece, range });
 
   return tiles.filter((candidateTile) => {
     const target = board[candidateTile];
 
-    const isAllowedTerrain =
-      target.terrain === undefined || specialTerrain.includes(target.terrain);
-
     const isEmptyOrOpponentTile =
       !target.piece || target.piece.owner !== piece.owner;
 
-    return isAllowedTerrain && isEmptyOrOpponentTile;
+    return isAllowedTerrain({ tile: target, piece }) && isEmptyOrOpponentTile;
   });
+}
+
+// annotated: recursive
+function reachableTiles({
+  from,
+  board,
+  piece,
+  range,
+}: {
+  from: TileID;
+  board: Board;
+  piece: Piece;
+  range: number;
+}): TileID[] {
+  const neighbours = tilesInRange({ tileId: from, range: 1 });
+  if (range === 1) {
+    return neighbours;
+  }
+  const further = neighbours
+    .filter((neighbour) => canPassThrough({ tile: board[neighbour], piece }))
+    .flatMap((neighbour) =>
+      reachableTiles({ from: neighbour, board, piece, range: range - 1 })
+    );
+  return Array.from(new Set([...neighbours, ...further])).filter(
+    (t) => t !== from
+  );
+}
+
+function isAllowedTerrain({ tile, piece }: { tile: Tile; piece: Piece }) {
+  return (
+    tile.terrain === undefined ||
+    pieces[piece.type].specialTerrain.includes(tile.terrain)
+  );
+}
+
+/* A knight passes through empty regions or its own troops and settlements, never forests, mountains or lakes */
+function canPassThrough({ tile, piece }: { tile: Tile; piece: Piece }) {
+  return (
+    isAllowedTerrain({ tile, piece }) &&
+    (!tile.piece || tile.piece.owner === piece.owner) &&
+    (!tile.building || tile.building.owner === piece.owner)
+  );
 }
 
 /** a village can't be built on terrain, nor on or next to another settlement */
