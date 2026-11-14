@@ -14,8 +14,7 @@ import {
   playersAfterScore,
 } from "game-logic/players.transitions";
 import { isAttackingWalls } from "game-logic/walls";
-import { createContext, useContext, useState } from "react";
-import type { ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { logRender, warnInconsistentState } from "lib/console";
 import { emptyBoard } from "./empty-board";
 import { initialBoard } from "./initial-board";
@@ -39,7 +38,7 @@ const GameContext = createContext<GameContext>({
   loadSavegame: () => {},
 });
 
-type Props = { children: ReactNode; random?: Pick<Random, "int"> };
+type Props = { children: ReactNode;seed?: number;  random?: Pick<Random, "int"> };
 
 /**
  * GameController
@@ -50,15 +49,10 @@ type Props = { children: ReactNode; random?: Pick<Random, "int"> };
  * { useTimeline(), useBoard(), usePlayers() }
  * ```
  */
-export function GameContextProvider({ children, random }: Props) {
+export function GameContextProvider({ children, seed = Date.now(), random }: Props) {
   logRender("GameContextProvider");
 
-  const [gameRandom] = useState(
-    () => random ?? createRandom(Math.floor(Math.random() * 2 ** 32))
-  );
-  const [startingPlayers] = useState(() =>
-    randomizeFirstPlayer({ players: initialPlayerStatus, random: gameRandom })
-  );
+const [gameRandom] = useState(() => random ?? createRandom(seed));
 
   const {
     board,
@@ -77,8 +71,13 @@ export function GameContextProvider({ children, random }: Props) {
     scorePoint,
     declareGreatestEmpire,
     _overridePlayers,
-  } = usePlayers(startingPlayers);
-
+  } = usePlayers();
+  useEffect(() => {
+    _overridePlayers(
+      randomizeFirstPlayer({ players: initialPlayerStatus, random: gameRandom })
+      );
+   }, [gameRandom, _overridePlayers]);
+  
   /* derived state */
   const activePlayer = findActivePlayer({
     activeCard: timeline.activeCard,
