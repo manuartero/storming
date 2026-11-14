@@ -1,3 +1,5 @@
+import { createRandom } from "lib/random";
+import type { Random } from "lib/random";
 import {
   activePlayer as findActivePlayer,
   isPlanningComplete,
@@ -5,15 +7,14 @@ import {
 import { boardAfterBuild, boardAfterMove } from "game-logic/board.transitions";
 import { empireSize } from "game-logic/empire-size";
 import { findWinner, isConqueringLastSettlement } from "game-logic/game-over";
-import { rotateToFirst } from "game-logic/player-order";
+import { randomizeFirstPlayer, rotateToFirst } from "game-logic/player-order";
 import { greatestEmpireTaker, isConquering } from "game-logic/score-check";
 import {
   playersAfterGreatestEmpire,
   playersAfterScore,
 } from "game-logic/players.transitions";
 import { isAttackingWalls } from "game-logic/walls";
-import { createContext, useContext } from "react";
-import type { ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { logRender, warnInconsistentState } from "lib/console";
 import { emptyBoard } from "./empty-board";
 import { initialBoard } from "./initial-board";
@@ -37,7 +38,7 @@ const GameContext = createContext<GameContext>({
   loadSavegame: () => {},
 });
 
-type Props = { children: ReactNode };
+type Props = { children: ReactNode;seed?: number;  random?: Pick<Random, "int"> };
 
 /**
  * GameController
@@ -48,8 +49,10 @@ type Props = { children: ReactNode };
  * { useTimeline(), useBoard(), usePlayers() }
  * ```
  */
-export function GameContextProvider({ children }: Props) {
+export function GameContextProvider({ children, seed = Date.now(), random }: Props) {
   logRender("GameContextProvider");
+
+const [gameRandom] = useState(() => random ?? createRandom(seed));
 
   const {
     board,
@@ -69,7 +72,12 @@ export function GameContextProvider({ children }: Props) {
     declareGreatestEmpire,
     _overridePlayers,
   } = usePlayers();
-
+  useEffect(() => {
+    _overridePlayers(
+      randomizeFirstPlayer({ players: initialPlayerStatus, random: gameRandom })
+      );
+   }, [gameRandom, _overridePlayers]);
+  
   /* derived state */
   const activePlayer = findActivePlayer({
     activeCard: timeline.activeCard,
@@ -98,7 +106,9 @@ export function GameContextProvider({ children }: Props) {
     console.info("newGame()");
     _overrideBoard(initialBoard);
     timeline._overrideTimeline(initialTimeline);
-    _overridePlayers(initialPlayerStatus);
+    _overridePlayers(
+      randomizeFirstPlayer({ players: initialPlayerStatus, random: gameRandom })
+    );
   };
 
   /* `players`: the statuses once this action's points are scored */

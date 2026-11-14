@@ -1,4 +1,5 @@
 import { act, renderHook } from "@testing-library/react";
+import type { ReactNode } from "react";
 import { NewCard } from "models/new-card";
 import { emptyBoard } from "./empty-board";
 import { initialBoard } from "./initial-board";
@@ -20,6 +21,42 @@ describe("useGameContext()", () => {
 });
 
 describe("<GameContextProvider />", () => {
+  test("randomizes the first seat at startup and for each new game", () => {
+    const values = [2, 3];
+    const wrapper = ({ children }: { children: ReactNode }) => (
+      <GameContextProvider random={{ int: () => values.shift() ?? 0 }}>
+        {children}
+      </GameContextProvider>
+    );
+    const { result } = renderHook(() => useGameContext(), { wrapper });
+
+    expect(result.current.players.map(({ player }) => player)).toEqual([
+      "enemy2",
+      "enemy3",
+      "player",
+      "enemy1",
+    ]);
+
+    act(() => result.current.newGame());
+
+    expect(result.current.players.map(({ player }) => player)).toEqual([
+      "enemy3",
+      "player",
+      "enemy1",
+      "enemy2",
+    ]);
+  });
+test("produces the same starting players order when given the same seed", () => {
+  const wrapper = ({ children }: { children: ReactNode }) => (
+    <GameContextProvider seed={42}>{children}</GameContextProvider>
+    );
+  const { result: first } = renderHook(() => useGameContext(), { wrapper });
+  const { result: second } = renderHook(() => useGameContext(), { wrapper });
+  expect(first.current.players.map(({ player }) => player)).toEqual(
+    second.current.players.map(({ player }) => player),
+    );
+  });
+  
   describe("move()", () => {
     const moveCard = (cardId: CardId): ActionCard => ({
       cardType: "actionCard",
@@ -106,9 +143,12 @@ describe("<GameContextProvider />", () => {
       board: Board;
       players?: PlayerStatus[];
     }) => {
-      const { result } = renderHook(() => useGameContext(), {
-        wrapper: GameContextProvider,
-      });
+      const wrapper = ({ children }: { children: ReactNode }) => (
+        <GameContextProvider random={{ int: () => 0 }}>
+          {children}
+        </GameContextProvider>
+      );
+      const { result } = renderHook(() => useGameContext(), { wrapper });
       act(() => {
         result.current.loadSavegame({
           phase: "action",
