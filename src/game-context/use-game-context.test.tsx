@@ -46,7 +46,17 @@ describe("<GameContextProvider />", () => {
       "enemy2",
     ]);
   });
-
+test("produces the same starting players order when given the same seed", () => {
+  const wrapper = ({ children }: { children: ReactNode }) => (
+    <GameContextProvider seed={42}>{children}</GameContextProvider>
+    );
+  const { result: first } = renderHook(() => useGameContext(), { wrapper });
+  const { result: second } = renderHook(() => useGameContext(), { wrapper });
+  expect(first.current.players.map(({ player }) => player)).toEqual(
+    second.current.players.map(({ player }) => player),
+    );
+  });
+  
   describe("move()", () => {
     const moveCard = (cardId: CardId): ActionCard => ({
       cardType: "actionCard",
